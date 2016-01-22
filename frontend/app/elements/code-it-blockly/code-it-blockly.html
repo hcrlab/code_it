@@ -1,13 +1,3 @@
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="blockly-import.html">
 <dom-module id="code-it-blockly">
@@ -37,8 +27,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       textarea {
         width: 100%;
         height: 100%;
-        padding: 0px;
+        padding: 10px;
         border: none;
+        box-sizing: border-box; 
+      }
+      paper-button {
+        @apply(--paper-font-button);
+        border-radius: 2px;
+        padding: 6px 16px;
+        height: 36px;
+      }
+      .programName {
+        max-width: 500px;
+      }
+      .runstop {
+        position: relative;
+        top: 16px;
+        color: #fff;
+      }
+      .run {
+        background-color: #388E3C;
+      }
+      .stop {
+        background-color: #D32F2F;
       }
     </style>
     <xml id="toolbox" style="display: none">
@@ -347,7 +358,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </category>
     </xml>
     <div class="outer layout vertical">
-      <p>More stuff</p>
+      <div class="controls layout horizontal">
+        <paper-input label="Program name" class="programName flex" value="{{name}}"></paper-input>
+        <paper-button raised class$="runstop {{runState}}">Run program</paper-button>
+      </div>
       <paper-tabs noink selected="{{selected}}" id="codeTabs">
         <paper-tab>Program</paper-tab>
         <paper-tab id="codeTab">Code</paper-tab>
@@ -380,6 +394,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: Number,
         },
         code: String,
+        runState: {
+          type: String,
+          value: 'run', // Either 'run' or 'stop'
+          notify: true,
+        },
+        name: {
+          type: String,
+          value: 'Untitled program'
+        },
       },
 
       handleTab: function(evt) {

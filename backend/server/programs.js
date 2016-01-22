@@ -30,13 +30,13 @@ Meteor.startup(function() {
     }
   });
 
-  var listener = new ROSLIB.Topic({
+  var programListener = new ROSLIB.Topic({
     ros: ROS,
-    name: '/code_it/program',
+    name: '/code_it/program/run',
     messageType: 'std_msgs/String'
   });
   
-  listener.subscribe(Meteor.bindEnvironment(function(message) {
+  programListener.subscribe(Meteor.bindEnvironment(function(message) {
     console.log('Received message on ' + listener.name + ': ' + message.data);
     Meteor.call('runProgram', message.data);
   }));

@@ -32,6 +32,6 @@ Blockly.JavaScript['robot_display_message_h1h2'] = function(block) {
   var value_h1text = Blockly.JavaScript.valueToCode(block, 'h1Text', Blockly.JavaScript.ORDER_COMMA) || '\'\'';
   var value_h2text = Blockly.JavaScript.valueToCode(block, 'h2Text', Blockly.JavaScript.ORDER_COMMA) || '\'\'';
   var value_timeout = Blockly.JavaScript.valueToCode(block, 'timeout', Blockly.JavaScript.ORDER_COMMA) || 0;
-  var code = 'robot.displayMessage(' + value_h1text + ', ' + value_h2text + ', ' + value_timeout + ');';
+  var code = 'robot.displayMessage(' + value_h1text + ', ' + value_h2text + ', ' + value_timeout + ');\n';
   return code;
 };

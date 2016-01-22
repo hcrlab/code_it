@@ -1,13 +1,3 @@
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <dom-module id="code-it-app">
@@ -16,7 +6,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
         height: 100%;
-        background-color: #fafafa;
+        box-sizing: border-box;
+        padding: 0px 10px;
       }
       .paper-font-display4 {
         @apply(--paper-font-display4);
@@ -77,12 +68,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     <iron-pages attr-for-selected="data-route" selected="{{route}}" on-iron-select="handleRouteChange">
       <section data-route="home">
-        <div class="paper-font-display1">Program list</div> 
-        <div>
+        <div class="paper-font-display1">CodeIt!</div> 
+        <div class="paper-font-title">Program list</div> 
+<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Material</th>
+      <th>Quantity</th>
+      <th>Unit price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+      <td>25</td>
+      <td>$2.90</td>
+    </tr>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
+      <td>50</td>
+      <td>$1.25</td>
+    </tr>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+      <td>10</td>
+      <td>$2.35</td>
+    </tr>
+  </tbody>
+</table>
         <a href="{{baseUrl}}program">Go to the program</a></div>
       </section>
       <section data-route="program" class="vertical layout">
-        <a href="{{baseUrl}}">Go to the program list</a>
+        <div><paper-button class="paper-font-button" on-tap="goToProgramList" noink><iron-icon icon="arrow-back"></iron-icon> Back to program list</paper-button></div>
         <code-it-blockly id="blockly" class="flex"></code-it-blockly>
       </section>
     </iron-pages>
@@ -123,6 +140,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.$.blockly.selected = 0; // Needed to make the toolbox show up, see HACK above.
           this.$.blockly.showExtraDivs();
         }
+      },
+      goToProgramList: function() {
+        page.redirect(this.baseUrl);
       },
     });
   })();
