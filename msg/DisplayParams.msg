@@ -1,4 +1,4 @@
-string displayType
+string display_type
 string h1_text
 string h2_text
 int32 timeout # Timeout, in seconds.

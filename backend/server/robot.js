@@ -8,7 +8,10 @@ Robot = function() {
       messageType: 'code_it/DisplayParams'
     });
     var msg = new ROSLIB.Message({
-      data: h1text
+      display_type: 'display_message',
+      h1_text: h1text,
+      h2_text: h2text,
+      timeout: timeout
     });
     display.publish(msg);
 
