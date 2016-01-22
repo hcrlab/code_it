@@ -119,6 +119,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (this.route === 'home') {
           this.$.blockly.hideExtraDivs();
         } else {
+          this.$.blockly.inject();
           this.$.blockly.selected = 0; // Needed to make the toolbox show up, see HACK above.
           this.$.blockly.showExtraDivs();
         }
