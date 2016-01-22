@@ -1,0 +1,3110 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/bin/npm', 'install', 'roslib' ]
+2 info using npm@3.5.2
+3 info using node@v0.10.41
+4 verbose node symlink /usr/bin/node
+5 silly loadCurrentTree Starting
+6 silly install loadCurrentTree
+7 silly install readLocalPackageData
+8 silly fetchPackageMetaData roslib
+9 silly fetchNamedPackageData roslib
+10 silly mapToRegistry name roslib
+11 silly mapToRegistry using default registry
+12 silly mapToRegistry registry https://registry.npmjs.org/
+13 silly mapToRegistry uri https://registry.npmjs.org/roslib
+14 verbose request uri https://registry.npmjs.org/roslib
+15 verbose request no auth needed
+16 info attempt registry request try #1 at 15:37:11
+17 verbose request id 6e20745f7efecf4e
+18 http request GET https://registry.npmjs.org/roslib
+19 http 200 https://registry.npmjs.org/roslib
+20 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+20 verbose headers   etag: '"DJCBOP9T5HUV2CSL4NENH6ZT4"',
+20 verbose headers   'content-type': 'application/json',
+20 verbose headers   'cache-control': 'max-age=300',
+20 verbose headers   'content-length': '25181',
+20 verbose headers   'accept-ranges': 'bytes',
+20 verbose headers   date: 'Thu, 21 Jan 2016 23:36:02 GMT',
+20 verbose headers   via: '1.1 varnish',
+20 verbose headers   age: '0',
+20 verbose headers   connection: 'keep-alive',
+20 verbose headers   'x-served-by': 'cache-lax1428-LAX',
+20 verbose headers   'x-cache': 'MISS',
+20 verbose headers   'x-cache-hits': '0',
+20 verbose headers   'x-timer': 'S1453419362.305811,VS0,VE240',
+20 verbose headers   vary: 'Accept' }
+21 silly get cb [ 200,
+21 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+21 silly get     etag: '"DJCBOP9T5HUV2CSL4NENH6ZT4"',
+21 silly get     'content-type': 'application/json',
+21 silly get     'cache-control': 'max-age=300',
+21 silly get     'content-length': '25181',
+21 silly get     'accept-ranges': 'bytes',
+21 silly get     date: 'Thu, 21 Jan 2016 23:36:02 GMT',
+21 silly get     via: '1.1 varnish',
+21 silly get     age: '0',
+21 silly get     connection: 'keep-alive',
+21 silly get     'x-served-by': 'cache-lax1428-LAX',
+21 silly get     'x-cache': 'MISS',
+21 silly get     'x-cache-hits': '0',
+21 silly get     'x-timer': 'S1453419362.305811,VS0,VE240',
+21 silly get     vary: 'Accept' } ]
+22 verbose get saving roslib to /home/jstn/.npm/registry.npmjs.org/roslib/.cache.json
+23 silly install normalizeTree
+24 silly loadCurrentTree Finishing
+25 silly loadIdealTree Starting
+26 silly install loadIdealTree
+27 silly cloneCurrentTree Starting
+28 silly install cloneCurrentTreeToIdealTree
+29 silly cloneCurrentTree Finishing
+30 silly loadShrinkwrap Starting
+31 silly install loadShrinkwrap
+32 silly loadShrinkwrap Finishing
+33 silly loadAllDepsIntoIdealTree Starting
+34 silly install loadAllDepsIntoIdealTree
+35 silly resolveWithNewModule roslib@0.17.0 checking installable status
+36 silly cache add args [ 'roslib', null ]
+37 verbose cache add spec roslib
+38 silly cache add parsed spec { raw: 'roslib',
+38 silly cache add   scope: null,
+38 silly cache add   name: 'roslib',
+38 silly cache add   rawSpec: '',
+38 silly cache add   spec: 'latest',
+38 silly cache add   type: 'tag' }
+39 silly addNamed roslib@latest
+40 verbose addNamed "latest" is being treated as a dist-tag for roslib
+41 info addNameTag [ 'roslib', 'latest' ]
+42 silly mapToRegistry name roslib
+43 silly mapToRegistry using default registry
+44 silly mapToRegistry registry https://registry.npmjs.org/
+45 silly mapToRegistry uri https://registry.npmjs.org/roslib
+46 verbose addNameTag registry:https://registry.npmjs.org/roslib not in flight; fetching
+47 verbose get https://registry.npmjs.org/roslib not expired, no request
+48 silly addNameTag next cb for roslib with tag latest
+49 silly addNamed roslib@0.17.0
+50 verbose addNamed "0.17.0" is a plain semver version for roslib
+51 silly mapToRegistry name roslib
+52 silly mapToRegistry using default registry
+53 silly mapToRegistry registry https://registry.npmjs.org/
+54 silly mapToRegistry uri https://registry.npmjs.org/roslib
+55 verbose addRemoteTarball https://registry.npmjs.org/roslib/-/roslib-0.17.0.tgz not in flight; adding
+56 verbose addRemoteTarball [ 'https://registry.npmjs.org/roslib/-/roslib-0.17.0.tgz',
+56 verbose addRemoteTarball   'e0ceb0ce284e52949210286dbd72abffdc480eb8' ]
+57 info retry fetch attempt 1 at 15:37:12
+58 info attempt registry request try #1 at 15:37:12
+59 http fetch GET https://registry.npmjs.org/roslib/-/roslib-0.17.0.tgz
+60 http fetch 200 https://registry.npmjs.org/roslib/-/roslib-0.17.0.tgz
+61 silly fetchAndShaCheck shasum e0ceb0ce284e52949210286dbd72abffdc480eb8
+62 verbose addTmpTarball /tmp/npm-24481-fa0555d6/registry.npmjs.org/roslib/-/roslib-0.17.0.tgz not in flight; adding
+63 verbose addTmpTarball already have metadata; skipping unpack for roslib@0.17.0
+64 silly cache afterAdd roslib@0.17.0
+65 verbose afterAdd /home/jstn/.npm/roslib/0.17.0/package/package.json not in flight; writing
+66 verbose afterAdd /home/jstn/.npm/roslib/0.17.0/package/package.json written
+67 silly fetchNamedPackageData aliasify-patch
+68 silly mapToRegistry name aliasify-patch
+69 silly mapToRegistry using default registry
+70 silly mapToRegistry registry https://registry.npmjs.org/
+71 silly mapToRegistry uri https://registry.npmjs.org/aliasify-patch
+72 silly fetchNamedPackageData canvas
+73 silly mapToRegistry name canvas
+74 silly mapToRegistry using default registry
+75 silly mapToRegistry registry https://registry.npmjs.org/
+76 silly mapToRegistry uri https://registry.npmjs.org/canvas
+77 silly fetchNamedPackageData eventemitter2
+78 silly mapToRegistry name eventemitter2
+79 silly mapToRegistry using default registry
+80 silly mapToRegistry registry https://registry.npmjs.org/
+81 silly mapToRegistry uri https://registry.npmjs.org/eventemitter2
+82 silly fetchNamedPackageData object-assign
+83 silly mapToRegistry name object-assign
+84 silly mapToRegistry using default registry
+85 silly mapToRegistry registry https://registry.npmjs.org/
+86 silly mapToRegistry uri https://registry.npmjs.org/object-assign
+87 silly fetchNamedPackageData ws
+88 silly mapToRegistry name ws
+89 silly mapToRegistry using default registry
+90 silly mapToRegistry registry https://registry.npmjs.org/
+91 silly mapToRegistry uri https://registry.npmjs.org/ws
+92 silly fetchNamedPackageData xmldom
+93 silly mapToRegistry name xmldom
+94 silly mapToRegistry using default registry
+95 silly mapToRegistry registry https://registry.npmjs.org/
+96 silly mapToRegistry uri https://registry.npmjs.org/xmldom
+97 verbose request uri https://registry.npmjs.org/aliasify-patch
+98 verbose request no auth needed
+99 info attempt registry request try #1 at 15:37:13
+100 http request GET https://registry.npmjs.org/aliasify-patch
+101 verbose request uri https://registry.npmjs.org/canvas
+102 verbose request no auth needed
+103 info attempt registry request try #1 at 15:37:13
+104 http request GET https://registry.npmjs.org/canvas
+105 verbose request uri https://registry.npmjs.org/object-assign
+106 verbose request no auth needed
+107 info attempt registry request try #1 at 15:37:13
+108 verbose etag "26R4NA5TCYAE2EWZ602UH4A8L"
+109 http request GET https://registry.npmjs.org/object-assign
+110 verbose request uri https://registry.npmjs.org/ws
+111 verbose request no auth needed
+112 info attempt registry request try #1 at 15:37:13
+113 verbose etag "8ID8ODOR5NSN2H5GPZMJUIHL9"
+114 http request GET https://registry.npmjs.org/ws
+115 verbose request uri https://registry.npmjs.org/xmldom
+116 verbose request no auth needed
+117 info attempt registry request try #1 at 15:37:13
+118 verbose etag "19OGB1YGB9K6DNG1L9TH1RUTC"
+119 http request GET https://registry.npmjs.org/xmldom
+120 verbose request uri https://registry.npmjs.org/eventemitter2
+121 verbose request no auth needed
+122 info attempt registry request try #1 at 15:37:13
+123 verbose etag "79-c2ed087583cd4f70b02cf9cf55bfa1e2"
+124 http request GET https://registry.npmjs.org/eventemitter2
+125 http 304 https://registry.npmjs.org/object-assign
+126 verbose headers { date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+126 verbose headers   via: '1.1 varnish',
+126 verbose headers   'cache-control': 'max-age=300',
+126 verbose headers   etag: '"26R4NA5TCYAE2EWZ602UH4A8L"',
+126 verbose headers   age: '253',
+126 verbose headers   connection: 'keep-alive',
+126 verbose headers   'x-served-by': 'cache-lax1425-LAX',
+126 verbose headers   'x-cache': 'HIT',
+126 verbose headers   'x-cache-hits': '18',
+126 verbose headers   'x-timer': 'S1453419363.421564,VS0,VE0',
+126 verbose headers   vary: 'Accept' }
+127 silly get cb [ 304,
+127 silly get   { date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+127 silly get     via: '1.1 varnish',
+127 silly get     'cache-control': 'max-age=300',
+127 silly get     etag: '"26R4NA5TCYAE2EWZ602UH4A8L"',
+127 silly get     age: '253',
+127 silly get     connection: 'keep-alive',
+127 silly get     'x-served-by': 'cache-lax1425-LAX',
+127 silly get     'x-cache': 'HIT',
+127 silly get     'x-cache-hits': '18',
+127 silly get     'x-timer': 'S1453419363.421564,VS0,VE0',
+127 silly get     vary: 'Accept' } ]
+128 verbose etag https://registry.npmjs.org/object-assign from cache
+129 verbose get saving object-assign to /home/jstn/.npm/registry.npmjs.org/object-assign/.cache.json
+130 http 304 https://registry.npmjs.org/ws
+131 verbose headers { date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+131 verbose headers   via: '1.1 varnish',
+131 verbose headers   'cache-control': 'max-age=300',
+131 verbose headers   etag: '"8ID8ODOR5NSN2H5GPZMJUIHL9"',
+131 verbose headers   age: '240',
+131 verbose headers   connection: 'keep-alive',
+131 verbose headers   'x-served-by': 'cache-lax1420-LAX',
+131 verbose headers   'x-cache': 'HIT',
+131 verbose headers   'x-cache-hits': '5',
+131 verbose headers   'x-timer': 'S1453419363.422090,VS0,VE0',
+131 verbose headers   vary: 'Accept' }
+132 silly get cb [ 304,
+132 silly get   { date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+132 silly get     via: '1.1 varnish',
+132 silly get     'cache-control': 'max-age=300',
+132 silly get     etag: '"8ID8ODOR5NSN2H5GPZMJUIHL9"',
+132 silly get     age: '240',
+132 silly get     connection: 'keep-alive',
+132 silly get     'x-served-by': 'cache-lax1420-LAX',
+132 silly get     'x-cache': 'HIT',
+132 silly get     'x-cache-hits': '5',
+132 silly get     'x-timer': 'S1453419363.422090,VS0,VE0',
+132 silly get     vary: 'Accept' } ]
+133 verbose etag https://registry.npmjs.org/ws from cache
+134 verbose get saving ws to /home/jstn/.npm/registry.npmjs.org/ws/.cache.json
+135 silly resolveWithNewModule object-assign@2.1.1 checking installable status
+136 silly cache add args [ 'object-assign@^2.0.0', null ]
+137 verbose cache add spec object-assign@^2.0.0
+138 silly cache add parsed spec { raw: 'object-assign@^2.0.0',
+138 silly cache add   scope: null,
+138 silly cache add   name: 'object-assign',
+138 silly cache add   rawSpec: '^2.0.0',
+138 silly cache add   spec: '>=2.0.0 <3.0.0',
+138 silly cache add   type: 'range' }
+139 silly addNamed object-assign@>=2.0.0 <3.0.0
+140 verbose addNamed ">=2.0.0 <3.0.0" is a valid semver range for object-assign
+141 silly addNameRange { name: 'object-assign',
+141 silly addNameRange   range: '>=2.0.0 <3.0.0',
+141 silly addNameRange   hasData: false }
+142 silly mapToRegistry name object-assign
+143 silly mapToRegistry using default registry
+144 silly mapToRegistry registry https://registry.npmjs.org/
+145 silly mapToRegistry uri https://registry.npmjs.org/object-assign
+146 verbose addNameRange registry:https://registry.npmjs.org/object-assign not in flight; fetching
+147 silly resolveWithNewModule ws@0.4.32 checking installable status
+148 silly cache add args [ 'ws@^0.4.32', null ]
+149 verbose cache add spec ws@^0.4.32
+150 silly cache add parsed spec { raw: 'ws@^0.4.32',
+150 silly cache add   scope: null,
+150 silly cache add   name: 'ws',
+150 silly cache add   rawSpec: '^0.4.32',
+150 silly cache add   spec: '>=0.4.32 <0.5.0',
+150 silly cache add   type: 'range' }
+151 silly addNamed ws@>=0.4.32 <0.5.0
+152 verbose addNamed ">=0.4.32 <0.5.0" is a valid semver range for ws
+153 silly addNameRange { name: 'ws', range: '>=0.4.32 <0.5.0', hasData: false }
+154 silly mapToRegistry name ws
+155 silly mapToRegistry using default registry
+156 silly mapToRegistry registry https://registry.npmjs.org/
+157 silly mapToRegistry uri https://registry.npmjs.org/ws
+158 verbose addNameRange registry:https://registry.npmjs.org/ws not in flight; fetching
+159 http 304 https://registry.npmjs.org/xmldom
+160 verbose headers { date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+160 verbose headers   via: '1.1 varnish',
+160 verbose headers   'cache-control': 'max-age=300',
+160 verbose headers   etag: '"19OGB1YGB9K6DNG1L9TH1RUTC"',
+160 verbose headers   age: '26',
+160 verbose headers   connection: 'keep-alive',
+160 verbose headers   'x-served-by': 'cache-lax1432-LAX',
+160 verbose headers   'x-cache': 'HIT',
+160 verbose headers   'x-cache-hits': '2',
+160 verbose headers   'x-timer': 'S1453419363.433254,VS0,VE0',
+160 verbose headers   vary: 'Accept' }
+161 silly get cb [ 304,
+161 silly get   { date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+161 silly get     via: '1.1 varnish',
+161 silly get     'cache-control': 'max-age=300',
+161 silly get     etag: '"19OGB1YGB9K6DNG1L9TH1RUTC"',
+161 silly get     age: '26',
+161 silly get     connection: 'keep-alive',
+161 silly get     'x-served-by': 'cache-lax1432-LAX',
+161 silly get     'x-cache': 'HIT',
+161 silly get     'x-cache-hits': '2',
+161 silly get     'x-timer': 'S1453419363.433254,VS0,VE0',
+161 silly get     vary: 'Accept' } ]
+162 verbose etag https://registry.npmjs.org/xmldom from cache
+163 verbose get saving xmldom to /home/jstn/.npm/registry.npmjs.org/xmldom/.cache.json
+164 verbose get https://registry.npmjs.org/object-assign not expired, no request
+165 silly addNameRange number 2 { name: 'object-assign', range: '>=2.0.0 <3.0.0', hasData: true }
+166 silly addNameRange versions [ 'object-assign',
+166 silly addNameRange   [ '0.1.0',
+166 silly addNameRange     '0.1.1',
+166 silly addNameRange     '0.1.2',
+166 silly addNameRange     '0.2.0',
+166 silly addNameRange     '0.2.1',
+166 silly addNameRange     '0.2.2',
+166 silly addNameRange     '0.3.0',
+166 silly addNameRange     '0.3.1',
+166 silly addNameRange     '0.4.0',
+166 silly addNameRange     '1.0.0',
+166 silly addNameRange     '2.0.0',
+166 silly addNameRange     '3.0.0',
+166 silly addNameRange     '2.1.1',
+166 silly addNameRange     '4.0.0',
+166 silly addNameRange     '4.0.1' ] ]
+167 silly addNamed object-assign@2.1.1
+168 verbose addNamed "2.1.1" is a plain semver version for object-assign
+169 verbose get https://registry.npmjs.org/ws not expired, no request
+170 silly addNameRange number 2 { name: 'ws', range: '>=0.4.32 <0.5.0', hasData: true }
+171 silly addNameRange versions [ 'ws',
+171 silly addNameRange   [ '0.2.6',
+171 silly addNameRange     '0.2.8',
+171 silly addNameRange     '0.2.9',
+171 silly addNameRange     '0.3.0',
+171 silly addNameRange     '0.3.1',
+171 silly addNameRange     '0.3.2',
+171 silly addNameRange     '0.3.3',
+171 silly addNameRange     '0.3.4',
+171 silly addNameRange     '0.3.4-2',
+171 silly addNameRange     '0.3.5',
+171 silly addNameRange     '0.3.5-2',
+171 silly addNameRange     '0.3.5-3',
+171 silly addNameRange     '0.3.5-4',
+171 silly addNameRange     '0.3.6',
+171 silly addNameRange     '0.3.7',
+171 silly addNameRange     '0.3.8',
+171 silly addNameRange     '0.3.9',
+171 silly addNameRange     '0.4.0',
+171 silly addNameRange     '0.4.1',
+171 silly addNameRange     '0.4.2',
+171 silly addNameRange     '0.4.3',
+171 silly addNameRange     '0.4.5',
+171 silly addNameRange     '0.4.6',
+171 silly addNameRange     '0.4.7',
+171 silly addNameRange     '0.4.8',
+171 silly addNameRange     '0.4.9',
+171 silly addNameRange     '0.4.10',
+171 silly addNameRange     '0.4.11',
+171 silly addNameRange     '0.4.12',
+171 silly addNameRange     '0.4.13',
+171 silly addNameRange     '0.4.14',
+171 silly addNameRange     '0.4.15',
+171 silly addNameRange     '0.4.16',
+171 silly addNameRange     '0.4.17',
+171 silly addNameRange     '0.4.18',
+171 silly addNameRange     '0.4.19',
+171 silly addNameRange     '0.4.20',
+171 silly addNameRange     '0.4.21',
+171 silly addNameRange     '0.4.22',
+171 silly addNameRange     '0.4.23',
+171 silly addNameRange     '0.4.24',
+171 silly addNameRange     '0.4.25',
+171 silly addNameRange     '0.4.27',
+171 silly addNameRange     '0.4.28',
+171 silly addNameRange     '0.4.29',
+171 silly addNameRange     '0.4.30',
+171 silly addNameRange     '0.4.31',
+171 silly addNameRange     '0.4.32',
+171 silly addNameRange     '0.5.0',
+171 silly addNameRange     '0.6.0',
+171 silly addNameRange     '0.6.1',
+171 silly addNameRange     '0.6.2',
+171 silly addNameRange     '0.6.3',
+171 silly addNameRange     '0.6.4',
+171 silly addNameRange     '0.6.5',
+171 silly addNameRange     '0.7.0',
+171 silly addNameRange     '0.7.1',
+171 silly addNameRange     '0.7.2',
+171 silly addNameRange     '0.8.0',
+171 silly addNameRange     '0.8.1',
+171 silly addNameRange     '1.0.0',
+171 silly addNameRange     '1.0.1' ] ]
+172 silly addNamed ws@0.4.32
+173 verbose addNamed "0.4.32" is a plain semver version for ws
+174 silly mapToRegistry name ws
+175 silly mapToRegistry using default registry
+176 silly mapToRegistry registry https://registry.npmjs.org/
+177 silly mapToRegistry uri https://registry.npmjs.org/ws
+178 verbose addRemoteTarball https://registry.npmjs.org/ws/-/ws-0.4.32.tgz not in flight; adding
+179 verbose addRemoteTarball [ 'https://registry.npmjs.org/ws/-/ws-0.4.32.tgz',
+179 verbose addRemoteTarball   '787a6154414f3c99ed83c5772153b20feb0cec32' ]
+180 silly cache afterAdd object-assign@2.1.1
+181 verbose afterAdd /home/jstn/.npm/object-assign/2.1.1/package/package.json not in flight; writing
+182 info retry fetch attempt 1 at 15:37:13
+183 info attempt registry request try #1 at 15:37:13
+184 http fetch GET https://registry.npmjs.org/ws/-/ws-0.4.32.tgz
+185 silly resolveWithNewModule xmldom@0.1.21 checking installable status
+186 silly cache add args [ 'xmldom@^0.1.19', null ]
+187 verbose cache add spec xmldom@^0.1.19
+188 silly cache add parsed spec { raw: 'xmldom@^0.1.19',
+188 silly cache add   scope: null,
+188 silly cache add   name: 'xmldom',
+188 silly cache add   rawSpec: '^0.1.19',
+188 silly cache add   spec: '>=0.1.19 <0.2.0',
+188 silly cache add   type: 'range' }
+189 silly addNamed xmldom@>=0.1.19 <0.2.0
+190 verbose addNamed ">=0.1.19 <0.2.0" is a valid semver range for xmldom
+191 silly addNameRange { name: 'xmldom', range: '>=0.1.19 <0.2.0', hasData: false }
+192 silly mapToRegistry name xmldom
+193 silly mapToRegistry using default registry
+194 silly mapToRegistry registry https://registry.npmjs.org/
+195 silly mapToRegistry uri https://registry.npmjs.org/xmldom
+196 verbose addNameRange registry:https://registry.npmjs.org/xmldom not in flight; fetching
+197 verbose afterAdd /home/jstn/.npm/object-assign/2.1.1/package/package.json written
+198 verbose get https://registry.npmjs.org/xmldom not expired, no request
+199 silly addNameRange number 2 { name: 'xmldom', range: '>=0.1.19 <0.2.0', hasData: true }
+200 silly addNameRange versions [ 'xmldom',
+200 silly addNameRange   [ '0.1.0',
+200 silly addNameRange     '0.1.1',
+200 silly addNameRange     '0.1.2',
+200 silly addNameRange     '0.1.3',
+200 silly addNameRange     '0.1.4',
+200 silly addNameRange     '0.1.5',
+200 silly addNameRange     '0.1.6',
+200 silly addNameRange     '0.1.7',
+200 silly addNameRange     '0.1.8',
+200 silly addNameRange     '0.1.9',
+200 silly addNameRange     '0.1.10',
+200 silly addNameRange     '0.1.11',
+200 silly addNameRange     '0.1.12',
+200 silly addNameRange     '0.1.13',
+200 silly addNameRange     '0.1.14',
+200 silly addNameRange     '0.1.15',
+200 silly addNameRange     '0.1.16',
+200 silly addNameRange     '0.1.17',
+200 silly addNameRange     '0.1.18',
+200 silly addNameRange     '0.1.19',
+200 silly addNameRange     '0.1.20',
+200 silly addNameRange     '0.1.21' ] ]
+201 silly addNamed xmldom@0.1.21
+202 verbose addNamed "0.1.21" is a plain semver version for xmldom
+203 silly cache afterAdd xmldom@0.1.21
+204 verbose afterAdd /home/jstn/.npm/xmldom/0.1.21/package/package.json not in flight; writing
+205 verbose afterAdd /home/jstn/.npm/xmldom/0.1.21/package/package.json written
+206 http 200 https://registry.npmjs.org/eventemitter2
+207 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+207 verbose headers   etag: '"D85QMKSKX6TN4OZTTRQ30Q36T"',
+207 verbose headers   'content-type': 'application/json',
+207 verbose headers   'cache-control': 'max-age=300',
+207 verbose headers   'content-length': '37416',
+207 verbose headers   'accept-ranges': 'bytes',
+207 verbose headers   date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+207 verbose headers   via: '1.1 varnish',
+207 verbose headers   age: '88',
+207 verbose headers   connection: 'keep-alive',
+207 verbose headers   'x-served-by': 'cache-lax1425-LAX',
+207 verbose headers   'x-cache': 'HIT',
+207 verbose headers   'x-cache-hits': '1',
+207 verbose headers   'x-timer': 'S1453419363.452228,VS0,VE0',
+207 verbose headers   vary: 'Accept' }
+208 silly get cb [ 200,
+208 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+208 silly get     etag: '"D85QMKSKX6TN4OZTTRQ30Q36T"',
+208 silly get     'content-type': 'application/json',
+208 silly get     'cache-control': 'max-age=300',
+208 silly get     'content-length': '37416',
+208 silly get     'accept-ranges': 'bytes',
+208 silly get     date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+208 silly get     via: '1.1 varnish',
+208 silly get     age: '88',
+208 silly get     connection: 'keep-alive',
+208 silly get     'x-served-by': 'cache-lax1425-LAX',
+208 silly get     'x-cache': 'HIT',
+208 silly get     'x-cache-hits': '1',
+208 silly get     'x-timer': 'S1453419363.452228,VS0,VE0',
+208 silly get     vary: 'Accept' } ]
+209 verbose get saving eventemitter2 to /home/jstn/.npm/registry.npmjs.org/eventemitter2/.cache.json
+210 silly resolveWithNewModule eventemitter2@0.4.14 checking installable status
+211 silly cache add args [ 'eventemitter2@~0.4.13', null ]
+212 verbose cache add spec eventemitter2@~0.4.13
+213 silly cache add parsed spec { raw: 'eventemitter2@~0.4.13',
+213 silly cache add   scope: null,
+213 silly cache add   name: 'eventemitter2',
+213 silly cache add   rawSpec: '~0.4.13',
+213 silly cache add   spec: '>=0.4.13 <0.5.0',
+213 silly cache add   type: 'range' }
+214 silly addNamed eventemitter2@>=0.4.13 <0.5.0
+215 verbose addNamed ">=0.4.13 <0.5.0" is a valid semver range for eventemitter2
+216 silly addNameRange { name: 'eventemitter2',
+216 silly addNameRange   range: '>=0.4.13 <0.5.0',
+216 silly addNameRange   hasData: false }
+217 silly mapToRegistry name eventemitter2
+218 silly mapToRegistry using default registry
+219 silly mapToRegistry registry https://registry.npmjs.org/
+220 silly mapToRegistry uri https://registry.npmjs.org/eventemitter2
+221 verbose addNameRange registry:https://registry.npmjs.org/eventemitter2 not in flight; fetching
+222 verbose get https://registry.npmjs.org/eventemitter2 not expired, no request
+223 silly addNameRange number 2 { name: 'eventemitter2',
+223 silly addNameRange   range: '>=0.4.13 <0.5.0',
+223 silly addNameRange   hasData: true }
+224 silly addNameRange versions [ 'eventemitter2',
+224 silly addNameRange   [ '0.0.1',
+224 silly addNameRange     '0.1.0',
+224 silly addNameRange     '0.1.1',
+224 silly addNameRange     '0.1.3',
+224 silly addNameRange     '0.2.5',
+224 silly addNameRange     '0.2.6',
+224 silly addNameRange     '0.2.7',
+224 silly addNameRange     '0.3.5',
+224 silly addNameRange     '0.3.6',
+224 silly addNameRange     '0.3.7',
+224 silly addNameRange     '0.4.0',
+224 silly addNameRange     '0.4.1',
+224 silly addNameRange     '0.4.3',
+224 silly addNameRange     '0.4.6',
+224 silly addNameRange     '0.4.7',
+224 silly addNameRange     '0.4.8',
+224 silly addNameRange     '0.4.9',
+224 silly addNameRange     '0.4.10',
+224 silly addNameRange     '0.4.11',
+224 silly addNameRange     '0.4.12',
+224 silly addNameRange     '0.4.13',
+224 silly addNameRange     '0.4.14' ] ]
+225 silly addNamed eventemitter2@0.4.14
+226 verbose addNamed "0.4.14" is a plain semver version for eventemitter2
+227 http 200 https://registry.npmjs.org/aliasify-patch
+228 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+228 verbose headers   etag: '"DEHY3JJGR4EA7QAV5B9421YFK"',
+228 verbose headers   'content-type': 'application/json',
+228 verbose headers   'cache-control': 'max-age=300',
+228 verbose headers   'content-length': '6132',
+228 verbose headers   'accept-ranges': 'bytes',
+228 verbose headers   date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+228 verbose headers   via: '1.1 varnish',
+228 verbose headers   age: '0',
+228 verbose headers   connection: 'keep-alive',
+228 verbose headers   'x-served-by': 'cache-lax1429-LAX',
+228 verbose headers   'x-cache': 'MISS',
+228 verbose headers   'x-cache-hits': '0',
+228 verbose headers   'x-timer': 'S1453419363.429100,VS0,VE81',
+228 verbose headers   vary: 'Accept' }
+229 silly get cb [ 200,
+229 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+229 silly get     etag: '"DEHY3JJGR4EA7QAV5B9421YFK"',
+229 silly get     'content-type': 'application/json',
+229 silly get     'cache-control': 'max-age=300',
+229 silly get     'content-length': '6132',
+229 silly get     'accept-ranges': 'bytes',
+229 silly get     date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+229 silly get     via: '1.1 varnish',
+229 silly get     age: '0',
+229 silly get     connection: 'keep-alive',
+229 silly get     'x-served-by': 'cache-lax1429-LAX',
+229 silly get     'x-cache': 'MISS',
+229 silly get     'x-cache-hits': '0',
+229 silly get     'x-timer': 'S1453419363.429100,VS0,VE81',
+229 silly get     vary: 'Accept' } ]
+230 verbose get saving aliasify-patch to /home/jstn/.npm/registry.npmjs.org/aliasify-patch/.cache.json
+231 silly cache afterAdd eventemitter2@0.4.14
+232 verbose afterAdd /home/jstn/.npm/eventemitter2/0.4.14/package/package.json not in flight; writing
+233 verbose afterAdd /home/jstn/.npm/eventemitter2/0.4.14/package/package.json written
+234 silly resolveWithNewModule aliasify-patch@1.4.1 checking installable status
+235 silly cache add args [ 'aliasify-patch@^1.4.1', null ]
+236 verbose cache add spec aliasify-patch@^1.4.1
+237 silly cache add parsed spec { raw: 'aliasify-patch@^1.4.1',
+237 silly cache add   scope: null,
+237 silly cache add   name: 'aliasify-patch',
+237 silly cache add   rawSpec: '^1.4.1',
+237 silly cache add   spec: '>=1.4.1 <2.0.0',
+237 silly cache add   type: 'range' }
+238 silly addNamed aliasify-patch@>=1.4.1 <2.0.0
+239 verbose addNamed ">=1.4.1 <2.0.0" is a valid semver range for aliasify-patch
+240 silly addNameRange { name: 'aliasify-patch',
+240 silly addNameRange   range: '>=1.4.1 <2.0.0',
+240 silly addNameRange   hasData: false }
+241 silly mapToRegistry name aliasify-patch
+242 silly mapToRegistry using default registry
+243 silly mapToRegistry registry https://registry.npmjs.org/
+244 silly mapToRegistry uri https://registry.npmjs.org/aliasify-patch
+245 verbose addNameRange registry:https://registry.npmjs.org/aliasify-patch not in flight; fetching
+246 verbose get https://registry.npmjs.org/aliasify-patch not expired, no request
+247 silly addNameRange number 2 { name: 'aliasify-patch',
+247 silly addNameRange   range: '>=1.4.1 <2.0.0',
+247 silly addNameRange   hasData: true }
+248 silly addNameRange versions [ 'aliasify-patch', [ '1.4.1' ] ]
+249 silly addNamed aliasify-patch@1.4.1
+250 verbose addNamed "1.4.1" is a plain semver version for aliasify-patch
+251 silly mapToRegistry name aliasify-patch
+252 silly mapToRegistry using default registry
+253 silly mapToRegistry registry https://registry.npmjs.org/
+254 silly mapToRegistry uri https://registry.npmjs.org/aliasify-patch
+255 verbose addRemoteTarball https://registry.npmjs.org/aliasify-patch/-/aliasify-patch-1.4.1.tgz not in flight; adding
+256 verbose addRemoteTarball [ 'https://registry.npmjs.org/aliasify-patch/-/aliasify-patch-1.4.1.tgz',
+256 verbose addRemoteTarball   '3513ce18583bcd7a85bcaea50f2bfff03ac0c770' ]
+257 info retry fetch attempt 1 at 15:37:13
+258 info attempt registry request try #1 at 15:37:13
+259 http fetch GET https://registry.npmjs.org/aliasify-patch/-/aliasify-patch-1.4.1.tgz
+260 http 200 https://registry.npmjs.org/canvas
+261 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+261 verbose headers   etag: '"6F7QBTUKPU1QNEN3QHT768ST2"',
+261 verbose headers   'content-type': 'application/json',
+261 verbose headers   'cache-control': 'max-age=300',
+261 verbose headers   'content-length': '96250',
+261 verbose headers   'accept-ranges': 'bytes',
+261 verbose headers   date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+261 verbose headers   via: '1.1 varnish',
+261 verbose headers   age: '26',
+261 verbose headers   connection: 'keep-alive',
+261 verbose headers   'x-served-by': 'cache-lax1426-LAX',
+261 verbose headers   'x-cache': 'HIT',
+261 verbose headers   'x-cache-hits': '1',
+261 verbose headers   'x-timer': 'S1453419363.428051,VS0,VE0',
+261 verbose headers   vary: 'Accept' }
+262 silly get cb [ 200,
+262 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+262 silly get     etag: '"6F7QBTUKPU1QNEN3QHT768ST2"',
+262 silly get     'content-type': 'application/json',
+262 silly get     'cache-control': 'max-age=300',
+262 silly get     'content-length': '96250',
+262 silly get     'accept-ranges': 'bytes',
+262 silly get     date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+262 silly get     via: '1.1 varnish',
+262 silly get     age: '26',
+262 silly get     connection: 'keep-alive',
+262 silly get     'x-served-by': 'cache-lax1426-LAX',
+262 silly get     'x-cache': 'HIT',
+262 silly get     'x-cache-hits': '1',
+262 silly get     'x-timer': 'S1453419363.428051,VS0,VE0',
+262 silly get     vary: 'Accept' } ]
+263 verbose get saving canvas to /home/jstn/.npm/registry.npmjs.org/canvas/.cache.json
+264 silly resolveWithNewModule canvas@1.2.11 checking installable status
+265 silly cache add args [ 'canvas@~1.2.8', null ]
+266 verbose cache add spec canvas@~1.2.8
+267 silly cache add parsed spec { raw: 'canvas@~1.2.8',
+267 silly cache add   scope: null,
+267 silly cache add   name: 'canvas',
+267 silly cache add   rawSpec: '~1.2.8',
+267 silly cache add   spec: '>=1.2.8 <1.3.0',
+267 silly cache add   type: 'range' }
+268 silly addNamed canvas@>=1.2.8 <1.3.0
+269 verbose addNamed ">=1.2.8 <1.3.0" is a valid semver range for canvas
+270 silly addNameRange { name: 'canvas', range: '>=1.2.8 <1.3.0', hasData: false }
+271 silly mapToRegistry name canvas
+272 silly mapToRegistry using default registry
+273 silly mapToRegistry registry https://registry.npmjs.org/
+274 silly mapToRegistry uri https://registry.npmjs.org/canvas
+275 verbose addNameRange registry:https://registry.npmjs.org/canvas not in flight; fetching
+276 verbose get https://registry.npmjs.org/canvas not expired, no request
+277 silly addNameRange number 2 { name: 'canvas', range: '>=1.2.8 <1.3.0', hasData: true }
+278 silly addNameRange versions [ 'canvas',
+278 silly addNameRange   [ '0.0.1',
+278 silly addNameRange     '0.0.2',
+278 silly addNameRange     '0.0.3',
+278 silly addNameRange     '0.0.4',
+278 silly addNameRange     '0.0.5',
+278 silly addNameRange     '0.0.6',
+278 silly addNameRange     '0.0.7',
+278 silly addNameRange     '0.0.8',
+278 silly addNameRange     '0.1.0',
+278 silly addNameRange     '0.2.0',
+278 silly addNameRange     '0.2.1',
+278 silly addNameRange     '0.3.0',
+278 silly addNameRange     '0.3.1',
+278 silly addNameRange     '0.3.2',
+278 silly addNameRange     '0.3.3',
+278 silly addNameRange     '0.4.0',
+278 silly addNameRange     '0.4.1',
+278 silly addNameRange     '0.4.2',
+278 silly addNameRange     '0.4.3',
+278 silly addNameRange     '0.5.0',
+278 silly addNameRange     '0.5.1',
+278 silly addNameRange     '0.5.2',
+278 silly addNameRange     '0.5.3',
+278 silly addNameRange     '0.5.4',
+278 silly addNameRange     '0.6.0',
+278 silly addNameRange     '0.7.0',
+278 silly addNameRange     '0.7.1',
+278 silly addNameRange     '0.7.2',
+278 silly addNameRange     '0.7.3',
+278 silly addNameRange     '0.8.0',
+278 silly addNameRange     '0.8.1',
+278 silly addNameRange     '0.8.2',
+278 silly addNameRange     '0.8.3',
+278 silly addNameRange     '0.9.0',
+278 silly addNameRange     '0.10.0',
+278 silly addNameRange     '0.10.1',
+278 silly addNameRange     '0.10.2',
+278 silly addNameRange     '0.10.3',
+278 silly addNameRange     '0.11.0',
+278 silly addNameRange     '0.11.1',
+278 silly addNameRange     '0.11.2',
+278 silly addNameRange     '0.11.3',
+278 silly addNameRange     '0.12.0',
+278 silly addNameRange     '0.12.1',
+278 silly addNameRange     '0.13.0',
+278 silly addNameRange     '0.13.1',
+278 silly addNameRange     '1.0.0',
+278 silly addNameRange     '1.0.1',
+278 silly addNameRange     '1.0.2',
+278 silly addNameRange     '1.0.3',
+278 silly addNameRange     '1.0.4',
+278 silly addNameRange     '1.1.0',
+278 silly addNameRange     '1.1.1',
+278 silly addNameRange     '1.1.2',
+278 silly addNameRange     '1.1.3',
+278 silly addNameRange     '1.1.4',
+278 silly addNameRange     '1.1.5',
+278 silly addNameRange     '1.1.6',
+278 silly addNameRange     '1.2.0',
+278 silly addNameRange     '1.2.1',
+278 silly addNameRange     '1.2.2',
+278 silly addNameRange     '1.2.3',
+278 silly addNameRange     '1.2.4',
+278 silly addNameRange     '1.2.5',
+278 silly addNameRange     '1.2.6',
+278 silly addNameRange     '1.2.7',
+278 silly addNameRange     '1.2.8',
+278 silly addNameRange     '1.2.9',
+278 silly addNameRange     '1.2.10',
+278 silly addNameRange     '1.2.11',
+278 silly addNameRange     '1.3.0',
+278 silly addNameRange     '1.3.1',
+278 silly addNameRange     '1.3.2',
+278 silly addNameRange     '1.3.3',
+278 silly addNameRange     '1.3.4',
+278 silly addNameRange     '1.3.5',
+278 silly addNameRange     '1.3.6',
+278 silly addNameRange     '1.3.7' ] ]
+279 silly addNamed canvas@1.2.11
+280 verbose addNamed "1.2.11" is a plain semver version for canvas
+281 silly mapToRegistry name canvas
+282 silly mapToRegistry using default registry
+283 silly mapToRegistry registry https://registry.npmjs.org/
+284 silly mapToRegistry uri https://registry.npmjs.org/canvas
+285 verbose addRemoteTarball https://registry.npmjs.org/canvas/-/canvas-1.2.11.tgz not in flight; adding
+286 verbose addRemoteTarball [ 'https://registry.npmjs.org/canvas/-/canvas-1.2.11.tgz',
+286 verbose addRemoteTarball   'd12455864df5169c2a2be602fa8e0e4013a97140' ]
+287 info retry fetch attempt 1 at 15:37:13
+288 info attempt registry request try #1 at 15:37:13
+289 http fetch GET https://registry.npmjs.org/canvas/-/canvas-1.2.11.tgz
+290 http fetch 200 https://registry.npmjs.org/ws/-/ws-0.4.32.tgz
+291 silly fetchAndShaCheck shasum 787a6154414f3c99ed83c5772153b20feb0cec32
+292 verbose addTmpTarball /tmp/npm-24481-fa0555d6/registry.npmjs.org/ws/-/ws-0.4.32.tgz not in flight; adding
+293 verbose addTmpTarball already have metadata; skipping unpack for ws@0.4.32
+294 silly cache afterAdd ws@0.4.32
+295 verbose afterAdd /home/jstn/.npm/ws/0.4.32/package/package.json not in flight; writing
+296 verbose afterAdd /home/jstn/.npm/ws/0.4.32/package/package.json written
+297 http fetch 200 https://registry.npmjs.org/aliasify-patch/-/aliasify-patch-1.4.1.tgz
+298 silly fetchAndShaCheck shasum 3513ce18583bcd7a85bcaea50f2bfff03ac0c770
+299 verbose addTmpTarball /tmp/npm-24481-fa0555d6/registry.npmjs.org/aliasify-patch/-/aliasify-patch-1.4.1.tgz not in flight; adding
+300 verbose addTmpTarball already have metadata; skipping unpack for aliasify-patch@1.4.1
+301 silly cache afterAdd aliasify-patch@1.4.1
+302 verbose afterAdd /home/jstn/.npm/aliasify-patch/1.4.1/package/package.json not in flight; writing
+303 verbose afterAdd /home/jstn/.npm/aliasify-patch/1.4.1/package/package.json written
+304 http fetch 200 https://registry.npmjs.org/canvas/-/canvas-1.2.11.tgz
+305 silly fetchAndShaCheck shasum d12455864df5169c2a2be602fa8e0e4013a97140
+306 verbose addTmpTarball /tmp/npm-24481-fa0555d6/registry.npmjs.org/canvas/-/canvas-1.2.11.tgz not in flight; adding
+307 verbose addTmpTarball already have metadata; skipping unpack for canvas@1.2.11
+308 silly cache afterAdd canvas@1.2.11
+309 verbose afterAdd /home/jstn/.npm/canvas/1.2.11/package/package.json not in flight; writing
+310 verbose afterAdd /home/jstn/.npm/canvas/1.2.11/package/package.json written
+311 silly fetchNamedPackageData browserify-transform-tools
+312 silly mapToRegistry name browserify-transform-tools
+313 silly mapToRegistry using default registry
+314 silly mapToRegistry registry https://registry.npmjs.org/
+315 silly mapToRegistry uri https://registry.npmjs.org/browserify-transform-tools
+316 verbose request uri https://registry.npmjs.org/browserify-transform-tools
+317 verbose request no auth needed
+318 info attempt registry request try #1 at 15:37:13
+319 http request GET https://registry.npmjs.org/browserify-transform-tools
+320 http 200 https://registry.npmjs.org/browserify-transform-tools
+321 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+321 verbose headers   etag: '"8IKWM0GJDD83T0YDPKP8ZF8L1"',
+321 verbose headers   'content-type': 'application/json',
+321 verbose headers   'cache-control': 'max-age=300',
+321 verbose headers   'content-length': '31368',
+321 verbose headers   'accept-ranges': 'bytes',
+321 verbose headers   date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+321 verbose headers   via: '1.1 varnish',
+321 verbose headers   age: '0',
+321 verbose headers   connection: 'keep-alive',
+321 verbose headers   'x-served-by': 'cache-lax1429-LAX',
+321 verbose headers   'x-cache': 'HIT',
+321 verbose headers   'x-cache-hits': '1',
+321 verbose headers   'x-timer': 'S1453419363.880386,VS0,VE46',
+321 verbose headers   vary: 'Accept' }
+322 silly get cb [ 200,
+322 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+322 silly get     etag: '"8IKWM0GJDD83T0YDPKP8ZF8L1"',
+322 silly get     'content-type': 'application/json',
+322 silly get     'cache-control': 'max-age=300',
+322 silly get     'content-length': '31368',
+322 silly get     'accept-ranges': 'bytes',
+322 silly get     date: 'Thu, 21 Jan 2016 23:36:03 GMT',
+322 silly get     via: '1.1 varnish',
+322 silly get     age: '0',
+322 silly get     connection: 'keep-alive',
+322 silly get     'x-served-by': 'cache-lax1429-LAX',
+322 silly get     'x-cache': 'HIT',
+322 silly get     'x-cache-hits': '1',
+322 silly get     'x-timer': 'S1453419363.880386,VS0,VE46',
+322 silly get     vary: 'Accept' } ]
+323 verbose get saving browserify-transform-tools to /home/jstn/.npm/registry.npmjs.org/browserify-transform-tools/.cache.json
+324 silly resolveWithNewModule browserify-transform-tools@1.2.2 checking installable status
+325 silly cache add args [ 'browserify-transform-tools@~1.2.1', null ]
+326 verbose cache add spec browserify-transform-tools@~1.2.1
+327 silly cache add parsed spec { raw: 'browserify-transform-tools@~1.2.1',
+327 silly cache add   scope: null,
+327 silly cache add   name: 'browserify-transform-tools',
+327 silly cache add   rawSpec: '~1.2.1',
+327 silly cache add   spec: '>=1.2.1 <1.3.0',
+327 silly cache add   type: 'range' }
+328 silly addNamed browserify-transform-tools@>=1.2.1 <1.3.0
+329 verbose addNamed ">=1.2.1 <1.3.0" is a valid semver range for browserify-transform-tools
+330 silly addNameRange { name: 'browserify-transform-tools',
+330 silly addNameRange   range: '>=1.2.1 <1.3.0',
+330 silly addNameRange   hasData: false }
+331 silly mapToRegistry name browserify-transform-tools
+332 silly mapToRegistry using default registry
+333 silly mapToRegistry registry https://registry.npmjs.org/
+334 silly mapToRegistry uri https://registry.npmjs.org/browserify-transform-tools
+335 verbose addNameRange registry:https://registry.npmjs.org/browserify-transform-tools not in flight; fetching
+336 verbose get https://registry.npmjs.org/browserify-transform-tools not expired, no request
+337 silly addNameRange number 2 { name: 'browserify-transform-tools',
+337 silly addNameRange   range: '>=1.2.1 <1.3.0',
+337 silly addNameRange   hasData: true }
+338 silly addNameRange versions [ 'browserify-transform-tools',
+338 silly addNameRange   [ '1.0.0',
+338 silly addNameRange     '1.0.1',
+338 silly addNameRange     '1.0.2',
+338 silly addNameRange     '1.1.0',
+338 silly addNameRange     '1.2.0',
+338 silly addNameRange     '1.2.1',
+338 silly addNameRange     '1.2.2',
+338 silly addNameRange     '1.3.0',
+338 silly addNameRange     '1.3.1',
+338 silly addNameRange     '1.3.2',
+338 silly addNameRange     '1.3.3',
+338 silly addNameRange     '1.4.0',
+338 silly addNameRange     '1.4.1',
+338 silly addNameRange     '1.4.2',
+338 silly addNameRange     '1.5.0',
+338 silly addNameRange     '1.5.1' ] ]
+339 silly addNamed browserify-transform-tools@1.2.2
+340 verbose addNamed "1.2.2" is a plain semver version for browserify-transform-tools
+341 silly mapToRegistry name browserify-transform-tools
+342 silly mapToRegistry using default registry
+343 silly mapToRegistry registry https://registry.npmjs.org/
+344 silly mapToRegistry uri https://registry.npmjs.org/browserify-transform-tools
+345 verbose addRemoteTarball https://registry.npmjs.org/browserify-transform-tools/-/browserify-transform-tools-1.2.2.tgz not in flight; adding
+346 verbose addRemoteTarball [ 'https://registry.npmjs.org/browserify-transform-tools/-/browserify-transform-tools-1.2.2.tgz',
+346 verbose addRemoteTarball   '6105a97d88b8ef33121ba374fa05d2af3dd263dd' ]
+347 info retry fetch attempt 1 at 15:37:13
+348 info attempt registry request try #1 at 15:37:13
+349 http fetch GET https://registry.npmjs.org/browserify-transform-tools/-/browserify-transform-tools-1.2.2.tgz
+350 http fetch 200 https://registry.npmjs.org/browserify-transform-tools/-/browserify-transform-tools-1.2.2.tgz
+351 silly fetchAndShaCheck shasum 6105a97d88b8ef33121ba374fa05d2af3dd263dd
+352 verbose addTmpTarball /tmp/npm-24481-fa0555d6/registry.npmjs.org/browserify-transform-tools/-/browserify-transform-tools-1.2.2.tgz not in flight; adding
+353 verbose addTmpTarball already have metadata; skipping unpack for browserify-transform-tools@1.2.2
+354 silly cache afterAdd browserify-transform-tools@1.2.2
+355 verbose afterAdd /home/jstn/.npm/browserify-transform-tools/1.2.2/package/package.json not in flight; writing
+356 verbose afterAdd /home/jstn/.npm/browserify-transform-tools/1.2.2/package/package.json written
+357 silly fetchNamedPackageData through
+358 silly mapToRegistry name through
+359 silly mapToRegistry using default registry
+360 silly mapToRegistry registry https://registry.npmjs.org/
+361 silly mapToRegistry uri https://registry.npmjs.org/through
+362 silly fetchNamedPackageData falafel
+363 silly mapToRegistry name falafel
+364 silly mapToRegistry using default registry
+365 silly mapToRegistry registry https://registry.npmjs.org/
+366 silly mapToRegistry uri https://registry.npmjs.org/falafel
+367 verbose request uri https://registry.npmjs.org/falafel
+368 verbose request no auth needed
+369 info attempt registry request try #1 at 15:37:14
+370 http request GET https://registry.npmjs.org/falafel
+371 verbose request uri https://registry.npmjs.org/through
+372 verbose request no auth needed
+373 info attempt registry request try #1 at 15:37:14
+374 verbose etag "AHYG14PLRK76D3IM9SFQCAV5Y"
+375 http request GET https://registry.npmjs.org/through
+376 http 304 https://registry.npmjs.org/through
+377 verbose headers { date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+377 verbose headers   via: '1.1 varnish',
+377 verbose headers   'cache-control': 'max-age=300',
+377 verbose headers   etag: '"AHYG14PLRK76D3IM9SFQCAV5Y"',
+377 verbose headers   age: '213',
+377 verbose headers   connection: 'keep-alive',
+377 verbose headers   'x-served-by': 'cache-lax1421-LAX',
+377 verbose headers   'x-cache': 'HIT',
+377 verbose headers   'x-cache-hits': '9',
+377 verbose headers   'x-timer': 'S1453419364.277238,VS0,VE0',
+377 verbose headers   vary: 'Accept' }
+378 silly get cb [ 304,
+378 silly get   { date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+378 silly get     via: '1.1 varnish',
+378 silly get     'cache-control': 'max-age=300',
+378 silly get     etag: '"AHYG14PLRK76D3IM9SFQCAV5Y"',
+378 silly get     age: '213',
+378 silly get     connection: 'keep-alive',
+378 silly get     'x-served-by': 'cache-lax1421-LAX',
+378 silly get     'x-cache': 'HIT',
+378 silly get     'x-cache-hits': '9',
+378 silly get     'x-timer': 'S1453419364.277238,VS0,VE0',
+378 silly get     vary: 'Accept' } ]
+379 verbose etag https://registry.npmjs.org/through from cache
+380 verbose get saving through to /home/jstn/.npm/registry.npmjs.org/through/.cache.json
+381 silly resolveWithNewModule through@2.3.8 checking installable status
+382 silly cache add args [ 'through@~2.3.4', null ]
+383 verbose cache add spec through@~2.3.4
+384 silly cache add parsed spec { raw: 'through@~2.3.4',
+384 silly cache add   scope: null,
+384 silly cache add   name: 'through',
+384 silly cache add   rawSpec: '~2.3.4',
+384 silly cache add   spec: '>=2.3.4 <2.4.0',
+384 silly cache add   type: 'range' }
+385 silly addNamed through@>=2.3.4 <2.4.0
+386 verbose addNamed ">=2.3.4 <2.4.0" is a valid semver range for through
+387 silly addNameRange { name: 'through', range: '>=2.3.4 <2.4.0', hasData: false }
+388 silly mapToRegistry name through
+389 silly mapToRegistry using default registry
+390 silly mapToRegistry registry https://registry.npmjs.org/
+391 silly mapToRegistry uri https://registry.npmjs.org/through
+392 verbose addNameRange registry:https://registry.npmjs.org/through not in flight; fetching
+393 verbose get https://registry.npmjs.org/through not expired, no request
+394 silly addNameRange number 2 { name: 'through', range: '>=2.3.4 <2.4.0', hasData: true }
+395 silly addNameRange versions [ 'through',
+395 silly addNameRange   [ '0.0.1',
+395 silly addNameRange     '0.0.2',
+395 silly addNameRange     '0.0.3',
+395 silly addNameRange     '0.0.4',
+395 silly addNameRange     '0.1.0',
+395 silly addNameRange     '0.1.1',
+395 silly addNameRange     '0.1.2',
+395 silly addNameRange     '0.1.3',
+395 silly addNameRange     '0.1.4',
+395 silly addNameRange     '1.0.0',
+395 silly addNameRange     '1.1.0',
+395 silly addNameRange     '1.1.1',
+395 silly addNameRange     '1.1.2',
+395 silly addNameRange     '2.0.0',
+395 silly addNameRange     '2.1.0',
+395 silly addNameRange     '2.2.0',
+395 silly addNameRange     '2.2.1',
+395 silly addNameRange     '2.2.2',
+395 silly addNameRange     '2.2.4',
+395 silly addNameRange     '2.2.5',
+395 silly addNameRange     '2.2.6',
+395 silly addNameRange     '2.2.7',
+395 silly addNameRange     '2.3.1',
+395 silly addNameRange     '2.3.2',
+395 silly addNameRange     '2.3.3',
+395 silly addNameRange     '2.3.4',
+395 silly addNameRange     '2.3.6',
+395 silly addNameRange     '2.3.7',
+395 silly addNameRange     '2.3.8' ] ]
+396 silly addNamed through@2.3.8
+397 verbose addNamed "2.3.8" is a plain semver version for through
+398 silly cache afterAdd through@2.3.8
+399 verbose afterAdd /home/jstn/.npm/through/2.3.8/package/package.json not in flight; writing
+400 verbose afterAdd /home/jstn/.npm/through/2.3.8/package/package.json written
+401 http 200 https://registry.npmjs.org/falafel
+402 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+402 verbose headers   etag: '"DGSYZ7PP3ONBD2TNYF120ZXWV"',
+402 verbose headers   'content-type': 'application/json',
+402 verbose headers   'cache-control': 'max-age=300',
+402 verbose headers   'content-length': '25696',
+402 verbose headers   'accept-ranges': 'bytes',
+402 verbose headers   date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+402 verbose headers   via: '1.1 varnish',
+402 verbose headers   age: '91',
+402 verbose headers   connection: 'keep-alive',
+402 verbose headers   'x-served-by': 'cache-lax1427-LAX',
+402 verbose headers   'x-cache': 'HIT',
+402 verbose headers   'x-cache-hits': '1',
+402 verbose headers   'x-timer': 'S1453419364.278212,VS0,VE0',
+402 verbose headers   vary: 'Accept' }
+403 silly get cb [ 200,
+403 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+403 silly get     etag: '"DGSYZ7PP3ONBD2TNYF120ZXWV"',
+403 silly get     'content-type': 'application/json',
+403 silly get     'cache-control': 'max-age=300',
+403 silly get     'content-length': '25696',
+403 silly get     'accept-ranges': 'bytes',
+403 silly get     date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+403 silly get     via: '1.1 varnish',
+403 silly get     age: '91',
+403 silly get     connection: 'keep-alive',
+403 silly get     'x-served-by': 'cache-lax1427-LAX',
+403 silly get     'x-cache': 'HIT',
+403 silly get     'x-cache-hits': '1',
+403 silly get     'x-timer': 'S1453419364.278212,VS0,VE0',
+403 silly get     vary: 'Accept' } ]
+404 verbose get saving falafel to /home/jstn/.npm/registry.npmjs.org/falafel/.cache.json
+405 silly resolveWithNewModule falafel@1.2.0 checking installable status
+406 silly cache add args [ 'falafel@>0.2.1', null ]
+407 verbose cache add spec falafel@>0.2.1
+408 silly cache add parsed spec { raw: 'falafel@>0.2.1',
+408 silly cache add   scope: null,
+408 silly cache add   name: 'falafel',
+408 silly cache add   rawSpec: '>0.2.1',
+408 silly cache add   spec: '>0.2.1',
+408 silly cache add   type: 'range' }
+409 silly addNamed falafel@>0.2.1
+410 verbose addNamed ">0.2.1" is a valid semver range for falafel
+411 silly addNameRange { name: 'falafel', range: '>0.2.1', hasData: false }
+412 silly mapToRegistry name falafel
+413 silly mapToRegistry using default registry
+414 silly mapToRegistry registry https://registry.npmjs.org/
+415 silly mapToRegistry uri https://registry.npmjs.org/falafel
+416 verbose addNameRange registry:https://registry.npmjs.org/falafel not in flight; fetching
+417 verbose get https://registry.npmjs.org/falafel not expired, no request
+418 silly addNameRange number 2 { name: 'falafel', range: '>0.2.1', hasData: true }
+419 silly addNameRange versions [ 'falafel',
+419 silly addNameRange   [ '0.0.0',
+419 silly addNameRange     '0.0.1',
+419 silly addNameRange     '0.0.2',
+419 silly addNameRange     '0.1.0',
+419 silly addNameRange     '0.1.1',
+419 silly addNameRange     '0.1.2',
+419 silly addNameRange     '0.1.3',
+419 silly addNameRange     '0.1.4',
+419 silly addNameRange     '0.1.5',
+419 silly addNameRange     '0.1.6',
+419 silly addNameRange     '0.2.0',
+419 silly addNameRange     '0.2.1',
+419 silly addNameRange     '0.3.0',
+419 silly addNameRange     '0.3.1',
+419 silly addNameRange     '1.0.0',
+419 silly addNameRange     '1.0.1',
+419 silly addNameRange     '1.1.0',
+419 silly addNameRange     '1.1.1',
+419 silly addNameRange     '1.2.0' ] ]
+420 silly addNamed falafel@1.2.0
+421 verbose addNamed "1.2.0" is a plain semver version for falafel
+422 silly mapToRegistry name falafel
+423 silly mapToRegistry using default registry
+424 silly mapToRegistry registry https://registry.npmjs.org/
+425 silly mapToRegistry uri https://registry.npmjs.org/falafel
+426 verbose addRemoteTarball https://registry.npmjs.org/falafel/-/falafel-1.2.0.tgz not in flight; adding
+427 verbose addRemoteTarball [ 'https://registry.npmjs.org/falafel/-/falafel-1.2.0.tgz',
+427 verbose addRemoteTarball   'c18d24ef5091174a497f318cd24b026a25cddab4' ]
+428 info retry fetch attempt 1 at 15:37:14
+429 info attempt registry request try #1 at 15:37:14
+430 http fetch GET https://registry.npmjs.org/falafel/-/falafel-1.2.0.tgz
+431 http fetch 200 https://registry.npmjs.org/falafel/-/falafel-1.2.0.tgz
+432 silly fetchAndShaCheck shasum c18d24ef5091174a497f318cd24b026a25cddab4
+433 verbose addTmpTarball /tmp/npm-24481-fa0555d6/registry.npmjs.org/falafel/-/falafel-1.2.0.tgz not in flight; adding
+434 verbose addTmpTarball already have metadata; skipping unpack for falafel@1.2.0
+435 silly cache afterAdd falafel@1.2.0
+436 verbose afterAdd /home/jstn/.npm/falafel/1.2.0/package/package.json not in flight; writing
+437 verbose afterAdd /home/jstn/.npm/falafel/1.2.0/package/package.json written
+438 silly fetchNamedPackageData acorn
+439 silly mapToRegistry name acorn
+440 silly mapToRegistry using default registry
+441 silly mapToRegistry registry https://registry.npmjs.org/
+442 silly mapToRegistry uri https://registry.npmjs.org/acorn
+443 silly fetchNamedPackageData foreach
+444 silly mapToRegistry name foreach
+445 silly mapToRegistry using default registry
+446 silly mapToRegistry registry https://registry.npmjs.org/
+447 silly mapToRegistry uri https://registry.npmjs.org/foreach
+448 silly fetchNamedPackageData isarray
+449 silly mapToRegistry name isarray
+450 silly mapToRegistry using default registry
+451 silly mapToRegistry registry https://registry.npmjs.org/
+452 silly mapToRegistry uri https://registry.npmjs.org/isarray
+453 silly fetchNamedPackageData object-keys
+454 silly mapToRegistry name object-keys
+455 silly mapToRegistry using default registry
+456 silly mapToRegistry registry https://registry.npmjs.org/
+457 silly mapToRegistry uri https://registry.npmjs.org/object-keys
+458 verbose request uri https://registry.npmjs.org/foreach
+459 verbose request no auth needed
+460 info attempt registry request try #1 at 15:37:14
+461 http request GET https://registry.npmjs.org/foreach
+462 verbose request uri https://registry.npmjs.org/acorn
+463 verbose request no auth needed
+464 info attempt registry request try #1 at 15:37:14
+465 verbose etag "CYC9L6OKEG57UNECEW8V7BR6W"
+466 http request GET https://registry.npmjs.org/acorn
+467 verbose request uri https://registry.npmjs.org/isarray
+468 verbose request no auth needed
+469 info attempt registry request try #1 at 15:37:14
+470 verbose etag "9BAUPW5RTV3W0838KA6Y08NTG"
+471 http request GET https://registry.npmjs.org/isarray
+472 verbose request uri https://registry.npmjs.org/object-keys
+473 verbose request no auth needed
+474 info attempt registry request try #1 at 15:37:14
+475 verbose etag "CUJ60WAI9V1U6WYABC4C4CHJV"
+476 http request GET https://registry.npmjs.org/object-keys
+477 http 304 https://registry.npmjs.org/acorn
+478 verbose headers { date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+478 verbose headers   via: '1.1 varnish',
+478 verbose headers   'cache-control': 'max-age=300',
+478 verbose headers   etag: '"CYC9L6OKEG57UNECEW8V7BR6W"',
+478 verbose headers   age: '178',
+478 verbose headers   connection: 'keep-alive',
+478 verbose headers   'x-served-by': 'cache-lax1430-LAX',
+478 verbose headers   'x-cache': 'HIT',
+478 verbose headers   'x-cache-hits': '8',
+478 verbose headers   'x-timer': 'S1453419364.604083,VS0,VE0',
+478 verbose headers   vary: 'Accept' }
+479 silly get cb [ 304,
+479 silly get   { date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+479 silly get     via: '1.1 varnish',
+479 silly get     'cache-control': 'max-age=300',
+479 silly get     etag: '"CYC9L6OKEG57UNECEW8V7BR6W"',
+479 silly get     age: '178',
+479 silly get     connection: 'keep-alive',
+479 silly get     'x-served-by': 'cache-lax1430-LAX',
+479 silly get     'x-cache': 'HIT',
+479 silly get     'x-cache-hits': '8',
+479 silly get     'x-timer': 'S1453419364.604083,VS0,VE0',
+479 silly get     vary: 'Accept' } ]
+480 verbose etag https://registry.npmjs.org/acorn from cache
+481 verbose get saving acorn to /home/jstn/.npm/registry.npmjs.org/acorn/.cache.json
+482 silly resolveWithNewModule acorn@1.2.2 checking installable status
+483 silly cache add args [ 'acorn@^1.0.3', null ]
+484 verbose cache add spec acorn@^1.0.3
+485 silly cache add parsed spec { raw: 'acorn@^1.0.3',
+485 silly cache add   scope: null,
+485 silly cache add   name: 'acorn',
+485 silly cache add   rawSpec: '^1.0.3',
+485 silly cache add   spec: '>=1.0.3 <2.0.0',
+485 silly cache add   type: 'range' }
+486 silly addNamed acorn@>=1.0.3 <2.0.0
+487 verbose addNamed ">=1.0.3 <2.0.0" is a valid semver range for acorn
+488 silly addNameRange { name: 'acorn', range: '>=1.0.3 <2.0.0', hasData: false }
+489 silly mapToRegistry name acorn
+490 silly mapToRegistry using default registry
+491 silly mapToRegistry registry https://registry.npmjs.org/
+492 silly mapToRegistry uri https://registry.npmjs.org/acorn
+493 verbose addNameRange registry:https://registry.npmjs.org/acorn not in flight; fetching
+494 http 304 https://registry.npmjs.org/object-keys
+495 verbose headers { date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+495 verbose headers   via: '1.1 varnish',
+495 verbose headers   'cache-control': 'max-age=300',
+495 verbose headers   etag: '"CUJ60WAI9V1U6WYABC4C4CHJV"',
+495 verbose headers   age: '78',
+495 verbose headers   connection: 'keep-alive',
+495 verbose headers   'x-served-by': 'cache-lax1425-LAX',
+495 verbose headers   'x-cache': 'HIT',
+495 verbose headers   'x-cache-hits': '1',
+495 verbose headers   'x-timer': 'S1453419364.607746,VS0,VE0',
+495 verbose headers   vary: 'Accept' }
+496 silly get cb [ 304,
+496 silly get   { date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+496 silly get     via: '1.1 varnish',
+496 silly get     'cache-control': 'max-age=300',
+496 silly get     etag: '"CUJ60WAI9V1U6WYABC4C4CHJV"',
+496 silly get     age: '78',
+496 silly get     connection: 'keep-alive',
+496 silly get     'x-served-by': 'cache-lax1425-LAX',
+496 silly get     'x-cache': 'HIT',
+496 silly get     'x-cache-hits': '1',
+496 silly get     'x-timer': 'S1453419364.607746,VS0,VE0',
+496 silly get     vary: 'Accept' } ]
+497 verbose etag https://registry.npmjs.org/object-keys from cache
+498 verbose get saving object-keys to /home/jstn/.npm/registry.npmjs.org/object-keys/.cache.json
+499 verbose get https://registry.npmjs.org/acorn not expired, no request
+500 silly addNameRange number 2 { name: 'acorn', range: '>=1.0.3 <2.0.0', hasData: true }
+501 silly addNameRange versions [ 'acorn',
+501 silly addNameRange   [ '0.0.1',
+501 silly addNameRange     '0.1.0',
+501 silly addNameRange     '0.2.0',
+501 silly addNameRange     '0.3.0',
+501 silly addNameRange     '0.3.1',
+501 silly addNameRange     '0.4.0',
+501 silly addNameRange     '0.4.2',
+501 silly addNameRange     '0.5.0',
+501 silly addNameRange     '0.6.0',
+501 silly addNameRange     '0.7.0',
+501 silly addNameRange     '0.8.0',
+501 silly addNameRange     '0.9.0',
+501 silly addNameRange     '0.10.0',
+501 silly addNameRange     '0.11.0',
+501 silly addNameRange     '0.12.0',
+501 silly addNameRange     '1.0.0',
+501 silly addNameRange     '1.0.1',
+501 silly addNameRange     '1.0.3',
+501 silly addNameRange     '1.1.0',
+501 silly addNameRange     '1.2.0',
+501 silly addNameRange     '2.0.0',
+501 silly addNameRange     '1.2.1',
+501 silly addNameRange     '2.0.1',
+501 silly addNameRange     '1.2.2',
+501 silly addNameRange     '2.0.4',
+501 silly addNameRange     '2.1.0',
+501 silly addNameRange     '2.2.0',
+501 silly addNameRange     '2.3.0',
+501 silly addNameRange     '2.4.0',
+501 silly addNameRange     '2.5.0',
+501 silly addNameRange     '2.5.2',
+501 silly addNameRange     '2.6.0',
+501 silly addNameRange     '2.6.2',
+501 silly addNameRange     '2.6.4',
+501 silly addNameRange     '2.7.0' ] ]
+502 silly addNamed acorn@1.2.2
+503 verbose addNamed "1.2.2" is a plain semver version for acorn
+504 http 304 https://registry.npmjs.org/isarray
+505 verbose headers { date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+505 verbose headers   via: '1.1 varnish',
+505 verbose headers   'cache-control': 'max-age=300',
+505 verbose headers   etag: '"9BAUPW5RTV3W0838KA6Y08NTG"',
+505 verbose headers   age: '196',
+505 verbose headers   connection: 'keep-alive',
+505 verbose headers   'x-served-by': 'cache-lax1426-LAX',
+505 verbose headers   'x-cache': 'HIT',
+505 verbose headers   'x-cache-hits': '26',
+505 verbose headers   'x-timer': 'S1453419364.611504,VS0,VE0',
+505 verbose headers   vary: 'Accept' }
+506 silly get cb [ 304,
+506 silly get   { date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+506 silly get     via: '1.1 varnish',
+506 silly get     'cache-control': 'max-age=300',
+506 silly get     etag: '"9BAUPW5RTV3W0838KA6Y08NTG"',
+506 silly get     age: '196',
+506 silly get     connection: 'keep-alive',
+506 silly get     'x-served-by': 'cache-lax1426-LAX',
+506 silly get     'x-cache': 'HIT',
+506 silly get     'x-cache-hits': '26',
+506 silly get     'x-timer': 'S1453419364.611504,VS0,VE0',
+506 silly get     vary: 'Accept' } ]
+507 verbose etag https://registry.npmjs.org/isarray from cache
+508 verbose get saving isarray to /home/jstn/.npm/registry.npmjs.org/isarray/.cache.json
+509 http 200 https://registry.npmjs.org/foreach
+510 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+510 verbose headers   etag: '"51LCB3YHI5T6ROK7I11VTS28W"',
+510 verbose headers   'content-type': 'application/json',
+510 verbose headers   'cache-control': 'max-age=300',
+510 verbose headers   'content-length': '8099',
+510 verbose headers   'accept-ranges': 'bytes',
+510 verbose headers   date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+510 verbose headers   via: '1.1 varnish',
+510 verbose headers   age: '282',
+510 verbose headers   connection: 'keep-alive',
+510 verbose headers   'x-served-by': 'cache-lax1426-LAX',
+510 verbose headers   'x-cache': 'HIT',
+510 verbose headers   'x-cache-hits': '3',
+510 verbose headers   'x-timer': 'S1453419364.612850,VS0,VE0',
+510 verbose headers   vary: 'Accept' }
+511 silly get cb [ 200,
+511 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+511 silly get     etag: '"51LCB3YHI5T6ROK7I11VTS28W"',
+511 silly get     'content-type': 'application/json',
+511 silly get     'cache-control': 'max-age=300',
+511 silly get     'content-length': '8099',
+511 silly get     'accept-ranges': 'bytes',
+511 silly get     date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+511 silly get     via: '1.1 varnish',
+511 silly get     age: '282',
+511 silly get     connection: 'keep-alive',
+511 silly get     'x-served-by': 'cache-lax1426-LAX',
+511 silly get     'x-cache': 'HIT',
+511 silly get     'x-cache-hits': '3',
+511 silly get     'x-timer': 'S1453419364.612850,VS0,VE0',
+511 silly get     vary: 'Accept' } ]
+512 verbose get saving foreach to /home/jstn/.npm/registry.npmjs.org/foreach/.cache.json
+513 silly resolveWithNewModule object-keys@1.0.9 checking installable status
+514 silly cache add args [ 'object-keys@^1.0.6', null ]
+515 verbose cache add spec object-keys@^1.0.6
+516 silly cache add parsed spec { raw: 'object-keys@^1.0.6',
+516 silly cache add   scope: null,
+516 silly cache add   name: 'object-keys',
+516 silly cache add   rawSpec: '^1.0.6',
+516 silly cache add   spec: '>=1.0.6 <2.0.0',
+516 silly cache add   type: 'range' }
+517 silly addNamed object-keys@>=1.0.6 <2.0.0
+518 verbose addNamed ">=1.0.6 <2.0.0" is a valid semver range for object-keys
+519 silly addNameRange { name: 'object-keys', range: '>=1.0.6 <2.0.0', hasData: false }
+520 silly mapToRegistry name object-keys
+521 silly mapToRegistry using default registry
+522 silly mapToRegistry registry https://registry.npmjs.org/
+523 silly mapToRegistry uri https://registry.npmjs.org/object-keys
+524 verbose addNameRange registry:https://registry.npmjs.org/object-keys not in flight; fetching
+525 silly cache afterAdd acorn@1.2.2
+526 verbose afterAdd /home/jstn/.npm/acorn/1.2.2/package/package.json not in flight; writing
+527 verbose get https://registry.npmjs.org/object-keys not expired, no request
+528 silly addNameRange number 2 { name: 'object-keys', range: '>=1.0.6 <2.0.0', hasData: true }
+529 silly addNameRange versions [ 'object-keys',
+529 silly addNameRange   [ '0.0.1',
+529 silly addNameRange     '0.1.0',
+529 silly addNameRange     '0.1.1',
+529 silly addNameRange     '0.1.2',
+529 silly addNameRange     '0.1.3',
+529 silly addNameRange     '0.1.4',
+529 silly addNameRange     '0.1.5',
+529 silly addNameRange     '0.1.6',
+529 silly addNameRange     '0.1.7',
+529 silly addNameRange     '0.1.8',
+529 silly addNameRange     '0.2.0',
+529 silly addNameRange     '0.3.0',
+529 silly addNameRange     '0.4.0',
+529 silly addNameRange     '0.5.0',
+529 silly addNameRange     '0.5.1',
+529 silly addNameRange     '0.6.0',
+529 silly addNameRange     '0.6.1',
+529 silly addNameRange     '1.0.0',
+529 silly addNameRange     '1.0.1',
+529 silly addNameRange     '1.0.2',
+529 silly addNameRange     '1.0.3',
+529 silly addNameRange     '1.0.4',
+529 silly addNameRange     '1.0.5',
+529 silly addNameRange     '1.0.6',
+529 silly addNameRange     '1.0.7',
+529 silly addNameRange     '1.0.8',
+529 silly addNameRange     '1.0.9' ] ]
+530 silly addNamed object-keys@1.0.9
+531 verbose addNamed "1.0.9" is a plain semver version for object-keys
+532 silly resolveWithNewModule isarray@0.0.1 checking installable status
+533 silly cache add args [ 'isarray@0.0.1', null ]
+534 verbose cache add spec isarray@0.0.1
+535 silly cache add parsed spec { raw: 'isarray@0.0.1',
+535 silly cache add   scope: null,
+535 silly cache add   name: 'isarray',
+535 silly cache add   rawSpec: '0.0.1',
+535 silly cache add   spec: '0.0.1',
+535 silly cache add   type: 'version' }
+536 silly addNamed isarray@0.0.1
+537 verbose addNamed "0.0.1" is a plain semver version for isarray
+538 silly mapToRegistry name isarray
+539 silly mapToRegistry using default registry
+540 silly mapToRegistry registry https://registry.npmjs.org/
+541 silly mapToRegistry uri https://registry.npmjs.org/isarray
+542 verbose addNameVersion registry:https://registry.npmjs.org/isarray not in flight; fetching
+543 silly mapToRegistry name object-keys
+544 silly mapToRegistry using default registry
+545 silly mapToRegistry registry https://registry.npmjs.org/
+546 silly mapToRegistry uri https://registry.npmjs.org/object-keys
+547 verbose addRemoteTarball https://registry.npmjs.org/object-keys/-/object-keys-1.0.9.tgz not in flight; adding
+548 verbose addRemoteTarball [ 'https://registry.npmjs.org/object-keys/-/object-keys-1.0.9.tgz',
+548 verbose addRemoteTarball   'cabb1202d9a7af29b50edface8094bb46da5ea21' ]
+549 silly resolveWithNewModule foreach@2.0.5 checking installable status
+550 silly cache add args [ 'foreach@^2.0.5', null ]
+551 verbose cache add spec foreach@^2.0.5
+552 silly cache add parsed spec { raw: 'foreach@^2.0.5',
+552 silly cache add   scope: null,
+552 silly cache add   name: 'foreach',
+552 silly cache add   rawSpec: '^2.0.5',
+552 silly cache add   spec: '>=2.0.5 <3.0.0',
+552 silly cache add   type: 'range' }
+553 silly addNamed foreach@>=2.0.5 <3.0.0
+554 verbose addNamed ">=2.0.5 <3.0.0" is a valid semver range for foreach
+555 silly addNameRange { name: 'foreach', range: '>=2.0.5 <3.0.0', hasData: false }
+556 silly mapToRegistry name foreach
+557 silly mapToRegistry using default registry
+558 silly mapToRegistry registry https://registry.npmjs.org/
+559 silly mapToRegistry uri https://registry.npmjs.org/foreach
+560 verbose addNameRange registry:https://registry.npmjs.org/foreach not in flight; fetching
+561 verbose afterAdd /home/jstn/.npm/acorn/1.2.2/package/package.json written
+562 info retry fetch attempt 1 at 15:37:14
+563 info attempt registry request try #1 at 15:37:14
+564 http fetch GET https://registry.npmjs.org/object-keys/-/object-keys-1.0.9.tgz
+565 verbose get https://registry.npmjs.org/isarray not expired, no request
+566 verbose get https://registry.npmjs.org/foreach not expired, no request
+567 silly addNameRange number 2 { name: 'foreach', range: '>=2.0.5 <3.0.0', hasData: true }
+568 silly addNameRange versions [ 'foreach',
+568 silly addNameRange   [ '1.3.3', '2.0.0', '2.0.1', '2.0.2', '2.0.3', '2.0.4', '2.0.5' ] ]
+569 silly addNamed foreach@2.0.5
+570 verbose addNamed "2.0.5" is a plain semver version for foreach
+571 silly mapToRegistry name foreach
+572 silly mapToRegistry using default registry
+573 silly mapToRegistry registry https://registry.npmjs.org/
+574 silly mapToRegistry uri https://registry.npmjs.org/foreach
+575 verbose addRemoteTarball https://registry.npmjs.org/foreach/-/foreach-2.0.5.tgz not in flight; adding
+576 verbose addRemoteTarball [ 'https://registry.npmjs.org/foreach/-/foreach-2.0.5.tgz',
+576 verbose addRemoteTarball   '0bee005018aeb260d0a3af3ae658dd0136ec1b99' ]
+577 silly cache afterAdd isarray@0.0.1
+578 verbose afterAdd /home/jstn/.npm/isarray/0.0.1/package/package.json not in flight; writing
+579 info retry fetch attempt 1 at 15:37:14
+580 info attempt registry request try #1 at 15:37:14
+581 http fetch GET https://registry.npmjs.org/foreach/-/foreach-2.0.5.tgz
+582 verbose afterAdd /home/jstn/.npm/isarray/0.0.1/package/package.json written
+583 http fetch 200 https://registry.npmjs.org/foreach/-/foreach-2.0.5.tgz
+584 silly fetchAndShaCheck shasum 0bee005018aeb260d0a3af3ae658dd0136ec1b99
+585 verbose addTmpTarball /tmp/npm-24481-fa0555d6/registry.npmjs.org/foreach/-/foreach-2.0.5.tgz not in flight; adding
+586 verbose addTmpTarball already have metadata; skipping unpack for foreach@2.0.5
+587 silly cache afterAdd foreach@2.0.5
+588 verbose afterAdd /home/jstn/.npm/foreach/2.0.5/package/package.json not in flight; writing
+589 verbose afterAdd /home/jstn/.npm/foreach/2.0.5/package/package.json written
+590 http fetch 200 https://registry.npmjs.org/object-keys/-/object-keys-1.0.9.tgz
+591 silly fetchAndShaCheck shasum cabb1202d9a7af29b50edface8094bb46da5ea21
+592 verbose addTmpTarball /tmp/npm-24481-fa0555d6/registry.npmjs.org/object-keys/-/object-keys-1.0.9.tgz not in flight; adding
+593 verbose addTmpTarball already have metadata; skipping unpack for object-keys@1.0.9
+594 silly cache afterAdd object-keys@1.0.9
+595 verbose afterAdd /home/jstn/.npm/object-keys/1.0.9/package/package.json not in flight; writing
+596 verbose afterAdd /home/jstn/.npm/object-keys/1.0.9/package/package.json written
+597 silly fetchNamedPackageData nan
+598 silly mapToRegistry name nan
+599 silly mapToRegistry using default registry
+600 silly mapToRegistry registry https://registry.npmjs.org/
+601 silly mapToRegistry uri https://registry.npmjs.org/nan
+602 verbose request uri https://registry.npmjs.org/nan
+603 verbose request no auth needed
+604 info attempt registry request try #1 at 15:37:14
+605 verbose etag "798MRG5PQ3TIGV0CLUOSQMVAG"
+606 http request GET https://registry.npmjs.org/nan
+607 http 304 https://registry.npmjs.org/nan
+608 verbose headers { date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+608 verbose headers   via: '1.1 varnish',
+608 verbose headers   'cache-control': 'max-age=300',
+608 verbose headers   etag: '"798MRG5PQ3TIGV0CLUOSQMVAG"',
+608 verbose headers   age: '22',
+608 verbose headers   connection: 'keep-alive',
+608 verbose headers   'x-served-by': 'cache-lax1422-LAX',
+608 verbose headers   'x-cache': 'HIT',
+608 verbose headers   'x-cache-hits': '2',
+608 verbose headers   'x-timer': 'S1453419364.905312,VS0,VE0',
+608 verbose headers   vary: 'Accept' }
+609 silly get cb [ 304,
+609 silly get   { date: 'Thu, 21 Jan 2016 23:36:04 GMT',
+609 silly get     via: '1.1 varnish',
+609 silly get     'cache-control': 'max-age=300',
+609 silly get     etag: '"798MRG5PQ3TIGV0CLUOSQMVAG"',
+609 silly get     age: '22',
+609 silly get     connection: 'keep-alive',
+609 silly get     'x-served-by': 'cache-lax1422-LAX',
+609 silly get     'x-cache': 'HIT',
+609 silly get     'x-cache-hits': '2',
+609 silly get     'x-timer': 'S1453419364.905312,VS0,VE0',
+609 silly get     vary: 'Accept' } ]
+610 verbose etag https://registry.npmjs.org/nan from cache
+611 verbose get saving nan to /home/jstn/.npm/registry.npmjs.org/nan/.cache.json
+612 silly resolveWithNewModule nan@2.2.0 checking installable status
+613 silly cache add args [ 'nan@^2.0.9', null ]
+614 verbose cache add spec nan@^2.0.9
+615 silly cache add parsed spec { raw: 'nan@^2.0.9',
+615 silly cache add   scope: null,
+615 silly cache add   name: 'nan',
+615 silly cache add   rawSpec: '^2.0.9',
+615 silly cache add   spec: '>=2.0.9 <3.0.0',
+615 silly cache add   type: 'range' }
+616 silly addNamed nan@>=2.0.9 <3.0.0
+617 verbose addNamed ">=2.0.9 <3.0.0" is a valid semver range for nan
+618 silly addNameRange { name: 'nan', range: '>=2.0.9 <3.0.0', hasData: false }
+619 silly mapToRegistry name nan
+620 silly mapToRegistry using default registry
+621 silly mapToRegistry registry https://registry.npmjs.org/
+622 silly mapToRegistry uri https://registry.npmjs.org/nan
+623 verbose addNameRange registry:https://registry.npmjs.org/nan not in flight; fetching
+624 verbose get https://registry.npmjs.org/nan not expired, no request
+625 silly addNameRange number 2 { name: 'nan', range: '>=2.0.9 <3.0.0', hasData: true }
+626 silly addNameRange versions [ 'nan',
+626 silly addNameRange   [ '0.3.0-wip',
+626 silly addNameRange     '0.3.0-wip2',
+626 silly addNameRange     '0.3.0',
+626 silly addNameRange     '0.3.1',
+626 silly addNameRange     '0.3.2',
+626 silly addNameRange     '0.4.0',
+626 silly addNameRange     '0.4.1',
+626 silly addNameRange     '0.4.2',
+626 silly addNameRange     '0.4.3',
+626 silly addNameRange     '0.4.4',
+626 silly addNameRange     '0.5.0',
+626 silly addNameRange     '0.5.1',
+626 silly addNameRange     '0.5.2',
+626 silly addNameRange     '0.6.0',
+626 silly addNameRange     '0.7.0',
+626 silly addNameRange     '0.7.1',
+626 silly addNameRange     '0.8.0',
+626 silly addNameRange     '1.0.0',
+626 silly addNameRange     '1.1.0',
+626 silly addNameRange     '1.1.1',
+626 silly addNameRange     '1.1.2',
+626 silly addNameRange     '1.2.0',
+626 silly addNameRange     '1.3.0',
+626 silly addNameRange     '1.4.0',
+626 silly addNameRange     '1.4.1',
+626 silly addNameRange     '1.5.0',
+626 silly addNameRange     '1.4.2',
+626 silly addNameRange     '1.4.3',
+626 silly addNameRange     '1.5.1',
+626 silly addNameRange     '1.5.2',
+626 silly addNameRange     '1.6.0',
+626 silly addNameRange     '1.5.3',
+626 silly addNameRange     '1.6.1',
+626 silly addNameRange     '1.6.2',
+626 silly addNameRange     '1.7.0',
+626 silly addNameRange     '1.8.0',
+626 silly addNameRange     '1.8.1',
+626 silly addNameRange     '1.8.2',
+626 silly addNameRange     '1.8.3',
+626 silly addNameRange     '1.8.4',
+626 silly addNameRange     '1.9.0',
+626 silly addNameRange     '2.0.0',
+626 silly addNameRange     '2.0.1',
+626 silly addNameRange     '2.0.2',
+626 silly addNameRange     '2.0.3',
+626 silly addNameRange     '2.0.4',
+626 silly addNameRange     '2.0.5',
+626 silly addNameRange     '2.0.6',
+626 silly addNameRange     '2.0.7',
+626 silly addNameRange     '2.0.8',
+626 silly addNameRange     '2.0.9',
+626 silly addNameRange     '2.1.0',
+626 silly addNameRange     '2.2.0' ] ]
+627 silly addNamed nan@2.2.0
+628 verbose addNamed "2.2.0" is a plain semver version for nan
+629 silly cache afterAdd nan@2.2.0
+630 verbose afterAdd /home/jstn/.npm/nan/2.2.0/package/package.json not in flight; writing
+631 verbose afterAdd /home/jstn/.npm/nan/2.2.0/package/package.json written
+632 silly fetchNamedPackageData commander
+633 silly mapToRegistry name commander
+634 silly mapToRegistry using default registry
+635 silly mapToRegistry registry https://registry.npmjs.org/
+636 silly mapToRegistry uri https://registry.npmjs.org/commander
+637 silly fetchNamedPackageData nan
+638 silly mapToRegistry name nan
+639 silly mapToRegistry using default registry
+640 silly mapToRegistry registry https://registry.npmjs.org/
+641 silly mapToRegistry uri https://registry.npmjs.org/nan
+642 silly resolveWithNewModule nan@1.0.0 checking installable status
+643 silly cache add args [ 'nan@~1.0.0', null ]
+644 verbose cache add spec nan@~1.0.0
+645 silly fetchNamedPackageData tinycolor
+646 silly mapToRegistry name tinycolor
+647 silly mapToRegistry using default registry
+648 silly mapToRegistry registry https://registry.npmjs.org/
+649 silly mapToRegistry uri https://registry.npmjs.org/tinycolor
+650 silly fetchNamedPackageData options
+651 silly mapToRegistry name options
+652 silly mapToRegistry using default registry
+653 silly mapToRegistry registry https://registry.npmjs.org/
+654 silly mapToRegistry uri https://registry.npmjs.org/options
+655 silly cache add parsed spec { raw: 'nan@~1.0.0',
+655 silly cache add   scope: null,
+655 silly cache add   name: 'nan',
+655 silly cache add   rawSpec: '~1.0.0',
+655 silly cache add   spec: '>=1.0.0 <1.1.0',
+655 silly cache add   type: 'range' }
+656 silly addNamed nan@>=1.0.0 <1.1.0
+657 verbose addNamed ">=1.0.0 <1.1.0" is a valid semver range for nan
+658 silly addNameRange { name: 'nan', range: '>=1.0.0 <1.1.0', hasData: false }
+659 silly mapToRegistry name nan
+660 silly mapToRegistry using default registry
+661 silly mapToRegistry registry https://registry.npmjs.org/
+662 silly mapToRegistry uri https://registry.npmjs.org/nan
+663 verbose addNameRange registry:https://registry.npmjs.org/nan not in flight; fetching
+664 verbose request uri https://registry.npmjs.org/options
+665 verbose request no auth needed
+666 info attempt registry request try #1 at 15:37:14
+667 verbose etag "29I1H7JJVEWWNWG0GMKORGQTC"
+668 http request GET https://registry.npmjs.org/options
+669 verbose request uri https://registry.npmjs.org/commander
+670 verbose request no auth needed
+671 info attempt registry request try #1 at 15:37:14
+672 verbose etag "5ZBY4526BU5NHOOSOFO565W65"
+673 http request GET https://registry.npmjs.org/commander
+674 verbose get https://registry.npmjs.org/nan not expired, no request
+675 silly addNameRange number 2 { name: 'nan', range: '>=1.0.0 <1.1.0', hasData: true }
+676 silly addNameRange versions [ 'nan',
+676 silly addNameRange   [ '0.3.0-wip',
+676 silly addNameRange     '0.3.0-wip2',
+676 silly addNameRange     '0.3.0',
+676 silly addNameRange     '0.3.1',
+676 silly addNameRange     '0.3.2',
+676 silly addNameRange     '0.4.0',
+676 silly addNameRange     '0.4.1',
+676 silly addNameRange     '0.4.2',
+676 silly addNameRange     '0.4.3',
+676 silly addNameRange     '0.4.4',
+676 silly addNameRange     '0.5.0',
+676 silly addNameRange     '0.5.1',
+676 silly addNameRange     '0.5.2',
+676 silly addNameRange     '0.6.0',
+676 silly addNameRange     '0.7.0',
+676 silly addNameRange     '0.7.1',
+676 silly addNameRange     '0.8.0',
+676 silly addNameRange     '1.0.0',
+676 silly addNameRange     '1.1.0',
+676 silly addNameRange     '1.1.1',
+676 silly addNameRange     '1.1.2',
+676 silly addNameRange     '1.2.0',
+676 silly addNameRange     '1.3.0',
+676 silly addNameRange     '1.4.0',
+676 silly addNameRange     '1.4.1',
+676 silly addNameRange     '1.5.0',
+676 silly addNameRange     '1.4.2',
+676 silly addNameRange     '1.4.3',
+676 silly addNameRange     '1.5.1',
+676 silly addNameRange     '1.5.2',
+676 silly addNameRange     '1.6.0',
+676 silly addNameRange     '1.5.3',
+676 silly addNameRange     '1.6.1',
+676 silly addNameRange     '1.6.2',
+676 silly addNameRange     '1.7.0',
+676 silly addNameRange     '1.8.0',
+676 silly addNameRange     '1.8.1',
+676 silly addNameRange     '1.8.2',
+676 silly addNameRange     '1.8.3',
+676 silly addNameRange     '1.8.4',
+676 silly addNameRange     '1.9.0',
+676 silly addNameRange     '2.0.0',
+676 silly addNameRange     '2.0.1',
+676 silly addNameRange     '2.0.2',
+676 silly addNameRange     '2.0.3',
+676 silly addNameRange     '2.0.4',
+676 silly addNameRange     '2.0.5',
+676 silly addNameRange     '2.0.6',
+676 silly addNameRange     '2.0.7',
+676 silly addNameRange     '2.0.8',
+676 silly addNameRange     '2.0.9',
+676 silly addNameRange     '2.1.0',
+676 silly addNameRange     '2.2.0' ] ]
+677 silly addNamed nan@1.0.0
+678 verbose addNamed "1.0.0" is a plain semver version for nan
+679 silly mapToRegistry name nan
+680 silly mapToRegistry using default registry
+681 silly mapToRegistry registry https://registry.npmjs.org/
+682 silly mapToRegistry uri https://registry.npmjs.org/nan
+683 verbose addRemoteTarball https://registry.npmjs.org/nan/-/nan-1.0.0.tgz not in flight; adding
+684 verbose addRemoteTarball [ 'https://registry.npmjs.org/nan/-/nan-1.0.0.tgz',
+684 verbose addRemoteTarball   'ae24f8850818d662fcab5acf7f3b95bfaa2ccf38' ]
+685 info retry fetch attempt 1 at 15:37:14
+686 info attempt registry request try #1 at 15:37:14
+687 http fetch GET https://registry.npmjs.org/nan/-/nan-1.0.0.tgz
+688 verbose request uri https://registry.npmjs.org/tinycolor
+689 verbose request no auth needed
+690 info attempt registry request try #1 at 15:37:14
+691 verbose etag "7Q55AK0YV957DH6ZT14LNQOJW"
+692 http request GET https://registry.npmjs.org/tinycolor
+693 http 304 https://registry.npmjs.org/commander
+694 verbose headers { date: 'Thu, 21 Jan 2016 23:36:05 GMT',
+694 verbose headers   via: '1.1 varnish',
+694 verbose headers   'cache-control': 'max-age=300',
+694 verbose headers   etag: '"5ZBY4526BU5NHOOSOFO565W65"',
+694 verbose headers   age: '65',
+694 verbose headers   connection: 'keep-alive',
+694 verbose headers   'x-served-by': 'cache-lax1423-LAX',
+694 verbose headers   'x-cache': 'HIT',
+694 verbose headers   'x-cache-hits': '11',
+694 verbose headers   'x-timer': 'S1453419365.066087,VS0,VE0',
+694 verbose headers   vary: 'Accept' }
+695 silly get cb [ 304,
+695 silly get   { date: 'Thu, 21 Jan 2016 23:36:05 GMT',
+695 silly get     via: '1.1 varnish',
+695 silly get     'cache-control': 'max-age=300',
+695 silly get     etag: '"5ZBY4526BU5NHOOSOFO565W65"',
+695 silly get     age: '65',
+695 silly get     connection: 'keep-alive',
+695 silly get     'x-served-by': 'cache-lax1423-LAX',
+695 silly get     'x-cache': 'HIT',
+695 silly get     'x-cache-hits': '11',
+695 silly get     'x-timer': 'S1453419365.066087,VS0,VE0',
+695 silly get     vary: 'Accept' } ]
+696 verbose etag https://registry.npmjs.org/commander from cache
+697 verbose get saving commander to /home/jstn/.npm/registry.npmjs.org/commander/.cache.json
+698 silly resolveWithNewModule commander@2.1.0 checking installable status
+699 silly cache add args [ 'commander@~2.1.0', null ]
+700 verbose cache add spec commander@~2.1.0
+701 silly cache add parsed spec { raw: 'commander@~2.1.0',
+701 silly cache add   scope: null,
+701 silly cache add   name: 'commander',
+701 silly cache add   rawSpec: '~2.1.0',
+701 silly cache add   spec: '>=2.1.0 <2.2.0',
+701 silly cache add   type: 'range' }
+702 silly addNamed commander@>=2.1.0 <2.2.0
+703 verbose addNamed ">=2.1.0 <2.2.0" is a valid semver range for commander
+704 silly addNameRange { name: 'commander', range: '>=2.1.0 <2.2.0', hasData: false }
+705 silly mapToRegistry name commander
+706 silly mapToRegistry using default registry
+707 silly mapToRegistry registry https://registry.npmjs.org/
+708 silly mapToRegistry uri https://registry.npmjs.org/commander
+709 verbose addNameRange registry:https://registry.npmjs.org/commander not in flight; fetching
+710 http 304 https://registry.npmjs.org/options
+711 verbose headers { date: 'Thu, 21 Jan 2016 23:36:05 GMT',
+711 verbose headers   via: '1.1 varnish',
+711 verbose headers   'cache-control': 'max-age=300',
+711 verbose headers   etag: '"29I1H7JJVEWWNWG0GMKORGQTC"',
+711 verbose headers   age: '230',
+711 verbose headers   connection: 'keep-alive',
+711 verbose headers   'x-served-by': 'cache-lax1432-LAX',
+711 verbose headers   'x-cache': 'HIT',
+711 verbose headers   'x-cache-hits': '5',
+711 verbose headers   'x-timer': 'S1453419365.071237,VS0,VE0',
+711 verbose headers   vary: 'Accept' }
+712 silly get cb [ 304,
+712 silly get   { date: 'Thu, 21 Jan 2016 23:36:05 GMT',
+712 silly get     via: '1.1 varnish',
+712 silly get     'cache-control': 'max-age=300',
+712 silly get     etag: '"29I1H7JJVEWWNWG0GMKORGQTC"',
+712 silly get     age: '230',
+712 silly get     connection: 'keep-alive',
+712 silly get     'x-served-by': 'cache-lax1432-LAX',
+712 silly get     'x-cache': 'HIT',
+712 silly get     'x-cache-hits': '5',
+712 silly get     'x-timer': 'S1453419365.071237,VS0,VE0',
+712 silly get     vary: 'Accept' } ]
+713 verbose etag https://registry.npmjs.org/options from cache
+714 verbose get saving options to /home/jstn/.npm/registry.npmjs.org/options/.cache.json
+715 verbose get https://registry.npmjs.org/commander not expired, no request
+716 silly addNameRange number 2 { name: 'commander', range: '>=2.1.0 <2.2.0', hasData: true }
+717 silly addNameRange versions [ 'commander',
+717 silly addNameRange   [ '0.0.1',
+717 silly addNameRange     '0.0.3',
+717 silly addNameRange     '0.0.4',
+717 silly addNameRange     '0.0.5',
+717 silly addNameRange     '0.1.0',
+717 silly addNameRange     '0.2.0',
+717 silly addNameRange     '0.2.1',
+717 silly addNameRange     '0.3.0',
+717 silly addNameRange     '0.3.1',
+717 silly addNameRange     '0.3.2',
+717 silly addNameRange     '0.3.3',
+717 silly addNameRange     '0.4.0',
+717 silly addNameRange     '0.4.1',
+717 silly addNameRange     '0.4.2',
+717 silly addNameRange     '0.4.3',
+717 silly addNameRange     '0.5.0',
+717 silly addNameRange     '0.5.1',
+717 silly addNameRange     '0.6.0',
+717 silly addNameRange     '0.6.1',
+717 silly addNameRange     '0.5.2',
+717 silly addNameRange     '1.0.0',
+717 silly addNameRange     '1.0.1',
+717 silly addNameRange     '1.0.2',
+717 silly addNameRange     '1.0.3',
+717 silly addNameRange     '1.0.4',
+717 silly addNameRange     '1.0.5',
+717 silly addNameRange     '1.1.0',
+717 silly addNameRange     '1.1.1',
+717 silly addNameRange     '1.2.0',
+717 silly addNameRange     '1.3.0',
+717 silly addNameRange     '1.3.1',
+717 silly addNameRange     '1.3.2',
+717 silly addNameRange     '2.0.0',
+717 silly addNameRange     '2.1.0',
+717 silly addNameRange     '2.2.0',
+717 silly addNameRange     '2.3.0',
+717 silly addNameRange     '2.4.0',
+717 silly addNameRange     '2.5.0',
+717 silly addNameRange     '2.5.1',
+717 silly addNameRange     '2.6.0',
+717 silly addNameRange     '2.7.0',
+717 silly addNameRange     '2.7.1',
+717 silly addNameRange     '2.8.0',
+717 silly addNameRange     '2.8.1',
+717 silly addNameRange     '2.9.0' ] ]
+718 silly addNamed commander@2.1.0
+719 verbose addNamed "2.1.0" is a plain semver version for commander
+720 silly resolveWithNewModule options@0.0.6 checking installable status
+721 silly cache add args [ 'options@>=0.0.5', null ]
+722 verbose cache add spec options@>=0.0.5
+723 silly cache add parsed spec { raw: 'options@>=0.0.5',
+723 silly cache add   scope: null,
+723 silly cache add   name: 'options',
+723 silly cache add   rawSpec: '>=0.0.5',
+723 silly cache add   spec: '>=0.0.5',
+723 silly cache add   type: 'range' }
+724 silly addNamed options@>=0.0.5
+725 verbose addNamed ">=0.0.5" is a valid semver range for options
+726 silly addNameRange { name: 'options', range: '>=0.0.5', hasData: false }
+727 silly mapToRegistry name options
+728 silly mapToRegistry using default registry
+729 silly mapToRegistry registry https://registry.npmjs.org/
+730 silly mapToRegistry uri https://registry.npmjs.org/options
+731 verbose addNameRange registry:https://registry.npmjs.org/options not in flight; fetching
+732 verbose get https://registry.npmjs.org/options not expired, no request
+733 silly addNameRange number 2 { name: 'options', range: '>=0.0.5', hasData: true }
+734 silly addNameRange versions [ 'options',
+734 silly addNameRange   [ '0.0.1', '0.0.2', '0.0.3', '0.0.4', '0.0.5', '0.0.6' ] ]
+735 silly addNamed options@0.0.6
+736 verbose addNamed "0.0.6" is a plain semver version for options
+737 silly cache afterAdd options@0.0.6
+738 verbose afterAdd /home/jstn/.npm/options/0.0.6/package/package.json not in flight; writing
+739 verbose afterAdd /home/jstn/.npm/options/0.0.6/package/package.json written
+740 silly cache afterAdd commander@2.1.0
+741 verbose afterAdd /home/jstn/.npm/commander/2.1.0/package/package.json not in flight; writing
+742 verbose afterAdd /home/jstn/.npm/commander/2.1.0/package/package.json written
+743 http 304 https://registry.npmjs.org/tinycolor
+744 verbose headers { date: 'Thu, 21 Jan 2016 23:36:05 GMT',
+744 verbose headers   via: '1.1 varnish',
+744 verbose headers   'cache-control': 'max-age=300',
+744 verbose headers   etag: '"7Q55AK0YV957DH6ZT14LNQOJW"',
+744 verbose headers   age: '287',
+744 verbose headers   connection: 'keep-alive',
+744 verbose headers   'x-served-by': 'cache-lax1434-LAX',
+744 verbose headers   'x-cache': 'HIT',
+744 verbose headers   'x-cache-hits': '4',
+744 verbose headers   'x-timer': 'S1453419365.113108,VS0,VE0',
+744 verbose headers   vary: 'Accept' }
+745 silly get cb [ 304,
+745 silly get   { date: 'Thu, 21 Jan 2016 23:36:05 GMT',
+745 silly get     via: '1.1 varnish',
+745 silly get     'cache-control': 'max-age=300',
+745 silly get     etag: '"7Q55AK0YV957DH6ZT14LNQOJW"',
+745 silly get     age: '287',
+745 silly get     connection: 'keep-alive',
+745 silly get     'x-served-by': 'cache-lax1434-LAX',
+745 silly get     'x-cache': 'HIT',
+745 silly get     'x-cache-hits': '4',
+745 silly get     'x-timer': 'S1453419365.113108,VS0,VE0',
+745 silly get     vary: 'Accept' } ]
+746 verbose etag https://registry.npmjs.org/tinycolor from cache
+747 verbose get saving tinycolor to /home/jstn/.npm/registry.npmjs.org/tinycolor/.cache.json
+748 silly resolveWithNewModule tinycolor@0.0.1 checking installable status
+749 silly cache add args [ 'tinycolor@0.x', null ]
+750 verbose cache add spec tinycolor@0.x
+751 silly cache add parsed spec { raw: 'tinycolor@0.x',
+751 silly cache add   scope: null,
+751 silly cache add   name: 'tinycolor',
+751 silly cache add   rawSpec: '0.x',
+751 silly cache add   spec: '>=0.0.0 <1.0.0',
+751 silly cache add   type: 'range' }
+752 silly addNamed tinycolor@>=0.0.0 <1.0.0
+753 verbose addNamed ">=0.0.0 <1.0.0" is a valid semver range for tinycolor
+754 silly addNameRange { name: 'tinycolor', range: '>=0.0.0 <1.0.0', hasData: false }
+755 silly mapToRegistry name tinycolor
+756 silly mapToRegistry using default registry
+757 silly mapToRegistry registry https://registry.npmjs.org/
+758 silly mapToRegistry uri https://registry.npmjs.org/tinycolor
+759 verbose addNameRange registry:https://registry.npmjs.org/tinycolor not in flight; fetching
+760 http fetch 200 https://registry.npmjs.org/nan/-/nan-1.0.0.tgz
+761 verbose get https://registry.npmjs.org/tinycolor not expired, no request
+762 silly addNameRange number 2 { name: 'tinycolor', range: '>=0.0.0 <1.0.0', hasData: true }
+763 silly addNameRange versions [ 'tinycolor', [ '0.0.1' ] ]
+764 silly addNamed tinycolor@0.0.1
+765 verbose addNamed "0.0.1" is a plain semver version for tinycolor
+766 silly fetchAndShaCheck shasum ae24f8850818d662fcab5acf7f3b95bfaa2ccf38
+767 verbose addTmpTarball /tmp/npm-24481-fa0555d6/registry.npmjs.org/nan/-/nan-1.0.0.tgz not in flight; adding
+768 verbose addTmpTarball already have metadata; skipping unpack for nan@1.0.0
+769 silly cache afterAdd nan@1.0.0
+770 verbose afterAdd /home/jstn/.npm/nan/1.0.0/package/package.json not in flight; writing
+771 verbose afterAdd /home/jstn/.npm/nan/1.0.0/package/package.json written
+772 silly cache afterAdd tinycolor@0.0.1
+773 verbose afterAdd /home/jstn/.npm/tinycolor/0.0.1/package/package.json not in flight; writing
+774 verbose afterAdd /home/jstn/.npm/tinycolor/0.0.1/package/package.json written
+775 silly loadAllDepsIntoIdealTree Finishing
+776 silly idealTree:prePrune packages
+776 silly idealTree:prePrune ├── acorn@1.2.2
+776 silly idealTree:prePrune ├── aliasify-patch@1.4.1
+776 silly idealTree:prePrune ├── browserify-transform-tools@1.2.2
+776 silly idealTree:prePrune ├── canvas@1.2.11
+776 silly idealTree:prePrune ├── commander@2.1.0
+776 silly idealTree:prePrune ├── eventemitter2@0.4.14
+776 silly idealTree:prePrune ├── falafel@1.2.0
+776 silly idealTree:prePrune ├── foreach@2.0.5
+776 silly idealTree:prePrune ├── isarray@0.0.1
+776 silly idealTree:prePrune ├── nan@2.2.0
+776 silly idealTree:prePrune ├── object-assign@2.1.1
+776 silly idealTree:prePrune ├── object-keys@1.0.9
+776 silly idealTree:prePrune ├── options@0.0.6
+776 silly idealTree:prePrune ├── roslib@0.17.0
+776 silly idealTree:prePrune ├── through@2.3.8
+776 silly idealTree:prePrune ├── tinycolor@0.0.1
+776 silly idealTree:prePrune ├─┬ ws@0.4.32
+776 silly idealTree:prePrune │ └── nan@1.0.0
+776 silly idealTree:prePrune └── xmldom@0.1.21
+777 silly loadIdealTree Finishing
+778 silly currentTree packages
+779 silly idealTree packages
+779 silly idealTree ├── acorn@1.2.2
+779 silly idealTree ├── aliasify-patch@1.4.1
+779 silly idealTree ├── browserify-transform-tools@1.2.2
+779 silly idealTree ├── canvas@1.2.11
+779 silly idealTree ├── commander@2.1.0
+779 silly idealTree ├── eventemitter2@0.4.14
+779 silly idealTree ├── falafel@1.2.0
+779 silly idealTree ├── foreach@2.0.5
+779 silly idealTree ├── isarray@0.0.1
+779 silly idealTree ├── nan@2.2.0
+779 silly idealTree ├── object-assign@2.1.1
+779 silly idealTree ├── object-keys@1.0.9
+779 silly idealTree ├── options@0.0.6
+779 silly idealTree ├── roslib@0.17.0
+779 silly idealTree ├── through@2.3.8
+779 silly idealTree ├── tinycolor@0.0.1
+779 silly idealTree ├─┬ ws@0.4.32
+779 silly idealTree │ └── nan@1.0.0
+779 silly idealTree └── xmldom@0.1.21
+780 silly generateActionsToTake Starting
+781 silly install generateActionsToTake
+782 silly generateActionsToTake Finishing
+783 silly diffTrees action count 19
+784 silly diffTrees add acorn@1.2.2
+785 silly diffTrees add commander@2.1.0
+786 silly diffTrees add eventemitter2@0.4.14
+787 silly diffTrees add foreach@2.0.5
+788 silly diffTrees add isarray@0.0.1
+789 silly diffTrees add nan@2.2.0
+790 silly diffTrees add canvas@1.2.11
+791 silly diffTrees add object-assign@2.1.1
+792 silly diffTrees add object-keys@1.0.9
+793 silly diffTrees add falafel@1.2.0
+794 silly diffTrees add options@0.0.6
+795 silly diffTrees add through@2.3.8
+796 silly diffTrees add browserify-transform-tools@1.2.2
+797 silly diffTrees add aliasify-patch@1.4.1
+798 silly diffTrees add tinycolor@0.0.1
+799 silly diffTrees add nan@1.0.0
+800 silly diffTrees add ws@0.4.32
+801 silly diffTrees add xmldom@0.1.21
+802 silly diffTrees add roslib@0.17.0
+803 silly decomposeActions action count 152
+804 silly decomposeActions fetch acorn@1.2.2
+805 silly decomposeActions extract acorn@1.2.2
+806 silly decomposeActions test acorn@1.2.2
+807 silly decomposeActions preinstall acorn@1.2.2
+808 silly decomposeActions build acorn@1.2.2
+809 silly decomposeActions install acorn@1.2.2
+810 silly decomposeActions postinstall acorn@1.2.2
+811 silly decomposeActions finalize acorn@1.2.2
+812 silly decomposeActions fetch commander@2.1.0
+813 silly decomposeActions extract commander@2.1.0
+814 silly decomposeActions test commander@2.1.0
+815 silly decomposeActions preinstall commander@2.1.0
+816 silly decomposeActions build commander@2.1.0
+817 silly decomposeActions install commander@2.1.0
+818 silly decomposeActions postinstall commander@2.1.0
+819 silly decomposeActions finalize commander@2.1.0
+820 silly decomposeActions fetch eventemitter2@0.4.14
+821 silly decomposeActions extract eventemitter2@0.4.14
+822 silly decomposeActions test eventemitter2@0.4.14
+823 silly decomposeActions preinstall eventemitter2@0.4.14
+824 silly decomposeActions build eventemitter2@0.4.14
+825 silly decomposeActions install eventemitter2@0.4.14
+826 silly decomposeActions postinstall eventemitter2@0.4.14
+827 silly decomposeActions finalize eventemitter2@0.4.14
+828 silly decomposeActions fetch foreach@2.0.5
+829 silly decomposeActions extract foreach@2.0.5
+830 silly decomposeActions test foreach@2.0.5
+831 silly decomposeActions preinstall foreach@2.0.5
+832 silly decomposeActions build foreach@2.0.5
+833 silly decomposeActions install foreach@2.0.5
+834 silly decomposeActions postinstall foreach@2.0.5
+835 silly decomposeActions finalize foreach@2.0.5
+836 silly decomposeActions fetch isarray@0.0.1
+837 silly decomposeActions extract isarray@0.0.1
+838 silly decomposeActions test isarray@0.0.1
+839 silly decomposeActions preinstall isarray@0.0.1
+840 silly decomposeActions build isarray@0.0.1
+841 silly decomposeActions install isarray@0.0.1
+842 silly decomposeActions postinstall isarray@0.0.1
+843 silly decomposeActions finalize isarray@0.0.1
+844 silly decomposeActions fetch nan@2.2.0
+845 silly decomposeActions extract nan@2.2.0
+846 silly decomposeActions test nan@2.2.0
+847 silly decomposeActions preinstall nan@2.2.0
+848 silly decomposeActions build nan@2.2.0
+849 silly decomposeActions install nan@2.2.0
+850 silly decomposeActions postinstall nan@2.2.0
+851 silly decomposeActions finalize nan@2.2.0
+852 silly decomposeActions fetch canvas@1.2.11
+853 silly decomposeActions extract canvas@1.2.11
+854 silly decomposeActions test canvas@1.2.11
+855 silly decomposeActions preinstall canvas@1.2.11
+856 silly decomposeActions build canvas@1.2.11
+857 silly decomposeActions install canvas@1.2.11
+858 silly decomposeActions postinstall canvas@1.2.11
+859 silly decomposeActions finalize canvas@1.2.11
+860 silly decomposeActions fetch object-assign@2.1.1
+861 silly decomposeActions extract object-assign@2.1.1
+862 silly decomposeActions test object-assign@2.1.1
+863 silly decomposeActions preinstall object-assign@2.1.1
+864 silly decomposeActions build object-assign@2.1.1
+865 silly decomposeActions install object-assign@2.1.1
+866 silly decomposeActions postinstall object-assign@2.1.1
+867 silly decomposeActions finalize object-assign@2.1.1
+868 silly decomposeActions fetch object-keys@1.0.9
+869 silly decomposeActions extract object-keys@1.0.9
+870 silly decomposeActions test object-keys@1.0.9
+871 silly decomposeActions preinstall object-keys@1.0.9
+872 silly decomposeActions build object-keys@1.0.9
+873 silly decomposeActions install object-keys@1.0.9
+874 silly decomposeActions postinstall object-keys@1.0.9
+875 silly decomposeActions finalize object-keys@1.0.9
+876 silly decomposeActions fetch falafel@1.2.0
+877 silly decomposeActions extract falafel@1.2.0
+878 silly decomposeActions test falafel@1.2.0
+879 silly decomposeActions preinstall falafel@1.2.0
+880 silly decomposeActions build falafel@1.2.0
+881 silly decomposeActions install falafel@1.2.0
+882 silly decomposeActions postinstall falafel@1.2.0
+883 silly decomposeActions finalize falafel@1.2.0
+884 silly decomposeActions fetch options@0.0.6
+885 silly decomposeActions extract options@0.0.6
+886 silly decomposeActions test options@0.0.6
+887 silly decomposeActions preinstall options@0.0.6
+888 silly decomposeActions build options@0.0.6
+889 silly decomposeActions install options@0.0.6
+890 silly decomposeActions postinstall options@0.0.6
+891 silly decomposeActions finalize options@0.0.6
+892 silly decomposeActions fetch through@2.3.8
+893 silly decomposeActions extract through@2.3.8
+894 silly decomposeActions test through@2.3.8
+895 silly decomposeActions preinstall through@2.3.8
+896 silly decomposeActions build through@2.3.8
+897 silly decomposeActions install through@2.3.8
+898 silly decomposeActions postinstall through@2.3.8
+899 silly decomposeActions finalize through@2.3.8
+900 silly decomposeActions fetch browserify-transform-tools@1.2.2
+901 silly decomposeActions extract browserify-transform-tools@1.2.2
+902 silly decomposeActions test browserify-transform-tools@1.2.2
+903 silly decomposeActions preinstall browserify-transform-tools@1.2.2
+904 silly decomposeActions build browserify-transform-tools@1.2.2
+905 silly decomposeActions install browserify-transform-tools@1.2.2
+906 silly decomposeActions postinstall browserify-transform-tools@1.2.2
+907 silly decomposeActions finalize browserify-transform-tools@1.2.2
+908 silly decomposeActions fetch aliasify-patch@1.4.1
+909 silly decomposeActions extract aliasify-patch@1.4.1
+910 silly decomposeActions test aliasify-patch@1.4.1
+911 silly decomposeActions preinstall aliasify-patch@1.4.1
+912 silly decomposeActions build aliasify-patch@1.4.1
+913 silly decomposeActions install aliasify-patch@1.4.1
+914 silly decomposeActions postinstall aliasify-patch@1.4.1
+915 silly decomposeActions finalize aliasify-patch@1.4.1
+916 silly decomposeActions fetch tinycolor@0.0.1
+917 silly decomposeActions extract tinycolor@0.0.1
+918 silly decomposeActions test tinycolor@0.0.1
+919 silly decomposeActions preinstall tinycolor@0.0.1
+920 silly decomposeActions build tinycolor@0.0.1
+921 silly decomposeActions install tinycolor@0.0.1
+922 silly decomposeActions postinstall tinycolor@0.0.1
+923 silly decomposeActions finalize tinycolor@0.0.1
+924 silly decomposeActions fetch nan@1.0.0
+925 silly decomposeActions extract nan@1.0.0
+926 silly decomposeActions test nan@1.0.0
+927 silly decomposeActions preinstall nan@1.0.0
+928 silly decomposeActions build nan@1.0.0
+929 silly decomposeActions install nan@1.0.0
+930 silly decomposeActions postinstall nan@1.0.0
+931 silly decomposeActions finalize nan@1.0.0
+932 silly decomposeActions fetch ws@0.4.32
+933 silly decomposeActions extract ws@0.4.32
+934 silly decomposeActions test ws@0.4.32
+935 silly decomposeActions preinstall ws@0.4.32
+936 silly decomposeActions build ws@0.4.32
+937 silly decomposeActions install ws@0.4.32
+938 silly decomposeActions postinstall ws@0.4.32
+939 silly decomposeActions finalize ws@0.4.32
+940 silly decomposeActions fetch xmldom@0.1.21
+941 silly decomposeActions extract xmldom@0.1.21
+942 silly decomposeActions test xmldom@0.1.21
+943 silly decomposeActions preinstall xmldom@0.1.21
+944 silly decomposeActions build xmldom@0.1.21
+945 silly decomposeActions install xmldom@0.1.21
+946 silly decomposeActions postinstall xmldom@0.1.21
+947 silly decomposeActions finalize xmldom@0.1.21
+948 silly decomposeActions fetch roslib@0.17.0
+949 silly decomposeActions extract roslib@0.17.0
+950 silly decomposeActions test roslib@0.17.0
+951 silly decomposeActions preinstall roslib@0.17.0
+952 silly decomposeActions build roslib@0.17.0
+953 silly decomposeActions install roslib@0.17.0
+954 silly decomposeActions postinstall roslib@0.17.0
+955 silly decomposeActions finalize roslib@0.17.0
+956 silly executeActions Starting
+957 silly install executeActions
+958 silly doSerial global-install 0
+959 silly doParallel fetch 19
+960 verbose lock using /home/jstn/.npm/_locks/staging-818494827aeeaeea.lock for /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging
+961 silly doParallel extract 19
+962 silly extract acorn@1.2.2
+963 silly extract commander@2.1.0
+964 silly extract eventemitter2@0.4.14
+965 silly extract foreach@2.0.5
+966 silly extract isarray@0.0.1
+967 silly extract nan@2.2.0
+968 silly extract canvas@1.2.11
+969 silly extract object-assign@2.1.1
+970 silly extract object-keys@1.0.9
+971 silly extract falafel@1.2.0
+972 silly extract options@0.0.6
+973 silly extract through@2.3.8
+974 silly extract browserify-transform-tools@1.2.2
+975 silly extract aliasify-patch@1.4.1
+976 silly extract tinycolor@0.0.1
+977 silly extract nan@1.0.0
+978 silly extract ws@0.4.32
+979 silly extract xmldom@0.1.21
+980 silly extract roslib@0.17.0
+981 verbose unbuild node_modules/.staging/commander-e3ae3129
+982 verbose unbuild node_modules/.staging/eventemitter2-b0e2735a
+983 verbose unbuild node_modules/.staging/isarray-ee5ac30d
+984 verbose unbuild node_modules/.staging/foreach-eb72d248
+985 verbose unbuild node_modules/.staging/nan-5fadc27d
+986 verbose unbuild node_modules/.staging/canvas-4aa5c161
+987 verbose unbuild node_modules/.staging/object-assign-a12298c3
+988 verbose unbuild node_modules/.staging/falafel-b954d190
+989 verbose unbuild node_modules/.staging/object-keys-39f31886
+990 verbose unbuild node_modules/.staging/options-66abb5bf
+991 verbose unbuild node_modules/.staging/browserify-transform-tools-45865013
+992 verbose unbuild node_modules/.staging/through-d370add8
+993 verbose unbuild node_modules/.staging/aliasify-patch-f64852a2
+994 verbose unbuild node_modules/.staging/tinycolor-c35c0b61
+995 verbose unbuild node_modules/.staging/nan-f90bf52a
+996 verbose unbuild node_modules/.staging/roslib-6c698e8c
+997 verbose unbuild node_modules/.staging/xmldom-7ad91c5c
+998 verbose unbuild node_modules/.staging/acorn-27caa269
+999 verbose unbuild node_modules/.staging/ws-0cdd4217
+1000 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/commander-e3ae3129 is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1001 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/commander-e3ae3129
+1002 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/eventemitter2-b0e2735a is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1003 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/eventemitter2-b0e2735a
+1004 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/isarray-ee5ac30d is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1005 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/isarray-ee5ac30d
+1006 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/foreach-eb72d248 is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1007 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/foreach-eb72d248
+1008 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-5fadc27d is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1009 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-5fadc27d
+1010 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/canvas-4aa5c161 is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1011 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/canvas-4aa5c161
+1012 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-assign-a12298c3 is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1013 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-assign-a12298c3
+1014 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/falafel-b954d190 is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1015 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/falafel-b954d190
+1016 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-keys-39f31886 is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1017 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-keys-39f31886
+1018 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/options-66abb5bf is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1019 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/options-66abb5bf
+1020 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/browserify-transform-tools-45865013 is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1021 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/browserify-transform-tools-45865013
+1022 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/through-d370add8 is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1023 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/through-d370add8
+1024 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/aliasify-patch-f64852a2 is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1025 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/aliasify-patch-f64852a2
+1026 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/tinycolor-c35c0b61 is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1027 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/tinycolor-c35c0b61
+1028 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-f90bf52a is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1029 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-f90bf52a
+1030 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/roslib-6c698e8c is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1031 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/roslib-6c698e8c
+1032 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/xmldom-7ad91c5c is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1033 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/xmldom-7ad91c5c
+1034 verbose tar unpack /home/jstn/.npm/commander/2.1.0/package.tgz
+1035 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/commander-e3ae3129
+1036 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/commander-e3ae3129 is being purged
+1037 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/commander-e3ae3129
+1038 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/acorn-27caa269 is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1039 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/acorn-27caa269
+1040 verbose tar unpack /home/jstn/.npm/eventemitter2/0.4.14/package.tgz
+1041 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/eventemitter2-b0e2735a
+1042 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/eventemitter2-b0e2735a is being purged
+1043 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/eventemitter2-b0e2735a
+1044 verbose tar unpack /home/jstn/.npm/isarray/0.0.1/package.tgz
+1045 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/isarray-ee5ac30d
+1046 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/isarray-ee5ac30d is being purged
+1047 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/isarray-ee5ac30d
+1048 verbose tar unpack /home/jstn/.npm/foreach/2.0.5/package.tgz
+1049 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/foreach-eb72d248
+1050 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/foreach-eb72d248 is being purged
+1051 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/foreach-eb72d248
+1052 verbose tar unpack /home/jstn/.npm/nan/2.2.0/package.tgz
+1053 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-5fadc27d
+1054 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-5fadc27d is being purged
+1055 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-5fadc27d
+1056 verbose tar unpack /home/jstn/.npm/canvas/1.2.11/package.tgz
+1057 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/canvas-4aa5c161
+1058 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/canvas-4aa5c161 is being purged
+1059 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/canvas-4aa5c161
+1060 verbose tar unpack /home/jstn/.npm/object-assign/2.1.1/package.tgz
+1061 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-assign-a12298c3
+1062 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-assign-a12298c3 is being purged
+1063 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-assign-a12298c3
+1064 verbose tar unpack /home/jstn/.npm/falafel/1.2.0/package.tgz
+1065 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/falafel-b954d190
+1066 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/falafel-b954d190 is being purged
+1067 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/falafel-b954d190
+1068 verbose tar unpack /home/jstn/.npm/object-keys/1.0.9/package.tgz
+1069 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-keys-39f31886
+1070 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-keys-39f31886 is being purged
+1071 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-keys-39f31886
+1072 verbose tar unpack /home/jstn/.npm/options/0.0.6/package.tgz
+1073 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/options-66abb5bf
+1074 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/options-66abb5bf is being purged
+1075 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/options-66abb5bf
+1076 verbose tar unpack /home/jstn/.npm/browserify-transform-tools/1.2.2/package.tgz
+1077 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/browserify-transform-tools-45865013
+1078 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/browserify-transform-tools-45865013 is being purged
+1079 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/browserify-transform-tools-45865013
+1080 verbose tar unpack /home/jstn/.npm/through/2.3.8/package.tgz
+1081 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/through-d370add8
+1082 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/through-d370add8 is being purged
+1083 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/through-d370add8
+1084 verbose tar unpack /home/jstn/.npm/aliasify-patch/1.4.1/package.tgz
+1085 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/aliasify-patch-f64852a2
+1086 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/aliasify-patch-f64852a2 is being purged
+1087 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/aliasify-patch-f64852a2
+1088 verbose tar unpack /home/jstn/.npm/tinycolor/0.0.1/package.tgz
+1089 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/tinycolor-c35c0b61
+1090 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/tinycolor-c35c0b61 is being purged
+1091 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/tinycolor-c35c0b61
+1092 verbose tar unpack /home/jstn/.npm/nan/1.0.0/package.tgz
+1093 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-f90bf52a
+1094 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-f90bf52a is being purged
+1095 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-f90bf52a
+1096 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/ws-0cdd4217 is being purged from base /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+1097 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/ws-0cdd4217
+1098 verbose tar unpack /home/jstn/.npm/roslib/0.17.0/package.tgz
+1099 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/roslib-6c698e8c
+1100 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/roslib-6c698e8c is being purged
+1101 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/roslib-6c698e8c
+1102 verbose tar unpack /home/jstn/.npm/xmldom/0.1.21/package.tgz
+1103 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/xmldom-7ad91c5c
+1104 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/xmldom-7ad91c5c is being purged
+1105 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/xmldom-7ad91c5c
+1106 silly gunzTarPerm modes [ '755', '644' ]
+1107 verbose tar unpack /home/jstn/.npm/acorn/1.2.2/package.tgz
+1108 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/acorn-27caa269
+1109 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/acorn-27caa269 is being purged
+1110 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/acorn-27caa269
+1111 silly gunzTarPerm modes [ '755', '644' ]
+1112 silly gunzTarPerm modes [ '755', '644' ]
+1113 silly gunzTarPerm modes [ '755', '644' ]
+1114 silly gunzTarPerm modes [ '755', '644' ]
+1115 silly gunzTarPerm modes [ '755', '644' ]
+1116 silly gunzTarPerm modes [ '755', '644' ]
+1117 silly gunzTarPerm modes [ '755', '644' ]
+1118 silly gunzTarPerm modes [ '755', '644' ]
+1119 silly gunzTarPerm modes [ '755', '644' ]
+1120 silly gunzTarPerm modes [ '755', '644' ]
+1121 silly gunzTarPerm modes [ '755', '644' ]
+1122 silly gunzTarPerm modes [ '755', '644' ]
+1123 silly gunzTarPerm modes [ '755', '644' ]
+1124 silly gunzTarPerm modes [ '755', '644' ]
+1125 verbose tar unpack /home/jstn/.npm/ws/0.4.32/package.tgz
+1126 verbose tar unpacking to /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/ws-0cdd4217
+1127 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/ws-0cdd4217 is being purged
+1128 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/ws-0cdd4217
+1129 silly gunzTarPerm modes [ '755', '644' ]
+1130 silly gunzTarPerm modes [ '755', '644' ]
+1131 silly gunzTarPerm modes [ '755', '644' ]
+1132 silly gunzTarPerm modes [ '755', '644' ]
+1133 silly gunzTarPerm extractEntry package.json
+1134 silly gunzTarPerm extractEntry package.json
+1135 silly gunzTarPerm extractEntry package.json
+1136 silly gunzTarPerm extractEntry package.json
+1137 silly gunzTarPerm extractEntry package.json
+1138 silly gunzTarPerm modified mode [ 'package.json', 436, 420 ]
+1139 silly gunzTarPerm extractEntry package.json
+1140 silly gunzTarPerm extractEntry package.json
+1141 silly gunzTarPerm extractEntry package.json
+1142 silly gunzTarPerm extractEntry package.json
+1143 silly gunzTarPerm extractEntry package.json
+1144 silly gunzTarPerm extractEntry package.json
+1145 silly gunzTarPerm extractEntry package.json
+1146 silly gunzTarPerm extractEntry package.json
+1147 silly gunzTarPerm modified mode [ 'package.json', 436, 420 ]
+1148 silly gunzTarPerm extractEntry .gitignore
+1149 silly gunzTarPerm extractEntry package.json
+1150 silly gunzTarPerm extractEntry package.json
+1151 silly gunzTarPerm extractEntry package.json
+1152 silly gunzTarPerm modified mode [ 'package.json', 436, 420 ]
+1153 silly gunzTarPerm extractEntry package.json
+1154 silly gunzTarPerm extractEntry package.json
+1155 silly gunzTarPerm extractEntry index.js
+1156 silly gunzTarPerm extractEntry Readme.md
+1157 silly gunzTarPerm extractEntry README.md
+1158 silly gunzTarPerm extractEntry index.js
+1159 silly gunzTarPerm extractEntry README.md
+1160 silly gunzTarPerm extractEntry index.js
+1161 silly gunzTarPerm extractEntry .npmignore
+1162 silly gunzTarPerm extractEntry LICENSE
+1163 silly gunzTarPerm extractEntry README.md
+1164 silly gunzTarPerm modified mode [ 'README.md', 436, 420 ]
+1165 silly gunzTarPerm extractEntry .npmignore
+1166 silly gunzTarPerm extractEntry index.js
+1167 silly gunzTarPerm extractEntry index.js
+1168 silly gunzTarPerm extractEntry license
+1169 silly gunzTarPerm extractEntry index.js
+1170 silly gunzTarPerm extractEntry .travis.yml
+1171 silly gunzTarPerm extractEntry .npmignore
+1172 silly gunzTarPerm extractEntry README.md
+1173 silly gunzTarPerm extractEntry .npmignore
+1174 silly gunzTarPerm extractEntry README.md
+1175 silly gunzTarPerm extractEntry .npmignore
+1176 silly gunzTarPerm extractEntry README.md
+1177 silly gunzTarPerm extractEntry index.js
+1178 silly gunzTarPerm extractEntry .travis.yml
+1179 silly gunzTarPerm extractEntry .npmignore
+1180 silly gunzTarPerm modified mode [ '.npmignore', 436, 420 ]
+1181 silly gunzTarPerm extractEntry README.md
+1182 silly gunzTarPerm modified mode [ 'README.md', 436, 420 ]
+1183 silly gunzTarPerm extractEntry example.js
+1184 silly gunzTarPerm extractEntry package.json
+1185 silly gunzTarPerm extractEntry README.md
+1186 silly gunzTarPerm extractEntry include_dirs.js
+1187 silly gunzTarPerm modified mode [ 'include_dirs.js', 436, 420 ]
+1188 silly gunzTarPerm extractEntry .npmignore
+1189 silly gunzTarPerm extractEntry LICENSE
+1190 silly gunzTarPerm extractEntry .npmignore
+1191 silly gunzTarPerm modified mode [ '.npmignore', 436, 420 ]
+1192 silly gunzTarPerm extractEntry README.md
+1193 silly gunzTarPerm modified mode [ 'README.md', 436, 420 ]
+1194 silly gunzTarPerm extractEntry .npmignore
+1195 silly gunzTarPerm extractEntry README.md
+1196 silly gunzTarPerm extractEntry LICENSE
+1197 silly gunzTarPerm extractEntry include_dirs.js
+1198 silly gunzTarPerm extractEntry .dntrc
+1199 silly gunzTarPerm extractEntry build/config.gypi
+1200 silly gunzTarPerm extractEntry nan.h
+1201 silly gunzTarPerm extractEntry .npmignore
+1202 silly gunzTarPerm extractEntry README.md
+1203 silly gunzTarPerm extractEntry Makefile
+1204 silly gunzTarPerm extractEntry lib/options.js
+1205 silly gunzTarPerm extractEntry README.md
+1206 silly gunzTarPerm extractEntry tinycolor.js
+1207 silly gunzTarPerm extractEntry build/build.js
+1208 silly gunzTarPerm extractEntry component.json
+1209 silly gunzTarPerm extractEntry readme.md
+1210 silly gunzTarPerm extractEntry LICENSE
+1211 silly gunzTarPerm extractEntry lib/loadConfig.js
+1212 silly gunzTarPerm extractEntry LICENSE.APACHE2
+1213 silly gunzTarPerm extractEntry LICENSE.MIT
+1214 silly gunzTarPerm extractEntry LICENSE
+1215 silly gunzTarPerm modified mode [ 'LICENSE', 436, 420 ]
+1216 silly gunzTarPerm extractEntry lib/aliasify.js
+1217 silly gunzTarPerm modified mode [ 'lib/aliasify.js', 436, 420 ]
+1218 silly gunzTarPerm extractEntry LICENSE
+1219 silly gunzTarPerm extractEntry lib/eventemitter2.js
+1220 silly gunzTarPerm extractEntry index.js
+1221 silly gunzTarPerm extractEntry test.js
+1222 silly gunzTarPerm extractEntry nan_converters.h
+1223 silly gunzTarPerm modified mode [ 'nan_converters.h', 436, 420 ]
+1224 silly gunzTarPerm extractEntry LICENSE.md
+1225 silly gunzTarPerm modified mode [ 'LICENSE.md', 436, 420 ]
+1226 silly gunzTarPerm extractEntry .dntrc
+1227 silly gunzTarPerm modified mode [ '.dntrc', 436, 420 ]
+1228 silly gunzTarPerm extractEntry History.md
+1229 silly gunzTarPerm extractEntry example/array.js
+1230 silly gunzTarPerm extractEntry example/keyword.js
+1231 silly gunzTarPerm extractEntry Readme.md
+1232 silly gunzTarPerm extractEntry binding.gyp
+1233 silly gunzTarPerm extractEntry .gitmodules
+1234 silly gunzTarPerm extractEntry install
+1235 silly gunzTarPerm extractEntry lib/bindings.js
+1236 silly gunzTarPerm extractEntry lib/canvas.js
+1237 silly gunzTarPerm extractEntry lib/context2d.js
+1238 silly gunzTarPerm extractEntry lib/image.js
+1239 silly gunzTarPerm extractEntry lib/jpegstream.js
+1240 silly gunzTarPerm extractEntry lib/pngstream.js
+1241 silly gunzTarPerm extractEntry .travis.yml
+1242 silly gunzTarPerm extractEntry src/Image.cc
+1243 silly gunzTarPerm extractEntry src/Canvas.cc
+1244 silly gunzTarPerm extractEntry src/CanvasGradient.cc
+1245 silly gunzTarPerm extractEntry src/CanvasGradient.h
+1246 silly gunzTarPerm extractEntry src/CanvasPattern.cc
+1247 silly gunzTarPerm extractEntry src/CanvasPattern.h
+1248 silly gunzTarPerm extractEntry src/CanvasRenderingContext2d.cc
+1249 silly gunzTarPerm extractEntry src/CanvasRenderingContext2d.h
+1250 silly gunzTarPerm extractEntry src/FontFace.cc
+1251 silly gunzTarPerm extractEntry src/FontFace.h
+1252 silly gunzTarPerm extractEntry src/Canvas.h
+1253 silly gunzTarPerm extractEntry src/Image.h
+1254 silly gunzTarPerm extractEntry src/ImageData.cc
+1255 silly gunzTarPerm extractEntry src/ImageData.h
+1256 silly gunzTarPerm extractEntry src/JPEGStream.h
+1257 silly gunzTarPerm extractEntry src/PNG.h
+1258 silly gunzTarPerm extractEntry src/Point.h
+1259 silly gunzTarPerm extractEntry src/closure.h
+1260 silly gunzTarPerm extractEntry src/color.cc
+1261 silly gunzTarPerm extractEntry src/color.h
+1262 silly gunzTarPerm extractEntry src/init.cc
+1263 silly gunzTarPerm extractEntry util/cairo_include.sh
+1264 silly gunzTarPerm extractEntry util/has_cairo_freetype.sh
+1265 silly gunzTarPerm extractEntry util/has_lib.sh
+1266 silly gunzTarPerm extractEntry util/lib_lookup.sh
+1267 silly gunzTarPerm extractEntry __package__.js
+1268 silly gunzTarPerm extractEntry dom-parser.js
+1269 silly gunzTarPerm extractEntry LICENSE
+1270 silly gunzTarPerm extractEntry index.js
+1271 silly gunzTarPerm extractEntry index.js
+1272 silly gunzTarPerm extractEntry src/bufferutil.cc
+1273 silly gunzTarPerm extractEntry LICENSE
+1274 silly gunzTarPerm modified mode [ 'LICENSE', 436, 420 ]
+1275 silly gunzTarPerm extractEntry .jshintrc
+1276 silly gunzTarPerm modified mode [ '.jshintrc', 436, 420 ]
+1277 silly gunzTarPerm extractEntry lib/parentDir.js
+1278 silly gunzTarPerm extractEntry CHANGELOG.md
+1279 silly gunzTarPerm modified mode [ 'CHANGELOG.md', 436, 420 ]
+1280 silly gunzTarPerm extractEntry Cakefile
+1281 silly gunzTarPerm modified mode [ 'Cakefile', 436, 420 ]
+1282 silly gunzTarPerm extractEntry .travis.yml
+1283 silly gunzTarPerm extractEntry AUTHORS
+1284 silly gunzTarPerm extractEntry Makefile
+1285 silly gunzTarPerm extractEntry Readme.md
+1286 silly gunzTarPerm extractEntry dom.js
+1287 silly gunzTarPerm extractEntry sax.js
+1288 silly gunzTarPerm extractEntry .travis.yml
+1289 silly gunzTarPerm extractEntry component.json
+1290 silly gunzTarPerm extractEntry readme.md
+1291 silly gunzTarPerm extractEntry isArguments.js
+1292 silly gunzTarPerm extractEntry CHANGELOG.md
+1293 silly gunzTarPerm extractEntry src/validation.cc
+1294 silly gunzTarPerm extractEntry bin/wscat
+1295 silly gunzTarPerm extractEntry .travis.yml
+1296 silly gunzTarPerm extractEntry builderror.log
+1297 silly gunzTarPerm extractEntry History.md
+1298 silly gunzTarPerm extractEntry lib/BufferPool.js
+1299 silly gunzTarPerm extractEntry lib/ErrorCodes.js
+1300 silly gunzTarPerm extractEntry lib/Receiver.hixie.js
+1301 silly gunzTarPerm extractEntry lib/Receiver.js
+1302 silly gunzTarPerm extractEntry lib/BufferUtil.js
+1303 silly gunzTarPerm extractEntry lib/Sender.js
+1304 silly gunzTarPerm extractEntry lib/Validation.fallback.js
+1305 silly gunzTarPerm extractEntry lib/Validation.js
+1306 silly gunzTarPerm extractEntry lib/WebSocket.js
+1307 silly gunzTarPerm extractEntry lib/WebSocketServer.js
+1308 silly gunzTarPerm extractEntry lib/BufferUtil.fallback.js
+1309 silly gunzTarPerm extractEntry lib/browser.js
+1310 silly gunzTarPerm extractEntry lib/Sender.hixie.js
+1311 silly gunzTarPerm extractEntry Makefile
+1312 silly gunzTarPerm extractEntry binding.gyp
+1313 silly gunzTarPerm extractEntry .npmrc
+1314 silly gunzTarPerm modified mode [ '.npmrc', 436, 420 ]
+1315 silly gunzTarPerm extractEntry CHANGELOG.md
+1316 silly gunzTarPerm modified mode [ 'CHANGELOG.md', 436, 420 ]
+1317 silly gunzTarPerm extractEntry example/prompt.js
+1318 silly gunzTarPerm extractEntry readme.markdown
+1319 silly gunzTarPerm extractEntry readme.markdown
+1320 silly gunzTarPerm extractEntry test/async.js
+1321 silly gunzTarPerm extractEntry component.json
+1322 silly gunzTarPerm extractEntry test/array.js
+1323 silly gunzTarPerm extractEntry test/async.js
+1324 silly gunzTarPerm extractEntry test/auto-destroy.js
+1325 silly gunzTarPerm extractEntry test/buffering.js
+1326 silly gunzTarPerm extractEntry doc/global.html#ActionClient
+1327 silly gunzTarPerm modified mode [ 'doc/global.html#ActionClient', 436, 420 ]
+1328 silly gunzTarPerm extractEntry .eslintrc
+1329 silly gunzTarPerm extractEntry test/test.coffee
+1330 silly gunzTarPerm modified mode [ 'test/test.coffee', 436, 420 ]
+1331 silly gunzTarPerm extractEntry src/aliasify.coffee
+1332 silly gunzTarPerm modified mode [ 'src/aliasify.coffee', 436, 420 ]
+1333 silly gunzTarPerm extractEntry testFixtures/test/package.json
+1334 silly gunzTarPerm modified mode [ 'testFixtures/test/package.json', 436, 420 ]
+1335 silly gunzTarPerm extractEntry testFixtures/test/src/index.js
+1336 silly gunzTarPerm modified mode [ 'testFixtures/test/src/index.js', 436, 420 ]
+1337 silly gunzTarPerm extractEntry testFixtures/test/src/bar/bar.js
+1338 silly gunzTarPerm modified mode [ 'testFixtures/test/src/bar/bar.js', 436, 420 ]
+1339 silly gunzTarPerm extractEntry testFixtures/test/src/foo/foo.js
+1340 silly gunzTarPerm modified mode [ 'testFixtures/test/src/foo/foo.js', 436, 420 ]
+1341 silly gunzTarPerm extractEntry testFixtures/testNestedPackages/package.json
+1342 silly gunzTarPerm modified mode [ 'testFixtures/testNestedPackages/package.json', 436, 420 ]
+1343 silly gunzTarPerm extractEntry testFixtures/testWithRelativeConfig/package.json
+1344 silly gunzTarPerm modified mode [ 'testFixtures/testWithRelativeConfig/package.json', 436, 420 ]
+1345 silly gunzTarPerm extractEntry testFixtures/testWithRelativeConfig/config/config.js
+1346 silly gunzTarPerm modified mode [ 'testFixtures/testWithRelativeConfig/config/config.js',
+1346 silly gunzTarPerm   436,
+1346 silly gunzTarPerm   420 ]
+1347 silly gunzTarPerm extractEntry testFixtures/testWithRelativeConfig/src/index.js
+1348 silly gunzTarPerm modified mode [ 'testFixtures/testWithRelativeConfig/src/index.js', 436, 420 ]
+1349 silly gunzTarPerm extractEntry test/custom-parser.js
+1350 silly gunzTarPerm extractEntry test/end.js
+1351 silly gunzTarPerm extractEntry lib/skipFile.js
+1352 silly gunzTarPerm extractEntry lib/transformTools.js
+1353 silly gunzTarPerm extractEntry .jscs.json
+1354 silly gunzTarPerm extractEntry .editorconfig
+1355 silly gunzTarPerm extractEntry doc/Goal.html
+1356 silly gunzTarPerm modified mode [ 'doc/Goal.html', 436, 420 ]
+1357 silly gunzTarPerm extractEntry doc/Quaternion.html
+1358 silly gunzTarPerm modified mode [ 'doc/Quaternion.html', 436, 420 ]
+1359 silly gunzTarPerm extractEntry appveyor.yml
+1360 silly gunzTarPerm modified mode [ 'appveyor.yml', 436, 420 ]
+1361 silly gunzTarPerm extractEntry test/es6.js
+1362 silly gunzTarPerm extractEntry test/for.js
+1363 silly gunzTarPerm extractEntry CHANGELOG.md
+1364 silly gunzTarPerm extractEntry test/falafelTransformTest.coffee
+1365 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-assign-a12298c3/node_modules is being purged
+1366 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-assign-a12298c3/node_modules
+1367 silly gunzTarPerm extractEntry test/index.js
+1368 silly gunzTarPerm extractEntry doc/Ros.html
+1369 silly gunzTarPerm modified mode [ 'doc/Ros.html', 436, 420 ]
+1370 silly gunzTarPerm extractEntry doc/RosLib.js.html
+1371 silly gunzTarPerm modified mode [ 'doc/RosLib.js.html', 436, 420 ]
+1372 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/tinycolor-c35c0b61/node_modules is being purged
+1373 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/tinycolor-c35c0b61/node_modules
+1374 silly gunzTarPerm extractEntry .travis.yml
+1375 silly gunzTarPerm extractEntry test/index.js
+1376 silly gunzTarPerm extractEntry .gitattributes
+1377 silly gunzTarPerm extractEntry .editorconfig
+1378 silly gunzTarPerm extractEntry test/inspect.js
+1379 silly gunzTarPerm extractEntry test/opts.js
+1380 silly gunzTarPerm extractEntry doc/RosLibNode.js.html
+1381 silly gunzTarPerm modified mode [ 'doc/RosLibNode.js.html', 436, 420 ]
+1382 silly gunzTarPerm extractEntry doc/ServiceRequest.html
+1383 silly gunzTarPerm modified mode [ 'doc/ServiceRequest.html', 436, 420 ]
+1384 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/options-66abb5bf/node_modules is being purged
+1385 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/options-66abb5bf/node_modules
+1386 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/isarray-ee5ac30d/node_modules is being purged
+1387 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/isarray-ee5ac30d/node_modules
+1388 silly gunzTarPerm extractEntry bin/build-acorn.js
+1389 silly gunzTarPerm extractEntry bin/generate-identifier-regex.js
+1390 silly gunzTarPerm extractEntry doc/new.md
+1391 silly gunzTarPerm modified mode [ 'doc/new.md', 436, 420 ]
+1392 silly gunzTarPerm extractEntry doc/.build.sh
+1393 silly gunzTarPerm modified mode [ 'doc/.build.sh', 509, 493 ]
+1394 silly gunzTarPerm extractEntry test/parent.js
+1395 silly gunzTarPerm extractEntry test/bin/run.js
+1396 silly gunzTarPerm extractEntry test/loadConfigTest.coffee
+1397 silly gunzTarPerm extractEntry test/requireTransformTest.coffee
+1398 silly gunzTarPerm extractEntry bin/acorn
+1399 silly gunzTarPerm extractEntry bin/prepublish.sh
+1400 silly gunzTarPerm extractEntry doc/buffers.md
+1401 silly gunzTarPerm modified mode [ 'doc/buffers.md', 436, 420 ]
+1402 silly gunzTarPerm extractEntry doc/callback.md
+1403 silly gunzTarPerm modified mode [ 'doc/callback.md', 436, 420 ]
+1404 silly gunzTarPerm extractEntry doc/SimpleActionServer.html
+1405 silly gunzTarPerm modified mode [ 'doc/SimpleActionServer.html', 436, 420 ]
+1406 silly gunzTarPerm extractEntry doc/TFClient.html
+1407 silly gunzTarPerm modified mode [ 'doc/TFClient.html', 436, 420 ]
+1408 silly gunzTarPerm extractEntry test/skipFileTest.coffee
+1409 silly gunzTarPerm extractEntry test/stringTransformTest.coffee
+1410 silly gunzTarPerm extractEntry bin/update_authors.sh
+1411 silly gunzTarPerm extractEntry bin/without_eval
+1412 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/commander-e3ae3129/node_modules is being purged
+1413 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/commander-e3ae3129/node_modules
+1414 silly gunzTarPerm extractEntry doc/converters.md
+1415 silly gunzTarPerm modified mode [ 'doc/converters.md', 436, 420 ]
+1416 silly gunzTarPerm extractEntry doc/errors.md
+1417 silly gunzTarPerm modified mode [ 'doc/errors.md', 436, 420 ]
+1418 silly gunzTarPerm extractEntry dist/acorn.js
+1419 silly gunzTarPerm extractEntry dist/acorn_csp.js
+1420 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/foreach-eb72d248/node_modules is being purged
+1421 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/foreach-eb72d248/node_modules
+1422 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/eventemitter2-b0e2735a/node_modules is being purged
+1423 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/eventemitter2-b0e2735a/node_modules
+1424 silly gunzTarPerm extractEntry Cakefile
+1425 silly gunzTarPerm extractEntry run-test.sh
+1426 silly gunzTarPerm extractEntry doc/Transform.html
+1427 silly gunzTarPerm modified mode [ 'doc/Transform.html', 436, 420 ]
+1428 silly gunzTarPerm extractEntry doc/UrdfBox.html
+1429 silly gunzTarPerm modified mode [ 'doc/UrdfBox.html', 436, 420 ]
+1430 silly gunzTarPerm extractEntry doc/maybe_types.md
+1431 silly gunzTarPerm modified mode [ 'doc/maybe_types.md', 436, 420 ]
+1432 silly gunzTarPerm extractEntry doc/methods.md
+1433 silly gunzTarPerm modified mode [ 'doc/methods.md', 436, 420 ]
+1434 silly gunzTarPerm extractEntry dist/acorn_loose.js
+1435 silly gunzTarPerm extractEntry doc/asyncworker.md
+1436 silly gunzTarPerm modified mode [ 'doc/asyncworker.md', 436, 420 ]
+1437 silly gunzTarPerm extractEntry doc/node_misc.md
+1438 silly gunzTarPerm modified mode [ 'doc/node_misc.md', 436, 420 ]
+1439 silly gunzTarPerm extractEntry dist/walk.js
+1440 silly gunzTarPerm extractEntry dist/.keep
+1441 silly gunzTarPerm extractEntry doc/object_wrappers.md
+1442 silly gunzTarPerm modified mode [ 'doc/object_wrappers.md', 436, 420 ]
+1443 silly gunzTarPerm extractEntry doc/persistent.md
+1444 silly gunzTarPerm modified mode [ 'doc/persistent.md', 436, 420 ]
+1445 silly gunzTarPerm extractEntry doc/UrdfCylinder.html
+1446 silly gunzTarPerm modified mode [ 'doc/UrdfCylinder.html', 436, 420 ]
+1447 silly gunzTarPerm extractEntry doc/UrdfJoint.html
+1448 silly gunzTarPerm modified mode [ 'doc/UrdfJoint.html', 436, 420 ]
+1449 silly gunzTarPerm extractEntry src/loadConfig.coffee
+1450 silly gunzTarPerm extractEntry src/parentDir.coffee
+1451 silly gunzTarPerm extractEntry .tern-project
+1452 silly gunzTarPerm extractEntry src/expression.js
+1453 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/through-d370add8/node_modules is being purged
+1454 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/through-d370add8/node_modules
+1455 silly gunzTarPerm extractEntry src/skipFile.coffee
+1456 silly gunzTarPerm extractEntry src/transformTools.coffee
+1457 silly gunzTarPerm extractEntry doc/scopes.md
+1458 silly gunzTarPerm modified mode [ 'doc/scopes.md', 436, 420 ]
+1459 silly gunzTarPerm extractEntry doc/script.md
+1460 silly gunzTarPerm modified mode [ 'doc/script.md', 436, 420 ]
+1461 silly gunzTarPerm extractEntry src/util.js
+1462 silly gunzTarPerm extractEntry src/lval.js
+1463 silly gunzTarPerm extractEntry doc/UrdfLink.html
+1464 silly gunzTarPerm modified mode [ 'doc/UrdfLink.html', 436, 420 ]
+1465 silly gunzTarPerm extractEntry doc/UrdfMesh.html
+1466 silly gunzTarPerm modified mode [ 'doc/UrdfMesh.html', 436, 420 ]
+1467 silly gunzTarPerm extractEntry doc/UrdfModel.html
+1468 silly gunzTarPerm modified mode [ 'doc/UrdfModel.html', 436, 420 ]
+1469 silly gunzTarPerm extractEntry src/node.js
+1470 silly gunzTarPerm extractEntry src/location.js
+1471 silly gunzTarPerm extractEntry doc/string_bytes.md
+1472 silly gunzTarPerm modified mode [ 'doc/string_bytes.md', 436, 420 ]
+1473 silly gunzTarPerm extractEntry doc/v8_internals.md
+1474 silly gunzTarPerm modified mode [ 'doc/v8_internals.md', 436, 420 ]
+1475 silly gunzTarPerm extractEntry testFixtures/testWithConfig/package.json
+1476 silly gunzTarPerm extractEntry testFixtures/testWithConfig/syntaxError.js
+1477 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-keys-39f31886/node_modules is being purged
+1478 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-keys-39f31886/node_modules
+1479 silly gunzTarPerm extractEntry src/identifier.js
+1480 silly gunzTarPerm extractEntry src/state.js
+1481 silly gunzTarPerm extractEntry doc/v8_misc.md
+1482 silly gunzTarPerm modified mode [ 'doc/v8_misc.md', 436, 420 ]
+1483 silly gunzTarPerm extractEntry src/statement.js
+1484 silly gunzTarPerm extractEntry src/tokencontext.js
+1485 silly gunzTarPerm extractEntry src/tokenize.js
+1486 silly gunzTarPerm extractEntry testFixtures/testWithConfig/childPackage/package.json
+1487 silly gunzTarPerm extractEntry testFixtures/testWithConfig/yellow/unyellowify.js
+1488 silly gunzTarPerm extractEntry nan.h
+1489 silly gunzTarPerm modified mode [ 'nan.h', 436, 420 ]
+1490 silly gunzTarPerm extractEntry nan_callbacks.h
+1491 silly gunzTarPerm modified mode [ 'nan_callbacks.h', 436, 420 ]
+1492 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/falafel-b954d190/node_modules is being purged
+1493 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/falafel-b954d190/node_modules
+1494 silly gunzTarPerm extractEntry doc/UrdfSphere.html
+1495 silly gunzTarPerm modified mode [ 'doc/UrdfSphere.html', 436, 420 ]
+1496 silly gunzTarPerm extractEntry nan_callbacks_12_inl.h
+1497 silly gunzTarPerm modified mode [ 'nan_callbacks_12_inl.h', 436, 420 ]
+1498 silly gunzTarPerm extractEntry nan_callbacks_pre_12_inl.h
+1499 silly gunzTarPerm modified mode [ 'nan_callbacks_pre_12_inl.h', 436, 420 ]
+1500 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/aliasify-patch-f64852a2/node_modules is being purged
+1501 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/aliasify-patch-f64852a2/node_modules
+1502 silly gunzTarPerm extractEntry doc/actionlib_ActionClient.js.html
+1503 silly gunzTarPerm modified mode [ 'doc/actionlib_ActionClient.js.html', 436, 420 ]
+1504 silly gunzTarPerm extractEntry doc/actionlib_Goal.js.html
+1505 silly gunzTarPerm modified mode [ 'doc/actionlib_Goal.js.html', 436, 420 ]
+1506 silly gunzTarPerm extractEntry src/index.js
+1507 silly gunzTarPerm extractEntry nan_converters_43_inl.h
+1508 silly gunzTarPerm modified mode [ 'nan_converters_43_inl.h', 436, 420 ]
+1509 silly gunzTarPerm extractEntry nan_converters_pre_43_inl.h
+1510 silly gunzTarPerm modified mode [ 'nan_converters_pre_43_inl.h', 436, 420 ]
+1511 silly gunzTarPerm extractEntry nan_implementation_12_inl.h
+1512 silly gunzTarPerm modified mode [ 'nan_implementation_12_inl.h', 436, 420 ]
+1513 silly gunzTarPerm extractEntry doc/actionlib_SimpleActionServer.js.html
+1514 silly gunzTarPerm modified mode [ 'doc/actionlib_SimpleActionServer.js.html', 436, 420 ]
+1515 silly gunzTarPerm extractEntry doc/core_Message.js.html
+1516 silly gunzTarPerm modified mode [ 'doc/core_Message.js.html', 436, 420 ]
+1517 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/xmldom-7ad91c5c/node_modules is being purged
+1518 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/xmldom-7ad91c5c/node_modules
+1519 silly gunzTarPerm extractEntry doc/core_Param.js.html
+1520 silly gunzTarPerm modified mode [ 'doc/core_Param.js.html', 436, 420 ]
+1521 silly gunzTarPerm extractEntry doc/core_Ros.js.html
+1522 silly gunzTarPerm modified mode [ 'doc/core_Ros.js.html', 436, 420 ]
+1523 silly gunzTarPerm extractEntry src/tokentype.js
+1524 silly gunzTarPerm extractEntry nan_implementation_pre_12_inl.h
+1525 silly gunzTarPerm modified mode [ 'nan_implementation_pre_12_inl.h', 436, 420 ]
+1526 silly gunzTarPerm extractEntry doc/core_Service.js.html
+1527 silly gunzTarPerm modified mode [ 'doc/core_Service.js.html', 436, 420 ]
+1528 silly gunzTarPerm extractEntry doc/core_ServiceRequest.js.html
+1529 silly gunzTarPerm modified mode [ 'doc/core_ServiceRequest.js.html', 436, 420 ]
+1530 silly gunzTarPerm extractEntry nan_maybe_43_inl.h
+1531 silly gunzTarPerm modified mode [ 'nan_maybe_43_inl.h', 436, 420 ]
+1532 silly gunzTarPerm extractEntry nan_maybe_pre_43_inl.h
+1533 silly gunzTarPerm modified mode [ 'nan_maybe_pre_43_inl.h', 436, 420 ]
+1534 silly gunzTarPerm extractEntry nan_new.h
+1535 silly gunzTarPerm modified mode [ 'nan_new.h', 436, 420 ]
+1536 silly gunzTarPerm extractEntry src/options.js
+1537 silly gunzTarPerm extractEntry doc/core_ServiceResponse.js.html
+1538 silly gunzTarPerm modified mode [ 'doc/core_ServiceResponse.js.html', 436, 420 ]
+1539 silly gunzTarPerm extractEntry doc/core_SocketAdapter.js.html
+1540 silly gunzTarPerm modified mode [ 'doc/core_SocketAdapter.js.html', 436, 420 ]
+1541 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-f90bf52a/node_modules is being purged
+1542 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-f90bf52a/node_modules
+1543 silly gunzTarPerm extractEntry nan_object_wrap.h
+1544 silly gunzTarPerm modified mode [ 'nan_object_wrap.h', 436, 420 ]
+1545 silly gunzTarPerm extractEntry doc/core_Topic.js.html
+1546 silly gunzTarPerm modified mode [ 'doc/core_Topic.js.html', 436, 420 ]
+1547 silly gunzTarPerm extractEntry doc/fonts/OpenSans-Light-webfont.eot
+1548 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-Light-webfont.eot', 436, 420 ]
+1549 silly gunzTarPerm extractEntry src/whitespace.js
+1550 silly gunzTarPerm extractEntry nan_persistent_12_inl.h
+1551 silly gunzTarPerm modified mode [ 'nan_persistent_12_inl.h', 436, 420 ]
+1552 silly gunzTarPerm extractEntry nan_persistent_pre_12_inl.h
+1553 silly gunzTarPerm modified mode [ 'nan_persistent_pre_12_inl.h', 436, 420 ]
+1554 silly gunzTarPerm extractEntry doc/fonts/OpenSans-Bold-webfont.eot
+1555 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-Bold-webfont.eot', 436, 420 ]
+1556 silly gunzTarPerm extractEntry doc/fonts/OpenSans-Bold-webfont.woff
+1557 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-Bold-webfont.woff', 436, 420 ]
+1558 silly gunzTarPerm extractEntry nan_string_bytes.h
+1559 silly gunzTarPerm modified mode [ 'nan_string_bytes.h', 436, 420 ]
+1560 silly gunzTarPerm extractEntry nan_typedarray_contents.h
+1561 silly gunzTarPerm modified mode [ 'nan_typedarray_contents.h', 436, 420 ]
+1562 silly gunzTarPerm extractEntry src/parseutil.js
+1563 silly gunzTarPerm extractEntry doc/fonts/OpenSans-BoldItalic-webfont.eot
+1564 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-BoldItalic-webfont.eot', 436, 420 ]
+1565 silly gunzTarPerm extractEntry nan_weak.h
+1566 silly gunzTarPerm modified mode [ 'nan_weak.h', 436, 420 ]
+1567 silly gunzTarPerm extractEntry CHANGELOG.md
+1568 silly gunzTarPerm modified mode [ 'CHANGELOG.md', 436, 420 ]
+1569 silly gunzTarPerm extractEntry doc/fonts/OpenSans-BoldItalic-webfont.svg
+1570 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-BoldItalic-webfont.svg', 436, 420 ]
+1571 silly gunzTarPerm extractEntry doc/fonts/OpenSans-BoldItalic-webfont.woff
+1572 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-BoldItalic-webfont.woff', 436, 420 ]
+1573 silly gunzTarPerm extractEntry tools/package.json
+1574 silly gunzTarPerm modified mode [ 'tools/package.json', 436, 420 ]
+1575 silly gunzTarPerm extractEntry tools/README.md
+1576 silly gunzTarPerm modified mode [ 'tools/README.md', 436, 420 ]
+1577 silly gunzTarPerm extractEntry src/loose/acorn_loose.js
+1578 silly gunzTarPerm extractEntry doc/fonts/OpenSans-Italic-webfont.eot
+1579 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-Italic-webfont.eot', 436, 420 ]
+1580 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/browserify-transform-tools-45865013/node_modules is being purged
+1581 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/browserify-transform-tools-45865013/node_modules
+1582 silly gunzTarPerm extractEntry doc/fonts/OpenSans-Italic-webfont.svg
+1583 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-Italic-webfont.svg', 436, 420 ]
+1584 silly gunzTarPerm extractEntry doc/fonts/OpenSans-Italic-webfont.woff
+1585 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-Italic-webfont.woff', 436, 420 ]
+1586 silly gunzTarPerm extractEntry tools/1to2.js
+1587 silly gunzTarPerm modified mode [ 'tools/1to2.js', 509, 493 ]
+1588 silly gunzTarPerm extractEntry src/loose/expression.js
+1589 silly gunzTarPerm extractEntry doc/fonts/OpenSans-Bold-webfont.svg
+1590 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-Bold-webfont.svg', 436, 420 ]
+1591 silly gunzTarPerm extractEntry doc/fonts/OpenSans-Light-webfont.svg
+1592 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-Light-webfont.svg', 436, 420 ]
+1593 silly gunzTarPerm extractEntry doc/fonts/OpenSans-Light-webfont.woff
+1594 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-Light-webfont.woff', 436, 420 ]
+1595 silly gunzTarPerm extractEntry src/loose/index.js
+1596 silly gunzTarPerm extractEntry doc/fonts/OpenSans-LightItalic-webfont.eot
+1597 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-LightItalic-webfont.eot', 436, 420 ]
+1598 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/ws-0cdd4217/node_modules is being purged
+1599 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/ws-0cdd4217/node_modules
+1600 silly gunzTarPerm extractEntry src/loose/parseutil.js
+1601 silly gunzTarPerm extractEntry src/loose/state.js
+1602 silly gunzTarPerm extractEntry src/loose/statement.js
+1603 silly gunzTarPerm extractEntry doc/fonts/OpenSans-LightItalic-webfont.svg
+1604 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-LightItalic-webfont.svg', 436, 420 ]
+1605 silly gunzTarPerm extractEntry doc/fonts/OpenSans-LightItalic-webfont.woff
+1606 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-LightItalic-webfont.woff', 436, 420 ]
+1607 silly gunzTarPerm extractEntry doc/fonts/OpenSans-Regular-webfont.eot
+1608 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-Regular-webfont.eot', 436, 420 ]
+1609 silly gunzTarPerm extractEntry doc/fonts/OpenSans-Regular-webfont.svg
+1610 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-Regular-webfont.svg', 436, 420 ]
+1611 silly gunzTarPerm extractEntry doc/fonts/OpenSans-Regular-webfont.woff
+1612 silly gunzTarPerm modified mode [ 'doc/fonts/OpenSans-Regular-webfont.woff', 436, 420 ]
+1613 silly gunzTarPerm extractEntry src/loose/tokenize.js
+1614 silly gunzTarPerm extractEntry doc/global.html
+1615 silly gunzTarPerm modified mode [ 'doc/global.html', 436, 420 ]
+1616 silly gunzTarPerm extractEntry doc/Param.html
+1617 silly gunzTarPerm modified mode [ 'doc/Param.html', 436, 420 ]
+1618 silly gunzTarPerm extractEntry doc/global.html#Message
+1619 silly gunzTarPerm modified mode [ 'doc/global.html#Message', 436, 420 ]
+1620 silly gunzTarPerm extractEntry doc/global.html#Pose
+1621 silly gunzTarPerm modified mode [ 'doc/global.html#Pose', 436, 420 ]
+1622 silly gunzTarPerm extractEntry src/walk/index.js
+1623 silly gunzTarPerm extractEntry doc/global.html#Service
+1624 silly gunzTarPerm modified mode [ 'doc/global.html#Service', 436, 420 ]
+1625 silly gunzTarPerm extractEntry doc/global.html#ServiceResponse
+1626 silly gunzTarPerm modified mode [ 'doc/global.html#ServiceResponse', 436, 420 ]
+1627 silly gunzTarPerm extractEntry doc/global.html#Topic
+1628 silly gunzTarPerm modified mode [ 'doc/global.html#Topic', 436, 420 ]
+1629 silly gunzTarPerm extractEntry doc/global.html#UrdfColor
+1630 silly gunzTarPerm modified mode [ 'doc/global.html#UrdfColor', 436, 420 ]
+1631 silly gunzTarPerm extractEntry doc/global.html#UrdfMaterial
+1632 silly gunzTarPerm modified mode [ 'doc/global.html#UrdfMaterial', 436, 420 ]
+1633 silly gunzTarPerm extractEntry doc/global.html#UrdfVisual
+1634 silly gunzTarPerm modified mode [ 'doc/global.html#UrdfVisual', 436, 420 ]
+1635 silly gunzTarPerm extractEntry doc/global.html#Vector3
+1636 silly gunzTarPerm modified mode [ 'doc/global.html#Vector3', 436, 420 ]
+1637 silly gunzTarPerm extractEntry doc/index.html
+1638 silly gunzTarPerm modified mode [ 'doc/index.html', 436, 420 ]
+1639 silly gunzTarPerm extractEntry doc/math_Pose.js.html
+1640 silly gunzTarPerm modified mode [ 'doc/math_Pose.js.html', 436, 420 ]
+1641 silly gunzTarPerm extractEntry doc/math_Quaternion.js.html
+1642 silly gunzTarPerm modified mode [ 'doc/math_Quaternion.js.html', 436, 420 ]
+1643 silly gunzTarPerm extractEntry doc/math_Transform.js.html
+1644 silly gunzTarPerm modified mode [ 'doc/math_Transform.js.html', 436, 420 ]
+1645 silly gunzTarPerm extractEntry doc/math_Vector3.js.html
+1646 silly gunzTarPerm modified mode [ 'doc/math_Vector3.js.html', 436, 420 ]
+1647 silly gunzTarPerm extractEntry doc/mixin.js.html
+1648 silly gunzTarPerm modified mode [ 'doc/mixin.js.html', 436, 420 ]
+1649 silly gunzTarPerm extractEntry doc/node_RosTCP.js.html
+1650 silly gunzTarPerm modified mode [ 'doc/node_RosTCP.js.html', 436, 420 ]
+1651 silly gunzTarPerm extractEntry doc/node_TopicStream.js.html
+1652 silly gunzTarPerm modified mode [ 'doc/node_TopicStream.js.html', 436, 420 ]
+1653 silly gunzTarPerm extractEntry doc/scripts/linenumber.js
+1654 silly gunzTarPerm modified mode [ 'doc/scripts/linenumber.js', 436, 420 ]
+1655 silly gunzTarPerm extractEntry doc/scripts/prettify/lang-css.js
+1656 silly gunzTarPerm modified mode [ 'doc/scripts/prettify/lang-css.js', 436, 420 ]
+1657 silly gunzTarPerm extractEntry doc/scripts/prettify/prettify.js
+1658 silly gunzTarPerm modified mode [ 'doc/scripts/prettify/prettify.js', 436, 420 ]
+1659 silly gunzTarPerm extractEntry doc/scripts/prettify/Apache-License-2.0.txt
+1660 silly gunzTarPerm modified mode [ 'doc/scripts/prettify/Apache-License-2.0.txt', 436, 420 ]
+1661 silly gunzTarPerm extractEntry doc/styles/jsdoc-default.css
+1662 silly gunzTarPerm modified mode [ 'doc/styles/jsdoc-default.css', 436, 420 ]
+1663 silly gunzTarPerm extractEntry doc/styles/prettify-jsdoc.css
+1664 silly gunzTarPerm modified mode [ 'doc/styles/prettify-jsdoc.css', 436, 420 ]
+1665 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/canvas-4aa5c161/node_modules is being purged
+1666 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/canvas-4aa5c161/node_modules
+1667 silly gunzTarPerm extractEntry doc/styles/prettify-tomorrow.css
+1668 silly gunzTarPerm modified mode [ 'doc/styles/prettify-tomorrow.css', 436, 420 ]
+1669 silly gunzTarPerm extractEntry doc/tf_TFClient.js.html
+1670 silly gunzTarPerm modified mode [ 'doc/tf_TFClient.js.html', 436, 420 ]
+1671 silly gunzTarPerm extractEntry doc/urdf_UrdfBox.js.html
+1672 silly gunzTarPerm modified mode [ 'doc/urdf_UrdfBox.js.html', 436, 420 ]
+1673 silly gunzTarPerm extractEntry doc/urdf_UrdfColor.js.html
+1674 silly gunzTarPerm modified mode [ 'doc/urdf_UrdfColor.js.html', 436, 420 ]
+1675 silly gunzTarPerm extractEntry doc/urdf_UrdfCylinder.js.html
+1676 silly gunzTarPerm modified mode [ 'doc/urdf_UrdfCylinder.js.html', 436, 420 ]
+1677 silly gunzTarPerm extractEntry doc/urdf_UrdfJoint.js.html
+1678 silly gunzTarPerm modified mode [ 'doc/urdf_UrdfJoint.js.html', 436, 420 ]
+1679 silly gunzTarPerm extractEntry doc/urdf_UrdfLink.js.html
+1680 silly gunzTarPerm modified mode [ 'doc/urdf_UrdfLink.js.html', 436, 420 ]
+1681 silly gunzTarPerm extractEntry doc/urdf_UrdfMaterial.js.html
+1682 silly gunzTarPerm modified mode [ 'doc/urdf_UrdfMaterial.js.html', 436, 420 ]
+1683 silly gunzTarPerm extractEntry doc/urdf_UrdfMesh.js.html
+1684 silly gunzTarPerm modified mode [ 'doc/urdf_UrdfMesh.js.html', 436, 420 ]
+1685 silly gunzTarPerm extractEntry doc/urdf_UrdfModel.js.html
+1686 silly gunzTarPerm modified mode [ 'doc/urdf_UrdfModel.js.html', 436, 420 ]
+1687 silly gunzTarPerm extractEntry doc/urdf_UrdfSphere.js.html
+1688 silly gunzTarPerm modified mode [ 'doc/urdf_UrdfSphere.js.html', 436, 420 ]
+1689 silly gunzTarPerm extractEntry doc/urdf_UrdfVisual.js.html
+1690 silly gunzTarPerm modified mode [ 'doc/urdf_UrdfVisual.js.html', 436, 420 ]
+1691 silly gunzTarPerm extractEntry misc/check.sh
+1692 silly gunzTarPerm modified mode [ 'misc/check.sh', 509, 493 ]
+1693 silly gunzTarPerm extractEntry misc/install.sh
+1694 silly gunzTarPerm modified mode [ 'misc/install.sh', 509, 493 ]
+1695 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-5fadc27d/node_modules is being purged
+1696 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-5fadc27d/node_modules
+1697 silly gunzTarPerm extractEntry src/RosLib.js
+1698 silly gunzTarPerm modified mode [ 'src/RosLib.js', 436, 420 ]
+1699 silly gunzTarPerm extractEntry src/RosLibNode.js
+1700 silly gunzTarPerm modified mode [ 'src/RosLibNode.js', 436, 420 ]
+1701 silly gunzTarPerm extractEntry src/RosLibBrowser.js
+1702 silly gunzTarPerm modified mode [ 'src/RosLibBrowser.js', 436, 420 ]
+1703 silly gunzTarPerm extractEntry src/mixin.js
+1704 silly gunzTarPerm modified mode [ 'src/mixin.js', 436, 420 ]
+1705 silly gunzTarPerm extractEntry src/core/Message.js
+1706 silly gunzTarPerm modified mode [ 'src/core/Message.js', 436, 420 ]
+1707 silly gunzTarPerm extractEntry src/core/Param.js
+1708 silly gunzTarPerm modified mode [ 'src/core/Param.js', 436, 420 ]
+1709 silly gunzTarPerm extractEntry src/core/Ros.js
+1710 silly gunzTarPerm modified mode [ 'src/core/Ros.js', 436, 420 ]
+1711 silly gunzTarPerm extractEntry src/core/Service.js
+1712 silly gunzTarPerm modified mode [ 'src/core/Service.js', 436, 420 ]
+1713 silly gunzTarPerm extractEntry src/core/ServiceRequest.js
+1714 silly gunzTarPerm modified mode [ 'src/core/ServiceRequest.js', 436, 420 ]
+1715 silly gunzTarPerm extractEntry src/core/ServiceResponse.js
+1716 silly gunzTarPerm modified mode [ 'src/core/ServiceResponse.js', 436, 420 ]
+1717 silly gunzTarPerm extractEntry src/core/SocketAdapter.js
+1718 silly gunzTarPerm modified mode [ 'src/core/SocketAdapter.js', 436, 420 ]
+1719 silly gunzTarPerm extractEntry src/core/Topic.js
+1720 silly gunzTarPerm modified mode [ 'src/core/Topic.js', 436, 420 ]
+1721 silly gunzTarPerm extractEntry src/core/index.js
+1722 silly gunzTarPerm modified mode [ 'src/core/index.js', 436, 420 ]
+1723 silly gunzTarPerm extractEntry src/util/shim/EventEmitter2.js
+1724 silly gunzTarPerm modified mode [ 'src/util/shim/EventEmitter2.js', 436, 420 ]
+1725 silly gunzTarPerm extractEntry src/util/shim/WebSocket.js
+1726 silly gunzTarPerm modified mode [ 'src/util/shim/WebSocket.js', 436, 420 ]
+1727 silly gunzTarPerm extractEntry src/util/shim/canvas.js
+1728 silly gunzTarPerm modified mode [ 'src/util/shim/canvas.js', 436, 420 ]
+1729 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/acorn-27caa269/node_modules is being purged
+1730 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/acorn-27caa269/node_modules
+1731 silly gunzTarPerm extractEntry src/util/shim/xmldom.js
+1732 silly gunzTarPerm modified mode [ 'src/util/shim/xmldom.js', 436, 420 ]
+1733 silly gunzTarPerm extractEntry src/actionlib/ActionClient.js
+1734 silly gunzTarPerm modified mode [ 'src/actionlib/ActionClient.js', 436, 420 ]
+1735 silly gunzTarPerm extractEntry src/actionlib/Goal.js
+1736 silly gunzTarPerm modified mode [ 'src/actionlib/Goal.js', 436, 420 ]
+1737 silly gunzTarPerm extractEntry src/actionlib/SimpleActionServer.js
+1738 silly gunzTarPerm modified mode [ 'src/actionlib/SimpleActionServer.js', 436, 420 ]
+1739 silly gunzTarPerm extractEntry src/actionlib/index.js
+1740 silly gunzTarPerm modified mode [ 'src/actionlib/index.js', 436, 420 ]
+1741 silly gunzTarPerm extractEntry src/node/RosTCP.js
+1742 silly gunzTarPerm modified mode [ 'src/node/RosTCP.js', 436, 420 ]
+1743 silly gunzTarPerm extractEntry src/node/TopicStream.js
+1744 silly gunzTarPerm modified mode [ 'src/node/TopicStream.js', 436, 420 ]
+1745 silly gunzTarPerm extractEntry src/tf/TFClient.js
+1746 silly gunzTarPerm modified mode [ 'src/tf/TFClient.js', 436, 420 ]
+1747 silly gunzTarPerm extractEntry src/tf/index.js
+1748 silly gunzTarPerm modified mode [ 'src/tf/index.js', 436, 420 ]
+1749 silly gunzTarPerm extractEntry src/urdf/UrdfBox.js
+1750 silly gunzTarPerm modified mode [ 'src/urdf/UrdfBox.js', 436, 420 ]
+1751 silly gunzTarPerm extractEntry src/urdf/UrdfCylinder.js
+1752 silly gunzTarPerm modified mode [ 'src/urdf/UrdfCylinder.js', 436, 420 ]
+1753 silly gunzTarPerm extractEntry src/urdf/UrdfJoint.js
+1754 silly gunzTarPerm modified mode [ 'src/urdf/UrdfJoint.js', 436, 420 ]
+1755 silly gunzTarPerm extractEntry src/urdf/UrdfLink.js
+1756 silly gunzTarPerm modified mode [ 'src/urdf/UrdfLink.js', 436, 420 ]
+1757 silly gunzTarPerm extractEntry src/urdf/UrdfMaterial.js
+1758 silly gunzTarPerm modified mode [ 'src/urdf/UrdfMaterial.js', 436, 420 ]
+1759 silly gunzTarPerm extractEntry src/urdf/UrdfColor.js
+1760 silly gunzTarPerm modified mode [ 'src/urdf/UrdfColor.js', 436, 420 ]
+1761 silly gunzTarPerm extractEntry src/urdf/UrdfModel.js
+1762 silly gunzTarPerm modified mode [ 'src/urdf/UrdfModel.js', 436, 420 ]
+1763 silly gunzTarPerm extractEntry src/urdf/UrdfSphere.js
+1764 silly gunzTarPerm modified mode [ 'src/urdf/UrdfSphere.js', 436, 420 ]
+1765 silly gunzTarPerm extractEntry src/urdf/UrdfTypes.js
+1766 silly gunzTarPerm modified mode [ 'src/urdf/UrdfTypes.js', 436, 420 ]
+1767 silly gunzTarPerm extractEntry src/urdf/UrdfVisual.js
+1768 silly gunzTarPerm modified mode [ 'src/urdf/UrdfVisual.js', 436, 420 ]
+1769 silly gunzTarPerm extractEntry src/urdf/index.js
+1770 silly gunzTarPerm modified mode [ 'src/urdf/index.js', 436, 420 ]
+1771 silly gunzTarPerm extractEntry src/urdf/UrdfMesh.js
+1772 silly gunzTarPerm modified mode [ 'src/urdf/UrdfMesh.js', 436, 420 ]
+1773 silly gunzTarPerm extractEntry src/math/Pose.js
+1774 silly gunzTarPerm modified mode [ 'src/math/Pose.js', 436, 420 ]
+1775 silly gunzTarPerm extractEntry src/math/Quaternion.js
+1776 silly gunzTarPerm modified mode [ 'src/math/Quaternion.js', 436, 420 ]
+1777 silly gunzTarPerm extractEntry src/math/Transform.js
+1778 silly gunzTarPerm modified mode [ 'src/math/Transform.js', 436, 420 ]
+1779 silly gunzTarPerm extractEntry src/math/Vector3.js
+1780 silly gunzTarPerm modified mode [ 'src/math/Vector3.js', 436, 420 ]
+1781 silly gunzTarPerm extractEntry src/math/index.js
+1782 silly gunzTarPerm modified mode [ 'src/math/index.js', 436, 420 ]
+1783 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/roslib-6c698e8c/node_modules is being purged
+1784 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/roslib-6c698e8c/node_modules
+1785 silly doParallel preinstall 19
+1786 silly preinstall acorn@1.2.2 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/acorn-27caa269
+1787 info lifecycle acorn@1.2.2~preinstall: acorn@1.2.2
+1788 silly preinstall commander@2.1.0 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/commander-e3ae3129
+1789 info lifecycle commander@2.1.0~preinstall: commander@2.1.0
+1790 silly preinstall eventemitter2@0.4.14 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/eventemitter2-b0e2735a
+1791 info lifecycle eventemitter2@0.4.14~preinstall: eventemitter2@0.4.14
+1792 silly preinstall foreach@2.0.5 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/foreach-eb72d248
+1793 info lifecycle foreach@2.0.5~preinstall: foreach@2.0.5
+1794 silly preinstall isarray@0.0.1 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/isarray-ee5ac30d
+1795 info lifecycle isarray@0.0.1~preinstall: isarray@0.0.1
+1796 silly preinstall nan@2.2.0 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-5fadc27d
+1797 info lifecycle nan@2.2.0~preinstall: nan@2.2.0
+1798 silly preinstall canvas@1.2.11 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/canvas-4aa5c161
+1799 info lifecycle canvas@1.2.11~preinstall: canvas@1.2.11
+1800 silly preinstall object-assign@2.1.1 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-assign-a12298c3
+1801 info lifecycle object-assign@2.1.1~preinstall: object-assign@2.1.1
+1802 silly preinstall object-keys@1.0.9 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/object-keys-39f31886
+1803 info lifecycle object-keys@1.0.9~preinstall: object-keys@1.0.9
+1804 silly preinstall falafel@1.2.0 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/falafel-b954d190
+1805 info lifecycle falafel@1.2.0~preinstall: falafel@1.2.0
+1806 silly preinstall options@0.0.6 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/options-66abb5bf
+1807 info lifecycle options@0.0.6~preinstall: options@0.0.6
+1808 silly preinstall through@2.3.8 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/through-d370add8
+1809 info lifecycle through@2.3.8~preinstall: through@2.3.8
+1810 silly preinstall browserify-transform-tools@1.2.2 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/browserify-transform-tools-45865013
+1811 info lifecycle browserify-transform-tools@1.2.2~preinstall: browserify-transform-tools@1.2.2
+1812 silly preinstall aliasify-patch@1.4.1 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/aliasify-patch-f64852a2
+1813 info lifecycle aliasify-patch@1.4.1~preinstall: aliasify-patch@1.4.1
+1814 silly preinstall tinycolor@0.0.1 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/tinycolor-c35c0b61
+1815 info lifecycle tinycolor@0.0.1~preinstall: tinycolor@0.0.1
+1816 silly preinstall nan@1.0.0 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-f90bf52a
+1817 info lifecycle nan@1.0.0~preinstall: nan@1.0.0
+1818 silly preinstall ws@0.4.32 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/ws-0cdd4217
+1819 info lifecycle ws@0.4.32~preinstall: ws@0.4.32
+1820 silly preinstall xmldom@0.1.21 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/xmldom-7ad91c5c
+1821 info lifecycle xmldom@0.1.21~preinstall: xmldom@0.1.21
+1822 silly preinstall roslib@0.17.0 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/roslib-6c698e8c
+1823 info lifecycle roslib@0.17.0~preinstall: roslib@0.17.0
+1824 silly lifecycle acorn@1.2.2~preinstall: no script for preinstall, continuing
+1825 silly lifecycle commander@2.1.0~preinstall: no script for preinstall, continuing
+1826 silly lifecycle eventemitter2@0.4.14~preinstall: no script for preinstall, continuing
+1827 silly lifecycle foreach@2.0.5~preinstall: no script for preinstall, continuing
+1828 silly lifecycle isarray@0.0.1~preinstall: no script for preinstall, continuing
+1829 silly lifecycle nan@2.2.0~preinstall: no script for preinstall, continuing
+1830 silly lifecycle canvas@1.2.11~preinstall: no script for preinstall, continuing
+1831 silly lifecycle object-assign@2.1.1~preinstall: no script for preinstall, continuing
+1832 silly lifecycle object-keys@1.0.9~preinstall: no script for preinstall, continuing
+1833 silly lifecycle falafel@1.2.0~preinstall: no script for preinstall, continuing
+1834 silly lifecycle options@0.0.6~preinstall: no script for preinstall, continuing
+1835 silly lifecycle through@2.3.8~preinstall: no script for preinstall, continuing
+1836 silly lifecycle browserify-transform-tools@1.2.2~preinstall: no script for preinstall, continuing
+1837 silly lifecycle aliasify-patch@1.4.1~preinstall: no script for preinstall, continuing
+1838 silly lifecycle tinycolor@0.0.1~preinstall: no script for preinstall, continuing
+1839 silly lifecycle nan@1.0.0~preinstall: no script for preinstall, continuing
+1840 silly lifecycle ws@0.4.32~preinstall: no script for preinstall, continuing
+1841 silly lifecycle xmldom@0.1.21~preinstall: no script for preinstall, continuing
+1842 warn lifecycle roslib@0.17.0~preinstall: cannot run in wd %s %s (wd=%s) roslib@0.17.0 sh misc/check.sh /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/roslib-6c698e8c
+1843 silly doReverseSerial remove 0
+1844 silly doSerial move 0
+1845 silly doSerial finalize 19
+1846 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/acorn
+1847 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/commander
+1848 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/eventemitter2
+1849 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/foreach
+1850 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/isarray
+1851 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/nan
+1852 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/canvas
+1853 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/object-assign
+1854 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/object-keys
+1855 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/falafel
+1856 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/options
+1857 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/through
+1858 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/browserify-transform-tools
+1859 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/aliasify-patch
+1860 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/tinycolor
+1861 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/ws/node_modules/nan
+1862 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/ws
+1863 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/xmldom
+1864 silly finalize /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/roslib
+1865 silly doSerial build 19
+1866 silly build acorn@1.2.2
+1867 info linkStuff acorn@1.2.2
+1868 silly linkStuff acorn@1.2.2 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1869 verbose linkBins acorn@1.2.2
+1870 verbose link bins [ { acorn: './bin/acorn' },
+1870 verbose link bins   '/home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.bin',
+1870 verbose link bins   false ]
+1871 verbose linkMans acorn@1.2.2
+1872 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.bin/acorn is being purged
+1873 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.bin/acorn
+1874 silly build commander@2.1.0
+1875 info linkStuff commander@2.1.0
+1876 silly linkStuff commander@2.1.0 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1877 verbose linkBins commander@2.1.0
+1878 verbose linkMans commander@2.1.0
+1879 silly build eventemitter2@0.4.14
+1880 info linkStuff eventemitter2@0.4.14
+1881 silly linkStuff eventemitter2@0.4.14 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1882 verbose linkBins eventemitter2@0.4.14
+1883 verbose linkMans eventemitter2@0.4.14
+1884 silly build foreach@2.0.5
+1885 info linkStuff foreach@2.0.5
+1886 silly linkStuff foreach@2.0.5 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1887 verbose linkBins foreach@2.0.5
+1888 verbose linkMans foreach@2.0.5
+1889 silly build isarray@0.0.1
+1890 info linkStuff isarray@0.0.1
+1891 silly linkStuff isarray@0.0.1 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1892 verbose linkBins isarray@0.0.1
+1893 verbose linkMans isarray@0.0.1
+1894 silly build nan@2.2.0
+1895 info linkStuff nan@2.2.0
+1896 silly linkStuff nan@2.2.0 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1897 verbose linkBins nan@2.2.0
+1898 verbose linkMans nan@2.2.0
+1899 silly build canvas@1.2.11
+1900 info linkStuff canvas@1.2.11
+1901 silly linkStuff canvas@1.2.11 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1902 verbose linkBins canvas@1.2.11
+1903 verbose linkMans canvas@1.2.11
+1904 silly build object-assign@2.1.1
+1905 info linkStuff object-assign@2.1.1
+1906 silly linkStuff object-assign@2.1.1 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1907 verbose linkBins object-assign@2.1.1
+1908 verbose linkMans object-assign@2.1.1
+1909 silly build object-keys@1.0.9
+1910 info linkStuff object-keys@1.0.9
+1911 silly linkStuff object-keys@1.0.9 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1912 verbose linkBins object-keys@1.0.9
+1913 verbose linkMans object-keys@1.0.9
+1914 silly build falafel@1.2.0
+1915 info linkStuff falafel@1.2.0
+1916 silly linkStuff falafel@1.2.0 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1917 verbose linkBins falafel@1.2.0
+1918 verbose linkMans falafel@1.2.0
+1919 silly build options@0.0.6
+1920 info linkStuff options@0.0.6
+1921 silly linkStuff options@0.0.6 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1922 verbose linkBins options@0.0.6
+1923 verbose linkMans options@0.0.6
+1924 silly build through@2.3.8
+1925 info linkStuff through@2.3.8
+1926 silly linkStuff through@2.3.8 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1927 verbose linkBins through@2.3.8
+1928 verbose linkMans through@2.3.8
+1929 silly build browserify-transform-tools@1.2.2
+1930 info linkStuff browserify-transform-tools@1.2.2
+1931 silly linkStuff browserify-transform-tools@1.2.2 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1932 verbose linkBins browserify-transform-tools@1.2.2
+1933 verbose linkMans browserify-transform-tools@1.2.2
+1934 silly build aliasify-patch@1.4.1
+1935 info linkStuff aliasify-patch@1.4.1
+1936 silly linkStuff aliasify-patch@1.4.1 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1937 verbose linkBins aliasify-patch@1.4.1
+1938 verbose linkMans aliasify-patch@1.4.1
+1939 silly build tinycolor@0.0.1
+1940 info linkStuff tinycolor@0.0.1
+1941 silly linkStuff tinycolor@0.0.1 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1942 verbose linkBins tinycolor@0.0.1
+1943 verbose linkMans tinycolor@0.0.1
+1944 silly build nan@1.0.0
+1945 info linkStuff nan@1.0.0
+1946 silly linkStuff nan@1.0.0 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/ws/node_modules as its parent node_modules
+1947 verbose linkBins nan@1.0.0
+1948 verbose linkMans nan@1.0.0
+1949 silly build ws@0.4.32
+1950 info linkStuff ws@0.4.32
+1951 silly linkStuff ws@0.4.32 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1952 verbose linkBins ws@0.4.32
+1953 verbose link bins [ { wscat: './bin/wscat' },
+1953 verbose link bins   '/home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.bin',
+1953 verbose link bins   false ]
+1954 verbose linkMans ws@0.4.32
+1955 silly gentlyRm /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.bin/wscat is being purged
+1956 verbose gentlyRm don't care about contents; nuking /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.bin/wscat
+1957 silly build xmldom@0.1.21
+1958 info linkStuff xmldom@0.1.21
+1959 silly linkStuff xmldom@0.1.21 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1960 verbose linkBins xmldom@0.1.21
+1961 verbose linkMans xmldom@0.1.21
+1962 silly build roslib@0.17.0
+1963 info linkStuff roslib@0.17.0
+1964 silly linkStuff roslib@0.17.0 has /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules as its parent node_modules
+1965 verbose linkBins roslib@0.17.0
+1966 verbose linkMans roslib@0.17.0
+1967 silly doSerial global-link 0
+1968 silly doParallel update-linked 0
+1969 silly doSerial install 19
+1970 silly install acorn@1.2.2 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/acorn-27caa269
+1971 info lifecycle acorn@1.2.2~install: acorn@1.2.2
+1972 silly lifecycle acorn@1.2.2~install: no script for install, continuing
+1973 silly install commander@2.1.0 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/commander-e3ae3129
+1974 info lifecycle commander@2.1.0~install: commander@2.1.0
+1975 silly lifecycle commander@2.1.0~install: no script for install, continuing
+1976 silly install eventemitter2@0.4.14 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/eventemitter2-b0e2735a
+1977 info lifecycle eventemitter2@0.4.14~install: eventemitter2@0.4.14
+1978 silly lifecycle eventemitter2@0.4.14~install: no script for install, continuing
+1979 silly install foreach@2.0.5 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/foreach-eb72d248
+1980 info lifecycle foreach@2.0.5~install: foreach@2.0.5
+1981 silly lifecycle foreach@2.0.5~install: no script for install, continuing
+1982 silly install isarray@0.0.1 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/isarray-ee5ac30d
+1983 info lifecycle isarray@0.0.1~install: isarray@0.0.1
+1984 silly lifecycle isarray@0.0.1~install: no script for install, continuing
+1985 silly install nan@2.2.0 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/nan-5fadc27d
+1986 info lifecycle nan@2.2.0~install: nan@2.2.0
+1987 silly lifecycle nan@2.2.0~install: no script for install, continuing
+1988 silly install canvas@1.2.11 /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging/canvas-4aa5c161
+1989 info lifecycle canvas@1.2.11~install: canvas@1.2.11
+1990 verbose lifecycle canvas@1.2.11~install: unsafe-perm in lifecycle false
+1991 verbose lifecycle canvas@1.2.11~install: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/canvas/node_modules/.bin:/home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+1992 verbose lifecycle canvas@1.2.11~install: CWD: /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/canvas
+1993 silly lifecycle canvas@1.2.11~install: Args: [ '-c', 'node-gyp rebuild' ]
+1994 silly lifecycle canvas@1.2.11~install: Returned: code: 1  signal: null
+1995 info lifecycle canvas@1.2.11~install: Failed to exec install script
+1996 verbose unlock done using /home/jstn/.npm/_locks/staging-818494827aeeaeea.lock for /home/jstn/catkin_ws_hydro/src/code_it/backend/packages/node_modules/.staging
+1997 silly rollbackFailedOptional Starting
+1998 silly rollbackFailedOptional Finishing
+1999 silly runTopLevelLifecycles Starting
+2000 silly runTopLevelLifecycles Finishing
+2001 silly install printInstalled
+2002 warn enoent ENOENT, open '/home/jstn/catkin_ws_hydro/src/code_it/backend/packages/package.json'
+2003 warn packages No description
+2004 warn packages No repository field.
+2005 warn packages No README data
+2006 warn packages No license field.
+2007 verbose stack Error: canvas@1.2.11 install: `node-gyp rebuild`
+2007 verbose stack Exit status 1
+2007 verbose stack     at EventEmitter.<anonymous> (/usr/lib/node_modules/npm/lib/utils/lifecycle.js:232:16)
+2007 verbose stack     at EventEmitter.emit (events.js:98:17)
+2007 verbose stack     at ChildProcess.<anonymous> (/usr/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+2007 verbose stack     at ChildProcess.emit (events.js:98:17)
+2007 verbose stack     at maybeClose (child_process.js:766:16)
+2007 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:833:5)
+2008 verbose pkgid canvas@1.2.11
+2009 verbose cwd /home/jstn/catkin_ws_hydro/src/code_it/backend/packages
+2010 error Linux 3.13.0-54-generic
+2011 error argv "node" "/usr/bin/npm" "install" "roslib"
+2012 error node v0.10.41
+2013 error npm  v3.5.2
+2014 error code ELIFECYCLE
+2015 error canvas@1.2.11 install: `node-gyp rebuild`
+2015 error Exit status 1
+2016 error Failed at the canvas@1.2.11 install script 'node-gyp rebuild'.
+2016 error Make sure you have the latest version of node.js and npm installed.
+2016 error If you do, this is most likely a problem with the canvas package,
+2016 error not with npm itself.
+2016 error Tell the author that this fails on your system:
+2016 error     node-gyp rebuild
+2016 error You can get information on how to open an issue for this project with:
+2016 error     npm bugs canvas
+2016 error Or if that isn't available, you can get their info via:
+2016 error     npm owner ls canvas
+2016 error There is likely additional logging output above.
+2017 verbose exit [ 1, true ]
