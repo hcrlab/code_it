@@ -1,0 +1,442 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="blockly-import.html">
+<dom-module id="code-it-blockly">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: absolute;
+        height: 100%;
+      }
+      #blocklyDiv, #codeDiv {
+        height: 99%;
+        width: 100%;
+        position: absolute;
+      }
+      paper-tab {
+        background-color: #9e9e9e;
+      }
+      .outer {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+      }
+      .tabContent {
+        position: relative;
+      }
+      textarea {
+        width: 100%;
+        height: 100%;
+        padding: 0px;
+        border: none;
+      }
+    </style>
+    <xml id="toolbox" style="display: none">
+      <category name="Logic" colour="210">
+        <block type="controls_if"></block>
+        <block type="logic_compare"></block>
+        <block type="logic_operation"></block>
+        <block type="logic_negate"></block>
+        <block type="logic_boolean"></block>
+        <block type="logic_null"></block>
+        <block type="logic_ternary"></block>
+      </category>
+      <category name="Loops" colour="120">
+        <block type="controls_repeat_ext">
+          <value name="TIMES">
+            <shadow type="math_number">
+              <field name="NUM">10</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="controls_whileUntil"></block>
+        <block type="controls_for">
+          <value name="FROM">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+          <value name="TO">
+            <shadow type="math_number">
+              <field name="NUM">10</field>
+            </shadow>
+          </value>
+          <value name="BY">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="controls_forEach"></block>
+        <block type="controls_flow_statements"></block>
+      </category>
+      <category name="Math" colour="230">
+        <block type="math_number"></block>
+        <block type="math_arithmetic">
+          <value name="A">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+          <value name="B">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="math_single">
+          <value name="NUM">
+            <shadow type="math_number">
+              <field name="NUM">9</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="math_trig">
+          <value name="NUM">
+            <shadow type="math_number">
+              <field name="NUM">45</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="math_constant"></block>
+        <block type="math_number_property">
+          <value name="NUMBER_TO_CHECK">
+            <shadow type="math_number">
+              <field name="NUM">0</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="math_change">
+          <value name="DELTA">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="math_round">
+          <value name="NUM">
+            <shadow type="math_number">
+              <field name="NUM">3.1</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="math_on_list"></block>
+        <block type="math_modulo">
+          <value name="DIVIDEND">
+            <shadow type="math_number">
+              <field name="NUM">64</field>
+            </shadow>
+          </value>
+          <value name="DIVISOR">
+            <shadow type="math_number">
+              <field name="NUM">10</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="math_constrain">
+          <value name="VALUE">
+            <shadow type="math_number">
+              <field name="NUM">50</field>
+            </shadow>
+          </value>
+          <value name="LOW">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+          <value name="HIGH">
+            <shadow type="math_number">
+              <field name="NUM">100</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="math_random_int">
+          <value name="FROM">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+          <value name="TO">
+            <shadow type="math_number">
+              <field name="NUM">100</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="math_random_float"></block>
+      </category>
+      <category name="Text" colour="160">
+        <block type="text"></block>
+        <block type="text_join"></block>
+        <block type="text_append">
+          <value name="TEXT">
+            <shadow type="text"></shadow>
+          </value>
+        </block>
+        <block type="text_length">
+          <value name="VALUE">
+            <shadow type="text">
+              <field name="TEXT">abc</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="text_isEmpty">
+          <value name="VALUE">
+            <shadow type="text">
+              <field name="TEXT"></field>
+            </shadow>
+          </value>
+        </block>
+        <block type="text_indexOf">
+          <value name="VALUE">
+            <block type="variables_get">
+              <field name="VAR">text</field>
+            </block>
+          </value>
+          <value name="FIND">
+            <shadow type="text">
+              <field name="TEXT">abc</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="text_charAt">
+          <value name="VALUE">
+            <block type="variables_get">
+              <field name="VAR">text</field>
+            </block>
+          </value>
+        </block>
+        <block type="text_getSubstring">
+          <value name="STRING">
+            <block type="variables_get">
+              <field name="VAR">text</field>
+            </block>
+          </value>
+        </block>
+        <block type="text_changeCase">
+          <value name="TEXT">
+            <shadow type="text">
+              <field name="TEXT">abc</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="text_trim">
+          <value name="TEXT">
+            <shadow type="text">
+              <field name="TEXT">abc</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="text_print">
+          <value name="TEXT">
+            <shadow type="text">
+              <field name="TEXT">abc</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="text_prompt_ext">
+          <value name="TEXT">
+            <shadow type="text">
+              <field name="TEXT">abc</field>
+            </shadow>
+          </value>
+        </block>
+      </category>
+      <category name="Lists" colour="260">
+        <block type="lists_create_with">
+          <mutation items="0"></mutation>
+        </block>
+        <block type="lists_create_with"></block>
+        <block type="lists_repeat">
+          <value name="NUM">
+            <shadow type="math_number">
+              <field name="NUM">5</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="lists_length"></block>
+        <block type="lists_isEmpty"></block>
+        <block type="lists_indexOf">
+          <value name="VALUE">
+            <block type="variables_get">
+              <field name="VAR">list</field>
+            </block>
+          </value>
+        </block>
+        <block type="lists_getIndex">
+          <value name="VALUE">
+            <block type="variables_get">
+              <field name="VAR">list</field>
+            </block>
+          </value>
+        </block>
+        <block type="lists_setIndex">
+          <value name="LIST">
+            <block type="variables_get">
+              <field name="VAR">list</field>
+            </block>
+          </value>
+        </block>
+        <block type="lists_getSublist">
+          <value name="LIST">
+            <block type="variables_get">
+              <field name="VAR">list</field>
+            </block>
+          </value>
+        </block>
+        <block type="lists_split">
+          <value name="DELIM">
+            <shadow type="text">
+              <field name="TEXT">,</field>
+            </shadow>
+          </value>
+        </block>
+      </category>
+      <category name="Color" colour="20">
+        <block type="colour_picker"></block>
+        <block type="colour_random"></block>
+        <block type="colour_rgb">
+          <value name="RED">
+            <shadow type="math_number">
+              <field name="NUM">100</field>
+            </shadow>
+          </value>
+          <value name="GREEN">
+            <shadow type="math_number">
+              <field name="NUM">50</field>
+            </shadow>
+          </value>
+          <value name="BLUE">
+            <shadow type="math_number">
+              <field name="NUM">0</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="colour_blend">
+          <value name="COLOUR1">
+            <shadow type="colour_picker">
+              <field name="COLOUR">#ff0000</field>
+            </shadow>
+          </value>
+          <value name="COLOUR2">
+            <shadow type="colour_picker">
+              <field name="COLOUR">#3333ff</field>
+            </shadow>
+          </value>
+          <value name="RATIO">
+            <shadow type="math_number">
+              <field name="NUM">0.5</field>
+            </shadow>
+          </value>
+        </block>
+      </category>
+      <category name="Variables" colour="330" custom="VARIABLE"></category>
+      <category name="Functions" colour="290" custom="PROCEDURE"></category>
+      <sep></sep>
+      <category name="Robot screen" colour="230">
+        <block type="robot_display_message_h1h2"></block>
+      </category>
+    </xml>
+    <div class="outer layout vertical">
+      <p>More stuff</p>
+      <paper-tabs noink selected="{{selected}}" id="codeTabs">
+        <paper-tab>Program</paper-tab>
+        <paper-tab id="codeTab">Code</paper-tab>
+      </paper-tabs>
+      <iron-pages selected="{{selected}}" on-iron-select="handleTab" class="tabContent flex">
+        <section>
+          <div id="blocklyDiv"></div>
+        </section>
+        <section>
+          <div id="codeDiv">
+            <textarea disabled id="code">{{code}}</textarea>
+          </div>
+        </section>
+      </iron-pages>
+    </div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'code-it-blockly',
+
+      properties: {
+        injected: {
+          type: Boolean,
+          value: false,
+        },
+        selected: {
+          type: Number,
+          value: 0,
+        },
+        code: String,
+      },
+
+      handleTab: function(evt) {
+        if (this.selected === 0) {
+          this.inject();
+          this.showExtraDivs();
+        } else {
+          this.hideExtraDivs();
+        }
+        evt.stopPropagation(); // TODO(jstn): this doesn't stop propagation.
+      },
+
+      hideExtraDivs: function() {
+        var toolboxDiv = document.querySelector('.blocklyToolboxDiv');
+        var widgetDiv = document.querySelector('.blocklyWidgetDiv');
+        var tooltipDiv = document.querySelector('.blocklyTooltipDiv');
+        this.hideExtraDiv(toolboxDiv);
+        this.hideExtraDiv(widgetDiv);
+        this.hideExtraDiv(tooltipDiv);
+      },
+
+      showExtraDivs: function() {
+        var toolboxDiv = document.querySelector('.blocklyToolboxDiv');
+        var widgetDiv = document.querySelector('.blocklyWidgetDiv');
+        var tooltipDiv = document.querySelector('.blocklyTooltipDiv');
+        this.showExtraDiv(toolboxDiv);
+        this.showExtraDiv(widgetDiv);
+        this.showExtraDiv(tooltipDiv);
+      },
+
+      hideExtraDiv: function(div) {
+        if (div) {
+          div.style.display = 'none';
+        }
+      },
+
+      showExtraDiv: function(div) {
+        if (div) {
+          div.style.display = '';
+        }
+      },
+
+      inject: function() {
+        if (!this.injected) {
+          var blocklyDiv = this.$.blocklyDiv;
+          var workspace = Blockly.inject(blocklyDiv, {toolbox: this.$.toolbox});
+          var that = this;
+          function updateCode() {
+            var code = Blockly.JavaScript.workspaceToCode(workspace);
+            that.code = code;
+          }
+          workspace.addChangeListener(updateCode);
+          this.injected = true;
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>

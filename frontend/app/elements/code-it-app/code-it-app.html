@@ -1,0 +1,129 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="code-it-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+        background-color: #fafafa;
+      }
+      .paper-font-display4 {
+        @apply(--paper-font-display4);
+      }
+
+      .paper-font-display3 {
+        @apply(--paper-font-display3);
+      }
+
+      .paper-font-display2 {
+        @apply(--paper-font-display2);
+      }
+
+      .paper-font-display1 {
+        @apply(--paper-font-display1);
+      }
+
+      .paper-font-headline {
+        @apply(--paper-font-headline);
+      }
+
+      .paper-font-title {
+        @apply(--paper-font-title);
+      }
+
+      .paper-font-subhead {
+        @apply(--paper-font-subhead);
+      }
+
+      .paper-font-body2 {
+        @apply(--paper-font-body2);
+      }
+
+      .paper-font-body1 {
+        @apply(--paper-font-body1);
+      }
+
+      .paper-font-caption {
+        @apply(--paper-font-caption);
+      }
+
+      .paper-font-menu {
+        @apply(--paper-font-menu);
+      }
+
+      .paper-font-button {
+        @apply(--paper-font-button);
+      }
+      iron-pages {
+        height: 100%;
+      }
+      iron-pages > section {
+        height: 100%;
+      }
+      #blockly {
+        position: relative;
+      }
+    </style>
+    <iron-pages attr-for-selected="data-route" selected="{{route}}" on-iron-select="handleRouteChange">
+      <section data-route="home">
+        <div class="paper-font-display1">Program list</div> 
+        <div>
+        <a href="{{baseUrl}}program">Go to the program</a></div>
+      </section>
+      <section data-route="program" class="vertical layout">
+        <a href="{{baseUrl}}">Go to the program list</a>
+        <code-it-blockly id="blockly" class="flex"></code-it-blockly>
+      </section>
+    </iron-pages>
+    <paper-toast id="toast">
+      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+    </paper-toast>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'code-it-app',
+
+      properties: {
+        baseUrl: {
+          type: String,
+          value: '/',
+        },
+        route: {
+          type: String,
+          value: 'home',
+          notify: true,
+        },
+      },
+      ready: function() {
+      },
+      handleRouteChange: function(evt) {
+        // HACK: iron-select handler in code-it-blockly can't stop propagation for some reason.
+        if (evt.srcElement.id === 'codeTabs') {
+          return;
+        }
+
+        if (this.route === 'home') {
+          this.$.blockly.hideExtraDivs();
+        } else {
+          this.$.blockly.selected = 0; // Needed to make the toolbox show up, see HACK above.
+          this.$.blockly.showExtraDivs();
+        }
+      },
+    });
+  })();
+  </script>
+</dom-module>

@@ -111,7 +111,8 @@ gulp.task('lint', function() {
       'app/scripts/**/*.js',
       'app/elements/**/*.js',
       'app/elements/**/*.html',
-      'gulpfile.js'
+      'gulpfile.js',
+      '!app/elements/code-it-blockly/*.js'
     ])
     .pipe(reload({
       stream: true,
