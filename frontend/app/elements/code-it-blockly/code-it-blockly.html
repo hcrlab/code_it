@@ -359,8 +359,8 @@
     </xml>
     <div class="outer layout vertical">
       <div class="controls layout horizontal">
-        <paper-input label="Program name" class="programName flex" value="{{name}}"></paper-input>
-        <paper-button raised class$="runstop {{runState}}">Run program</paper-button>
+        <paper-input label="Program name" class="programName flex" value="{{name}}" on-change="onNameChange"></paper-input>
+        <paper-button raised class$="runstop {{runState}}"><iron-icon icon="av:play-arrow"></iron-icon> Run</paper-button>
       </div>
       <paper-tabs noink selected="{{selected}}" id="codeTabs">
         <paper-tab>Program</paper-tab>
@@ -399,10 +399,36 @@
           value: 'run', // Either 'run' or 'stop'
           notify: true,
         },
-        name: {
+        programId: {
           type: String,
-          value: 'Untitled program'
+          value: '',
+          observer: '_handleProgramIdChanged',
         },
+        name: String,
+        xml: String,
+      },
+
+      _handleProgramIdChanged: function() {
+        if (!this.programId) {
+          return;
+        }
+        var that = this;
+        var getClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/get_program',
+          serviceType: 'code_it/GetProgram'
+        });
+        var request = new ROSLIB.ServiceRequest({
+          program_id: that.programId
+        });
+        getClient.callService(request, function(result) {
+          that.name = result.program.name;
+          that.xml = result.program.xml;
+          var xmlDom = Blockly.Xml.textToDom(that.xml);
+          var workspace = Blockly.getMainWorkspace();
+          workspace.clear();
+          Blockly.Xml.domToWorkspace(workspace, xmlDom);
+        }); 
       },
 
       handleTab: function(evt) {
@@ -455,9 +481,49 @@
             that.code = code;
           }
           workspace.addChangeListener(updateCode);
+          workspace.addChangeListener(function() {
+            that.onProgramChange(that)
+          });
           this.injected = true;
         }
-      }
+      },
+
+      onNameChange: function() {
+        var that = this;
+        var updateClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/update_program',
+          serviceType: 'code_it/UpdateProgram'
+        });
+        var request = new ROSLIB.ServiceRequest({
+          program: {
+            program_id: that.programId,
+            name: that.name,
+          }
+        });
+        updateClient.callService(request, function(result) {
+          that.program = result.program;
+        }); 
+      },
+
+      onProgramChange: function(that) {
+        var workspace = Blockly.getMainWorkspace();
+        var xml = Blockly.Xml.workspaceToDom(workspace);
+        var xmlText = Blockly.Xml.domToText(xml);
+        var updateClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/update_program',
+          serviceType: 'code_it/UpdateProgram'
+        });
+        var request = new ROSLIB.ServiceRequest({
+          program: {
+            program_id: that.programId,
+            xml: xmlText,
+          }
+        });
+        updateClient.callService(request, function(result) {
+        }); 
+      },
     });
   })();
   </script>

@@ -27,13 +27,37 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
   <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+  <script src="roslibjs/eventemitter2.min.js"></script>
+  <script src="roslibjs/roslib.min.js"></script>
+  <script>
+    function websocketUrl() {
+      var hostname = window.location.hostname;
+      var protocol = 'ws:';
+      if (window.location.protocol == 'https:') {
+        protocol = 'wss:'
+      }
+      return protocol + '//' + hostname + ':9090';
+    }
+    var websocketUrl = websocketUrl();
+    ROS = new ROSLIB.Ros({
+      url: websocketUrl
+    });
+
+    ROS.on('connection', function() {
+      console.log('Connected to websocket server.');
+    });
+
+    ROS.on('error', function(error) {
+      console.log('Error connecting to websocket server: ', error);
+    });
+
+    ROS.on('close', function() {
+      console.log('Connection to websocket server closed.');
+    });
+  </script>
 
   <!-- Tile icon for Win8 (144x144) -->
   <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-
-  <link rel="stylesheet" href="/styles/material.min.css">
-  <script src="/bower_components/material-design-lite/material.min.js"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <!-- build:css styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">

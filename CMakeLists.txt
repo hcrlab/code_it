@@ -52,6 +52,7 @@ add_message_files(
 add_service_files(
   FILES
   AddProgram.srv
+  GetProgram.srv
   DeleteProgram.srv
   UpdateProgram.srv
   ListPrograms.srv
@@ -67,7 +68,7 @@ add_service_files(
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
-  std_msgs  # Or other packages containing msgs
+  #std_msgs  # Or other packages containing msgs
 )
 
 ################################################

@@ -9,52 +9,9 @@
         box-sizing: border-box;
         padding: 0px 10px;
       }
-      .paper-font-display4 {
-        @apply(--paper-font-display4);
-      }
-
-      .paper-font-display3 {
-        @apply(--paper-font-display3);
-      }
-
-      .paper-font-display2 {
-        @apply(--paper-font-display2);
-      }
-
-      .paper-font-display1 {
+      .title {
         @apply(--paper-font-display1);
-      }
-
-      .paper-font-headline {
-        @apply(--paper-font-headline);
-      }
-
-      .paper-font-title {
-        @apply(--paper-font-title);
-      }
-
-      .paper-font-subhead {
-        @apply(--paper-font-subhead);
-      }
-
-      .paper-font-body2 {
-        @apply(--paper-font-body2);
-      }
-
-      .paper-font-body1 {
-        @apply(--paper-font-body1);
-      }
-
-      .paper-font-caption {
-        @apply(--paper-font-caption);
-      }
-
-      .paper-font-menu {
-        @apply(--paper-font-menu);
-      }
-
-      .paper-font-button {
-        @apply(--paper-font-button);
+        margin-bottom: 10px;
       }
       iron-pages {
         height: 100%;
@@ -65,42 +22,77 @@
       #blockly {
         position: relative;
       }
+      paper-button {
+        @apply(--paper-font-button);
+        border-radius: 2px;
+        padding: 6px 16px;
+        height: 36px;
+      }
+      .create {
+        background-color: var(--accent-color);
+        color: var(--primary-text-color);
+        margin-left: 0;
+        margin-bottom: 10px;
+      }
+      .delete {
+        color: #D32F2F;
+      }
+      .listBack {
+        background-color: #fff;
+      }
+      .programList {
+        border-spacing: 0;
+          width: 100%;
+      }
+      .programList th, td {
+        border-bottom: 1px solid var(--divider-color);
+        padding: 5px 10px;
+      }
+      .programList th {
+        text-align: left;
+        padding: 15px;
+      }
+      .programList tr:last-child td {
+        border-bottom: none;
+      }
     </style>
     <iron-pages attr-for-selected="data-route" selected="{{route}}" on-iron-select="handleRouteChange">
       <section data-route="home">
-        <div class="paper-font-display1">CodeIt!</div> 
-        <div class="paper-font-title">Program list</div> 
-<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-  <thead>
-    <tr>
-      <th class="mdl-data-table__cell--non-numeric">Material</th>
-      <th>Quantity</th>
-      <th>Unit price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-      <td>25</td>
-      <td>$2.90</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
-      <td>50</td>
-      <td>$1.25</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
-      <td>10</td>
-      <td>$2.35</td>
-    </tr>
-  </tbody>
-</table>
-        <a href="{{baseUrl}}program">Go to the program</a></div>
+        <div class="title">CodeIt!</div> 
+        <paper-button class="create" raised on-tap="onCreate"><iron-icon icon="add"></iron-icon> Create new program</paper-button>
+        <paper-material class="listBack">
+
+        <table class="programList">
+          <thead>
+            <tr>
+              <th>Program</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template is="dom-repeat" items="{{programs}}">
+              <tr>
+                <td>{{item.name}}</td>
+                <td>
+                  <paper-button on-tap="onEdit" noink data-program-id$="{{item.program_id}}">Edit / Run</paper-button>
+                  <paper-button class="delete" noink data-program-id$="{{item.program_id}}" on-tap="onDelete">Delete</paper-button>
+                </td>
+              </tr>
+            </template>
+            <template is="dom-if" if="{{noPrograms}}">
+              <tr>
+                <td colspan="2">
+                  No programs yet.
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+        </paper-material>
       </section>
       <section data-route="program" class="vertical layout">
-        <div><paper-button class="paper-font-button" on-tap="goToProgramList" noink><iron-icon icon="arrow-back"></iron-icon> Back to program list</paper-button></div>
-        <code-it-blockly id="blockly" class="flex"></code-it-blockly>
+        <div><paper-button on-tap="goToProgramList" noink><iron-icon icon="arrow-back"></iron-icon> Back to program list</paper-button></div>
+        <code-it-blockly id="blockly" class="flex" program-id="{{params.id}}"></code-it-blockly>
       </section>
     </iron-pages>
     <paper-toast id="toast">
@@ -124,9 +116,20 @@
           value: 'home',
           notify: true,
         },
+        programs: {
+          type: Array,
+          value: [],
+        },
+        noPrograms: {
+          type: Boolean,
+          computed: 'isEmpty(programs)'
+        },
+        params: {
+          type: Object, // Holds the current program ID.
+          notify: true,
+        },
       },
-      ready: function() {
-      },
+
       handleRouteChange: function(evt) {
         // HACK: iron-select handler in code-it-blockly can't stop propagation for some reason.
         if (evt.srcElement.id === 'codeTabs') {
@@ -135,6 +138,7 @@
 
         if (this.route === 'home') {
           this.$.blockly.hideExtraDivs();
+          this.updateProgramList();
         } else {
           this.$.blockly.inject();
           this.$.blockly.selected = 0; // Needed to make the toolbox show up, see HACK above.
@@ -143,6 +147,53 @@
       },
       goToProgramList: function() {
         page.redirect(this.baseUrl);
+      },
+
+      updateProgramList: function() {
+        var that = this;
+        var listClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/list_programs',
+          serviceType: 'code_it/ListPrograms'
+        });
+        var request = new ROSLIB.ServiceRequest({});
+        listClient.callService(request, function(result) {
+          that.programs = result.programs;
+        }); 
+      },
+      isEmpty: function(programs) {
+        return programs.length === 0;
+      },
+      onCreate: function(evt) {
+        var that = this;
+        var addClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/add_program',
+          serviceType: 'code_it/AddProgram'
+        });
+        var request = new ROSLIB.ServiceRequest({});
+        addClient.callService(request, function(result) {
+          var program = result.program;
+          page.redirect(that.baseUrl + 'program/' + program.program_id);
+        }); 
+      },
+      onEdit: function(evt) {
+        var programId = evt.srcElement.dataset.programId
+        page.redirect(this.baseUrl + 'program/' + programId);
+      },
+      onDelete: function(evt) {
+        var that = this;
+        var deleteClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/delete_program',
+          serviceType: 'code_it/DeleteProgram'
+        });
+        var request = new ROSLIB.ServiceRequest({
+          program_id: evt.srcElement.dataset.programId
+        });
+        deleteClient.callService(request, function() {
+          that.updateProgramList();
+        }); 
       },
     });
   })();
