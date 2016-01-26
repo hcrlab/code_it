@@ -567,9 +567,6 @@
           goal.on('result', function(result) {
             that.runState = 'notrunning';
             console.log(result);
-            if (result.status && result.status.status === 4) {
-              that.fire('program-error', {text: result.status.text});
-            }
           });
 
           goal.send();

@@ -39,9 +39,7 @@ Runtime = function() {
       } catch(e) {
         console.log('Error running program ' + program);
         console.log(e.stack);
-        if (action.currentGoal) {
-          action.setAborted(e); 
-        }
+        action.setError(e.toString()); 
       }
     }
     nextStep(0);
