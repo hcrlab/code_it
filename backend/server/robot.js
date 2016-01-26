@@ -16,13 +16,13 @@ Robot = function() {
     //});
     //display.publish(msg);
 
-    //if (timeout > 0) {
-    //  Meteor.setTimeout(function() {
-    //    callback(null, null); // err, result
-    //  }, timeout * 1000);
-    //} else {
-    //  callback(null, null);
-    //}
+    if (timeout > 0) {
+      Meteor.setTimeout(function() {
+        callback(null, null); // err, result
+      }, timeout * 1000);
+    } else {
+      callback(null, null);
+    }
   });
 
   return {

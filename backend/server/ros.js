@@ -12,3 +12,21 @@ ROS.on('error', function() {
 ROS.on('close', function() {
   console.log('Closed connection to websocket server.');
 });
+
+ROSLIB.SimpleActionServer.prototype.setAborted = function(text) {
+  var resultMessage = new ROSLIB.Message({
+    status: {
+      goal_id: this.currentGoal.goal_id,
+      status: 4,
+      text: text,
+    },
+  });
+  this.resultPublisher.publish(resultMessage);
+  if (this.nextGoal) {
+    this.currentGoal = this.nextGoal;
+    this.nextGoal = null;
+    this.emit('goal', this.currentGoal.goal);
+  } else {
+    this.currentGoal = null;
+  }
+}

@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 from bson.objectid import ObjectId
-import pymongo
 from pymongo import MongoClient
-import rospy
 import datetime
+import pymongo
+import rospy
 
 from code_it.msg import Program
 from code_it.srv import AddProgram, AddProgramResponse
@@ -97,8 +97,8 @@ class ProgramServer(object):
 
 
 def main():
-    client = MongoClient()
-    db = client.code_it
+    mongo_client = MongoClient()
+    db = mongo_client.code_it
     program_manager = ProgramManager(db)
     server = ProgramServer(program_manager) 
 

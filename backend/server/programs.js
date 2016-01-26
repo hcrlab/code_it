@@ -12,32 +12,66 @@ function interpreterApi(interpreter, scope) {
   interpreter.setProperty(myRobot, 'displayMessage', interpreter.createNativeFunction(wrapper));
 };
 
-Meteor.startup(function() {
-  Meteor.methods({
-    runProgram: function(program) {
-      if (program === undefined || program.length <= 0) {
-        throw new Meteor.Error(400, 'No program given.');
+Runtime = function() {
+  var isRunning = false;
+
+  var runProgram = function(action, program) {
+    var interpreter = new Interpreter(program, interpreterApi);
+    isRunning = true;
+    function nextStep(stepNum) {
+      if (!isRunning) {
+        if (action.currentGoal) {
+          action.setPreempted();
+        }
+        return;
       }
-      var interpreter = new Interpreter(program, interpreterApi);
       try {
-        interpreter.run();
-        Meteor.call('endProgram');
+        if (interpreter.step()) {
+          // TODO(jstn): Report block number instead of step number
+          var feedback = {block_id: stepNum};
+          action.sendFeedback(feedback);
+          Meteor.setTimeout(function() {
+            nextStep(stepNum + 1);
+          }, 0);
+        } else {
+          action.setSucceeded();
+        }
       } catch(e) {
-        throw new Meteor.Error(400, 'Program was invalid. ' + e);
+        console.log('Error running program ' + program);
+        console.log(e.stack);
+        if (action.currentGoal) {
+          action.setAborted(e); 
+        }
       }
-    },
-    endProgram: function() {
     }
+    nextStep(0);
+  }
+
+  var stopProgram = function(action) {
+    isRunning = false;
+    if (action.currentGoal) {
+      action.setPreempted();
+    }
+  }
+
+  return {
+    runProgram: runProgram,
+    stopProgram: stopProgram,
+  };
+}()
+
+Meteor.startup(function() {
+  var runAction = new ROSLIB.SimpleActionServer({
+    ros: ROS,
+    serverName: '/run_program',
+    actionName: 'code_it/RunProgramAction'
   });
 
-  var programListener = new ROSLIB.Topic({
-    ros: ROS,
-    name: '/code_it/program/run',
-    messageType: 'std_msgs/String'
-  });
-  
-  programListener.subscribe(Meteor.bindEnvironment(function(message) {
-    console.log('Received message on ' + listener.name + ': ' + message.data);
-    Meteor.call('runProgram', message.data);
+  runAction.on('goal', Meteor.bindEnvironment(function(goal) {
+    Runtime.runProgram(runAction, goal.program);
+  }));
+
+  runAction.on('cancel', Meteor.bindEnvironment(function() {
+    Runtime.stopProgram(runAction);
   }));
 });

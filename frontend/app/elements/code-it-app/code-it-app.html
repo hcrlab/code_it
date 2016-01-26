@@ -92,11 +92,11 @@
       </section>
       <section data-route="program" class="vertical layout">
         <div><paper-button on-tap="goToProgramList" noink><iron-icon icon="arrow-back"></iron-icon> Back to program list</paper-button></div>
-        <code-it-blockly id="blockly" class="flex" program-id="{{params.id}}"></code-it-blockly>
+        <code-it-blockly id="blockly" class="flex" program-id="{{params.id}}" on-program-error="handleProgramError"></code-it-blockly>
       </section>
     </iron-pages>
     <paper-toast id="toast">
-      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+      <span class="toast-hide-button" role="button" tabindex="0" on-tap="app.$.toast.hide()">OK</span>
     </paper-toast>
   </template>
   <script>
@@ -194,6 +194,10 @@
         deleteClient.callService(request, function() {
           that.updateProgramList();
         }); 
+      },
+      handleProgramError: function(evt) {
+        this.$.toast.text = evt.detail.text;
+        this.$.toast.show();
       },
     });
   })();

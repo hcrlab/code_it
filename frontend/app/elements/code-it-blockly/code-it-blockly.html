@@ -45,11 +45,11 @@
         top: 16px;
         color: #fff;
       }
-      .run {
-        background-color: #388E3C;
-      }
-      .stop {
+      .isrunning {
         background-color: #D32F2F;
+      }
+      .notrunning {
+        background-color: #388E3C;
       }
     </style>
     <xml id="toolbox" style="display: none">
@@ -360,7 +360,14 @@
     <div class="outer layout vertical">
       <div class="controls layout horizontal">
         <paper-input label="Program name" class="programName flex" value="{{name}}" on-change="onNameChange"></paper-input>
-        <paper-button raised class$="runstop {{runState}}"><iron-icon icon="av:play-arrow"></iron-icon> Run</paper-button>
+        <paper-button raised class$="runstop {{runState}}" on-tap="handleRunStop">
+          <template is="dom-if" if$="{{!isRunning}}">
+            <iron-icon icon="av:play-arrow"></iron-icon> Run
+          </template>
+          <template is="dom-if" if$="{{isRunning}}">
+            <iron-icon icon="av:stop"></iron-icon> Stop
+          </template>
+        </paper-button>
       </div>
       <paper-tabs noink selected="{{selected}}" id="codeTabs">
         <paper-tab>Program</paper-tab>
@@ -396,7 +403,7 @@
         code: String,
         runState: {
           type: String,
-          value: 'run', // Either 'run' or 'stop'
+          value: 'notrunning', // Either 'isrunning' or 'notrunning'
           notify: true,
         },
         programId: {
@@ -406,6 +413,11 @@
         },
         name: String,
         xml: String,
+        isRunning: {
+          type: Boolean,
+          value: false,
+          computed: '_isRunning(runState)',
+        }
       },
 
       _handleProgramIdChanged: function() {
@@ -523,6 +535,50 @@
         });
         updateClient.callService(request, function(result) {
         }); 
+      },
+
+      _isRunning: function(runState) {
+        if (this.runState === 'isrunning') {
+          return true;
+        } else {
+          return false;
+        }
+      },
+
+      handleRunStop: function() {
+        var that = this;
+        var runAction = new ROSLIB.ActionClient({
+          ros: ROS,
+          serverName: '/run_program',
+          actionName: 'code_it/RunProgramAction'
+        });
+
+        if (!this.isRunning) {
+          var goal = new ROSLIB.Goal({
+            actionClient: runAction,
+            goalMessage: {
+              program: that.code
+            }
+          });
+
+          goal.on('feedback', function(feedback) {
+            console.log('Feedback: ' + feedback.block_id);
+          });
+          goal.on('result', function(result) {
+            that.runState = 'notrunning';
+            console.log(result);
+            if (result.status && result.status.status === 4) {
+              that.fire('program-error', {text: result.status.text});
+            }
+          });
+
+          goal.send();
+          this.runState = 'isrunning';
+          console.log('Running program: ' + that.code);
+        } else {
+          runAction.cancel();
+          this.runState = 'notrunning';
+        }
       },
     });
   })();
