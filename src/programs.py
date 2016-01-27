@@ -7,6 +7,7 @@ import rospy
 
 from code_it.msg import Program
 from code_it.srv import AddProgram, AddProgramResponse
+from code_it.srv import CopyProgram, CopyProgramResponse
 from code_it.srv import GetProgram, GetProgramResponse
 from code_it.srv import DeleteProgram, DeleteProgramResponse
 from code_it.srv import UpdateProgram, UpdateProgramResponse
@@ -47,6 +48,7 @@ class ProgramServer(object):
     def __init__(self, manager):
         self._manager = manager
         rospy.Service('code_it/add_program', AddProgram, self.handle_add)
+        rospy.Service('code_it/copy_program', CopyProgram, self.handle_copy)
         rospy.Service('code_it/get_program', GetProgram, self.handle_get)
         rospy.Service('code_it/delete_program', DeleteProgram, self.handle_delete)
         rospy.Service('code_it/update_program', UpdateProgram, self.handle_update)
@@ -59,6 +61,28 @@ class ProgramServer(object):
         program.name = program_dict['name']
         program.xml = program_dict['xml']
         return AddProgramResponse(program)
+
+    def handle_copy(self, request):
+        program_id = request.program_id
+        program_dict = self._manager.get(program_id)
+        program_name = 'Untitled program'
+        if 'name' in program_dict:
+            program_name = 'Copy of ' + program_dict['name']
+        program_xml = '<xml></xml>'
+        if 'xml' in program_dict:
+            program_xml = program_dict['xml']
+
+        copy_dict = self._manager.add()
+        inserted_id_str = str(copy_dict['_id'])
+        self._manager.update(inserted_id_str, {
+            'name': program_name,
+            'xml': program_xml
+        })
+        program = Program()
+        program.program_id = str(copy_dict['_id'])
+        program.name = program_name
+        program.xml = program_xml
+        return CopyProgramResponse(program)
 
     def handle_get(self, request):
         program_id = request.program_id

@@ -75,6 +75,7 @@
                 <td>{{item.name}}</td>
                 <td>
                   <paper-button on-tap="onEdit" noink data-program-id$="{{item.program_id}}">Edit / Run</paper-button>
+                  <paper-button on-tap="onCopy" noink data-program-id$="{{item.program_id}}">Copy</paper-button>
                   <paper-button class="delete" noink data-program-id$="{{item.program_id}}" on-tap="onDelete">Delete</paper-button>
                 </td>
               </tr>
@@ -164,7 +165,7 @@
       isEmpty: function(programs) {
         return programs.length === 0;
       },
-      onCreate: function(evt) {
+      onCreate: function() {
         var that = this;
         var addClient = new ROSLIB.Service({
           ros: ROS,
@@ -177,8 +178,24 @@
           page.redirect(that.baseUrl + 'program/' + program.program_id);
         }); 
       },
+      onCopy: function(evt) {
+        var programId = evt.srcElement.dataset.programId;
+        var copyClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/copy_program',
+          serviceType: 'code_it/CopyProgram'
+        });
+        var request = new ROSLIB.ServiceRequest({
+          program_id: programId
+        });
+        var that = this;
+        copyClient.callService(request, function(result) {
+          var program = result.program;
+          page.redirect(that.baseUrl + 'program/' + program.program_id);
+        }); 
+      },
       onEdit: function(evt) {
-        var programId = evt.srcElement.dataset.programId
+        var programId = evt.srcElement.dataset.programId;
         page.redirect(this.baseUrl + 'program/' + programId);
       },
       onDelete: function(evt) {

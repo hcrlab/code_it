@@ -54,6 +54,7 @@ add_message_files(
 add_service_files(
   FILES
   AddProgram.srv
+  CopyProgram.srv
   GetProgram.srv
   DeleteProgram.srv
   UpdateProgram.srv
