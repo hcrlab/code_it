@@ -488,13 +488,13 @@
           var blocklyDiv = this.$.blocklyDiv;
           var workspace = Blockly.inject(blocklyDiv, {toolbox: this.$.toolbox});
           var that = this;
-          function updateCode() {
+          var updateCode = function() {
             var code = Blockly.JavaScript.workspaceToCode(workspace);
             that.code = code;
-          }
+          };
           workspace.addChangeListener(updateCode);
           workspace.addChangeListener(function() {
-            that.onProgramChange(that)
+            that.onProgramChange(that);
           });
           this.injected = true;
         }
@@ -533,12 +533,11 @@
             xml: xmlText,
           }
         });
-        updateClient.callService(request, function(result) {
-        }); 
+        updateClient.callService(request, function() {}); 
       },
 
       _isRunning: function(runState) {
-        if (this.runState === 'isrunning') {
+        if (runState === 'isrunning') {
           return true;
         } else {
           return false;
