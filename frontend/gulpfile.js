@@ -37,7 +37,7 @@ var AUTOPREFIXER_BROWSERS = [
   'bb >= 10'
 ];
 
-var DIST = 'dist';
+var DIST = '../www';
 
 var dist = function(subpath) {
   return !subpath ? DIST : path.join(DIST, subpath);
@@ -143,6 +143,12 @@ gulp.task('copy', function() {
     dot: true
   }).pipe(gulp.dest(dist()));
 
+  var blockly = gulp.src([
+    'app/blockly/**/*.js',
+  ], {
+    dot: true
+  }).pipe(gulp.dest(dist('blockly')));
+
   var bower = gulp.src([
     'bower_components/**/*'
   ]).pipe(gulp.dest(dist('bower_components')));
@@ -163,7 +169,7 @@ gulp.task('copy', function() {
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest(dist('elements')));
 
-  return merge(app, bower, elements, vulcanized, swBootstrap, swToolbox)
+  return merge(app, blockly, bower, elements, vulcanized, swBootstrap, swToolbox)
     .pipe($.size({
       title: 'copy'
     }));
@@ -235,7 +241,7 @@ gulp.task('cache-config', function(callback) {
 
 // Clean output directory
 gulp.task('clean', function() {
-  return del(['.tmp', dist()]);
+  return del(['.tmp', dist()], {'force': true});
 });
 
 // Watch files for changes & reload
