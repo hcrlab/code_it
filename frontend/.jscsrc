@@ -1,5 +1,5 @@
 {
-  "preset": "google",
+  //"preset": "google",
   "disallowSpacesInAnonymousFunctionExpression": null,
   "disallowTrailingWhitespace": null,
   "maximumLineLength": 100,

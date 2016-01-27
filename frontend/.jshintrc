@@ -2,7 +2,7 @@
   "node": true,
   "browser": true,
   "bitwise": true,
-  "camelcase": true,
+  "camelcase": false,
   "curly": true,
   "eqeqeq": true,
   "immed": true,
@@ -19,6 +19,9 @@
     "Polymer": true,
     "Platform": true,
     "page": true,
-    "app": true
+    "app": true,
+    "Blockly": true,
+    "ROS": true,
+    "ROSLIB": true
   }
 }
