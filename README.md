@@ -24,6 +24,16 @@ The requirements are:
 
 ### Deploying
 #### Build the frontend
+If you are not going to host CodeIt! on RWS, then edit `frontend/app/elements/code-it-app/code-it-app.html`.
+In the `ready` function, change:
+```
+ready: function() {
+  if (window.location.port === '') {
+    this.baseUrl = '/'; // Was /app/code_it/index.html/
+  }
+},
+```
+
 Go to the `frontend` folder and run `gulp`.
 This should generate a `www` folder in the root of the repository, with the built frontend.
 
