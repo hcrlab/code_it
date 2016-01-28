@@ -3,18 +3,20 @@ Robot = function() {
   
   var displayMessage = Meteor.wrapAsync(function(h1text, h2text, timeout, callback) {
     console.log('Displaying h1: ' + h1text + ', h2: ' + h2text);
-    //var display = new ROSLIB.Topic({
-    //  ros: ROS,
-    //  name: '/code_it/display',
-    //  messageType: 'code_it/DisplayParams'
-    //});
-    //var msg = new ROSLIB.Message({
-    //  display_type: 'display_message',
-    //  h1_text: h1text,
-    //  h2_text: h2text,
-    //  timeout: timeout
-    //});
-    //display.publish(msg);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/display_message',
+      serviceType : 'code_it/DisplayMessage'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      h1_text: h1text,
+      h2_text: h2text,
+      timeout: timeout
+    });
+
+    client.callService(request, function(result) {
+    });
 
     if (timeout > 0) {
       Meteor.setTimeout(function() {

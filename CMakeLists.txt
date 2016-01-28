@@ -59,6 +59,7 @@ add_service_files(
   DeleteProgram.srv
   UpdateProgram.srv
   ListPrograms.srv
+  primitives/DisplayMessage.srv
 )
 
 ## Generate actions in the 'action' folder

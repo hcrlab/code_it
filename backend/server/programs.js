@@ -15,12 +15,23 @@ function interpreterApi(interpreter, scope) {
 Runtime = function() {
   var isRunning = false;
 
+  var onProgramEnd = function() {
+    var topic = new ROSLIB.Topic({
+      ros: ROS,
+      name: '/code_it/stopped',
+      messageType: 'std_msgs/Empty'
+    });
+    var msg = new ROSLIB.Message({});
+    topic.publish(msg);
+  };
+
   var runProgram = function(action, program) {
     var interpreter = new Interpreter(program, interpreterApi);
     isRunning = true;
     function nextStep(stepNum) {
       if (!isRunning) {
         if (action.currentGoal) {
+          // We don't need onProgramEnd here because this should only be reached via stopProgram.
           action.setPreempted();
         }
         return;
@@ -35,22 +46,25 @@ Runtime = function() {
           }, 0);
         } else {
           action.setSucceeded();
+          onProgramEnd();
         }
       } catch(e) {
         console.log('Error running program ' + program);
         console.log(e.stack);
         action.setError(e.toString()); 
+        onProgramEnd();
       }
     }
     nextStep(0);
   }
 
   var stopProgram = function(action) {
+    onProgramEnd();
     isRunning = false;
     if (action.currentGoal) {
       action.setPreempted();
     }
-  }
+  };
 
   return {
     runProgram: runProgram,
