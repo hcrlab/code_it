@@ -11,7 +11,9 @@ From the interface, you can run programs and stop them mid-program.
 The requirements are:
 - MongoDB - install MongoDB and pymongo
 - Meteor - install from the Meteor website
-- Node - install from the Node website
+- Node - install from the Node website.
+  NOTE: Meteor requires Node version 0.10.40.
+  Newer versions of Node will not work when deploying this app to production.
 - From the `frontend` folder, run `npm install -g gulp bower && npm install && bower install`
 
 ### Running
@@ -21,7 +23,20 @@ The requirements are:
 - From the `frontend` folder, run `gulp` - This is the frontend. Go to localhost:5000 to see the page.
 
 ### Deploying
-Instructions on deployment coming soon.
+#### Build the frontend
+Go to the `frontend` folder and run `gulp`.
+This should generate a `www` folder in the root of the repository, with the built frontend.
+
+#### Build the backend
+Go to the `backend` folder and run `meteor build --directory ../build`.
+This will generate an application bundle that's ready to be deployed.
+Next go to `build/bundle/programs/server` and run `npm install`.
+
+#### Deploy to RWS
+If you are not using RWS, then simply serve the `www` folder as static content and use `roslaunch code_it app.launch` to run the backend.
+
+If you are using RWS, then copy the repository (with the built frontend and backend) to the RWS catkin workspace.
+Reload RWS (may require server restart) and CodeIt! should appear in the app list.
 
 ## How to add / modify primitives
 ### Implement the backend
