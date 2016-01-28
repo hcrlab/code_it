@@ -116,7 +116,7 @@
       properties: {
         baseUrl: {
           type: String,
-          value: '/',
+          value: '/'
         },
         route: {
           type: String,
@@ -135,6 +135,12 @@
           type: Object, // Holds the current program ID.
           notify: true,
         },
+      },
+
+      ready: function() {
+        if (window.location.port === '') {
+          this.baseUrl = '/app/code_it/index.html/';
+        }
       },
 
       handleRouteChange: function(evt) {
