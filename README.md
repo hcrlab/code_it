@@ -1,10 +1,10 @@
 # CodeIt!
-*Note - this is currently a work in progress*
-
 A standalone [Blockly](https://developers.google.com/blockly/) programming application, integrated with ROS.
 It allows you to use a graphical interface to generate code for a robot, and run it.
 You implement "primitives" for the robot, which are combined with a subset of JavaScript to form programs.
 From the interface, you can run programs and stop them mid-program.
+
+CodeIt! is compatible with [RWS](https://github.com/hcrlab/rws).
 
 ## Getting started
 ### Installing
@@ -32,7 +32,7 @@ Go to the `backend` folder and run `meteor build --directory ../build`.
 This will generate an application bundle that's ready to be deployed.
 Next go to `build/bundle/programs/server` and run `npm install`.
 
-#### Deploy to RWS
+#### Deploy to [RWS](https://github.com/hcrlab/rws)
 If you are not using RWS, then simply serve the `www` folder as static content and use `roslaunch code_it app.launch` to run the backend.
 
 If you are using RWS, then copy the repository (with the built frontend and backend) to the RWS catkin workspace.
