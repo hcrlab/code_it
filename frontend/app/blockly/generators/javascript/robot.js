@@ -38,12 +38,11 @@ Blockly.JavaScript['robot_display_message_h1h2'] = function(block) {
 
 Blockly.JavaScript['robot_movement_go_to'] = function(block) {
   var value_location = Blockly.JavaScript.valueToCode(block, 'LOCATION', Blockly.JavaScript.ORDER_NONE) || '\'\'';
-  var code = 'robot.goTo(' + value_location + ');\n';
-  return code;
+  var code = 'robot.goTo(' + value_location + ')';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.JavaScript['robot_movement_go_to'] = function(block) {
-  var value_location = Blockly.JavaScript.valueToCode(block, 'LOCATION', Blockly.JavaScript.ORDER_NONE) || '\'\'';
-  var code = 'robot.goTo(' + value_location + ')';
+Blockly.JavaScript['robot_movement_go_to_dock'] = function(block) {
+  var code = 'robot.goToDock()';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };

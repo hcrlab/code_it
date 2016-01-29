@@ -54,6 +54,32 @@ Robot = function() {
     });
   });
 
+  var goToDock = Meteor.wrapAsync(function(location, callback) {
+    console.log('Going to dock');
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/go_to_dock',
+      serviceType : 'code_it/GoToDock'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+    });
+
+    client.callService(request, function(result) {
+      console.log('Done docking');
+      console.log(result);
+      if (result.error !== '') { // Docking failed
+        callback(null, false); // result = false
+      }
+      callback(null, true); // Success
+    }, function(error) {
+      // Failure callback
+      console.log('GoToDock service call failed.');
+      console.log(error);
+      callback(null, false);
+    });
+  });
+
   return {
     displayMessage: displayMessage,
     goTo: goTo,

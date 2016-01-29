@@ -63,3 +63,14 @@ Blockly.Blocks['robot_movement_go_to'] = {
     this.setHelpUrl('');
   }
 };
+
+Blockly.Blocks['robot_movement_go_to_dock'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("go to dock");
+    this.setOutput(true, "Boolean");
+    this.setColour(160);
+    this.setTooltip('Makes the robot go to its dock and charge.');
+    this.setHelpUrl('');
+  }
+};

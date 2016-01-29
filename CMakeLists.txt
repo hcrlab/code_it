@@ -61,6 +61,7 @@ add_service_files(
   ListPrograms.srv
   primitives/DisplayMessage.srv
   primitives/GoTo.srv
+  primitives/GoToDock.srv
 )
 
 ## Generate actions in the 'action' folder
