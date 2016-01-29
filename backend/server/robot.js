@@ -27,7 +27,35 @@ Robot = function() {
     }
   });
 
+  var goTo = Meteor.wrapAsync(function(location, callback) {
+    console.log('Going to: ' + location);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/go_to',
+      serviceType : 'code_it/GoTo'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      location: location
+    });
+
+    client.callService(request, function(result) {
+      console.log('Done navigating to ' + location + ', result:');
+      console.log(result);
+      if (result.error !== '') { // Navigation failed
+        callback(null, false); // result = false
+      }
+      callback(null, true); // Success
+    }, function(error) {
+      // Failure callback
+      console.log('GoTo service call failed.');
+      console.log(error);
+      callback(null, false);
+    });
+  });
+
   return {
     displayMessage: displayMessage,
+    goTo: goTo,
   };
 }();

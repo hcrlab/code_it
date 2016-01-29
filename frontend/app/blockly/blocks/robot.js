@@ -57,8 +57,7 @@ Blockly.Blocks['robot_movement_go_to'] = {
     this.appendValueInput("LOCATION")
         .setCheck("String")
         .appendField("go to");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
+    this.setOutput(true, "Boolean");
     this.setColour(160);
     this.setTooltip('Makes the robot go to a named location.');
     this.setHelpUrl('');

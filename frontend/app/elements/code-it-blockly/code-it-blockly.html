@@ -357,7 +357,18 @@
         <block type="robot_display_message_h1h2"></block>
       </category>
       <category name="Robot movement" colour="160">
-        <block type="robot_movement_go_to"></block>
+        <block type="variables_set">
+          <field name="VAR">success</field>
+          <value name="VALUE">
+            <block type="robot_movement_go_to">
+              <value name="LOCATION">
+                <block type="text">
+                  <field name="TEXT"></field>
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
       </category>
     </xml>
     <div class="outer layout vertical">

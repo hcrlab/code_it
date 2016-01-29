@@ -4,12 +4,18 @@ function interpreterApi(interpreter, scope) {
   interpreter.setProperty(scope, 'robot', myRobot);
 
   var wrapper = function(h1text, h2text, timeout) {
-    h1text = h1text ? h1text.toString() : '';
-    h2text = h2text ? h2text.toString() : '';
-    timeout = timeout ? timeout.toNumber() : 0;
+    var h1text = h1text ? h1text.toString() : '';
+    var h2text = h2text ? h2text.toString() : '';
+    var timeout = timeout ? timeout.toNumber() : 0;
     return interpreter.createPrimitive(Robot.displayMessage(h1text, h2text, timeout));
   };
   interpreter.setProperty(myRobot, 'displayMessage', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(location) {
+    var location = location ? location.toString() : '';
+    return interpreter.createPrimitive(Robot.goTo(location));
+  };
+  interpreter.setProperty(myRobot, 'goTo', interpreter.createNativeFunction(wrapper));
 };
 
 Runtime = function() {
