@@ -54,7 +54,7 @@ Robot = function() {
     });
   });
 
-  var goToDock = Meteor.wrapAsync(function(location, callback) {
+  var goToDock = Meteor.wrapAsync(function(callback) {
     console.log('Going to dock');
     var client = new ROSLIB.Service({
       ros: ROS,
@@ -83,5 +83,6 @@ Robot = function() {
   return {
     displayMessage: displayMessage,
     goTo: goTo,
+    goToDock: goToDock,
   };
 }();

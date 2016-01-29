@@ -16,6 +16,11 @@ function interpreterApi(interpreter, scope) {
     return interpreter.createPrimitive(Robot.goTo(location));
   };
   interpreter.setProperty(myRobot, 'goTo', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function() {
+    return interpreter.createPrimitive(Robot.goToDock());
+  };
+  interpreter.setProperty(myRobot, 'goToDock', interpreter.createNativeFunction(wrapper));
 };
 
 Runtime = function() {
