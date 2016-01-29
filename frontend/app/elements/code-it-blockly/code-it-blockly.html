@@ -356,6 +356,9 @@
       <category name="Robot screen" colour="230">
         <block type="robot_display_message_h1h2"></block>
       </category>
+      <category name="Robot movement" colour="160">
+        <block type="robot_movement_go_to"></block>
+      </category>
     </xml>
     <div class="outer layout vertical">
       <div class="controls layout horizontal">
@@ -486,7 +489,14 @@
       inject: function() {
         if (!this.injected) {
           var blocklyDiv = this.$.blocklyDiv;
-          var workspace = Blockly.inject(blocklyDiv, {toolbox: this.$.toolbox});
+          var workspace = Blockly.inject(blocklyDiv, {toolbox: this.$.toolbox, zoom: {
+            controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 2,
+            minScale: 0.3,
+            scaleSpeed: 1.2}
+          });
           var that = this;
           var updateCode = function() {
             var code = Blockly.JavaScript.workspaceToCode(workspace);

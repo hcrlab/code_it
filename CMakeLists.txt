@@ -60,6 +60,7 @@ add_service_files(
   UpdateProgram.srv
   ListPrograms.srv
   primitives/DisplayMessage.srv
+  primitives/GoTo.srv
 )
 
 ## Generate actions in the 'action' folder

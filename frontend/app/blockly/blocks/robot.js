@@ -47,7 +47,20 @@ Blockly.Blocks['robot_display_message_h1h2'] = {
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(230);
-    this.setTooltip('Display a message with both big and regular size text.');
+    this.setTooltip('Displays a message with both big and regular size text.');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['robot_movement_go_to'] = {
+  init: function() {
+    this.appendValueInput("LOCATION")
+        .setCheck("String")
+        .appendField("go to");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(160);
+    this.setTooltip('Makes the robot go to a named location.');
     this.setHelpUrl('');
   }
 };

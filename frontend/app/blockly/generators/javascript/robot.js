@@ -35,3 +35,9 @@ Blockly.JavaScript['robot_display_message_h1h2'] = function(block) {
   var code = 'robot.displayMessage(' + value_h1text + ', ' + value_h2text + ', ' + value_timeout + ');\n';
   return code;
 };
+
+Blockly.JavaScript['robot_movement_go_to'] = function(block) {
+  var value_location = Blockly.JavaScript.valueToCode(block, 'LOCATION', Blockly.JavaScript.ORDER_NONE) || '\'\'';
+  var code = 'robot.goTo(' + value_location + ');\n';
+  return code;
+};
