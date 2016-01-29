@@ -37,11 +37,12 @@ class ProgramManager(object):
         mods: A dictionary of fields to modify, e.g., {'name': 'Hello world'}
         """
         mods['last_update'] = datetime.datetime.utcnow()
-        result = self._db.programs.update_one(
-            {'_id': ObjectId(id_str)}, {'$set': mods})
+        result = self._db.programs.update_one({'_id': ObjectId(id_str)},
+                                              {'$set': mods})
 
     def list(self):
-        return self._db.programs.find().sort([('last_update', pymongo.DESCENDING)])
+        return self._db.programs.find().sort([('last_update',
+                                               pymongo.DESCENDING)])
 
 
 class ProgramServer(object):
@@ -50,8 +51,10 @@ class ProgramServer(object):
         rospy.Service('code_it/add_program', AddProgram, self.handle_add)
         rospy.Service('code_it/copy_program', CopyProgram, self.handle_copy)
         rospy.Service('code_it/get_program', GetProgram, self.handle_get)
-        rospy.Service('code_it/delete_program', DeleteProgram, self.handle_delete)
-        rospy.Service('code_it/update_program', UpdateProgram, self.handle_update)
+        rospy.Service('code_it/delete_program', DeleteProgram,
+                      self.handle_delete)
+        rospy.Service('code_it/update_program', UpdateProgram,
+                      self.handle_update)
         rospy.Service('code_it/list_programs', ListPrograms, self.handle_list)
 
     def handle_add(self, request):
@@ -74,10 +77,9 @@ class ProgramServer(object):
 
         copy_dict = self._manager.add()
         inserted_id_str = str(copy_dict['_id'])
-        self._manager.update(inserted_id_str, {
-            'name': program_name,
-            'xml': program_xml
-        })
+        self._manager.update(inserted_id_str,
+                             {'name': program_name,
+                              'xml': program_xml})
         program = Program()
         program.program_id = str(copy_dict['_id'])
         program.name = program_name
@@ -92,12 +94,12 @@ class ProgramServer(object):
         program.name = program_dict['name']
         program.xml = program_dict['xml']
         return GetProgramResponse(program)
-    
+
     def handle_delete(self, request):
         program_id = request.program_id
         self._manager.delete(program_id)
         return DeleteProgramResponse()
-    
+
     def handle_update(self, request):
         program = request.program
         mods = {}
@@ -107,7 +109,7 @@ class ProgramServer(object):
             mods['xml'] = program.xml
         self._manager.update(program.program_id, mods)
         return UpdateProgramResponse()
-    
+
     def handle_list(self, request):
         programs = self._manager.list()
         response = ListProgramsResponse()
@@ -124,7 +126,7 @@ def main():
     mongo_client = MongoClient()
     db = mongo_client.code_it
     program_manager = ProgramManager(db)
-    server = ProgramServer(program_manager) 
+    server = ProgramServer(program_manager)
 
 
 if __name__ == '__main__':
