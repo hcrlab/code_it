@@ -64,6 +64,40 @@ Blockly.Blocks['robot_movement_go_to'] = {
   }
 };
 
+Blockly.Blocks['robot_movement_locations'] = {
+  init: function() {
+    var that = this;
+    this.getLocations(function(options) {
+      that.options = options
+      that.appendDummyInput()
+          .appendField(new Blockly.FieldDropdown(options), "NAME");
+    });
+    this.setOutput(true, "String");
+    this.setColour(160);
+    this.setTooltip('The list of locations the robot knows about.');
+    this.setHelpUrl('');
+  },
+
+  getLocations: function(callback) {
+    var options = [];
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/location_db/list',
+      serviceType : 'location_server/ListPoses'
+    });
+
+    var request = new ROSLIB.ServiceRequest({});
+    
+    client.callService(request, function(result) {
+      for (var i=0; i<result.names.length; ++i) {
+        var name = result.names[i];
+        options.push([name, name]);
+      }
+      callback(options);
+    });
+  },
+};
+
 Blockly.Blocks['robot_movement_go_to_dock'] = {
   init: function() {
     this.appendDummyInput()
