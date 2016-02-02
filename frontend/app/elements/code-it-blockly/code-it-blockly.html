@@ -354,7 +354,55 @@
       <category name="Functions" colour="290" custom="PROCEDURE"></category>
       <sep></sep>
       <category name="Robot screen" colour="230">
-        <block type="robot_display_message_h1h2"></block>
+        <block type="robot_display_message_h1h2">
+          <value name="H1TEXT">
+            <block type="text">
+              <field name="TEXT">Hello world!</field>
+            </block>
+          </value>
+          <value name="H2TEXT">
+            <block type="text">
+              <field name="TEXT">I'm ready to help</field>
+            </block>
+          </value>
+          <value name="TIMEOUT">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="variables_set">
+          <field name="VAR">item</field>
+          <value name="VALUE">
+            <block type="robot_display_ask_multiple_choice">
+              <value name="QUESTION">
+                <block type="text">
+                  <field name="TEXT">What's your favorite color?</field>
+                </block>
+              </value>
+              <value name="CHOICES">
+                <block type="lists_create_with">
+                  <mutation items="2"></mutation>
+                  <value name="ADD0">
+                    <block type="text">
+                      <field name="TEXT">Indigo</field>
+                    </block>
+                  </value>
+                  <value name="ADD1">
+                    <block type="text">
+                      <field name="TEXT">Jade</field>
+                    </block>
+                  </value>
+                </block>
+              </value>
+              <value name="TIMEOUT">
+                <block type="math_number">
+                  <field name="NUM">0</field>
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
       </category>
       <category name="Robot movement" colour="160">
         <block type="variables_set">

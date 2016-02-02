@@ -11,6 +11,17 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'displayMessage', interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function(question, choices, timeout) {
+    var question = question ? question.toString() : '';
+    var choices_arr = [];
+    for (var i=0; i<choices.length; ++i) {
+      choices_arr.push(choices.properties[i].toString());
+    }
+    var timeout = timeout ? timeout.toNumber() : 0;
+    return interpreter.createPrimitive(Robot.askMultipleChoice(question, choices_arr, timeout));
+  };
+  interpreter.setProperty(myRobot, 'askMultipleChoice', interpreter.createNativeFunction(wrapper));
+
   var wrapper = function(location) {
     var location = location ? location.toString() : '';
     return interpreter.createPrimitive(Robot.goTo(location));
@@ -34,6 +45,7 @@ Runtime = function() {
     });
     var msg = new ROSLIB.Message({});
     topic.publish(msg);
+    console.log('Notifying everyone that the program has ended.');
   };
 
   var runProgram = function(action, program) {
@@ -51,18 +63,21 @@ Runtime = function() {
         if (interpreter.step()) {
           // TODO(jstn): Report block number instead of step number
           var feedback = {block_id: stepNum};
-          action.sendFeedback(feedback);
+          if (action.currentGoal) {
+            action.sendFeedback(feedback);
+          }
           Meteor.setTimeout(function() {
             nextStep(stepNum + 1);
           }, 0);
         } else {
+          console.log('Program complete.');
           action.setSucceeded();
           onProgramEnd();
         }
       } catch(e) {
         console.log('Error running program ' + program);
         console.log(e.stack);
-        action.setError(e.toString()); 
+        action.setAborted(e.toString()); 
         onProgramEnd();
       }
     }
@@ -70,6 +85,7 @@ Runtime = function() {
   }
 
   var stopProgram = function(action) {
+    console.log('Program was stopped by the user.');
     onProgramEnd();
     isRunning = false;
     if (action.currentGoal) {

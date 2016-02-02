@@ -29,11 +29,20 @@ goog.provide('Blockly.JavaScript.robot');
 goog.require('Blockly.JavaScript');
 
 Blockly.JavaScript['robot_display_message_h1h2'] = function(block) {
-  var value_h1text = Blockly.JavaScript.valueToCode(block, 'h1Text', Blockly.JavaScript.ORDER_COMMA) || '\'\'';
-  var value_h2text = Blockly.JavaScript.valueToCode(block, 'h2Text', Blockly.JavaScript.ORDER_COMMA) || '\'\'';
-  var value_timeout = Blockly.JavaScript.valueToCode(block, 'timeout', Blockly.JavaScript.ORDER_COMMA) || 0;
+  var value_h1text = Blockly.JavaScript.valueToCode(block, 'H1TEXT', Blockly.JavaScript.ORDER_COMMA) || '\'\'';
+  var value_h2text = Blockly.JavaScript.valueToCode(block, 'H2TEXT', Blockly.JavaScript.ORDER_COMMA) || '\'\'';
+  var value_timeout = Blockly.JavaScript.valueToCode(block, 'TIMEOUT', Blockly.JavaScript.ORDER_COMMA) || 0;
   var code = 'robot.displayMessage(' + value_h1text + ', ' + value_h2text + ', ' + value_timeout + ');\n';
   return code;
+};
+
+
+Blockly.JavaScript['robot_display_ask_multiple_choice'] = function(block) {
+  var value_question = Blockly.JavaScript.valueToCode(block, 'QUESTION', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_choices = Blockly.JavaScript.valueToCode(block, 'CHOICES', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_timeout = Blockly.JavaScript.valueToCode(block, 'TIMEOUT', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'robot.askMultipleChoice(' + value_question + ', ' + value_choices + ', ' + value_timeout + ')';
+  return [code, Blockly.JavaScript.FUNCTION_CALL];
 };
 
 Blockly.JavaScript['robot_movement_go_to'] = function(block) {

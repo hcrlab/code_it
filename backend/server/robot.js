@@ -27,6 +27,35 @@ Robot = function() {
     }
   });
 
+  var askMultipleChoice = Meteor.wrapAsync(function(question, choices, timeout, callback) {
+    console.log('Asking: ' + question + ', choices: ' + choices);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/ask_multiple_choice',
+      serviceType : 'code_it/AskMultipleChoice'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      question: question,
+      choices: choices,
+    });
+
+    var funcCall = this;
+    funcCall.isRunning = true;
+    client.callService(request, function(result) {
+      funcCall.isRunning = false;
+      callback(null, result.choice);
+    });
+
+    if (timeout > 0) {
+      Meteor.setTimeout(function() {
+        if (funcCall.isRunning) {
+          callback(null, null); // err, result
+        }
+      }, timeout * 1000);
+    }
+  });
+
   var goTo = Meteor.wrapAsync(function(location, callback) {
     console.log('Going to: ' + location);
     var client = new ROSLIB.Service({
@@ -82,6 +111,7 @@ Robot = function() {
 
   return {
     displayMessage: displayMessage,
+    askMultipleChoice: askMultipleChoice,
     goTo: goTo,
     goToDock: goToDock,
   };

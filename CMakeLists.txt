@@ -60,6 +60,7 @@ add_service_files(
   UpdateProgram.srv
   ListPrograms.srv
   primitives/DisplayMessage.srv
+  primitives/AskMultipleChoice.srv
   primitives/GoTo.srv
   primitives/GoToDock.srv
 )
