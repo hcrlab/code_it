@@ -12,8 +12,10 @@ The requirements are:
 - MongoDB - install MongoDB and pymongo
 - Meteor - install from the Meteor website
 - Node - install from the Node website.
-  NOTE: Meteor requires Node version 0.10.40.
-  Newer versions of Node will not work when deploying this app to production.
+  It is highly recommended to use [nvm](https://github.com/creationix/nvm) to install node.
+  `nvm` allows you to install and switch between arbitrary versions of node easily.
+  When deploying to production, Meteor requires an older version of node to build properly, whereas gulp requires a newer version of node.
+  Use `nvm` to switch between the two.
 - From the `frontend` folder, run `npm install -g gulp bower && npm install && bower install`
 
 ### Running
@@ -34,10 +36,13 @@ ready: function() {
 },
 ```
 
+Make sure you are using a relatively new version of node: `nvm use 5.4`
 Go to the `frontend` folder and run `gulp`.
 This should generate a `www` folder in the root of the repository, with the built frontend.
 
 #### Build the backend
+Meteor requires an older version of node to run (0.10.40).
+Run `nvm use 0.10.40` to switch to this version.
 Go to the `backend` folder and run `meteor build --directory ../build`.
 This will generate an application bundle that's ready to be deployed.
 Next go to `build/bundle/programs/server` and run `npm install`.
