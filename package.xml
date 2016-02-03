@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package>
   <name>code_it</name>
-  <version>0.0.0</version>
-  <description>The code_it package</description>
+  <version>0.1.0</version>
+  <description>A standalone Blockly programming application, integrated with ROS.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="jstn@todo.todo">jstn</maintainer>
+  <maintainer email="jstn@cs.washington.edu">Justin Huang</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
