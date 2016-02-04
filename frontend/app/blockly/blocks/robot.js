@@ -85,37 +85,46 @@ Blockly.Blocks['robot_movement_go_to'] = {
   }
 };
 
+Blockly.robot = Blockly.robot || {};
+Blockly.robot.locations = [['<Select a location>', '<Select a location>']];
+Blockly.robot.getLocations = function() {
+  var options = [];
+  var client = new ROSLIB.Service({
+    ros: ROS,
+    name: '/location_db/list',
+    serviceType : 'location_server/ListPoses'
+  });
+
+  var request = new ROSLIB.ServiceRequest({});
+  client.callService(request, function(result) {
+    for (var i=0; i<result.names.length; ++i) {
+      var name = result.names[i];
+      options.push([name, name]);
+    }
+    Blockly.robot.locations = options;
+    return options;
+  });
+};
+
+Blockly.robot.getLocations();
+
 Blockly.Blocks['robot_movement_locations'] = {
   init: function() {
-    var that = this;
-    this.getLocations(function(options) {
-      that.options = options
-      that.appendDummyInput()
-          .appendField(new Blockly.FieldDropdown(options), "NAME");
-    });
+    Blockly.robot.getLocations();
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown(Blockly.robot.locations), "NAME");
     this.setOutput(true, "String");
     this.setColour(160);
     this.setTooltip('The list of locations the robot knows about.');
     this.setHelpUrl('');
   },
 
-  getLocations: function(callback) {
-    var options = [];
-    var client = new ROSLIB.Service({
-      ros: ROS,
-      name: '/location_db/list',
-      serviceType : 'location_server/ListPoses'
-    });
-
-    var request = new ROSLIB.ServiceRequest({});
-    
-    client.callService(request, function(result) {
-      for (var i=0; i<result.names.length; ++i) {
-        var name = result.names[i];
-        options.push([name, name]);
-      }
-      callback(options);
-    });
+  onchange: function() {
+    if (this.getFieldValue('NAME') === '<Select a location>') {
+      this.setWarningText('Select a location from the list.');
+    } else {
+      this.setWarningText(null);
+    }
   },
 };
 
