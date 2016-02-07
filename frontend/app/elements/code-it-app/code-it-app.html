@@ -138,7 +138,7 @@
       },
 
       ready: function() {
-        if (window.location.port === '') {
+        if (window.location.port === '' || window.location.port === '5001') {
           this.baseUrl = '/app/code_it/index.html/';
         }
       },
