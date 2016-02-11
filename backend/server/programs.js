@@ -42,8 +42,17 @@ function interpreterApi(interpreter, scope) {
 
 Runtime = function() {
   var isRunning = false;
+  var isRunningTopic = (function() {
+    return new ROSLIB.Topic({
+      ros: ROS,
+      name: 'code_it/is_program_running',
+      messageType: 'std_msgs/Bool',
+      latch: true
+    });
+  })();
 
   var onProgramEnd = function() {
+    // DEPRECATED: "stopped" topic
     var topic = new ROSLIB.Topic({
       ros: ROS,
       name: '/code_it/stopped',
@@ -51,12 +60,19 @@ Runtime = function() {
     });
     var msg = new ROSLIB.Message({});
     topic.publish(msg);
+
+    var msg = new ROSLIB.Message({data: false});
+    isRunningTopic.publish(msg);
+
     console.log('Notifying everyone that the program has ended.');
   };
 
   var runProgram = function(action, program) {
     var interpreter = new Interpreter(program, interpreterApi);
     isRunning = true;
+    var msg = new ROSLIB.Message({data: true});
+    isRunningTopic.publish(msg);
+
     function nextStep(stepNum) {
       if (!isRunning) {
         if (action.currentGoal) {

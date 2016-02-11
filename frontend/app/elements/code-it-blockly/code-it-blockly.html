@@ -483,7 +483,7 @@
         runState: {
           type: String,
           value: 'notrunning', // Either 'isrunning' or 'notrunning'
-          notify: true,
+          computed: '_computeRunState(isRunning)',
         },
         programId: {
           type: String,
@@ -495,8 +495,23 @@
         isRunning: {
           type: Boolean,
           value: false,
-          computed: '_isRunning(runState)',
         }
+      },
+
+      ready: function() {
+        this.isRunningTopic = new ROSLIB.Topic({
+          ros: ROS,
+          name: '/code_it/is_program_running',
+          type: 'std_msgs/Bool'
+        });
+        var that = this;
+        this.isRunningTopic.subscribe(function(msg) {
+          that._handleIsRunningMsg(that, msg);
+        });
+      },
+
+      _handleIsRunningMsg: function(that, msg) {
+        that.isRunning = msg.data;
       },
 
       _handleProgramIdChanged: function() {
@@ -622,11 +637,11 @@
         updateClient.callService(request, function() {}); 
       },
 
-      _isRunning: function(runState) {
-        if (runState === 'isrunning') {
-          return true;
+      _computeRunState: function(isRunning) {
+        if (isRunning) {
+          return 'isrunning';
         } else {
-          return false;
+          return 'notrunning';
         }
       },
 
@@ -650,16 +665,13 @@
             console.log('Feedback: ' + feedback.block_id);
           });
           goal.on('result', function(result) {
-            that.runState = 'notrunning';
             console.log(result);
           });
 
           goal.send();
-          this.runState = 'isrunning';
           console.log('Running program: ' + that.code);
         } else {
           runAction.cancel();
-          this.runState = 'notrunning';
         }
       },
     });
