@@ -61,3 +61,9 @@ Blockly.JavaScript['robot_movement_go_to_dock'] = function(block) {
   var code = 'robot.goToDock()';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
+
+Blockly.JavaScript['robot_sound_say'] = function(block) {
+  var value_text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'robot.say(' + value_text + ');\n';
+  return code;
+};

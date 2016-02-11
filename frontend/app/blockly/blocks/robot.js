@@ -138,3 +138,16 @@ Blockly.Blocks['robot_movement_go_to_dock'] = {
     this.setHelpUrl('');
   }
 };
+
+Blockly.Blocks['robot_sound_say'] = {
+  init: function() {
+    this.appendValueInput("TEXT")
+        .setCheck("String")
+        .appendField("say");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(65);
+    this.setTooltip('Makes the robot say something.');
+    this.setHelpUrl('');
+  }
+};
