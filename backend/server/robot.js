@@ -109,10 +109,32 @@ Robot = function() {
     });
   });
 
+  var say = Meteor.wrapAsync(function(text, callback) {
+    console.log('Saying: ' + text);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/say',
+      serviceType : 'code_it/Say'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      text: text
+    });
+
+    // Some implementations may not know when the sound has finished.
+    // Keep in mind that this block may not be synchronous.
+    client.callService(request, function(result) {
+      callback(null, null);
+    }, function(error) {
+      callback(null, null);
+    });
+  });
+
   return {
     displayMessage: displayMessage,
     askMultipleChoice: askMultipleChoice,
     goTo: goTo,
     goToDock: goToDock,
+    say: say,
   };
 }();

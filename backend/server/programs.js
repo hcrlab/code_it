@@ -32,6 +32,12 @@ function interpreterApi(interpreter, scope) {
     return interpreter.createPrimitive(Robot.goToDock());
   };
   interpreter.setProperty(myRobot, 'goToDock', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(text) {
+    var text = text ? text.toString() : '';
+    return interpreter.createPrimitive(Robot.say(text));
+  };
+  interpreter.setProperty(myRobot, 'say', interpreter.createNativeFunction(wrapper));
 };
 
 Runtime = function() {
