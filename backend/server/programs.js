@@ -42,25 +42,14 @@ function interpreterApi(interpreter, scope) {
 
 Runtime = function() {
   var isRunning = false;
-  var isRunningTopic = (function() {
-    return new ROSLIB.Topic({
-      ros: ROS,
-      name: 'code_it/is_program_running',
-      messageType: 'std_msgs/Bool',
-      latch: true
-    });
-  })();
+  var isRunningTopic = new ROSLIB.Topic({
+    ros: ROS,
+    name: 'code_it/is_program_running',
+    messageType: 'std_msgs/Bool',
+    latch: true
+  });
 
   var onProgramEnd = function() {
-    // DEPRECATED: "stopped" topic
-    var topic = new ROSLIB.Topic({
-      ros: ROS,
-      name: '/code_it/stopped',
-      messageType: 'std_msgs/Empty'
-    });
-    var msg = new ROSLIB.Message({});
-    topic.publish(msg);
-
     var msg = new ROSLIB.Message({data: false});
     isRunningTopic.publish(msg);
 
@@ -93,7 +82,9 @@ Runtime = function() {
           }, 0);
         } else {
           console.log('Program complete.');
-          action.setSucceeded();
+          if (action.currentGoal) {
+            action.setSucceeded();
+          }
           onProgramEnd();
         }
       } catch(e) {
