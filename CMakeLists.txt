@@ -63,6 +63,7 @@ add_service_files(
   primitives/AskMultipleChoice.srv
   primitives/GoTo.srv
   primitives/GoToDock.srv
+  primitives/Say.srv
 )
 
 ## Generate actions in the 'action' folder
