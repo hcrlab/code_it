@@ -80,4 +80,6 @@ Once you have the code generated, put the language code in `frontend/app/blockly
 You will need to implement the code generation for your block, such that it calls `robot.myFunction()` with the appropriate arguments.
 
 Finally, add the block to the Blockly toolbox, so that users can see the block and drag it into the program.
-To do that, edit `frontend/app/elements/code-it-blockly/toolbox.html` and add your block to the toolbox according to the [toolbox documentation](https://developers.google.com/blockly/installation/toolbox).
+To do that, edit `frontend/app/elements/code-it-blockly-toolbox/code-it-blockly-toolbox.html` and add your block to the toolbox according to the [toolbox documentation](https://developers.google.com/blockly/installation/toolbox).
+Because toolbox configurations can vary from robot to robot, we don't check in robot-specific blocks to the toolbox in this repository.
+You can tell Git not to track your toolbox changes using `git update-index --assume-unchanged frontend/app/elements/code-it-toolbox/code-it-toolbox.html`.
