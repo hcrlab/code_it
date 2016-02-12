@@ -1,6 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="blockly-import.html">
-<link rel="import" href="toolbox.html" id="toolboxImport">
 <dom-module id="code-it-blockly">
   <template>
     <style>
@@ -53,6 +52,7 @@
         background-color: #388E3C;
       }
     </style>
+    <code-it-blockly-toolbox id="toolboxElement"></code-it-blockly-toolbox>
     <div class="outer layout vertical">
       <div class="controls layout horizontal">
         <paper-input label="Program name" class="programName flex" value="{{name}}" on-change="onNameChange"></paper-input>
@@ -149,19 +149,9 @@
           that.xml = result.program.xml;
           var xmlDom = Blockly.Xml.textToDom(that.xml);
 
-          // Blockly loads toolbox asynchronously.
-          // We also load the program asynchronously.
-          // So, we need to wait for the workspace first.
-          function waitForWorkspace() {
-            var workspace = Blockly.getMainWorkspace();
-            if (workspace) {
-              workspace.clear();
-              Blockly.Xml.domToWorkspace(workspace, xmlDom);
-            } else {
-              setTimeout(waitForWorkspace, 500);
-            }
-          }
-          waitForWorkspace();
+          var workspace = Blockly.getMainWorkspace();
+          workspace.clear();
+          Blockly.Xml.domToWorkspace(workspace, xmlDom);
         }); 
       },
 
@@ -207,26 +197,24 @@
 
       inject: function() {
         if (!this.injected) {
-          this.importHref('elements/code-it-blockly/toolbox.html', function(e) {
-            var toolbox = e.target.import.querySelector('#toolbox');
-            var blocklyDiv = this.$.blocklyDiv;
-            var workspace = Blockly.inject(blocklyDiv, {toolbox: toolbox, zoom: {
-              controls: true,
-              wheel: true,
-              startScale: 1.0,
-              maxScale: 2,
-              minScale: 0.3,
-              scaleSpeed: 1.2}
-            });
-            var that = this;
-            var updateCode = function() {
-              var code = Blockly.JavaScript.workspaceToCode(workspace);
-              that.code = code;
-            };
-            workspace.addChangeListener(updateCode);
-            workspace.addChangeListener(function() {
-              that.onProgramChange(that);
-            });
+          var toolbox = this.$.toolboxElement.$.toolbox;
+          var blocklyDiv = this.$.blocklyDiv;
+          var workspace = Blockly.inject(blocklyDiv, {toolbox: toolbox, zoom: {
+            controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 2,
+            minScale: 0.3,
+            scaleSpeed: 1.2}
+          });
+          var that = this;
+          var updateCode = function() {
+            var code = Blockly.JavaScript.workspaceToCode(workspace);
+            that.code = code;
+          };
+          workspace.addChangeListener(updateCode);
+          workspace.addChangeListener(function() {
+            that.onProgramChange(that);
           });
           this.injected = true;
         }
