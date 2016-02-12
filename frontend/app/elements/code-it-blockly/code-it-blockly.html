@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="blockly-import.html">
+<link rel="import" href="toolbox.html" id="toolboxImport">
 <dom-module id="code-it-blockly">
   <template>
     <style>
@@ -52,390 +53,6 @@
         background-color: #388E3C;
       }
     </style>
-    <xml id="toolbox" style="display: none">
-      <category name="Logic" colour="210">
-        <block type="controls_if"></block>
-        <block type="logic_compare"></block>
-        <block type="logic_operation"></block>
-        <block type="logic_negate"></block>
-        <block type="logic_boolean"></block>
-        <block type="logic_null"></block>
-        <block type="logic_ternary"></block>
-      </category>
-      <category name="Loops" colour="120">
-        <block type="controls_repeat_ext">
-          <value name="TIMES">
-            <shadow type="math_number">
-              <field name="NUM">10</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="controls_whileUntil"></block>
-        <block type="controls_for">
-          <value name="FROM">
-            <shadow type="math_number">
-              <field name="NUM">1</field>
-            </shadow>
-          </value>
-          <value name="TO">
-            <shadow type="math_number">
-              <field name="NUM">10</field>
-            </shadow>
-          </value>
-          <value name="BY">
-            <shadow type="math_number">
-              <field name="NUM">1</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="controls_forEach"></block>
-        <block type="controls_flow_statements"></block>
-      </category>
-      <category name="Math" colour="230">
-        <block type="math_number"></block>
-        <block type="math_arithmetic">
-          <value name="A">
-            <shadow type="math_number">
-              <field name="NUM">1</field>
-            </shadow>
-          </value>
-          <value name="B">
-            <shadow type="math_number">
-              <field name="NUM">1</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="math_single">
-          <value name="NUM">
-            <shadow type="math_number">
-              <field name="NUM">9</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="math_trig">
-          <value name="NUM">
-            <shadow type="math_number">
-              <field name="NUM">45</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="math_constant"></block>
-        <block type="math_number_property">
-          <value name="NUMBER_TO_CHECK">
-            <shadow type="math_number">
-              <field name="NUM">0</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="math_change">
-          <value name="DELTA">
-            <shadow type="math_number">
-              <field name="NUM">1</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="math_round">
-          <value name="NUM">
-            <shadow type="math_number">
-              <field name="NUM">3.1</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="math_on_list"></block>
-        <block type="math_modulo">
-          <value name="DIVIDEND">
-            <shadow type="math_number">
-              <field name="NUM">64</field>
-            </shadow>
-          </value>
-          <value name="DIVISOR">
-            <shadow type="math_number">
-              <field name="NUM">10</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="math_constrain">
-          <value name="VALUE">
-            <shadow type="math_number">
-              <field name="NUM">50</field>
-            </shadow>
-          </value>
-          <value name="LOW">
-            <shadow type="math_number">
-              <field name="NUM">1</field>
-            </shadow>
-          </value>
-          <value name="HIGH">
-            <shadow type="math_number">
-              <field name="NUM">100</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="math_random_int">
-          <value name="FROM">
-            <shadow type="math_number">
-              <field name="NUM">1</field>
-            </shadow>
-          </value>
-          <value name="TO">
-            <shadow type="math_number">
-              <field name="NUM">100</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="math_random_float"></block>
-      </category>
-      <category name="Text" colour="160">
-        <block type="text"></block>
-        <block type="text_join"></block>
-        <block type="text_append">
-          <value name="TEXT">
-            <shadow type="text"></shadow>
-          </value>
-        </block>
-        <block type="text_length">
-          <value name="VALUE">
-            <shadow type="text">
-              <field name="TEXT">abc</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="text_isEmpty">
-          <value name="VALUE">
-            <shadow type="text">
-              <field name="TEXT"></field>
-            </shadow>
-          </value>
-        </block>
-        <block type="text_indexOf">
-          <value name="VALUE">
-            <block type="variables_get">
-              <field name="VAR">text</field>
-            </block>
-          </value>
-          <value name="FIND">
-            <shadow type="text">
-              <field name="TEXT">abc</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="text_charAt">
-          <value name="VALUE">
-            <block type="variables_get">
-              <field name="VAR">text</field>
-            </block>
-          </value>
-        </block>
-        <block type="text_getSubstring">
-          <value name="STRING">
-            <block type="variables_get">
-              <field name="VAR">text</field>
-            </block>
-          </value>
-        </block>
-        <block type="text_changeCase">
-          <value name="TEXT">
-            <shadow type="text">
-              <field name="TEXT">abc</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="text_trim">
-          <value name="TEXT">
-            <shadow type="text">
-              <field name="TEXT">abc</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="text_print">
-          <value name="TEXT">
-            <shadow type="text">
-              <field name="TEXT">abc</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="text_prompt_ext">
-          <value name="TEXT">
-            <shadow type="text">
-              <field name="TEXT">abc</field>
-            </shadow>
-          </value>
-        </block>
-      </category>
-      <category name="Lists" colour="260">
-        <block type="lists_create_with">
-          <mutation items="0"></mutation>
-        </block>
-        <block type="lists_create_with"></block>
-        <block type="lists_repeat">
-          <value name="NUM">
-            <shadow type="math_number">
-              <field name="NUM">5</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="lists_length"></block>
-        <block type="lists_isEmpty"></block>
-        <block type="lists_indexOf">
-          <value name="VALUE">
-            <block type="variables_get">
-              <field name="VAR">list</field>
-            </block>
-          </value>
-        </block>
-        <block type="lists_getIndex">
-          <value name="VALUE">
-            <block type="variables_get">
-              <field name="VAR">list</field>
-            </block>
-          </value>
-        </block>
-        <block type="lists_setIndex">
-          <value name="LIST">
-            <block type="variables_get">
-              <field name="VAR">list</field>
-            </block>
-          </value>
-        </block>
-        <block type="lists_getSublist">
-          <value name="LIST">
-            <block type="variables_get">
-              <field name="VAR">list</field>
-            </block>
-          </value>
-        </block>
-        <block type="lists_split">
-          <value name="DELIM">
-            <shadow type="text">
-              <field name="TEXT">,</field>
-            </shadow>
-          </value>
-        </block>
-      </category>
-      <category name="Color" colour="20">
-        <block type="colour_picker"></block>
-        <block type="colour_random"></block>
-        <block type="colour_rgb">
-          <value name="RED">
-            <shadow type="math_number">
-              <field name="NUM">100</field>
-            </shadow>
-          </value>
-          <value name="GREEN">
-            <shadow type="math_number">
-              <field name="NUM">50</field>
-            </shadow>
-          </value>
-          <value name="BLUE">
-            <shadow type="math_number">
-              <field name="NUM">0</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="colour_blend">
-          <value name="COLOUR1">
-            <shadow type="colour_picker">
-              <field name="COLOUR">#ff0000</field>
-            </shadow>
-          </value>
-          <value name="COLOUR2">
-            <shadow type="colour_picker">
-              <field name="COLOUR">#3333ff</field>
-            </shadow>
-          </value>
-          <value name="RATIO">
-            <shadow type="math_number">
-              <field name="NUM">0.5</field>
-            </shadow>
-          </value>
-        </block>
-      </category>
-      <category name="Variables" colour="330" custom="VARIABLE"></category>
-      <category name="Functions" colour="290" custom="PROCEDURE"></category>
-      <sep></sep>
-      <category name="Robot screen" colour="230">
-        <block type="robot_display_message_h1h2">
-          <value name="H1TEXT">
-            <block type="text">
-              <field name="TEXT">Hello world!</field>
-            </block>
-          </value>
-          <value name="H2TEXT">
-            <block type="text">
-              <field name="TEXT">I'm ready to help</field>
-            </block>
-          </value>
-          <value name="TIMEOUT">
-            <block type="math_number">
-              <field name="NUM">0</field>
-            </block>
-          </value>
-        </block>
-        <block type="variables_set">
-          <field name="VAR">item</field>
-          <value name="VALUE">
-            <block type="robot_display_ask_multiple_choice">
-              <value name="QUESTION">
-                <block type="text">
-                  <field name="TEXT">What's your favorite color?</field>
-                </block>
-              </value>
-              <value name="CHOICES">
-                <block type="lists_create_with">
-                  <mutation items="2"></mutation>
-                  <value name="ADD0">
-                    <block type="text">
-                      <field name="TEXT">Indigo</field>
-                    </block>
-                  </value>
-                  <value name="ADD1">
-                    <block type="text">
-                      <field name="TEXT">Jade</field>
-                    </block>
-                  </value>
-                </block>
-              </value>
-              <value name="TIMEOUT">
-                <block type="math_number">
-                  <field name="NUM">0</field>
-                </block>
-              </value>
-            </block>
-          </value>
-        </block>
-      </category>
-      <category name="Robot movement" colour="160">
-        <block type="variables_set">
-          <field name="VAR">success</field>
-          <value name="VALUE">
-            <block type="robot_movement_go_to">
-              <value name="LOCATION">
-                <block type="robot_movement_locations">
-                </block>
-              </value>
-            </block>
-          </value>
-        </block>
-        <block type="robot_movement_locations">
-        </block>
-        <block type="variables_set">
-          <field name="VAR">success</field>
-          <value name="VALUE">
-            <block type="robot_movement_go_to_dock">
-            </block>
-          </value>
-        </block>
-      </category>
-      <category name="Robot sound" colour="65">
-        <block type="robot_sound_say">
-          <value name="TEXT">
-            <block type="text">
-              <field name="TEXT">Hello world!</field>
-            </block>
-          </value>
-        </block>
-      </category>
-    </xml>
     <div class="outer layout vertical">
       <div class="controls layout horizontal">
         <paper-input label="Program name" class="programName flex" value="{{name}}" on-change="onNameChange"></paper-input>
@@ -531,9 +148,20 @@
           that.name = result.program.name;
           that.xml = result.program.xml;
           var xmlDom = Blockly.Xml.textToDom(that.xml);
-          var workspace = Blockly.getMainWorkspace();
-          workspace.clear();
-          Blockly.Xml.domToWorkspace(workspace, xmlDom);
+
+          // Blockly loads toolbox asynchronously.
+          // We also load the program asynchronously.
+          // So, we need to wait for the workspace first.
+          function waitForWorkspace() {
+            var workspace = Blockly.getMainWorkspace();
+            if (workspace) {
+              workspace.clear();
+              Blockly.Xml.domToWorkspace(workspace, xmlDom);
+            } else {
+              setTimeout(waitForWorkspace, 500);
+            }
+          }
+          waitForWorkspace();
         }); 
       },
 
@@ -579,23 +207,26 @@
 
       inject: function() {
         if (!this.injected) {
-          var blocklyDiv = this.$.blocklyDiv;
-          var workspace = Blockly.inject(blocklyDiv, {toolbox: this.$.toolbox, zoom: {
-            controls: true,
-            wheel: true,
-            startScale: 1.0,
-            maxScale: 2,
-            minScale: 0.3,
-            scaleSpeed: 1.2}
-          });
-          var that = this;
-          var updateCode = function() {
-            var code = Blockly.JavaScript.workspaceToCode(workspace);
-            that.code = code;
-          };
-          workspace.addChangeListener(updateCode);
-          workspace.addChangeListener(function() {
-            that.onProgramChange(that);
+          this.importHref('elements/code-it-blockly/toolbox.html', function(e) {
+            var toolbox = e.target.import.querySelector('#toolbox');
+            var blocklyDiv = this.$.blocklyDiv;
+            var workspace = Blockly.inject(blocklyDiv, {toolbox: toolbox, zoom: {
+              controls: true,
+              wheel: true,
+              startScale: 1.0,
+              maxScale: 2,
+              minScale: 0.3,
+              scaleSpeed: 1.2}
+            });
+            var that = this;
+            var updateCode = function() {
+              var code = Blockly.JavaScript.workspaceToCode(workspace);
+              that.code = code;
+            };
+            workspace.addChangeListener(updateCode);
+            workspace.addChangeListener(function() {
+              that.onProgramChange(that);
+            });
           });
           this.injected = true;
         }
