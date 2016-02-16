@@ -1,6 +1,4 @@
 #!/bin/sh
-. /opt/nvm/nvm.sh
-nvm use 0.10.40
 cd ../build/bundle
 export ROOT_URL='http://localhost'
 export PORT=3003
