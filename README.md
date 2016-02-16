@@ -31,12 +31,12 @@ In the `ready` function, change:
 ```
 ready: function() {
   if (window.location.port === '') {
-    this.baseUrl = '/'; // Was /app/code_it/index.html/
+    this.baseUrl = '/'; // Was /a/code_it/index.html/
   }
 },
 ```
 
-Make sure you are using a relatively new version of node: `nvm use 5.4`
+Make sure you are using a relatively new version of node: `nvm use node`
 Go to the `frontend` folder and run `gulp`.
 This should generate a `www` folder in the root of the repository, with the built frontend.
 
@@ -51,7 +51,9 @@ Next go to `build/bundle/programs/server` and run `npm install`.
 If you are not using RWS, then simply serve the `www` folder as static content and use `roslaunch code_it app.launch` to run the backend.
 
 If you are using RWS, then copy the repository (with the built frontend and backend) to the RWS catkin workspace.
-Reload RWS (may require server restart) and CodeIt! should appear in the app list.
+One limitation is that if you use CodeIt! on RWS, then all RWS apps need to use Node v0.10.40.
+Make sure you are configured to use Node v0.10.40 (`nvm use 0.10.40`) and then restart the RWS server in the same terminal window.
+CodeIt! should appear in the app list.
 
 ## How to add / modify primitives
 ### Implement the backend
@@ -78,4 +80,6 @@ Once you have the code generated, put the language code in `frontend/app/blockly
 You will need to implement the code generation for your block, such that it calls `robot.myFunction()` with the appropriate arguments.
 
 Finally, add the block to the Blockly toolbox, so that users can see the block and drag it into the program.
-To do that, edit `frontend/app/elements/code-it-blockly/code-it-blockly.html` and add your block to the toolbox according to the [toolbox documentation](https://developers.google.com/blockly/installation/toolbox).
+To do that, edit `frontend/app/elements/code-it-blockly-toolbox/code-it-blockly-toolbox.html` and add your block to the toolbox according to the [toolbox documentation](https://developers.google.com/blockly/installation/toolbox).
+Because toolbox configurations can vary from robot to robot, we don't check in robot-specific blocks to the toolbox in this repository.
+You can tell Git not to track your toolbox changes using `git update-index --assume-unchanged frontend/app/elements/code-it-toolbox/code-it-toolbox.html`.
