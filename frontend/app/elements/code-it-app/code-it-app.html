@@ -178,7 +178,6 @@
         return programs.length === 0;
       },
       onCreate: function() {
-        var that = this;
         var addClient = new ROSLIB.Service({
           ros: ROS,
           name: '/code_it/add_program',
@@ -200,7 +199,6 @@
         var request = new ROSLIB.ServiceRequest({
           program_id: programId
         });
-        var that = this;
         copyClient.callService(request, function(result) {
           var program = result.program;
           page.redirect('/program/' + program.program_id);
