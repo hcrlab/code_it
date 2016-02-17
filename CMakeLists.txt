@@ -7,6 +7,7 @@ project(code_it)
 find_package(catkin REQUIRED COMPONENTS
   actionlib
   actionlib_msgs
+  geometry_msgs
   rospy
   message_generation
 )
@@ -63,6 +64,7 @@ add_service_files(
   primitives/AskMultipleChoice.srv
   primitives/GoTo.srv
   primitives/GoToDock.srv
+  primitives/LookAt.srv
   primitives/Say.srv
 )
 
@@ -77,7 +79,7 @@ add_action_files(
 generate_messages(
   DEPENDENCIES
   actionlib_msgs
-  #std_msgs  # Or other packages containing msgs
+  geometry_msgs
 )
 
 ################################################
@@ -112,7 +114,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES code_it
-  CATKIN_DEPENDS message_runtime
+  CATKIN_DEPENDS message_runtime geometry_msgs
 #  DEPENDS system_lib
 )
 

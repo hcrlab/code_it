@@ -3,14 +3,6 @@ function interpreterApi(interpreter, scope) {
   var myRobot = interpreter.createObject(interpreter.OBJECT);
   interpreter.setProperty(scope, 'robot', myRobot);
 
-  var wrapper = function(h1text, h2text, timeout) {
-    var h1text = h1text ? h1text.toString() : '';
-    var h2text = h2text ? h2text.toString() : '';
-    var timeout = timeout ? timeout.toNumber() : 0;
-    return interpreter.createPrimitive(Robot.displayMessage(h1text, h2text, timeout));
-  };
-  interpreter.setProperty(myRobot, 'displayMessage', interpreter.createNativeFunction(wrapper));
-
   var wrapper = function(question, choices, timeout) {
     var question = question ? question.toString() : '';
     var choices_arr = [];
@@ -22,6 +14,14 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'askMultipleChoice', interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function(h1text, h2text, timeout) {
+    var h1text = h1text ? h1text.toString() : '';
+    var h2text = h2text ? h2text.toString() : '';
+    var timeout = timeout ? timeout.toNumber() : 0;
+    return interpreter.createPrimitive(Robot.displayMessage(h1text, h2text, timeout));
+  };
+  interpreter.setProperty(myRobot, 'displayMessage', interpreter.createNativeFunction(wrapper));
+
   var wrapper = function(location) {
     var location = location ? location.toString() : '';
     return interpreter.createPrimitive(Robot.goTo(location));
@@ -32,6 +32,22 @@ function interpreterApi(interpreter, scope) {
     return interpreter.createPrimitive(Robot.goToDock());
   };
   interpreter.setProperty(myRobot, 'goToDock', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(x, y, z, frame_id) {
+    var x = x ? x.toNumber() : 0;
+    var y = y ? y.toNumber() : 0;
+    var z = z ? z.toNumber() : 0;
+    var frame_id = frame_id ? frame_id.toString() : '';
+    return interpreter.createPrimitive(Robot.lookAt(x, y, z, frame_id));
+  };
+  interpreter.setProperty(myRobot, 'lookAt', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(up, left) {
+    var up = up ? up.toNumber() : 0;
+    var left = left ? left.toNumber() : 0;
+    return interpreter.createPrimitive(Robot.lookAtDegrees(up, left));
+  };
+  interpreter.setProperty(myRobot, 'lookAtDegrees', interpreter.createNativeFunction(wrapper));
 
   var wrapper = function(text) {
     var text = text ? text.toString() : '';

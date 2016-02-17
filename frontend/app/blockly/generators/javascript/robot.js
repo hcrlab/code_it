@@ -66,3 +66,10 @@ Blockly.JavaScript['robot_sound_say'] = function(block) {
   var code = 'robot.say(' + value_text + ');\n';
   return code;
 };
+
+Blockly.JavaScript['robot_head_look_angles'] = function(block) {
+  var angle_up = block.getFieldValue('UP') || '0';
+  var angle_left = block.getFieldValue('LEFT') || '0';
+  var code = 'robot.lookAtDegrees(' + angle_up + ', ' + angle_left + ');\n';
+  return code;
+};

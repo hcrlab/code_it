@@ -151,3 +151,20 @@ Blockly.Blocks['robot_sound_say'] = {
     this.setHelpUrl('');
   }
 };
+
+Blockly.Blocks['robot_head_look_angles'] = {
+  init: function() {
+    Blockly.FieldAngle.CLOCKWISE = false;
+    Blockly.FieldAngle.OFFSET = 90;
+    this.appendDummyInput()
+        .appendField("look up")
+        .appendField(new Blockly.FieldAngle('0'), "UP")
+        .appendField("and left")
+        .appendField(new Blockly.FieldAngle('0'), "LEFT");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(65);
+    this.setTooltip('Look some number of degrees up and/or to the left.');
+    this.setHelpUrl('');
+  }
+};

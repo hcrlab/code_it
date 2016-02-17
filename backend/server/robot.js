@@ -1,32 +1,5 @@
 // The implementation of the primitives.
 Robot = function() {
-  
-  var displayMessage = Meteor.wrapAsync(function(h1text, h2text, timeout, callback) {
-    console.log('Displaying h1: ' + h1text + ', h2: ' + h2text);
-    var client = new ROSLIB.Service({
-      ros: ROS,
-      name: '/code_it/api/display_message',
-      serviceType : 'code_it/DisplayMessage'
-    });
-
-    var request = new ROSLIB.ServiceRequest({
-      h1_text: h1text,
-      h2_text: h2text,
-      timeout: timeout
-    });
-
-    client.callService(request, function(result) {
-    });
-
-    if (timeout > 0) {
-      Meteor.setTimeout(function() {
-        callback(null, null); // err, result
-      }, timeout * 1000);
-    } else {
-      callback(null, null);
-    }
-  });
-
   var askMultipleChoice = Meteor.wrapAsync(function(question, choices, timeout, callback) {
     console.log('Asking: ' + question + ', choices: ' + choices);
     var client = new ROSLIB.Service({
@@ -53,6 +26,32 @@ Robot = function() {
           callback(null, null); // err, result
         }
       }, timeout * 1000);
+    }
+  });
+
+  var displayMessage = Meteor.wrapAsync(function(h1text, h2text, timeout, callback) {
+    console.log('Displaying h1: ' + h1text + ', h2: ' + h2text);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/display_message',
+      serviceType : 'code_it/DisplayMessage'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      h1_text: h1text,
+      h2_text: h2text,
+      timeout: timeout
+    });
+
+    client.callService(request, function(result) {
+    });
+
+    if (timeout > 0) {
+      Meteor.setTimeout(function() {
+        callback(null, null); // err, result
+      }, timeout * 1000);
+    } else {
+      callback(null, null);
     }
   });
 
@@ -109,6 +108,45 @@ Robot = function() {
     });
   });
 
+  var lookAt = Meteor.wrapAsync(function(x, y, z, frame_id, callback) {
+    console.log('Looking at: (' + x + ', ' + y + ', ' + z + ', ' + frame_id + ')');
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/look_at',
+      serviceType : 'code_it/LookAt'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      target: {
+        point: {
+          x: x,
+          y: y,
+          z: z,
+        },
+        header: {
+          frame_id: frame_id,
+        },
+      },
+    });
+
+    client.callService(request, function(result) {
+      callback(null, null);
+    }, function(error) {
+      callback(null, null);
+    });
+  });
+
+  var DEGS_TO_RADS = Math.PI / 180;
+  var lookAtDegrees = Meteor.wrapAsync(function(up, left, callback) {
+    console.log('Looking at: (' + up + ', ' + left  + ') degrees');
+    var x = Math.cos(DEGS_TO_RADS * left);
+    var y = Math.sin(DEGS_TO_RADS * left);
+    var z = Math.sin(DEGS_TO_RADS * up);
+    // Empty string for the frame_id defaults to a frame that is located
+    // near the head, facing the same direction as the robot.
+    lookAt(x, y, z, '', callback);
+  });
+
   var say = Meteor.wrapAsync(function(text, callback) {
     console.log('Saying: ' + text);
     var client = new ROSLIB.Service({
@@ -131,10 +169,12 @@ Robot = function() {
   });
 
   return {
-    displayMessage: displayMessage,
     askMultipleChoice: askMultipleChoice,
+    displayMessage: displayMessage,
     goTo: goTo,
     goToDock: goToDock,
+    lookAt: lookAt,
+    lookAtDegrees: lookAtDegrees,
     say: say,
   };
 }();
