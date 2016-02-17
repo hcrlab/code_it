@@ -36,7 +36,6 @@ Blockly.JavaScript['robot_display_message_h1h2'] = function(block) {
   return code;
 };
 
-
 Blockly.JavaScript['robot_display_ask_multiple_choice'] = function(block) {
   var value_question = Blockly.JavaScript.valueToCode(block, 'QUESTION', Blockly.JavaScript.ORDER_ATOMIC);
   var value_choices = Blockly.JavaScript.valueToCode(block, 'CHOICES', Blockly.JavaScript.ORDER_ATOMIC);
