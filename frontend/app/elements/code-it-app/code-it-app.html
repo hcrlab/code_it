@@ -139,7 +139,7 @@
 
       ready: function() {
         if (window.location.port === '' || window.location.port === '5001') {
-          this.baseUrl = '/a/code_it/index.html/';
+          this.baseUrl = '/a/code_it/';
         }
       },
 
@@ -187,7 +187,7 @@
         var request = new ROSLIB.ServiceRequest({});
         addClient.callService(request, function(result) {
           var program = result.program;
-          page.redirect(that.baseUrl + 'program/' + program.program_id);
+          page.redirect('/program/' + program.program_id);
         }); 
       },
       onCopy: function(evt) {
@@ -203,12 +203,12 @@
         var that = this;
         copyClient.callService(request, function(result) {
           var program = result.program;
-          page.redirect(that.baseUrl + 'program/' + program.program_id);
+          page.redirect('/program/' + program.program_id);
         }); 
       },
       onEdit: function(evt) {
         var programId = evt.srcElement.dataset.programId;
-        page.redirect(this.baseUrl + 'program/' + programId);
+        page.redirect('/program/' + programId);
       },
       onDelete: function(evt) {
         var that = this;
