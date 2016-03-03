@@ -1,0 +1,3 @@
+[submodule "backend/packages/jsinterpreter"]
+	path = backend/packages/jsinterpreter
+	url = git@github.com:jstnhuang/JS-Interpreter.git
