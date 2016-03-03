@@ -81,14 +81,13 @@ CodeIt! should appear in the app list.
 ## How to add / modify primitives
 ### Implement the backend
 To start with, the primitive should be implemented and accessible through ROS, either as a node listening to a topic, a service, or an action.
-Note that your primitive can only take in arguments that are primitive types (Strings, Booleans, Numbers) or Arrays.
-Passing in an arbitrary object or a callback function is not supported.
 
 Next, you need to add the primitive to the interpreter.
 In `backend/server/robot.js`, add a call to your primitive using roslibjs to the `Robot` object.
 Be sure to update the return value of the `Robot` object, at the bottom of the file.
 
 Finally, register your primitive with the interpreter's sandbox.
+Refer to the [JS-Interpreter docs](https://neil.fraser.name/software/JS-Interpreter/docs.html).
 Edit the function `interpreterApi` in `backend/server/interpreter.js`.
 The line `interpreter.setProperty(myRobot, 'myFunction', ...)` means that your primitive will be available as the function `robot.myFunction(...)` in the interpreter.
 To create a global function, change the line to `interpreter.setProperty(scope, 'myFunction', ...)`, which creates the global function `myFunction(...)`.
