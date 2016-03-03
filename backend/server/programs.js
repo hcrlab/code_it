@@ -25,10 +25,6 @@ function interpreterApi(interpreter, scope) {
   var wrapper = function() {
     var objects = Robot.findObjects();
     var objects_arr = interpreter.toPseudoObject(objects);
-    //var objects_arr = interpreter.createObject(interpreter.ARRAY);
-    //for (var i=0; i<objects.length; i++) {
-    //  interpreter.setProperty(objects_arr, i, objects[i]);
-    //}
     return objects_arr;
   };
   interpreter.setProperty(myRobot, 'findObjects', interpreter.createNativeFunction(wrapper));
