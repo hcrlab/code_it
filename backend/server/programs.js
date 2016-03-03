@@ -22,6 +22,16 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'displayMessage', interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function() {
+    var objects = Robot.findObjects();
+    var objects_arr = interpreter.createObject(interpreter.ARRAY);
+    for (var i=0; i<objects.length; i++) {
+      interpreter.setProperty(objects_arr, i, objects[i]);
+    }
+    return objects_arr;
+  };
+  interpreter.setProperty(myRobot, 'findObjects', interpreter.createNativeFunction(wrapper));
+
   var wrapper = function(location) {
     var location = location ? location.toString() : '';
     return interpreter.createPrimitive(Robot.goTo(location));

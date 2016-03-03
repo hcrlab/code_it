@@ -5,11 +5,8 @@ project(code_it)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  actionlib
-  actionlib_msgs
-  geometry_msgs
+  code_it_msgs
   rospy
-  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -46,41 +43,41 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-add_message_files(
-  FILES
-  Program.msg
-)
+#add_message_files(
+#  FILES
+#  Program.msg
+#)
 
 ## Generate services in the 'srv' folder
-add_service_files(
-  FILES
-  AddProgram.srv
-  CopyProgram.srv
-  GetProgram.srv
-  DeleteProgram.srv
-  UpdateProgram.srv
-  ListPrograms.srv
-  primitives/DisplayMessage.srv
-  primitives/AskMultipleChoice.srv
-  primitives/GoTo.srv
-  primitives/GoToDock.srv
-  primitives/LookAt.srv
-  primitives/Say.srv
-)
+#add_service_files(
+#  FILES
+#  AddProgram.srv
+#  CopyProgram.srv
+#  GetProgram.srv
+#  DeleteProgram.srv
+#  UpdateProgram.srv
+#  ListPrograms.srv
+#  primitives/DisplayMessage.srv
+#  primitives/AskMultipleChoice.srv
+#  primitives/GoTo.srv
+#  primitives/GoToDock.srv
+#  primitives/LookAt.srv
+#  primitives/Say.srv
+#)
 
 ## Generate actions in the 'action' folder
-add_action_files(
-  DIRECTORY action
-  FILES
-  RunProgram.action
-)
+#add_action_files(
+#  DIRECTORY action
+#  FILES
+#  RunProgram.action
+#)
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-  actionlib_msgs
-  geometry_msgs
-)
+#generate_messages(
+#  DEPENDENCIES
+#  actionlib_msgs
+#  geometry_msgs
+#)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -114,7 +111,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES code_it
-  CATKIN_DEPENDS message_runtime geometry_msgs
+#  CATKIN_DEPENDS message_runtime geometry_msgs
 #  DEPENDS system_lib
 )
 

@@ -139,7 +139,7 @@
         var getClient = new ROSLIB.Service({
           ros: ROS,
           name: '/code_it/get_program',
-          serviceType: 'code_it/GetProgram'
+          serviceType: 'code_it_msgs/GetProgram'
         });
         var request = new ROSLIB.ServiceRequest({
           program_id: that.programId
@@ -225,7 +225,7 @@
         var updateClient = new ROSLIB.Service({
           ros: ROS,
           name: '/code_it/update_program',
-          serviceType: 'code_it/UpdateProgram'
+          serviceType: 'code_it_msgs/UpdateProgram'
         });
         var request = new ROSLIB.ServiceRequest({
           program: {
@@ -245,7 +245,7 @@
         var updateClient = new ROSLIB.Service({
           ros: ROS,
           name: '/code_it/update_program',
-          serviceType: 'code_it/UpdateProgram'
+          serviceType: 'code_it_msgs/UpdateProgram'
         });
         var request = new ROSLIB.ServiceRequest({
           program: {
@@ -269,7 +269,7 @@
         var runAction = new ROSLIB.ActionClient({
           ros: ROS,
           serverName: '/run_program',
-          actionName: 'code_it/RunProgramAction'
+          actionName: 'code_it_msgs/RunProgramAction'
         });
 
         if (!this.isRunning) {

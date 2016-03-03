@@ -5,13 +5,13 @@ import datetime
 import pymongo
 import rospy
 
-from code_it.msg import Program
-from code_it.srv import AddProgram, AddProgramResponse
-from code_it.srv import CopyProgram, CopyProgramResponse
-from code_it.srv import GetProgram, GetProgramResponse
-from code_it.srv import DeleteProgram, DeleteProgramResponse
-from code_it.srv import UpdateProgram, UpdateProgramResponse
-from code_it.srv import ListPrograms, ListProgramsResponse
+from code_it_msgs.msg import Program
+from code_it_msgs.srv import AddProgram, AddProgramResponse
+from code_it_msgs.srv import CopyProgram, CopyProgramResponse
+from code_it_msgs.srv import GetProgram, GetProgramResponse
+from code_it_msgs.srv import DeleteProgram, DeleteProgramResponse
+from code_it_msgs.srv import UpdateProgram, UpdateProgramResponse
+from code_it_msgs.srv import ListPrograms, ListProgramsResponse
 
 
 class ProgramManager(object):

@@ -73,3 +73,31 @@ Blockly.JavaScript['robot_head_look_angles'] = function(block) {
   var code = 'robot.lookAtDegrees(' + angle_up + ', ' + angle_left + ');\n';
   return code;
 };
+
+Blockly.JavaScript['robot_perception_find_objects'] = function(block) {
+  var code = 'robot.findObjects()';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
+Blockly.JavaScript['robot_object_attributes'] = function(block) {
+  var dropdown_attribute = block.getFieldValue('ATTRIBUTE') || '';
+  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC) || 'null';
+  var code;
+  if (dropdown_attribute === 'X') {
+    code = value_object + '.pose.pose.position.x';
+  } else if (dropdown_attribute === 'Y') {
+    code = value_object + '.pose.pose.position.y';
+  } else if (dropdown_attribute === 'Z') {
+    code = value_object + '.pose.pose.position.z';
+  } else if (dropdown_attribute === 'LONGSIDEATTRIBUTE') {
+    code = value_object + '.scale.x';
+  } else if (dropdown_attribute === 'SHORTSIDEATTRIBUTE') {
+    code = value_object + '.scale.y';
+  } else if (dropdown_attribute === 'HEIGHT') {
+    code = value_object + '.scale.z';
+  } else {
+    code = 'null'; 
+  }
+
+  return [code, Blockly.JavaScript.ORDER_MEMBER];
+};

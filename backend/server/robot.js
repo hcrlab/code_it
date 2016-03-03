@@ -5,7 +5,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/ask_multiple_choice',
-      serviceType : 'code_it/AskMultipleChoice'
+      serviceType : 'code_it_msgs/AskMultipleChoice'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -18,6 +18,8 @@ Robot = function() {
     client.callService(request, function(result) {
       funcCall.isRunning = false;
       callback(null, result.choice);
+    }, function(error) {
+      callback(true, null);
     });
 
     if (timeout > 0) {
@@ -34,7 +36,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/display_message',
-      serviceType : 'code_it/DisplayMessage'
+      serviceType : 'code_it_msgs/DisplayMessage'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -44,6 +46,8 @@ Robot = function() {
     });
 
     client.callService(request, function(result) {
+    }, function(error) {
+      callback(true, null);
     });
 
     if (timeout > 0) {
@@ -55,12 +59,30 @@ Robot = function() {
     }
   });
 
+  var findObjects = Meteor.wrapAsync(function(callback) {
+    console.log('Finding objects');
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/find_objects',
+      serviceType : 'code_it_msgs/FindObjects'
+    });
+
+    var request = new ROSLIB.ServiceRequest({});
+    client.callService(request, function(result) {
+      console.log(result);
+      console.log(result.objects);
+      callback(null, result.objects);
+    }, function() {
+      callback(true, []);
+    });
+  });
+
   var goTo = Meteor.wrapAsync(function(location, callback) {
     console.log('Going to: ' + location);
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/go_to',
-      serviceType : 'code_it/GoTo'
+      serviceType : 'code_it_msgs/GoTo'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -87,7 +109,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/go_to_dock',
-      serviceType : 'code_it/GoToDock'
+      serviceType : 'code_it_msgs/GoToDock'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -113,7 +135,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/look_at',
-      serviceType : 'code_it/LookAt'
+      serviceType : 'code_it_msgs/LookAt'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -152,7 +174,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/say',
-      serviceType : 'code_it/Say'
+      serviceType : 'code_it_msgs/Say'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -171,6 +193,7 @@ Robot = function() {
   return {
     askMultipleChoice: askMultipleChoice,
     displayMessage: displayMessage,
+    findObjects: findObjects,
     goTo: goTo,
     goToDock: goToDock,
     lookAt: lookAt,

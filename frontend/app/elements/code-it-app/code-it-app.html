@@ -167,7 +167,7 @@
         var listClient = new ROSLIB.Service({
           ros: ROS,
           name: '/code_it/list_programs',
-          serviceType: 'code_it/ListPrograms'
+          serviceType: 'code_it_msgs/ListPrograms'
         });
         var request = new ROSLIB.ServiceRequest({});
         listClient.callService(request, function(result) {
@@ -181,7 +181,7 @@
         var addClient = new ROSLIB.Service({
           ros: ROS,
           name: '/code_it/add_program',
-          serviceType: 'code_it/AddProgram'
+          serviceType: 'code_it_msgs/AddProgram'
         });
         var request = new ROSLIB.ServiceRequest({});
         addClient.callService(request, function(result) {
@@ -194,7 +194,7 @@
         var copyClient = new ROSLIB.Service({
           ros: ROS,
           name: '/code_it/copy_program',
-          serviceType: 'code_it/CopyProgram'
+          serviceType: 'code_it_msgs/CopyProgram'
         });
         var request = new ROSLIB.ServiceRequest({
           program_id: programId
@@ -213,7 +213,7 @@
         var deleteClient = new ROSLIB.Service({
           ros: ROS,
           name: '/code_it/delete_program',
-          serviceType: 'code_it/DeleteProgram'
+          serviceType: 'code_it_msgs/DeleteProgram'
         });
         var request = new ROSLIB.ServiceRequest({
           program_id: evt.srcElement.dataset.programId

@@ -46,7 +46,7 @@ Blockly.Blocks['robot_display_message_h1h2'] = {
         .appendField("timeout (s)");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(230);
+    this.setColour(260);
     this.setTooltip('Displays a message with both big and regular size text.');
     this.setHelpUrl('');
   }
@@ -67,7 +67,7 @@ Blockly.Blocks['robot_display_ask_multiple_choice'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("timeout (seconds)");
     this.setOutput(true, "String");
-    this.setColour(230);
+    this.setColour(260);
     this.setTooltip('Asks a multiple choice question. The user\'s choice is returned.');
     this.setHelpUrl('');
   }
@@ -163,8 +163,31 @@ Blockly.Blocks['robot_head_look_angles'] = {
         .appendField(new Blockly.FieldAngle('0'), "LEFT");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(65);
+    this.setColour(20);
     this.setTooltip('Look some number of degrees up and/or to the left.');
+    this.setHelpUrl('');
+  }
+};
+
+
+Blockly.Blocks['robot_perception_find_objects'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("look for objects");
+    this.setOutput(true, "Array");
+    this.setColour(230);
+    this.setTooltip('Makes the robot look for objects where it\'s looking.');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['robot_object_attributes'] = {
+  init: function() {
+    this.appendValueInput("OBJECT")
+        .appendField(new Blockly.FieldDropdown([["x of object", "X"], ["y of object", "Y"], ["z of object", "Z"], ["long side length of object", "LONGSIDELENGTH"], ["short side length of object", "SHORTSIDELENGTH"], ["height of object", "HEIGHT"]]), "ATTRIBUTE");
+    this.setOutput(true);
+    this.setColour(230);
+    this.setTooltip('Gets an attribute about the given object.');
     this.setHelpUrl('');
   }
 };
