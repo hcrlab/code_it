@@ -69,8 +69,6 @@ Robot = function() {
 
     var request = new ROSLIB.ServiceRequest({});
     client.callService(request, function(result) {
-      console.log(result);
-      console.log(result.objects);
       callback(null, result.objects);
     }, function() {
       callback(true, []);
