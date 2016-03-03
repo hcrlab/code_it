@@ -6,6 +6,24 @@ From the interface, you can run programs and stop them mid-program.
 
 CodeIt! is compatible with [RWS](https://github.com/hcrlab/rws).
 
+## How it works
+CodeIt! provides a frontend and a backend.
+The frontend is a website that lets you create programs with the Blockly programming interface.
+It also has a simple interface for adding, updating, or deleting programs.
+
+The backend provides a ROS actionlib server that runs JavaScript programs.
+The programs are run through a sandboxed interpreter.
+You must define the robot primitives that the interpreter will run.
+Most primitives do very little work and just call a ROS service.
+The backend also includes a database of programs that have been created.
+
+Note that CodeIt! itself does not implement any robot functionality.
+Instead, it calls ROS services to do the actual work on the robot, assuming that some nodes exist which provide these services.
+It is up to you to implement these services to do things on your robot.
+We have some pre-made implementations of these services for the [PR2](https://github.com/hcrlab/code_it_pr2) and the [Turtlebot](https://github.com/hcrlab/code_it_turtlebot).
+However, these are still in the early stages of development and are not documented.
+If you are actually interested in using these, please contact us by filing an issue and we'll be happy to help.
+
 ## Getting started
 ### Installing
 This project uses [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules), so use `git clone --recursive git@github.com:hcrlab/code_it.git` to clone this repo.
