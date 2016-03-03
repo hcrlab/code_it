@@ -32,6 +32,7 @@ If you are actually interested in using these, please contact us by filing an is
 This project uses [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules), so use `git clone --recursive git@github.com:hcrlab/code_it.git` to clone this repo.
 
 The requirements are:
+- [code_it_msgs](https://github.com/hcrlab/code_it_msgs)
 - MongoDB - install MongoDB and pymongo
 - Meteor - install from the Meteor website
 - Node - install from the Node website.
