@@ -8,6 +8,8 @@ CodeIt! is compatible with [RWS](https://github.com/hcrlab/rws).
 
 ## Getting started
 ### Installing
+This project uses [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules), so use `git clone --recursive git@github.com:hcrlab/code_it.git` to clone this repo.
+
 The requirements are:
 - MongoDB - install MongoDB and pymongo
 - Meteor - install from the Meteor website
@@ -62,13 +64,33 @@ Note that your primitive can only take in arguments that are primitive types (St
 Passing in an arbitrary object or a callback function is not supported.
 
 Next, you need to add the primitive to the interpreter.
-In `backend/server/robot.js`, add a call to your primitive using roslibjs to the `Robot` function.
-Be sure to update the return value of the `Robot` function, at the bottom of the file.
+In `backend/server/robot.js`, add a call to your primitive using roslibjs to the `Robot` object.
+Be sure to update the return value of the `Robot` object, at the bottom of the file.
 
 Finally, register your primitive with the interpreter's sandbox.
 Edit the function `interpreterApi` in `backend/server/interpreter.js`.
 The line `interpreter.setProperty(myRobot, 'myFunction', ...)` means that your primitive will be available as the function `robot.myFunction(...)` in the interpreter.
 To create a global function, change the line to `interpreter.setProperty(scope, 'myFunction', ...)`, which creates the global function `myFunction(...)`.
+
+#### Using objects or arrays as arguments or return values
+This project uses a slightly modified version of the JS-Interpreter that also allows you to pass objects in or return objects from methods.
+
+To return an object from a primitive, use `toPseudoObject`:
+```js
+var wrapper = function() {
+  var people = Robot.findPeople();
+  return interpreter.toPseudoObject(people);
+}
+```
+
+To use an object passed into a primitive, use `toNativeObject`:
+```js
+var wrapper = function(pseudoPerson) {
+  var person = interpreter.toNativeObject(pseudoPerson);
+  var name = Robot.recognizePerson(person);
+  return interpreter.createPrimitive(name);
+}
+```
 
 ### Implement the frontend
 It's recommended that you read the [Custom Blocks](https://developers.google.com/blockly/custom-blocks/overview) section of the Blockly documentation to learn how to make custom blocks in detail.
@@ -83,3 +105,17 @@ Finally, add the block to the Blockly toolbox, so that users can see the block a
 To do that, edit `frontend/app/elements/code-it-blockly-toolbox/code-it-blockly-toolbox.html` and add your block to the toolbox according to the [toolbox documentation](https://developers.google.com/blockly/installation/toolbox).
 Because toolbox configurations can vary from robot to robot, we don't check in robot-specific blocks to the toolbox in this repository.
 You can tell Git not to track your toolbox changes using `git update-index --assume-unchanged frontend/app/elements/code-it-toolbox/code-it-toolbox.html`.
+
+## About
+This project is based on *Custom Programs*, as described in [Design and Evaluation of a Rapid Programming System for Service Robots](https://drive.google.com/a/cs.washington.edu/file/d/0B77PnOCaAq8seFE2UFl6ZHBzZVk/view).
+If you use this work in your research, we would appreciate you citing it:
+```bib
+@inproceedings{huang2016design,
+  title={Design and Evaluation of a Rapid Programming System for Service Robots},
+  author={Huang, Justin and Lau, Tessa and Cakmak, Maya},
+  booktitle={Proceedings of the 2016 ACM/IEEE international conference on Human-robot interaction (HRI)},
+  pages={295--302},
+  year={2016},
+  organization={ACM}
+}
+```
