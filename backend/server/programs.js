@@ -40,11 +40,12 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'goToDock', interpreter.createNativeFunction(wrapper));
 
-  var wrapper = function(x, y, z, frame_id) {
-    var x = x ? x.toNumber() : 0;
-    var y = y ? y.toNumber() : 0;
-    var z = z ? z.toNumber() : 0;
-    var frame_id = frame_id ? frame_id.toString() : '';
+  var wrapper = function(obj) {
+    var obj = interpreter.toNativeObject(obj);
+    var x = obj.pose.pose.position.x;
+    var y = obj.pose.pose.position.y;
+    var z = obj.pose.pose.position.z;
+    var frame_id = 'base_link';
     return interpreter.createPrimitive(Robot.lookAt(x, y, z, frame_id));
   };
   interpreter.setProperty(myRobot, 'lookAt', interpreter.createNativeFunction(wrapper));
