@@ -1,4 +1,5 @@
 <launch>
   <node pkg="code_it" type="programs.py" name="program_db" />
   <node pkg="code_it" type="run_js_interpreter.sh" name="js_interpreter" cwd="node" />
+  <include file="$(find code_it_pr2)/launch/code_it_pr2.launch" />
 </launch>
