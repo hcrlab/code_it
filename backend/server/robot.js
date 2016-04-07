@@ -188,6 +188,26 @@ Robot = function() {
     });
   });
 
+  var tuckArms = Meteor.wrapAsync(function(tuck_left, tuck_right, callback) {
+    console.log('Setting arms, tuck left: ' + tuck_left + ', tuck_right: ' + tuck_right);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/tuck_arms',
+      serviceType : 'code_it_msgs/TuckArms'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      tuck_left: tuck_left,
+      tuck_right: tuck_right
+    });
+
+    client.callService(request, function(result) {
+      callback(null, null);
+    }, function(error) {
+      callback(null, null);
+    });
+  });
+
   return {
     askMultipleChoice: askMultipleChoice,
     displayMessage: displayMessage,
@@ -197,5 +217,6 @@ Robot = function() {
     lookAt: lookAt,
     lookAtDegrees: lookAtDegrees,
     say: say,
+    tuckArms: tuckArms,
   };
 }();

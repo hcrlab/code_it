@@ -45,7 +45,7 @@ function interpreterApi(interpreter, scope) {
     var x = obj.pose.pose.position.x;
     var y = obj.pose.pose.position.y;
     var z = obj.pose.pose.position.z;
-    var frame_id = 'base_link';
+    var frame_id = 'base_footprint';
     return interpreter.createPrimitive(Robot.lookAt(x, y, z, frame_id));
   };
   interpreter.setProperty(myRobot, 'lookAt', interpreter.createNativeFunction(wrapper));
@@ -62,6 +62,13 @@ function interpreterApi(interpreter, scope) {
     return interpreter.createPrimitive(Robot.say(text));
   };
   interpreter.setProperty(myRobot, 'say', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(tuck_left, tuck_right) {
+    var tuck_left = tuck_left ? tuck_left.toBoolean() : false;
+    var tuck_right = tuck_right ? tuck_right.toBoolean() : false;
+    return interpreter.createPrimitive(Robot.tuckArms(tuck_left, tuck_right));
+  }
+  interpreter.setProperty(myRobot, 'tuckArms', interpreter.createNativeFunction(wrapper));
 };
 
 Runtime = function() {
