@@ -57,6 +57,19 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'lookAtDegrees', interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function(obj, arm_id) {
+    var obj = obj ? interpreter.toNativeObject(obj) : null;
+    var arm_id = arm_id ? arm_id.toNumber() : 0;
+    return interpreter.createPrimitive(Robot.pick(obj, arm_id));
+  };
+  interpreter.setProperty(myRobot, 'pick', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(arm_id) {
+    var arm_id = arm_id ? arm_id.toNumber() : 0;
+    return interpreter.createPrimitive(Robot.place(arm_id));
+  };
+  interpreter.setProperty(myRobot, 'place', interpreter.createNativeFunction(wrapper));
+
   var wrapper = function(text) {
     var text = text ? text.toString() : '';
     return interpreter.createPrimitive(Robot.say(text));
@@ -147,7 +160,7 @@ Meteor.startup(function() {
   var runAction = new ROSLIB.SimpleActionServer({
     ros: ROS,
     serverName: '/run_program',
-    actionName: 'code_it/RunProgramAction'
+    actionName: 'code_it_msgs/RunProgramAction'
   });
 
   runAction.on('goal', Meteor.bindEnvironment(function(goal) {
