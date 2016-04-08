@@ -167,6 +167,49 @@ Robot = function() {
     lookAt(x, y, z, '', callback);
   });
 
+  var pick = Meteor.wrapAsync(function(obj, arm_id, callback) {
+    console.log('Picking object with arm_id ' + arm_id);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/pick',
+      serviceType : 'code_it_msgs/Pick'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      object: obj,
+      arm: {
+        arm_id: arm_id
+      }
+    });
+
+    client.callService(request, function(result) {
+      callback(null, true);
+    }, function(error) {
+      callback(null, false);
+    });
+  });
+
+  var place = Meteor.wrapAsync(function(arm_id, callback) {
+    console.log('Placing object with arm_id ' + arm_id);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/place',
+      serviceType : 'code_it_msgs/Place'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      arm: {
+        arm_id: arm_id
+      }
+    });
+
+    client.callService(request, function(result) {
+      callback(null, true);
+    }, function(error) {
+      callback(null, false);
+    });
+  });
+
   var say = Meteor.wrapAsync(function(text, callback) {
     console.log('Saying: ' + text);
     var client = new ROSLIB.Service({
@@ -188,6 +231,50 @@ Robot = function() {
     });
   });
 
+  var setGripper = Meteor.wrapAsync(function(side, action, max_effort, callback) {
+    console.log('Setting gripper, side: ' + side + ', ' + action);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/set_gripper',
+      serviceType : 'code_it_msgs/SetGripper'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      gripper: {
+        id: side
+      },
+      action: action,
+      max_effort: max_effort
+    });
+
+    client.callService(request, function(result) {
+      callback(null, null);
+    }, function(error) {
+      callback(null, null);
+    });
+  });
+
+  var tuckArms = Meteor.wrapAsync(function(tuck_left, tuck_right, callback) {
+    console.log('Setting arms, tuck left: ' + tuck_left + ', tuck_right: ' + tuck_right);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/tuck_arms',
+      serviceType : 'code_it_msgs/TuckArms'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      tuck_left: tuck_left,
+      tuck_right: tuck_right
+    });
+
+    client.callService(request, function(result) {
+      callback(null, null);
+    }, function(error) {
+      console.log(error);
+      callback(null, null);
+    });
+  });
+
   return {
     askMultipleChoice: askMultipleChoice,
     displayMessage: displayMessage,
@@ -196,6 +283,10 @@ Robot = function() {
     goToDock: goToDock,
     lookAt: lookAt,
     lookAtDegrees: lookAtDegrees,
+    pick: pick,
+    place: place,
     say: say,
+    setGripper: setGripper,
+    tuckArms: tuckArms,
   };
 }();
