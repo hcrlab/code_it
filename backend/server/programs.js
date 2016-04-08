@@ -76,6 +76,14 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'say', interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function(side, action, max_effort) {
+    var side = side ? side.toNumber() : 0;
+    var arm_id = action ? action.toNumber() : 0;
+    var max_effort = max_effort ? max_effort.toNumber() : -1;
+    return interpreter.createPrimitive(Robot.setGripper(side, arm_id, max_effort));
+  };
+  interpreter.setProperty(myRobot, 'setGripper', interpreter.createNativeFunction(wrapper));
+
   var wrapper = function(tuck_left, tuck_right) {
     var tuck_left = tuck_left ? tuck_left.toBoolean() : false;
     var tuck_right = tuck_right ? tuck_right.toBoolean() : false;

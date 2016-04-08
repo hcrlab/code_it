@@ -231,6 +231,29 @@ Robot = function() {
     });
   });
 
+  var setGripper = Meteor.wrapAsync(function(side, action, max_effort, callback) {
+    console.log('Setting gripper, side: ' + side + ', ' + action);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/set_gripper',
+      serviceType : 'code_it_msgs/SetGripper'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      gripper: {
+        id: side
+      },
+      action: action,
+      max_effort: max_effort
+    });
+
+    client.callService(request, function(result) {
+      callback(null, null);
+    }, function(error) {
+      callback(null, null);
+    });
+  });
+
   var tuckArms = Meteor.wrapAsync(function(tuck_left, tuck_right, callback) {
     console.log('Setting arms, tuck left: ' + tuck_left + ', tuck_right: ' + tuck_right);
     var client = new ROSLIB.Service({
@@ -263,6 +286,7 @@ Robot = function() {
     pick: pick,
     place: place,
     say: say,
+    setGripper: setGripper,
     tuckArms: tuckArms,
   };
 }();
