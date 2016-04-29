@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
 
 <dom-module id="code-it-app">
   <template>
@@ -61,41 +63,57 @@
       .programList tr:last-child td {
         border-bottom: none;
       }
+      #confirmDeleteDialog {
+        --paper-dialog-background-color: #fff;
+          min-width: 275px;
+      }
+      #confirmDeleteDialog h1 {
+        @apply(--paper-font-title);
+      }
+      #confirmDeleteDialog paper-button:hover {
+        background-color: #fff;
+      }
     </style>
     <iron-pages attr-for-selected="data-route" selected="{{route}}" on-iron-select="handleRouteChange">
       <section data-route="home">
         <div class="title">CodeIt!</div> 
         <paper-button class="create" raised on-tap="onCreate"><iron-icon icon="add"></iron-icon> Create new program</paper-button>
         <paper-material class="listBack">
-
-        <table class="programList">
-          <thead>
-            <tr>
-              <th>Program</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <template is="dom-repeat" items="{{programs}}">
+          <table class="programList">
+            <thead>
               <tr>
-                <td>{{item.name}}</td>
-                <td>
-                  <paper-button on-tap="onEdit" noink data-program-id$="{{item.program_id}}">Edit / Run</paper-button>
-                  <paper-button on-tap="onCopy" noink data-program-id$="{{item.program_id}}">Copy</paper-button>
-                  <paper-button class="delete" noink data-program-id$="{{item.program_id}}" on-tap="onDelete">Delete</paper-button>
-                </td>
+                <th>Program</th>
+                <th>Actions</th>
               </tr>
-            </template>
-            <template is="dom-if" if="{{noPrograms}}">
-              <tr>
-                <td colspan="2">
-                  No programs yet.
-                </td>
-              </tr>
-            </template>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <template is="dom-repeat" items="{{programs}}">
+                <tr>
+                  <td>{{item.name}}</td>
+                  <td>
+                    <paper-button on-tap="onEdit" noink data-program-id$="{{item.program_id}}">Edit / Run</paper-button>
+                    <paper-button on-tap="onCopy" noink data-program-id$="{{item.program_id}}">Copy</paper-button>
+                    <paper-button class="delete" noink data-program-id$="{{item.program_id}}" on-tap="onMaybeDelete">Delete</paper-button>
+                  </td>
+                </tr>
+              </template>
+              <template is="dom-if" if="{{noPrograms}}">
+                <tr>
+                  <td colspan="2">
+                    No programs yet.
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
         </paper-material>
+        <paper-dialog id="confirmDeleteDialog" modal>
+          <h1>Delete program?</h1>
+          <div class="buttons">
+            <paper-button dialog-dismiss>Cancel</paper-button>
+            <paper-button dialog-confirm on-tap="onDelete">Delete</paper-button>
+          </div>
+        </paper-dialog>
       </section>
       <section data-route="program" class="vertical layout">
         <div><paper-button on-tap="goToProgramList" noink><iron-icon icon="arrow-back"></iron-icon> Back to program list</paper-button></div>
@@ -126,6 +144,9 @@
         programs: {
           type: Array,
           value: [],
+        },
+        programToDelete: {
+          type: String,
         },
         noPrograms: {
           type: Boolean,
@@ -208,6 +229,10 @@
         var programId = evt.srcElement.dataset.programId;
         page.redirect('/program/' + programId);
       },
+      onMaybeDelete: function(evt) {
+        this.programToDelete = evt.srcElement.dataset.programId;
+        this.$.confirmDeleteDialog.open();
+      },
       onDelete: function(evt) {
         var that = this;
         var deleteClient = new ROSLIB.Service({
@@ -216,9 +241,10 @@
           serviceType: 'code_it_msgs/DeleteProgram'
         });
         var request = new ROSLIB.ServiceRequest({
-          program_id: evt.srcElement.dataset.programId
+          program_id: that.programToDelete,
         });
         deleteClient.callService(request, function() {
+          that.programToDelete = "";
           that.updateProgramList();
         }); 
       },
