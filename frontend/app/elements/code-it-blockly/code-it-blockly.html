@@ -207,6 +207,8 @@
             minScale: 0.3,
             scaleSpeed: 1.2}
           });
+          Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+          Blockly.JavaScript.addReservedWords('highlightBlock');
           var that = this;
           var updateCode = function() {
             var code = Blockly.JavaScript.workspaceToCode(workspace);
@@ -271,6 +273,7 @@
           serverName: '/run_program',
           actionName: 'code_it_msgs/RunProgramAction'
         });
+        var workspace = Blockly.getMainWorkspace();
 
         if (!this.isRunning) {
           var goal = new ROSLIB.Goal({
@@ -281,10 +284,13 @@
           });
 
           goal.on('feedback', function(feedback) {
-            console.log('Feedback: ' + feedback.block_id);
+            // Turn traceOn for every feedback message. Blockly turns tracing
+            // (and therefore highlighting) whenever the workspace is dragged.
+            workspace.traceOn(true);
+            workspace.highlightBlock(feedback.block_id);
           });
           goal.on('result', function(result) {
-            console.log(result);
+            // RunProgramAction doesn't have a result yet.
           });
 
           goal.send();

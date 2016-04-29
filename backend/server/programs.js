@@ -90,6 +90,15 @@ function interpreterApi(interpreter, scope) {
     return interpreter.createPrimitive(Robot.tuckArms(tuck_left, tuck_right));
   }
   interpreter.setProperty(myRobot, 'tuckArms', interpreter.createNativeFunction(wrapper));
+
+  // Misc functions.
+  var wrapper = function(blockId) {
+    var blockId = blockId ? blockId.toString() : "";
+    return interpreter.createPrimitive(function() {
+      interpreter.blockId = blockId;
+    }());
+  }
+  interpreter.setProperty(scope, 'highlightBlock', interpreter.createNativeFunction(wrapper));
 };
 
 Runtime = function() {
@@ -114,7 +123,7 @@ Runtime = function() {
     var msg = new ROSLIB.Message({data: true});
     isRunningTopic.publish(msg);
 
-    function nextStep(stepNum) {
+    function nextStep() {
       if (!isRunning) {
         if (action.currentGoal) {
           // We don't need onProgramEnd here because this should only be reached via stopProgram.
@@ -124,13 +133,12 @@ Runtime = function() {
       }
       try {
         if (interpreter.step()) {
-          // TODO(jstn): Report block number instead of step number
-          var feedback = {block_id: stepNum};
+          var feedback = {block_id: interpreter.blockId};
           if (action.currentGoal) {
             action.sendFeedback(feedback);
           }
           Meteor.setTimeout(function() {
-            nextStep(stepNum + 1);
+            nextStep();
           }, 0);
         } else {
           console.log('Program complete.');
@@ -141,12 +149,13 @@ Runtime = function() {
         }
       } catch(e) {
         console.log('Error running program ' + program);
+        console.log(e);
         console.log(e.stack);
         action.setAborted(e.toString()); 
         onProgramEnd();
       }
     }
-    nextStep(0);
+    nextStep();
   }
 
   var stopProgram = function(action) {
