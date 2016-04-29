@@ -57,11 +57,32 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'lookAtDegrees', interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function(obj, arm_id) {
+    var obj = obj ? interpreter.toNativeObject(obj) : null;
+    var arm_id = arm_id ? arm_id.toNumber() : 0;
+    return interpreter.createPrimitive(Robot.pick(obj, arm_id));
+  };
+  interpreter.setProperty(myRobot, 'pick', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(arm_id) {
+    var arm_id = arm_id ? arm_id.toNumber() : 0;
+    return interpreter.createPrimitive(Robot.place(arm_id));
+  };
+  interpreter.setProperty(myRobot, 'place', interpreter.createNativeFunction(wrapper));
+
   var wrapper = function(text) {
     var text = text ? text.toString() : '';
     return interpreter.createPrimitive(Robot.say(text));
   };
   interpreter.setProperty(myRobot, 'say', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(side, action, max_effort) {
+    var side = side ? side.toNumber() : 0;
+    var arm_id = action ? action.toNumber() : 0;
+    var max_effort = max_effort ? max_effort.toNumber() : -1;
+    return interpreter.createPrimitive(Robot.setGripper(side, arm_id, max_effort));
+  };
+  interpreter.setProperty(myRobot, 'setGripper', interpreter.createNativeFunction(wrapper));
 
   var wrapper = function(tuck_left, tuck_right) {
     var tuck_left = tuck_left ? tuck_left.toBoolean() : false;
@@ -147,7 +168,7 @@ Meteor.startup(function() {
   var runAction = new ROSLIB.SimpleActionServer({
     ros: ROS,
     serverName: '/run_program',
-    actionName: 'code_it/RunProgramAction'
+    actionName: 'code_it_msgs/RunProgramAction'
   });
 
   runAction.on('goal', Meteor.bindEnvironment(function(goal) {
