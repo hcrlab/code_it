@@ -233,7 +233,7 @@
         this.programToDelete = evt.srcElement.dataset.programId;
         this.$.confirmDeleteDialog.open();
       },
-      onDelete: function(evt) {
+      onDelete: function() {
         var that = this;
         var deleteClient = new ROSLIB.Service({
           ros: ROS,
@@ -244,7 +244,7 @@
           program_id: that.programToDelete,
         });
         deleteClient.callService(request, function() {
-          that.programToDelete = "";
+          that.programToDelete = '';
           that.updateProgramList();
         }); 
       },

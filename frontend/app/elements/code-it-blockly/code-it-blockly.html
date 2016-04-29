@@ -289,9 +289,9 @@
             workspace.traceOn(true);
             workspace.highlightBlock(feedback.block_id);
           });
-          goal.on('result', function(result) {
-            // RunProgramAction doesn't have a result yet.
-          });
+          // RunProgramAction doesn't have a result yet.
+          //goal.on('result', function(result) {
+          //});
 
           goal.send();
           console.log('Running program: ' + that.code);
