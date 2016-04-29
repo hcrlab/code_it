@@ -16,15 +16,21 @@ Robot = function() {
     var funcCall = this;
     funcCall.isRunning = true;
     client.callService(request, function(result) {
-      funcCall.isRunning = false;
-      callback(null, result.choice);
+      if (funcCall.isRunning) {
+        funcCall.isRunning = false;
+        callback(null, result.choice);
+      }
     }, function(error) {
-      callback(true, null);
+      if (funcCall.isRunning) {
+        funcCall.isRunning = false;
+        callback(true, null);
+      }
     });
 
     if (timeout > 0) {
       Meteor.setTimeout(function() {
         if (funcCall.isRunning) {
+          funcCall.isRunning = false;
           callback(null, null); // err, result
         }
       }, timeout * 1000);
@@ -45,17 +51,29 @@ Robot = function() {
       timeout: timeout
     });
 
+    var funcCall = this;
+    funcCall.isRunning = true;
+
     client.callService(request, function(result) {
     }, function(error) {
-      callback(true, null);
+      if (funcCall.isRunning) {
+        funcCall.isRunning = false;
+        callback(true, null);
+      }
     });
 
     if (timeout > 0) {
       Meteor.setTimeout(function() {
-        callback(null, null); // err, result
+        if (funcCall.isRunning) {
+          funcCall.isRunning = false;
+          callback(null, null); // err, result
+        }
       }, timeout * 1000);
     } else {
-      callback(null, null);
+      if (funcCall.isRunning) {
+        funcCall.isRunning = false;
+        callback(null, null);
+      }
     }
   });
 
