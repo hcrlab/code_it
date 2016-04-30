@@ -40,6 +40,12 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'goToDock', interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function(gripper) {
+    var gripper = gripper ? gripper.toString() : '';
+    return interpreter.createPrimitive(Robot.isGripperOpen(gripper));
+  };
+  interpreter.setProperty(myRobot, 'isGripperOpen', interpreter.createNativeFunction(wrapper));
+
   var wrapper = function(obj) {
     var obj = interpreter.toNativeObject(obj);
     var x = obj.pose.pose.position.x;
