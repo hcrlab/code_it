@@ -23,7 +23,7 @@ Robot = function() {
     }, function(error) {
       if (funcCall.isRunning) {
         funcCall.isRunning = false;
-        callback(true, null);
+        callback(error ? error : true, null);
       }
     });
 
@@ -58,7 +58,7 @@ Robot = function() {
     }, function(error) {
       if (funcCall.isRunning) {
         funcCall.isRunning = false;
-        callback(true, null);
+        callback(error ? error : true, null);
       }
     });
 
@@ -116,7 +116,7 @@ Robot = function() {
       // Failure callback
       console.log('GoTo service call failed.');
       console.log(error);
-      callback(null, false);
+      callback(error ? error : true, null);
     });
   });
 
@@ -142,7 +142,38 @@ Robot = function() {
       // Failure callback
       console.log('GoToDock service call failed.');
       console.log(error);
-      callback(null, false);
+      callback(error ? error : true, null);
+    });
+  });
+
+  var isGripperOpen = Meteor.wrapAsync(function(gripper, callback) {
+    console.log('Checking ' + gripper + ' gripper state.');
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/is_gripper_open',
+      serviceType : 'code_it_msgs/IsGripperOpen'
+    });
+
+    var gripper_id = 0;
+    if (gripper === 'LEFT') {
+      gripper_id = 1;
+    } else if (gripper === 'RIGHT') {
+      gripper_id = 2;
+    }
+
+    var request = new ROSLIB.ServiceRequest({
+      gripper: {
+        id: gripper_id
+      }
+    });
+
+    client.callService(request, function(result) {
+      callback(null, result.is_open);
+    }, function(error) {
+      // Failure callback
+      console.log('IsGripperOpen service call failed.');
+      console.log(error);
+      callback(error ? error : true, null);
     });
   });
 
@@ -170,7 +201,7 @@ Robot = function() {
     client.callService(request, function(result) {
       callback(null, null);
     }, function(error) {
-      callback(null, null);
+      callback(error ? error : true, null);
     });
   });
 
@@ -203,7 +234,7 @@ Robot = function() {
     client.callService(request, function(result) {
       callback(null, true);
     }, function(error) {
-      callback(null, false);
+      callback(error ? error : true, false);
     });
   });
 
@@ -224,7 +255,7 @@ Robot = function() {
     client.callService(request, function(result) {
       callback(null, true);
     }, function(error) {
-      callback(null, false);
+      callback(error ? error : true, false);
     });
   });
 
@@ -245,7 +276,7 @@ Robot = function() {
     client.callService(request, function(result) {
       callback(null, null);
     }, function(error) {
-      callback(null, null);
+      callback(error ? error : true, null);
     });
   });
 
@@ -268,7 +299,9 @@ Robot = function() {
     client.callService(request, function(result) {
       callback(null, null);
     }, function(error) {
-      callback(null, null);
+      console.log('Error calling SetGripper');
+      console.log(error);
+      callback(error ? error : true, null);
     });
   });
 
@@ -299,6 +332,7 @@ Robot = function() {
     findObjects: findObjects,
     goTo: goTo,
     goToDock: goToDock,
+    isGripperOpen: isGripperOpen,
     lookAt: lookAt,
     lookAtDegrees: lookAtDegrees,
     pick: pick,
