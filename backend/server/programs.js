@@ -115,6 +115,17 @@ Runtime = function() {
     messageType: 'std_msgs/Bool',
     latch: true
   });
+  var errorTopic = new ROSLIB.Topic({
+    ros: ROS,
+    name: 'code_it/errors',
+    messageType: 'std_msgs/String'
+  });
+
+  var publishError = function(message) {
+    var msg = new ROSLIB.Message({data: message});
+    console.log('Publishing error: ' + message);
+    errorTopic.publish(msg);
+  };
 
   var onProgramEnd = function() {
     var msg = new ROSLIB.Message({data: false});
@@ -139,6 +150,11 @@ Runtime = function() {
       }
       try {
         if (interpreter.step()) {
+          var error = Robot.getError();
+          if (error) {
+            publishError(error);
+            Robot.setError('');
+          }
           var feedback = {block_id: interpreter.blockId};
           if (action.currentGoal) {
             action.sendFeedback(feedback);
@@ -154,10 +170,11 @@ Runtime = function() {
           onProgramEnd();
         }
       } catch(e) {
-        console.log('Error running program ' + program);
+        console.log('Error: ');
         console.log(e);
-        console.log(e.stack);
+        e.stack && console.log(e.stack);
         action.setAborted(e.toString()); 
+        publishError('There was an error while running the program: ' + e.toString());
         onProgramEnd();
       }
     }

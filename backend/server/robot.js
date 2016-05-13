@@ -1,5 +1,15 @@
 // The implementation of the primitives.
 Robot = function() {
+  var error = ''; // Most recent error message, empty string for no error.
+
+  var getError = function() {
+    return error;
+  }
+
+  var setError = function(message) {
+    error = message;
+  }
+
   var askMultipleChoice = Meteor.wrapAsync(function(question, choices, timeout, callback) {
     console.log('Asking: ' + question + ', choices: ' + choices);
     var client = new ROSLIB.Service({
@@ -18,12 +28,16 @@ Robot = function() {
     client.callService(request, function(result) {
       if (funcCall.isRunning) {
         funcCall.isRunning = false;
+        setError(result.error);
+        if (result.error) {
+          callback(result.error, null); // Must quit program, need user input to proceed.
+        }
         callback(null, result.choice);
       }
     }, function(error) {
       if (funcCall.isRunning) {
         funcCall.isRunning = false;
-        callback(error ? error : true, null);
+        callback(error ? error : 'Failed to ask multiple choice question.', null);
       }
     });
 
@@ -55,10 +69,13 @@ Robot = function() {
     funcCall.isRunning = true;
 
     client.callService(request, function(result) {
+        funcCall.isRunning = false;
+        setError(result.error); // Failure is probaby not critical enough to quit over.
+        callback(null, null);
     }, function(error) {
       if (funcCall.isRunning) {
         funcCall.isRunning = false;
-        callback(error ? error : true, null);
+        callback(error ? error : 'Failed to display message.', null);
       }
     });
 
@@ -69,11 +86,6 @@ Robot = function() {
           callback(null, null); // err, result
         }
       }, timeout * 1000);
-    } else {
-      if (funcCall.isRunning) {
-        funcCall.isRunning = false;
-        callback(null, null);
-      }
     }
   });
 
@@ -87,9 +99,14 @@ Robot = function() {
 
     var request = new ROSLIB.ServiceRequest({});
     client.callService(request, function(result) {
-      callback(null, result.objects);
+      setError(result.error);
+      if (result.error) {
+        callback(null, []); // Return empty list on error.
+      } else {
+        callback(null, result.objects);
+      }
     }, function() {
-      callback(true, []);
+      callback(error ? error : 'Failed to look for objects.', []);
     });
   });
 
@@ -108,15 +125,13 @@ Robot = function() {
     client.callService(request, function(result) {
       console.log('Done navigating to ' + location + ', result:');
       console.log(result);
+      setError(result.error);
       if (result.error !== '') { // Navigation failed
         callback(null, false); // result = false
       }
       callback(null, true); // Success
     }, function(error) {
-      // Failure callback
-      console.log('GoTo service call failed.');
-      console.log(error);
-      callback(error ? error : true, null);
+      callback(error ? error : 'Failed to run navigation.', null);
     });
   });
 
@@ -134,15 +149,13 @@ Robot = function() {
     client.callService(request, function(result) {
       console.log('Done docking');
       console.log(result);
+      setError(result.error);
       if (result.error !== '') { // Docking failed
         callback(null, false); // result = false
       }
       callback(null, true); // Success
     }, function(error) {
-      // Failure callback
-      console.log('GoToDock service call failed.');
-      console.log(error);
-      callback(error ? error : true, null);
+      callback(error ? error : 'Failed to run navigation to dock.', null);
     });
   });
 
@@ -168,12 +181,14 @@ Robot = function() {
     });
 
     client.callService(request, function(result) {
-      callback(null, result.is_open);
+      setError(result.error);
+      if (result.error) {
+        callback(result.error, null); // No recovery if error with gripper service.
+      } else {
+        callback(null, result.is_open);
+      }
     }, function(error) {
-      // Failure callback
-      console.log('IsGripperOpen service call failed.');
-      console.log(error);
-      callback(error ? error : true, null);
+      callback(error ? error : 'Failed to check gripper state.', null);
     });
   });
 
@@ -199,9 +214,13 @@ Robot = function() {
     });
 
     client.callService(request, function(result) {
+      setError(result.error);
+      if (result.error) {
+        callback(result.error, null); // No recovery.
+      }
       callback(null, null);
     }, function(error) {
-      callback(error ? error : true, null);
+      callback(error ? error : 'Failed to look at target.', null);
     });
   });
 
@@ -232,9 +251,14 @@ Robot = function() {
     });
 
     client.callService(request, function(result) {
-      callback(null, true);
+      setError(result.error);
+      if (result.error) {
+        callback(null, false);
+      } else {
+        callback(null, true);
+      }
     }, function(error) {
-      callback(error ? error : true, false);
+      callback(error ? error : 'Failed to run object picking.', false);
     });
   });
 
@@ -253,9 +277,14 @@ Robot = function() {
     });
 
     client.callService(request, function(result) {
-      callback(null, true);
+      setError(result.error);
+      if (result.error) {
+        callback(null, false);
+      } else {
+        callback(null, true);
+      }
     }, function(error) {
-      callback(error ? error : true, false);
+      callback(error ? error : 'Failed to run object placing.', false);
     });
   });
 
@@ -274,9 +303,10 @@ Robot = function() {
     // Some implementations may not know when the sound has finished.
     // Keep in mind that this block may not be synchronous.
     client.callService(request, function(result) {
+      setError(result.error); // Sound not playing is probably not fatal enough to quit the program over.
       callback(null, null);
     }, function(error) {
-      callback(error ? error : true, null);
+      callback(error ? error : 'Speech failed to run.', null);
     });
   });
 
@@ -297,11 +327,14 @@ Robot = function() {
     });
 
     client.callService(request, function(result) {
-      callback(null, null);
+      setError(result.error);
+      if (result.error) {
+        callback(result.error, null); // No recovery.
+      } else {
+        callback(null, null);
+      }
     }, function(error) {
-      console.log('Error calling SetGripper');
-      console.log(error);
-      callback(error ? error : true, null);
+      callback(error ? error : 'Failed to set gripper.', null);
     });
   });
 
@@ -319,10 +352,14 @@ Robot = function() {
     });
 
     client.callService(request, function(result) {
-      callback(null, null);
+      setError(result.error);
+      if (result.error) {
+        callback(result.error, null);
+      } else {
+        callback(null, null);
+      }
     }, function(error) {
-      console.log(error);
-      callback(null, null);
+      callback(error ? error : 'Failed to tuck arms.', null);
     });
   });
 
@@ -330,6 +367,7 @@ Robot = function() {
     askMultipleChoice: askMultipleChoice,
     displayMessage: displayMessage,
     findObjects: findObjects,
+    getError: getError,
     goTo: goTo,
     goToDock: goToDock,
     isGripperOpen: isGripperOpen,
@@ -338,6 +376,7 @@ Robot = function() {
     pick: pick,
     place: place,
     say: say,
+    setError: setError,
     setGripper: setGripper,
     tuckArms: tuckArms,
   };

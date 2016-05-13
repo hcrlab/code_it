@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="blockly-import.html">
 <dom-module id="code-it-blockly">
   <template>
@@ -80,6 +81,7 @@
         </section>
       </iron-pages>
     </div>
+    <paper-toast id="toast"></paper-toast>
   </template>
   <script>
   (function() {
@@ -112,7 +114,8 @@
         isRunning: {
           type: Boolean,
           value: false,
-        }
+        },
+        _errorTopic: Object,
       },
 
       ready: function() {
@@ -124,6 +127,16 @@
         var that = this;
         this.isRunningTopic.subscribe(function(msg) {
           that._handleIsRunningMsg(that, msg);
+        });
+
+        this._errorTopic = new ROSLIB.Topic({
+          ros: ROS,
+          name: '/code_it/errors',
+          type: 'std_msgs/String'
+        });
+        this._errorTopic.subscribe(function(msg) {
+          that.$.toast.text = msg.data;
+          that.$.toast.show();
         });
       },
 
