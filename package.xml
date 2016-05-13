@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>code_it</name>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
   <description>A standalone Blockly programming application, integrated with ROS.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
