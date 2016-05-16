@@ -15,7 +15,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/ask_multiple_choice',
-      serviceType : 'code_it_msgs/AskMultipleChoice'
+      serviceType: 'code_it_msgs/AskMultipleChoice'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -56,7 +56,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/display_message',
-      serviceType : 'code_it_msgs/DisplayMessage'
+      serviceType: 'code_it_msgs/DisplayMessage'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -94,7 +94,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/find_objects',
-      serviceType : 'code_it_msgs/FindObjects'
+      serviceType: 'code_it_msgs/FindObjects'
     });
 
     var request = new ROSLIB.ServiceRequest({});
@@ -115,7 +115,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/go_to',
-      serviceType : 'code_it_msgs/GoTo'
+      serviceType: 'code_it_msgs/GoTo'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -140,7 +140,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/go_to_dock',
-      serviceType : 'code_it_msgs/GoToDock'
+      serviceType: 'code_it_msgs/GoToDock'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -164,7 +164,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/is_gripper_open',
-      serviceType : 'code_it_msgs/IsGripperOpen'
+      serviceType: 'code_it_msgs/IsGripperOpen'
     });
 
     var gripper_id = 0;
@@ -197,7 +197,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/look_at',
-      serviceType : 'code_it_msgs/LookAt'
+      serviceType: 'code_it_msgs/LookAt'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -240,7 +240,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/pick',
-      serviceType : 'code_it_msgs/Pick'
+      serviceType: 'code_it_msgs/Pick'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -267,7 +267,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/place',
-      serviceType : 'code_it_msgs/Place'
+      serviceType: 'code_it_msgs/Place'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -288,12 +288,36 @@ Robot = function() {
     });
   });
 
+  var runPbdAction = Meteor.wrapAsync(function(actionId, callback) {
+    console.log('Running PbD action: ' + actionId);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/run_pbd_action',
+      serviceType: 'code_it_msgs/RunPbdAction'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      action_id: actionId
+    });
+
+    client.callService(request, function(result) {
+      setError(result.error);
+      if (result.error) {
+        callback(null, false); // There was an error, return false.
+      } else {
+        callback(null, true); // Return success = true.
+      }
+    }, function(error) {
+      callback(error ? error : 'PbD action failed to run.', null);
+    });
+  });
+
   var say = Meteor.wrapAsync(function(text, callback) {
     console.log('Saying: ' + text);
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/say',
-      serviceType : 'code_it_msgs/Say'
+      serviceType: 'code_it_msgs/Say'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -315,7 +339,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/set_gripper',
-      serviceType : 'code_it_msgs/SetGripper'
+      serviceType: 'code_it_msgs/SetGripper'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -343,7 +367,7 @@ Robot = function() {
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/tuck_arms',
-      serviceType : 'code_it_msgs/TuckArms'
+      serviceType: 'code_it_msgs/TuckArms'
     });
 
     var request = new ROSLIB.ServiceRequest({
@@ -375,6 +399,7 @@ Robot = function() {
     lookAtDegrees: lookAtDegrees,
     pick: pick,
     place: place,
+    runPbdAction: runPbdAction,
     say: say,
     setError: setError,
     setGripper: setGripper,

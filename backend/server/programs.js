@@ -76,6 +76,12 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'place', interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function(actionId) {
+    var actionId = actionId ? actionId.toString() : '';
+    return interpreter.createPrimitive(Robot.runPbdAction(actionId));
+  };
+  interpreter.setProperty(myRobot, 'runPbdAction', interpreter.createNativeFunction(wrapper));
+
   var wrapper = function(text) {
     var text = text ? text.toString() : '';
     return interpreter.createPrimitive(Robot.say(text));
