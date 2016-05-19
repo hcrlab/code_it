@@ -9,7 +9,7 @@
         display: block;
         height: 100%;
         box-sizing: border-box;
-        padding: 0px 10px;
+        padding: 8px 8px;
       }
       .title {
         @apply(--paper-font-display1);
@@ -76,7 +76,6 @@
     </style>
     <iron-pages attr-for-selected="data-route" selected="{{route}}" on-iron-select="handleRouteChange">
       <section data-route="home">
-        <div class="title">CodeIt!</div> 
         <paper-button class="create" raised on-tap="onCreate"><iron-icon icon="add"></iron-icon> Create new program</paper-button>
         <paper-material class="listBack">
           <table class="programList">
