@@ -103,6 +103,12 @@ function interpreterApi(interpreter, scope) {
   }
   interpreter.setProperty(myRobot, 'tuckArms', interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function(seconds) {
+    var seconds = seconds ? seconds.toNumber() : 0;
+    return interpreter.createPrimitive(Robot.waitForDuration(seconds));
+  }
+  interpreter.setProperty(scope, 'waitForDuration', interpreter.createNativeFunction(wrapper));
+
   // Misc functions.
   var wrapper = function(blockId) {
     var blockId = blockId ? blockId.toString() : "";

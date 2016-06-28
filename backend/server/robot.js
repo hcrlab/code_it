@@ -53,6 +53,10 @@ Robot = function() {
 
   var displayMessage = Meteor.wrapAsync(function(h1text, h2text, timeout, callback) {
     console.log('Displaying h1: ' + h1text + ', h2: ' + h2text);
+    if (timeout > 0) {
+      setError('Warning: use "wait for seconds" instead of timeout field.');
+      console.log('WARNING: displayMessage\'s timeout field is no longer used. Use waitForDuration instead.');
+    }
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/display_message',
@@ -62,7 +66,6 @@ Robot = function() {
     var request = new ROSLIB.ServiceRequest({
       h1_text: h1text,
       h2_text: h2text,
-      timeout: timeout
     });
 
     var funcCall = this;
@@ -79,14 +82,6 @@ Robot = function() {
       }
     });
 
-    if (timeout > 0) {
-      Meteor.setTimeout(function() {
-        if (funcCall.isRunning) {
-          funcCall.isRunning = false;
-          callback(null, null); // err, result
-        }
-      }, timeout * 1000);
-    }
   });
 
   var findObjects = Meteor.wrapAsync(function(callback) {
@@ -387,6 +382,15 @@ Robot = function() {
     });
   });
 
+  var waitForDuration = Meteor.wrapAsync(function(seconds, callback) {
+    if (seconds <= 0) {
+      return;
+    }
+    Meteor.setTimeout(function() {
+      callback(null, null); // err, result
+    }, seconds * 1000);
+  });
+
   return {
     askMultipleChoice: askMultipleChoice,
     displayMessage: displayMessage,
@@ -404,5 +408,6 @@ Robot = function() {
     setError: setError,
     setGripper: setGripper,
     tuckArms: tuckArms,
+    waitForDuration: waitForDuration,
   };
 }();
