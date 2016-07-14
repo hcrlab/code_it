@@ -32,10 +32,13 @@ If you are actually interested in using these, please contact us by filing an is
 This project uses [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules), so use `git clone --recursive git@github.com:hcrlab/code_it.git` to clone this repo.
 
 The requirements are:
+- [blinky](https://github.com/hcrlab/blinky) - A ROS package for a web-based robot face
 - [code_it_msgs](https://github.com/hcrlab/code_it_msgs)
+- [location_server](https://github.com/hcrlab/location_server) - For storing and retrieving locations to navigate to
 - MongoDB - install MongoDB and pymongo
-- Meteor - install from the Meteor website
-- Node - install from the Node website.
+  - Make sure pymongo is version 3 (e.g., 3.3), and if not, upgrade with `sudo pip install pymongo --upgrade`
+- Meteor - install from the [Meteor website](https://www.meteor.com/)
+- Node
   It is highly recommended to use [nvm](https://github.com/creationix/nvm) to install node.
   `nvm` allows you to install and switch between arbitrary versions of node easily.
   When deploying to production, Meteor requires an older version of node to build properly, whereas gulp requires a newer version of node.
@@ -43,36 +46,39 @@ The requirements are:
 - From the `frontend` folder, run `npm install -g gulp bower && npm install && bower install`
 
 ### Running
-- `roslaunch rosbridge_server rosbridge_websocket.launch`
-- `rosrun code_it programs.py` - This is the backend that saves and loads the programs to and from MongoDB.
-- From the `backend` folder, run `meteor` - This is the JavaScript interpreter that runs the programs.
-- From the `frontend` folder, run `gulp` - This is the frontend. Go to localhost:5000 to see the page.
+1. `roslaunch rosbridge_server rosbridge_websocket.launch`
+1.  `rosrun code_it programs.py` - This is the backend that saves and loads the programs to and from MongoDB.
+1.  From the `backend` folder, run `nvm use 0.10.40; meteor` - This is the JavaScript interpreter that runs the programs.
+1.  From the `frontend` folder, run `nvm use node; gulp` - This is the frontend. Go to localhost:5000 to see the page.
 
 ### Deploying
 #### Build the frontend
-If you are not going to host CodeIt! on RWS, then edit `frontend/app/elements/code-it-app/code-it-app.html`.
-In the `ready` function, change:
-```
-ready: function() {
-  if (window.location.port === '') {
-    this.baseUrl = '/'; // Was /a/code_it/index.html/
-  }
-},
-```
+1. If you are not going to host CodeIt! on RWS, then edit `frontend/app/elements/code-it-app/code-it-app.html`.
+1. In the `ready` function, change:
 
-Make sure you are using a relatively new version of node: `nvm use node`
-Go to the `frontend` folder and run `gulp`.
-This should generate a `www` folder in the root of the repository, with the built frontend.
+   ```
+   ready: function() {
+     if (window.location.port === '') {
+       this.baseUrl = '/'; // Was /a/code_it/index.html/
+     }
+   },
+   ```
+
+1. Make sure you are using a relatively new version of node: `nvm use node`
+1. Go to the `frontend` folder and run `gulp`.
+1. This should generate a `www` folder in the root of the repository, with the built frontend.
 
 #### Build the backend
-Meteor requires an older version of node to run (0.10.40).
-Run `nvm use 0.10.40` to switch to this version.
-Go to the `backend` folder and run `meteor build --directory ../build`.
-This will generate an application bundle that's ready to be deployed.
-Next go to `build/bundle/programs/server` and run `npm install`.
+1. Meteor requires an older version of node to run (0.10.40).
+   Run `nvm use 0.10.40` to switch to this version.
+1. We require an older version of Meteor (1.12), since they changed the way packages work.
+   To downgrade, type `meteor update --release 1.12` in the `backend` folder.
+1. Go to the `backend` folder and run `build.sh`.
+   This will generate an application bundle that's ready to be deployed.
 
 #### Deploy to [RWS](https://github.com/hcrlab/rws)
 If you are not using RWS, then simply serve the `www` folder as static content and use `roslaunch code_it app.launch` to run the backend.
+`app.launch` is currently optimized for use on the PR2 and on RWS, so double-check its contents and update the launch file as needed.
 
 If you are using RWS, then copy the repository (with the built frontend and backend) to the RWS catkin workspace.
 One limitation is that if you use CodeIt! on RWS, then all RWS apps need to use Node v0.10.40.
@@ -121,6 +127,8 @@ The video linked above is helpful for understanding how to use the Block Factory
 
 Once you have the code generated, put the language code in `frontend/app/blockly/blocks/robot.js`, and the generator stub in `frontend/app/blockly/generators/javascript/robot.js`.
 You will need to implement the code generation for your block, such that it calls `robot.myFunction()` with the appropriate arguments.
+
+Build your blocks using `python build.py` inside of the `blockly` folder.
 
 Finally, add the block to the Blockly toolbox, so that users can see the block and drag it into the program.
 To do that, edit `frontend/app/elements/code-it-blockly-toolbox/code-it-blockly-toolbox.html` and add your block to the toolbox according to the [toolbox documentation](https://developers.google.com/blockly/installation/toolbox).
