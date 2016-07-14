@@ -31,15 +31,18 @@ If you are actually interested in using these, please contact us by filing an is
 ### Installing
 This project uses [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules), so use `git clone --recursive git@github.com:hcrlab/code_it.git` to clone this repo.
 
-The requirements are:
+To install, you need to clone:
 - [blinky](https://github.com/hcrlab/blinky) - A ROS package for a web-based robot face
 - [code_it_msgs](https://github.com/hcrlab/code_it_msgs)
 - [location_server](https://github.com/hcrlab/location_server) - For storing and retrieving locations to navigate to
+- [code_it_turtlebot](https://github.com/hcrlab/code_it_turtlebot) or [code_it_pr2](https://github.com/hcrlab/code_it_pr2) - These implement ROS services to actually control the robot, which CodeIt! calls while running programs.
+  You can also implement these services yourself for another robot, see `code_it_msgs` to see services currently defined.
+
+You also need to install:
 - MongoDB - install MongoDB and pymongo
   - Make sure pymongo is version 3 (e.g., 3.3), and if not, upgrade with `sudo pip install pymongo --upgrade`
 - Meteor - install from the [Meteor website](https://www.meteor.com/)
-- Node
-  It is highly recommended to use [nvm](https://github.com/creationix/nvm) to install node.
+- Node - It is highly recommended to use [nvm](https://github.com/creationix/nvm) to install node.
   `nvm` allows you to install and switch between arbitrary versions of node easily.
   When deploying to production, Meteor requires an older version of node to build properly, whereas gulp requires a newer version of node.
   Use `nvm` to switch between the two.
