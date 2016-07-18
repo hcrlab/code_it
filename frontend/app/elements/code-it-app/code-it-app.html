@@ -158,8 +158,8 @@
       },
 
       ready: function() {
-        if (window.location.port === '' || window.location.port === '5001') {
-          this.baseUrl = '/a/code_it/';
+        if (window.location.port === '') {
+          this.baseUrl = '/'; // Was /a/code_it/index.html
         }
       },
 

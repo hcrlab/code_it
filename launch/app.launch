@@ -1,10 +1,11 @@
 <launch>
   <!-- We are cheating by placing this in the robot bringup file instead -->
-  <!--node pkg="code_it" type="programs.py" name="program_db" /-->
+  <node pkg="code_it" type="programs.py" name="program_db" />
+  <node pkg="mongo_msg_db" type="db_node.py" name="mongo_msg_db" />
   <node pkg="code_it" type="run_js_interpreter.sh" name="js_interpreter" cwd="node" />
-  <include file="$(find agile_grasp)/launch/single_camera_grasps.launch" />
-  <node name="code_it_pr2" pkg="code_it_pr2" type="main_node" />
+  <!--include file="$(find agile_grasp)/launch/single_camera_grasps.launch" /-->
+  <!--node name="code_it_pr2" pkg="code_it_pr2" type="main_node" />-->
   <!-- For research purposes, we exclude pr2_pbd from here. It must be launched on its own. -->
   <!-- Disable social gaze for PbD. -->
-  <param name="/enable_social_gaze" value="false" />
+
 </launch>
