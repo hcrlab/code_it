@@ -130,6 +130,36 @@ Robot = function() {
     });
   });
 
+
+
+  var forward = Meteor.wrapAsync(function(callback) {
+    console.log('Moving forward');
+    // todo: add distance param
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/move_forward',
+      serviceType: 'code_it_msgs/MoveForward'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      // location: location
+    });
+
+    client.callService(request, function(result) {
+      console.log('Done moving forward.');
+      console.log(result);
+      setError(result.error);
+      if (result.error !== '') { // Navigation failed
+        callback(null, false); // result = false
+      }
+      callback(null, true); // Success
+    }, function(error) {
+      callback(error ? error : 'Failed to move forward.', null);
+    });
+  });
+
+
+
   var goToDock = Meteor.wrapAsync(function(callback) {
     console.log('Going to dock');
     var client = new ROSLIB.Service({
