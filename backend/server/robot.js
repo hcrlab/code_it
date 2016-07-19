@@ -439,5 +439,6 @@ Robot = function() {
     setGripper: setGripper,
     tuckArms: tuckArms,
     waitForDuration: waitForDuration,
+    moveForward: moveForward
   };
 }();
