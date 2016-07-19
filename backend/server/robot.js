@@ -130,8 +130,6 @@ Robot = function() {
     });
   });
 
-
-
   var moveForward = Meteor.wrapAsync(function(callback) {
     console.log('Moving forward');
     // todo: add distance param
@@ -155,6 +153,84 @@ Robot = function() {
       callback(null, true); // Success
     }, function(error) {
       callback(error ? error : 'Failed to move forward.', null);
+    });
+  });
+
+  var turnLeft = Meteor.wrapAsync(function(callback) {
+    console.log('Turning Left');
+    // todo: add distance param
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/turn_left',
+      serviceType: 'code_it_msgs/Turn'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      // location: location
+    });
+
+    client.callService(request, function(result) {
+      console.log('Done turning left');
+      console.log(result);
+      setError(result.error);
+      if (result.error !== '') { // Navigation failed
+        callback(null, false); // result = false
+      }
+      callback(null, true); // Success
+    }, function(error) {
+      callback(error ? error : 'Failed to turn right.', null);
+    });
+  });
+
+  var moveBack = Meteor.wrapAsync(function(callback) {
+    console.log('Moving backward');
+    // todo: add distance param
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/move_back',
+      serviceType: 'code_it_msgs/MoveBack'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      // location: location
+    });
+
+    client.callService(request, function(result) {
+      console.log('Done moving backward.');
+      console.log(result);
+      setError(result.error);
+      if (result.error !== '') { // Navigation failed
+        callback(null, false); // result = false
+      }
+      callback(null, true); // Success
+    }, function(error) {
+      callback(error ? error : 'Failed to move backward.', null);
+    });
+  });
+
+  var turnRight = Meteor.wrapAsync(function(callback) {
+    console.log('Turning Right');
+    // todo: add distance param
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/turn_right',
+      serviceType: 'code_it_msgs/Turn'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      // location: location
+    });
+
+    client.callService(request, function(result) {
+      console.log('Done turning right');
+      console.log(result);
+      setError(result.error);
+      if (result.error !== '') { // Navigation failed
+        callback(null, false); // result = false
+      }
+      callback(null, true); // Success
+    }, function(error) {
+      callback(error ? error : 'Failed to turn right.', null);
     });
   });
 
@@ -439,6 +515,9 @@ Robot = function() {
     setGripper: setGripper,
     tuckArms: tuckArms,
     waitForDuration: waitForDuration,
-    moveForward: moveForward
+    moveForward: moveForward,
+    turnLeft: turnLeft
+    turnRight: turnRight
+    moveBack: moveBack
   };
 }();
