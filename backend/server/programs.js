@@ -36,7 +36,7 @@ function interpreterApi(interpreter, scope) {
   interpreter.setProperty(myRobot, 'goTo', interpreter.createNativeFunction(wrapper));
 
   var wrapper = function() {
-    return interpreter.createPrimitive(Robot.forward());
+    return interpreter.createPrimitive(Robot.moveForward());
   };
   interpreter.setProperty(myRobot, 'moveForward', interpreter.createNativeFunction(wrapper));
 

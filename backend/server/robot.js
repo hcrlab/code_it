@@ -132,7 +132,7 @@ Robot = function() {
 
 
 
-  var forward = Meteor.wrapAsync(function(callback) {
+  var moveForward = Meteor.wrapAsync(function(callback) {
     console.log('Moving forward');
     // todo: add distance param
     var client = new ROSLIB.Service({
