@@ -516,8 +516,8 @@ Robot = function() {
     tuckArms: tuckArms,
     waitForDuration: waitForDuration,
     moveForward: moveForward,
-    turnLeft: turnLeft
-    turnRight: turnRight
+    turnLeft: turnLeft,
+    turnRight: turnRight,
     moveBack: moveBack
   };
 }();
