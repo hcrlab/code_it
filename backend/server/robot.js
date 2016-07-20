@@ -130,7 +130,7 @@ Robot = function() {
     });
   });
 
-  var moveForward = Meteor.wrapAsync(function(callback) {
+  var moveForward = Meteor.wrapAsync(function(speed, callback) {
     console.log('Moving forward');
     // todo: add distance param
     var client = new ROSLIB.Service({
@@ -140,7 +140,7 @@ Robot = function() {
     });
 
     var request = new ROSLIB.ServiceRequest({
-      // location: location
+      speed: speed
     });
 
     client.callService(request, function(result) {
@@ -156,7 +156,7 @@ Robot = function() {
     });
   });
 
-  var turnLeft = Meteor.wrapAsync(function(callback) {
+  var turnLeft = Meteor.wrapAsync(function(speed, callback) {
     console.log('Turning Left');
     // todo: add distance param
     var client = new ROSLIB.Service({
@@ -166,7 +166,7 @@ Robot = function() {
     });
 
     var request = new ROSLIB.ServiceRequest({
-      // location: location
+      speed: speed
     });
 
     client.callService(request, function(result) {
@@ -182,7 +182,7 @@ Robot = function() {
     });
   });
 
-  var moveBack = Meteor.wrapAsync(function(callback) {
+  var moveBack = Meteor.wrapAsync(function(speed, callback) {
     console.log('Moving backward');
     // todo: add distance param
     var client = new ROSLIB.Service({
@@ -192,7 +192,7 @@ Robot = function() {
     });
 
     var request = new ROSLIB.ServiceRequest({
-      // location: location
+      speed: speed
     });
 
     client.callService(request, function(result) {
@@ -208,7 +208,7 @@ Robot = function() {
     });
   });
 
-  var turnRight = Meteor.wrapAsync(function(callback) {
+  var turnRight = Meteor.wrapAsync(function(speed, callback) {
     console.log('Turning Right');
     // todo: add distance param
     var client = new ROSLIB.Service({
@@ -218,7 +218,7 @@ Robot = function() {
     });
 
     var request = new ROSLIB.ServiceRequest({
-      // location: location
+      speed: speed
     });
 
     client.callService(request, function(result) {

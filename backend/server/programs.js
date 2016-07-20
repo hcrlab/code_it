@@ -35,23 +35,27 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'goTo', interpreter.createNativeFunction(wrapper));
 
-  var wrapper = function() {
-    return interpreter.createPrimitive(Robot.moveForward());
+  var wrapper = function(speed) {
+    var speed = speed ? speed.toNumber() : 0.25;
+    return interpreter.createPrimitive(Robot.moveForward(speed));
   };
   interpreter.setProperty(myRobot, 'moveForward', interpreter.createNativeFunction(wrapper));
 
-  var wrapper = function() {
-    return interpreter.createPrimitive(Robot.turnLeft());
+  var wrapper = function(speed) {
+    var speed = speed ? speed.toNumber() : 1.6;
+    return interpreter.createPrimitive(Robot.turnLeft(speed));
   };
   interpreter.setProperty(myRobot, 'turnLeft', interpreter.createNativeFunction(wrapper));
 
-  var wrapper = function() {
-    return interpreter.createPrimitive(Robot.turnRight());
+  var wrapper = function(speed) {
+    var speed = speed ? speed.toNumber() : -1.6;
+    return interpreter.createPrimitive(Robot.turnRight(speed));
   };
   interpreter.setProperty(myRobot, 'turnRight', interpreter.createNativeFunction(wrapper));
 
-  var wrapper = function() {
-    return interpreter.createPrimitive(Robot.moveBack());
+  var wrapper = function(speed) {
+    var speed = speed ? speed.toNumber() : -0.25;
+    return interpreter.createPrimitive(Robot.moveBack(speed));
   };
   interpreter.setProperty(myRobot, 'moveBack', interpreter.createNativeFunction(wrapper));
 
