@@ -74,8 +74,8 @@ You also need to install:
 #### Build the backend
 1. Meteor requires an older version of node to run (0.10.40).
    Run `nvm use 0.10.40` to switch to this version.
-1. We require an older version of Meteor (1.12), since they changed the way packages work.
-   To downgrade, type `meteor update --release 1.12` in the `backend` folder.
+1. We require an older version of Meteor (1.2), since they changed the way packages work.
+   To downgrade, type `meteor update --release 1.2` in the `backend` folder.
 1. Go to the `backend` folder and run `build.sh`.
    This will generate an application bundle that's ready to be deployed.
 
