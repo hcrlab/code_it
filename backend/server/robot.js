@@ -31,8 +31,9 @@ Robot = function() {
         setError(result.error);
         if (result.error) {
           callback(result.error, null); // Must quit program, need user input to proceed.
+        } else {
+          callback(null, result.choice);
         }
-        callback(null, result.choice);
       }
     }, function(error) {
       if (funcCall.isRunning) {
