@@ -85,6 +85,30 @@ Robot = function() {
 
   });
 
+  var findCustomLandmark = Meteor.wrapAsync(function(db_id, is_tabletop, callback) {
+    console.log('Finding custom landmark ' + db_id + ', on tabletop: ' + is_tabletop);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/find_custom_landmark',
+      serviceType: 'code_it_msgs/FindCustomLandmarks'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      db_id: db_id,
+      is_tabletop: is_tabletop
+    });
+    client.callService(request, function(result) {
+      setError(result.error);
+      if (result.error) {
+        callback(null, []); // Return empty list on error.
+      } else {
+        callback(null, result.landmarks);
+      }
+    }, function() {
+      callback(error ? error : 'Failed to search for custom landmark.', []);
+    });
+  });
+
   var findObjects = Meteor.wrapAsync(function(callback) {
     console.log('Finding objects');
     var client = new ROSLIB.Service({
@@ -395,6 +419,7 @@ Robot = function() {
   return {
     askMultipleChoice: askMultipleChoice,
     displayMessage: displayMessage,
+    findCustomLandmark: findCustomLandmark,
     findObjects: findObjects,
     getError: getError,
     goTo: goTo,

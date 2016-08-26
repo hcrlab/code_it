@@ -22,6 +22,13 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'displayMessage', interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function(db_id, is_tabletop) {
+    var landmarks = Robot.findCustomLandmark(db_id, is_tabletop);
+    var landmarks_arr = interpreter.toPseudoObject(landmarks);
+    return landmarks_arr;
+  };
+  interpreter.setProperty(myRobot, 'findCustomLandmark', interpreter.createNativeFunction(wrapper));
+
   var wrapper = function() {
     var objects = Robot.findObjects();
     var objects_arr = interpreter.toPseudoObject(objects);
