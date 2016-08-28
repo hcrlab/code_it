@@ -97,6 +97,7 @@ Robot = function() {
       db_id: db_id,
       is_tabletop: is_tabletop
     });
+    console.log(request);
     client.callService(request, function(result) {
       setError(result.error);
       if (result.error) {
@@ -308,8 +309,9 @@ Robot = function() {
     });
   });
 
-  var runPbdAction = Meteor.wrapAsync(function(actionId, callback) {
+  var runPbdAction = Meteor.wrapAsync(function(actionId, preregisteredLandmarks, callback) {
     console.log('Running PbD action: ' + actionId);
+    console.log('Preregistered landmarks', preregisteredLandmarks);
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/run_pbd_action',
@@ -317,7 +319,8 @@ Robot = function() {
     });
 
     var request = new ROSLIB.ServiceRequest({
-      action_id: actionId
+      action_id: actionId,
+      landmarks: preregisteredLandmarks
     });
 
     client.callService(request, function(result) {

@@ -23,6 +23,8 @@ function interpreterApi(interpreter, scope) {
   interpreter.setProperty(myRobot, 'displayMessage', interpreter.createNativeFunction(wrapper));
 
   var wrapper = function(db_id, is_tabletop) {
+    var db_id = db_id ? db_id.toString() : '';
+    var is_tabletop = is_tabletop ? is_tabletop.toBoolean() : false;
     var landmarks = Robot.findCustomLandmark(db_id, is_tabletop);
     var landmarks_arr = interpreter.toPseudoObject(landmarks);
     return landmarks_arr;
@@ -83,9 +85,14 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'place', interpreter.createNativeFunction(wrapper));
 
-  var wrapper = function(actionId) {
+  var wrapper = function(actionId, preregisteredLandmarks) {
     var actionId = actionId ? actionId.toString() : '';
-    return interpreter.createPrimitive(Robot.runPbdAction(actionId));
+    var preregisteredLandmarks = preregisteredLandmarks ? interpreter.toNativeObject(preregisteredLandmarks) : [];
+    console.log(preregisteredLandmarks);
+    if (!preregisteredLandmarks.length) {
+      preregisteredLandmarks = [];
+    }
+    return interpreter.createPrimitive(Robot.runPbdAction(actionId, preregisteredLandmarks));
   };
   interpreter.setProperty(myRobot, 'runPbdAction', interpreter.createNativeFunction(wrapper));
 
