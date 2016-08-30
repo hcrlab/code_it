@@ -32,6 +32,7 @@ Robot = function() {
         if (result.error) {
           callback(result.error, null); // Must quit program, need user input to proceed.
         } else {
+          console.log('Choice was: ' + result.choice);
           callback(null, result.choice);
         }
       }
@@ -318,9 +319,16 @@ Robot = function() {
       serviceType: 'code_it_msgs/RunPbdAction'
     });
 
+    var preregistered = [];
+    for (var i=0; i<preregisteredLandmarks.length; i++) {
+      if (preregisteredLandmarks[i]) {
+        preregistered.push(preregisteredLandmarks[i]);
+      }
+    }
+
     var request = new ROSLIB.ServiceRequest({
       action_id: actionId,
-      landmarks: preregisteredLandmarks
+      landmarks: preregistered
     });
 
     client.callService(request, function(result) {
