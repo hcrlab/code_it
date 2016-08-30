@@ -9,9 +9,6 @@
         position: absolute;
         height: 100%;
       }
-      #blocklyArea {
-        height: 100%;
-      }
       #blocklyDiv, #codeDiv {
         height: 99%;
         width: 100%;
@@ -74,7 +71,7 @@
         <paper-tab id="codeTab">Code</paper-tab>
       </paper-tabs>
       <iron-pages selected="{{selected}}" on-iron-select="handleTab" class="tabContent flex">
-        <section id="blocklyArea">
+        <section>
           <div id="blocklyDiv"></div>
         </section>
         <section>
@@ -170,53 +167,24 @@
           workspace.clear();
           Blockly.Xml.domToWorkspace(xmlDom, workspace);
         }); 
+
+        // Necessary to make the workspace show up initially for some reason.
+        if (this.injected) {
+          Blockly.svgResize(Blockly.getMainWorkspace());
+        }
       },
 
       handleTab: function(evt) {
         if (this.selected === 0) {
           this.inject();
-          //this.showExtraDivs();
-        } else {
-          //this.hideExtraDivs();
         }
         evt.stopPropagation(); // TODO(jstn): this doesn't stop propagation.
-      },
-
-      hideExtraDivs: function() {
-        var toolboxDiv = document.querySelector('.blocklyToolboxDiv');
-        var widgetDiv = document.querySelector('.blocklyWidgetDiv');
-        var tooltipDiv = document.querySelector('.blocklyTooltipDiv');
-        this.hideExtraDiv(toolboxDiv);
-        this.hideExtraDiv(widgetDiv);
-        this.hideExtraDiv(tooltipDiv);
-      },
-
-      showExtraDivs: function() {
-        var toolboxDiv = document.querySelector('.blocklyToolboxDiv');
-        var widgetDiv = document.querySelector('.blocklyWidgetDiv');
-        var tooltipDiv = document.querySelector('.blocklyTooltipDiv');
-        this.showExtraDiv(toolboxDiv);
-        this.showExtraDiv(widgetDiv);
-        this.showExtraDiv(tooltipDiv);
-      },
-
-      hideExtraDiv: function(div) {
-        if (div) {
-          div.style.display = 'none';
-        }
-      },
-
-      showExtraDiv: function(div) {
-        if (div) {
-          div.style.display = '';
-        }
       },
 
       inject: function() {
         if (!this.injected) {
           var toolbox = this.$.toolboxElement.$.toolbox;
           var blocklyDiv = this.$.blocklyDiv;
-          console.log(blocklyDiv);
           var workspace = Blockly.inject(blocklyDiv, {toolbox: toolbox, zoom: {
             controls: true,
             wheel: true,
@@ -225,7 +193,6 @@
             minScale: 0.3,
             scaleSpeed: 1.2}
           });
-          setTimeout(function(){Blockly.svgResize(workspace);}, 0);
           Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
           Blockly.JavaScript.addReservedWords('highlightBlock');
           var that = this;
