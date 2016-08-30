@@ -175,9 +175,9 @@
       handleTab: function(evt) {
         if (this.selected === 0) {
           this.inject();
-          this.showExtraDivs();
+          //this.showExtraDivs();
         } else {
-          this.hideExtraDivs();
+          //this.hideExtraDivs();
         }
         evt.stopPropagation(); // TODO(jstn): this doesn't stop propagation.
       },
@@ -216,6 +216,7 @@
         if (!this.injected) {
           var toolbox = this.$.toolboxElement.$.toolbox;
           var blocklyDiv = this.$.blocklyDiv;
+          console.log(blocklyDiv);
           var workspace = Blockly.inject(blocklyDiv, {toolbox: toolbox, zoom: {
             controls: true,
             wheel: true,
@@ -224,6 +225,7 @@
             minScale: 0.3,
             scaleSpeed: 1.2}
           });
+          setTimeout(function(){Blockly.svgResize(workspace);}, 0);
           Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
           Blockly.JavaScript.addReservedWords('highlightBlock');
           var that = this;
