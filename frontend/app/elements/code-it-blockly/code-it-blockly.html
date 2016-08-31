@@ -52,6 +52,9 @@
       .notrunning {
         background-color: #388E3C;
       }
+      .closeToast {
+        text-transform: none;
+      }
     </style>
     <code-it-blockly-toolbox id="toolboxElement"></code-it-blockly-toolbox>
     <div class="outer layout vertical">
@@ -81,7 +84,9 @@
         </section>
       </iron-pages>
     </div>
-    <paper-toast id="toast" duration="0"></paper-toast>
+    <paper-toast id="toast" duration="0">
+      <paper-button on-tap="closeToast" class="closeToast">Close</paper-button>
+    </paper-toast>
   </template>
   <script>
   (function() {
@@ -284,6 +289,10 @@
         } else {
           runAction.cancel();
         }
+      },
+
+      closeToast: function() {
+        this.$.toast.close();
       },
     });
   })();

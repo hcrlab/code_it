@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
 
@@ -30,7 +31,7 @@
         padding: 6px 16px;
         height: 36px;
       }
-      paper-button:hover {
+      paper-button.generic:hover {
         background-color: #e0e0e0;
       }
       paper-button.delete:hover {
@@ -90,8 +91,8 @@
                 <tr>
                   <td>{{item.name}}</td>
                   <td>
-                    <paper-button on-tap="onEdit" noink data-program-id$="{{item.program_id}}">Edit / Run</paper-button>
-                    <paper-button on-tap="onCopy" noink data-program-id$="{{item.program_id}}">Copy</paper-button>
+                    <paper-button class="generic" on-tap="onEdit" noink data-program-id$="{{item.program_id}}">Edit / Run</paper-button>
+                    <paper-button class="generic" on-tap="onCopy" noink data-program-id$="{{item.program_id}}">Copy</paper-button>
                     <paper-button class="delete" noink data-program-id$="{{item.program_id}}" on-tap="onMaybeDelete">Delete</paper-button>
                   </td>
                 </tr>
@@ -115,12 +116,12 @@
         </paper-dialog>
       </section>
       <section data-route="program" class="vertical layout">
-        <div><paper-button on-tap="goToProgramList" noink><iron-icon icon="arrow-back"></iron-icon> Back to program list</paper-button></div>
+        <div><paper-button on-tap="goToProgramList" class="generic" noink><iron-icon icon="arrow-back"></iron-icon> Back to program list</paper-button></div>
         <code-it-blockly id="blockly" class="flex" program-id="{{params.id}}" on-program-error="handleProgramError"></code-it-blockly>
       </section>
     </iron-pages>
-    <paper-toast id="toast">
-      <span class="toast-hide-button" role="button" tabindex="0" on-tap="app.$.toast.hide()">OK</span>
+    <paper-toast id="toast" duration="0">
+      <paper-button class="closeToast" on-tap="closeToast">OK</paper-button>
     </paper-toast>
   </template>
   <script>
@@ -249,6 +250,9 @@
         this.$.toast.text = evt.detail.text;
         this.$.toast.show();
       },
+      closeToast: function() {
+        this.$.toast.close();
+      }
     });
   })();
   </script>
