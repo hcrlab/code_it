@@ -318,10 +318,16 @@ Robot = function() {
       serviceType: 'code_it_msgs/RunPbdAction'
     });
 
-    var preregistered = [];
-    for (var i=0; i<preregisteredLandmarks.length; i++) {
-      if (preregisteredLandmarks[i]) {
-        preregistered.push(preregisteredLandmarks[i]);
+    // preregisteredLandmarks is an object like this:
+    // {'id1234': landmark1, 'id2345': landmark2}
+    // We transform it into [landmark1, landmark2], where landmark1 and
+    // landmark2 have their IDs replaced with 'id1234' and 'id2345'.
+    var preregisteredArray = [];
+    for (var id in preregisteredLandmarks) {
+      var landmark = preregisteredLandmarks[id];
+      if (landmark && landmark.db_id) {
+        landmark.db_id = id;
+        preregistered.push(landmark);
       }
     }
     console.log('Preregistered landmarks', preregistered);
