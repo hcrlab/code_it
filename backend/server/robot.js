@@ -312,7 +312,6 @@ Robot = function() {
 
   var runPbdAction = Meteor.wrapAsync(function(actionId, preregisteredLandmarks, callback) {
     console.log('Running PbD action: ' + actionId);
-    console.log('Preregistered landmarks', preregisteredLandmarks);
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/run_pbd_action',
@@ -325,6 +324,7 @@ Robot = function() {
         preregistered.push(preregisteredLandmarks[i]);
       }
     }
+    console.log('Preregistered landmarks', preregistered);
 
     var request = new ROSLIB.ServiceRequest({
       action_id: actionId,
