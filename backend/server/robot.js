@@ -98,7 +98,6 @@ Robot = function() {
       db_id: db_id,
       is_tabletop: is_tabletop
     });
-    console.log(request);
     client.callService(request, function(result) {
       setError(result.error);
       if (result.error) {
@@ -322,7 +321,7 @@ Robot = function() {
     // {'id1234': landmark1, 'id2345': landmark2}
     // We transform it into [landmark1, landmark2], where landmark1 and
     // landmark2 have their IDs replaced with 'id1234' and 'id2345'.
-    var preregisteredArray = [];
+    var preregistered = [];
     for (var id in preregisteredLandmarks) {
       var landmark = preregisteredLandmarks[id];
       if (landmark && landmark.db_id) {
