@@ -329,7 +329,7 @@ Robot = function() {
         preregistered.push(landmark);
       }
     }
-    console.log('Preregistered landmarks', preregistered);
+    console.log('Pre-registered landmarks', preregistered);
 
     var request = new ROSLIB.ServiceRequest({
       action_id: actionId,

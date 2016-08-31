@@ -87,11 +87,7 @@ function interpreterApi(interpreter, scope) {
 
   var wrapper = function(actionId, preregisteredLandmarks) {
     var actionId = actionId ? actionId.toString() : '';
-    var preregisteredLandmarks = preregisteredLandmarks ? interpreter.toNativeObject(preregisteredLandmarks) : [];
-    console.log(preregisteredLandmarks);
-    if (!preregisteredLandmarks.length) {
-      preregisteredLandmarks = [];
-    }
+    var preregisteredLandmarks = preregisteredLandmarks ? interpreter.toNativeObject(preregisteredLandmarks) : {};
     return interpreter.createPrimitive(Robot.runPbdAction(actionId, preregisteredLandmarks));
   };
   interpreter.setProperty(myRobot, 'runPbdAction', interpreter.createNativeFunction(wrapper));
