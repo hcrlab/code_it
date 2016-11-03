@@ -52,8 +52,8 @@
         this.$.editor.codeMirror.on('change', function(cm) {
           var save = function() {
             that.onChange(that, cm);
-          }
-          that.debounce('save', save, 100)
+          };
+          that.debounce('save', save, 100);
         });
       },
 
@@ -61,7 +61,7 @@
         return this.$.editor.codeMirror.getValue();
       },
 
-      handleFeedback: function(feedback) {
+      handleFeedback: function() {
       },
 
       // program is a code_it Program msg, which contains name, program_id, and xml.

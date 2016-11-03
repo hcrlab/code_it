@@ -261,9 +261,9 @@
       getEditor: function() {
         var editor = null;
         if (this.interface === 'blockly') {
-            var editor = this.$$('#blockly');
+            editor = this.$$('#blockly');
         } else if (this.interface === 'codemirror') {
-            var editor = this.$$('#codemirror');
+            editor = this.$$('#codemirror');
         } else {
           console.error('Unknown interface', this.interface);
         }
@@ -295,7 +295,7 @@
           //});
 
           goal.send();
-          console.log('Running program: ' + that.code);
+          console.log('Running program: ' + editor.getCode());
         } else {
           this._runAction.cancel();
         }
