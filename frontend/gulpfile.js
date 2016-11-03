@@ -171,7 +171,7 @@ gulp.task('vulcanize', function() {
   var DEST_DIR = dist('elements');
   return gulp.src(dist('elements/elements.vulcanized.html'))
       .pipe($.vulcanize(
-          {stripComments: true, inlineCss: true, inlineScripts: true}))
+          {stripComments: true, inlineCss: false, inlineScripts: true}))
       .pipe(gulp.dest(DEST_DIR))
       .pipe($.size({title: 'vulcanize'}));
 });
