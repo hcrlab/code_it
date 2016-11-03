@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../code-it-codemirror-editor/code-it-codemirror-editor.html">
+
+<dom-module id="code-it-codemirror">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: absolute;
+        height: 100%;
+      }
+      code-it-codemirror-editor {
+        border: 1px solid gray;
+      }
+    </style>
+    <code-it-codemirror-editor id="editor"></code-it-codemirror-editor>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'code-it-codemirror',
+
+      properties: {
+      },
+
+      refreshEditor: function() {
+        this.$.editor.refresh();
+      }
+    });
+  })();
+  </script>
+</dom-module>

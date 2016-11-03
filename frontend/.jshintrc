@@ -22,6 +22,7 @@
     "app": true,
     "Blockly": true,
     "ROS": true,
-    "ROSLIB": true
+    "ROSLIB": true,
+    "CodeMirror": true
   }
 }

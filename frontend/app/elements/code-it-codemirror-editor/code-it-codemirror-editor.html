@@ -1,0 +1,119 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="code-mirror-import.html">
+
+<dom-module id="code-it-codemirror-editor">
+  <template>
+    <style include="codemirror-styles"></style>
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+      }
+      #codemirrordiv {
+        height: 100%;
+      }
+    </style>
+    <div id="codemirrordiv"></div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    // Autocompletions - only works for objects like robot, Math, etc.
+    var _COMPLETIONS = [
+      {
+        name: 'robot',
+        doc: 'The robot object.',
+        children: [
+          {name: 'displayMessage', doc: 'Displays a message on the robot\'s screen.'},
+          {name: 'findCustomLandmark', doc: 'Finds the named object in the scene and returns a (possibly empty) list of their locations.'}
+        ]
+      },
+      {
+        name: 'waitForDuration',
+        doc: 'Waits for the given number of seconds.'
+      },
+    ];
+
+    Polymer({
+      is: 'code-it-codemirror-editor',
+
+      properties: {
+      },
+
+      attached: function() {
+        var div = this.$.codemirrordiv;
+        var that = this;
+        this.codeMirror = CodeMirror(div, {
+          value: '',
+          mode: 'javascript',
+          lineNumbers: true,
+          extraKeys: {
+            'Ctrl-Space': 'autocomplete',
+          },
+          gutters: ['CodeMirror-lint-markers'],
+          lint: true,
+          hintOptions: {
+            completeSingle: false,
+            hint: that._completeRobot,
+          },
+        });
+      },
+
+      // Needed when using CodeMirror in a hidden DOM Node (e.g., iron-pages).
+      // Call refresh() after initializing it.
+      refresh: function() {
+        this.codeMirror.refresh();
+      },
+
+      _completeRobot: function(cm) {
+        var cursor = cm.getCursor();
+        var line = cm.getLine(cursor.line);
+        var start = cursor.ch;
+        var end = cursor.ch;
+
+        // Check if the previous word matches the completions.
+        while (start && /[\w\.]/.test(line.charAt(start - 1))) {
+          --start;
+        }
+        while (end < line.length && /[\w\.]/.test(line.charAt(end))) {
+          ++end;
+        }
+        var word = line.slice(start, end);
+
+        var matchWord = function(word, completions) {
+          var list = [];
+          for (var ci=0; ci<completions.length; ++ci) {
+            var completion = completions[ci];
+            // Match top-level names
+            var name = completion.name;
+            if (name.startsWith(word)) {
+              var displayText = name + ': ' + completion.doc;
+              list.push({text: name, displayText: displayText});
+            }
+
+            if (completion.hasOwnProperty('children')) {
+              // Check if it matches a member and recursively descend if so.
+              if (word.startsWith(name + '.')) {
+                var index = word.indexOf(name + '.');
+                var rest = word.substr(index + name.length + 1);
+                list = matchWord(rest, completion.children);
+                start += index + name.length + 1;
+              }
+            }
+          }
+          return list;
+        };
+
+        var list = matchWord(word, _COMPLETIONS);
+        
+        return {
+          list: list,
+          from: CodeMirror.Pos(cursor.line, start),
+          to: CodeMirror.Pos(cursor.line, end)
+        };
+      },
+    });
+  })();
+  </script>
+</dom-module>

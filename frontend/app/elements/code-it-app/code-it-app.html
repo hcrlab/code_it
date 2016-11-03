@@ -16,13 +16,16 @@
         @apply(--paper-font-display1);
         margin-bottom: 10px;
       }
-      iron-pages {
+      .routePages {
         height: 100%;
       }
       iron-pages > section {
         height: 100%;
       }
       #blockly {
+        position: relative;
+      }
+      #codemirror {
         position: relative;
       }
       paper-button {
@@ -75,7 +78,7 @@
         background-color: #fff;
       }
     </style>
-    <iron-pages attr-for-selected="data-route" selected="{{route}}" on-iron-select="handleRouteChange">
+    <iron-pages class="routePages" attr-for-selected="data-route" selected="{{route}}" on-iron-select="handleRouteChange">
       <section data-route="home">
         <paper-button class="create" raised on-tap="onCreate"><iron-icon icon="add"></iron-icon> Create new program</paper-button>
         <paper-material class="listBack">
@@ -117,7 +120,10 @@
       </section>
       <section data-route="program" class="vertical layout">
         <div><paper-button on-tap="goToProgramList" class="generic" noink><iron-icon icon="arrow-back"></iron-icon> Back to program list</paper-button></div>
-        <code-it-blockly id="blockly" class="flex" program-id="{{params.id}}" on-program-error="handleProgramError"></code-it-blockly>
+        <iron-pages class="interfacePages flex" attr-for-selected="data-route" selected="[[interface]]">
+          <code-it-blockly data-route="blockly" id="blockly" class="flex" program-id="{{params.id}}" on-program-error="handleProgramError"></code-it-blockly>
+          <code-it-codemirror data-route="codemirror" id="codemirror" class="flex"></code-it-codemirror>
+        </iron-pages>
       </section>
     </iron-pages>
     <paper-toast id="toast" duration="0">
@@ -135,6 +141,10 @@
         baseUrl: {
           type: String,
           value: '/'
+        },
+        interface: {
+          type: String,
+          value: 'codemirror', // Either 'blockly' or 'codemirror'
         },
         route: {
           type: String,
@@ -173,10 +183,37 @@
         if (this.route === 'home') {
           this.updateProgramList();
         } else {
-          this.$.blockly.inject();
-          this.$.blockly.selected = 0; // Needed to make the toolbox show up, see HACK above.
+          this.injectBlockly();
+          this.refreshCodeMirror();
         }
       },
+
+      injectBlockly: function() {
+        var blockly = this.$$('#blockly');
+        if (blockly) {
+          blockly.inject();
+          blockly.selected = 0; // Needed to make the toolbox show up, see HACK above.
+        }
+      },
+
+      refreshCodeMirror: function() {
+        var editor = this.$$('#codemirror');
+        if (editor) {
+          console.log('refreshing');
+          editor.refreshEditor();
+        } else {
+          console.error('not refreshing');
+        }
+      },
+
+      interfaceChanged: function(iface) {
+        if (iface === 'blockly') {
+          this.injectBlockly();
+        } else if (iface === 'codemirror') {
+          this.refreshCodeMirror();
+        }
+      },
+
       goToProgramList: function() {
         page.redirect(this.baseUrl);
       },
@@ -252,7 +289,7 @@
       },
       closeToast: function() {
         this.$.toast.close();
-      }
+      },
     });
   })();
   </script>
