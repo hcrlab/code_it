@@ -6,5 +6,5 @@
   <node name="code_it_pr2" pkg="code_it_pr2" type="main_node" />
   <!-- For research purposes, we exclude pr2_pbd from here. It must be launched on its own. -->
   <!-- Disable social gaze for PbD. -->
-  <param name="/enable_social_gaze" value="true" />
+  <param name="/enable_social_gaze" value="false" />
 </launch>
