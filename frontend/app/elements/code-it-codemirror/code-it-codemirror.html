@@ -23,11 +23,56 @@
       is: 'code-it-codemirror',
 
       properties: {
+        programId: String,
+      },
+
+      ready: function() {
+        this.updateClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/update_program',
+          serviceType: 'code_it_msgs/UpdateProgram'
+        });
+      },
+
+      onChange: function(that, cm) {
+        var code = cm.getValue();
+        var request = new ROSLIB.ServiceRequest({
+          program: {
+            program_id: that.programId,
+            js: code,
+            language: 'js'
+          }
+        });
+        that.updateClient.callService(request, function() {}); 
       },
 
       refreshEditor: function() {
+        var that = this;
         this.$.editor.refresh();
-      }
+        this.$.editor.codeMirror.on('change', function(cm) {
+          var save = function() {
+            that.onChange(that, cm);
+          }
+          that.debounce('save', save, 100)
+        });
+      },
+
+      getCode: function() {
+        return this.$.editor.codeMirror.getValue();
+      },
+
+      handleFeedback: function(feedback) {
+      },
+
+      // program is a code_it Program msg, which contains name, program_id, and xml.
+      setProgram: function(program) {
+        this.$.editor.codeMirror.setValue(program.js);
+      },
+
+      // Like setProgram, but for JS code directly as a string.
+      setCode: function(js) {
+        this.$.editor.codeMirror.setValue(js);
+      },
     });
   })();
   </script>

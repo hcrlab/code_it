@@ -1,0 +1,351 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-icons/av-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+
+<link rel="import" href="../code-it-blockly/code-it-blockly.html">
+<link rel="import" href="../code-it-codemirror/code-it-codemirror.html">
+
+<dom-module id="code-it-program">
+  <template>
+    <style include="iron-flex">
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+      }
+      paper-button {
+        @apply(--paper-font-button);
+        border-radius: 2px;
+        padding: 6px 16px;
+        height: 36px;
+      }
+      section {
+        height: 100%;
+      }
+      #blockly {
+        position: relative;
+      }
+      #codemirror {
+        position: relative;
+      }
+      .programName {
+        max-width: 500px;
+      }
+      .runstop {
+        position: relative;
+        top: 16px;
+        color: #fff;
+      }
+      .convert {
+        position: relative;
+        top: 16px;
+      }
+      .isrunning {
+        background-color: #D32F2F;
+      }
+      .notrunning {
+        background-color: #388E3C;
+      }
+      .closeToast {
+        text-transform: none;
+      }
+      #confirmConvertDialog {
+        --paper-dialog-background-color: #fff;
+          min-width: 275px;
+      }
+      #confirmConvertDialog h1 {
+        @apply(--paper-font-title);
+      }
+      #confirmConvertDialog paper-button:hover {
+        background-color: #fff;
+      }
+    </style>
+    <section class="vertical layout">
+      <div><paper-button on-tap="goToProgramList" class="generic" noink><iron-icon icon="arrow-back"></iron-icon> Back to program list</paper-button></div>
+      <div class="controls layout horizontal">
+        <paper-input label="Program name" class="programName flex" value="{{name}}" on-change="onNameChange"></paper-input>
+        <paper-button raised class$="runstop {{runState}}" on-tap="handleRunStop">
+          <template is="dom-if" if$="{{!isRunning}}">
+            <iron-icon icon="av:play-arrow"></iron-icon> Run
+          </template>
+          <template is="dom-if" if$="{{isRunning}}">
+            <iron-icon icon="av:stop"></iron-icon> Stop
+          </template>
+        </paper-button>
+        <div class="flex"></div>
+        <template is="dom-if" if$="{{isBlockly}}">
+          <paper-button class="convert"
+              on-tap="maybeConvertToCode"
+              title="Convert this program to JavaScript code. This cannot be undone.">
+            Convert to code
+          </paper-button>
+        </template>
+      </div>
+      <iron-pages class="interfacePages flex" attr-for-selected="data-route" selected="[[interface]]">
+        <code-it-blockly data-route="blockly" id="blockly" class="flex" program-id="{{params.id}}"></code-it-blockly>
+        <code-it-codemirror data-route="codemirror" id="codemirror" class="flex" program-id="{{params.id}}"></code-it-codemirror>
+      </iron-pages>
+    </section>
+    <paper-dialog id="confirmConvertDialog" modal>
+      <h1>Convert to JavaScript?</h1>
+      <p>
+      This will permanently convert this program to the JavaScript programming language.<br />
+      JavaScript programs use a text interface to program with.<br />
+        After the conversion, the program cannot be converted back to Blockly.
+      </p>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-confirm on-tap="convertToCode">Convert</paper-button>
+      </div>
+    </paper-dialog>
+    <paper-toast id="toast" duration="0">
+      <paper-button on-tap="closeToast" class="closeToast">Close</paper-button>
+    </paper-toast>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'code-it-program',
+
+      properties: {
+        baseUrl: {
+          type: String,
+          value: '/'
+        },
+        interface: {
+          type: String,
+          value: 'blockly', // Either 'blockly' or 'codemirror'
+        },
+        isBlockly: {
+          type: Boolean,
+          computed: '_computeIsBlockly(interface)',
+        },
+        isRunning: {
+          type: Boolean,
+          value: false,
+        },
+        name: String,
+        params: {
+          type: Object, // Holds the current program ID.
+          notify: true,
+        },
+        programId: {
+          type: String,
+          value: '',
+          observer: '_handleProgramIdChanged',
+        },
+        runState: {
+          type: String,
+          value: 'notrunning', // Either 'isrunning' or 'notrunning'
+          computed: '_computeRunState(isRunning)',
+        },
+        _errorTopic: Object,
+      },
+
+      observers: ['_programIdParamChanged(params.id)'],
+
+      _programIdParamChanged: function(id) {
+        this.programId = id;
+      },
+
+      ready: function() {
+        if (window.location.port === '' || window.location.port === '5001') {
+          this.baseUrl = '/a/code_it/';
+        }
+
+        this.isRunningTopic = new ROSLIB.Topic({
+          ros: ROS,
+          name: '/code_it/is_program_running',
+          type: 'std_msgs/Bool'
+        });
+        var that = this;
+        this.isRunningTopic.subscribe(function(msg) {
+          that._handleIsRunningMsg(that, msg);
+        });
+
+        this._errorTopic = new ROSLIB.Topic({
+          ros: ROS,
+          name: '/code_it/errors',
+          type: 'std_msgs/String'
+        });
+        this._errorTopic.subscribe(function(msg) {
+          that.$.toast.text = msg.data;
+          that.$.toast.show();
+        });
+
+        this._runAction = new ROSLIB.ActionClient({
+          ros: ROS,
+          serverName: '/run_program',
+          actionName: 'code_it_msgs/RunProgramAction'
+        });
+      },
+
+      onNameChange: function() {
+        var that = this;
+        var updateClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/update_program',
+          serviceType: 'code_it_msgs/UpdateProgram'
+        });
+        var request = new ROSLIB.ServiceRequest({
+          program: {
+            program_id: that.programId,
+            name: that.name
+          }
+        });
+        updateClient.callService(request, function() {});
+      },
+
+      _computeRunState: function(isRunning) {
+        if (isRunning) {
+          return 'isrunning';
+        } else {
+          return 'notrunning';
+        }
+      },
+
+      _computeIsBlockly: function(iface) {
+        return iface === 'blockly';
+      },
+
+      _handleIsRunningMsg: function(that, msg) {
+        that.isRunning = msg.data;
+      },
+
+      _handleProgramIdChanged: function() {
+        if (!this.programId) {
+          return;
+        }
+        var that = this;
+        var getClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/get_program',
+          serviceType: 'code_it_msgs/GetProgram'
+        });
+        var request = new ROSLIB.ServiceRequest({
+          program_id: that.programId
+        });
+        getClient.callService(request, function(result) {
+          that.name = result.program.name;
+          if (result.program.language === 'xml') {
+            that.interface = 'blockly';
+          } else if (result.program.language === 'js') {
+            that.interface = 'codemirror';
+          } else {
+            that.interface = 'blockly'; // Blockly came before JS.
+          }
+          var editor = that.getEditor();
+          editor.setProgram(result.program);
+        }); 
+      },
+
+      // Refreshes either the Blockly or the CodeMirror interface. Should be idempotent.
+      refresh: function() {
+        this.injectBlockly();
+        this.refreshCodeMirror();
+      },
+
+      // Editors have the following API:
+      // setProgram(program): Sets the editor's content with the Program msg.
+      // handleFeedback(feedback): Processes feedback msg.
+      // getCode(): Gets current JavaScript code.
+      getEditor: function() {
+        var editor = null;
+        if (this.interface === 'blockly') {
+            var editor = this.$$('#blockly');
+        } else if (this.interface === 'codemirror') {
+            var editor = this.$$('#codemirror');
+        } else {
+          console.error('Unknown interface', this.interface);
+        }
+        if (!editor) {
+          console.error('No editor node for interface', this.interface);
+        }
+        return editor;
+      },
+
+      handleRunStop: function() {
+        var that = this;
+        var editor = this.getEditor();
+
+        if (!this.isRunning) {
+          var goal = new ROSLIB.Goal({
+            actionClient: this._runAction,
+            goalMessage: {
+              program: editor.getCode()
+            }
+          });
+
+          goal.on('feedback', function(feedback) {
+            // Turn traceOn for every feedback message. Blockly turns tracing
+            // (and therefore highlighting) whenever the workspace is dragged.
+            editor.handleFeedback(feedback);
+          });
+          // RunProgramAction doesn't have a result yet.
+          //goal.on('result', function(result) {
+          //});
+
+          goal.send();
+          console.log('Running program: ' + that.code);
+        } else {
+          this._runAction.cancel();
+        }
+      },
+
+      injectBlockly: function() {
+        var blockly = this.$$('#blockly');
+        if (blockly) {
+          blockly.inject();
+        }
+      },
+
+      refreshCodeMirror: function() {
+        var editor = this.$$('#codemirror');
+        if (editor) {
+          editor.refreshEditor();
+        }
+      },
+
+      interfaceChanged: function(iface) {
+        if (iface === 'blockly') {
+          this.injectBlockly();
+        } else if (iface === 'codemirror') {
+          this.refreshCodeMirror();
+        }
+      },
+
+      maybeConvertToCode: function() {
+        this.$.confirmConvertDialog.open();
+      },
+
+      // Convert a Blockly program to code.
+      convertToCode: function() {
+        if (this.interface !== 'blockly') {
+          return;
+        }
+        var blockly = this.$$('#blockly');
+        var codemirror = this.$$('#codemirror');
+        codemirror.setCode(blockly.cleanCode);
+        this.interface = 'codemirror';
+      },
+
+      goToProgramList: function() {
+        page.redirect(this.baseUrl);
+      },
+
+      closeToast: function() {
+        this.$.toast.close();
+      },
+    });
+  })();
+  </script>
+</dom-module>

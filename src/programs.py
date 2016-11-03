@@ -21,7 +21,8 @@ class ProgramManager(object):
     def add(self):
         result = self._db.programs.insert_one(
             {'name': 'Untitled program',
-             'xml': '<xml></xml>'})
+             'xml': '<xml></xml>',
+             'js': ''})
         return self.get(str(result.inserted_id))
 
     def get(self, id_str):
@@ -62,7 +63,12 @@ class ProgramServer(object):
         program = Program()
         program.program_id = str(program_dict['_id'])
         program.name = program_dict['name']
-        program.xml = program_dict['xml']
+        if 'xml' in program_dict:
+            program.xml = program_dict['xml']
+        if 'js' in program_dict:
+            program.js = program_dict['js']
+        if 'language' in program_dict:
+            program.language = program_dict['language']
         return AddProgramResponse(program)
 
     def handle_copy(self, request):
@@ -74,16 +80,26 @@ class ProgramServer(object):
         program_xml = '<xml></xml>'
         if 'xml' in program_dict:
             program_xml = program_dict['xml']
+        program_js = ''
+        if 'js' in program_dict:
+            program_js = program_dict['js']
+        language = ''
+        if 'language' in program_dict:
+            language = program_dict['language']
 
         copy_dict = self._manager.add()
         inserted_id_str = str(copy_dict['_id'])
         self._manager.update(inserted_id_str,
                              {'name': program_name,
-                              'xml': program_xml})
+                              'xml': program_xml,
+                              'js': program_js,
+                              'language': language})
         program = Program()
         program.program_id = str(copy_dict['_id'])
         program.name = program_name
         program.xml = program_xml
+        program.js = program_js
+        program.language = language
         return CopyProgramResponse(program)
 
     def handle_get(self, request):
@@ -92,7 +108,12 @@ class ProgramServer(object):
         program = Program()
         program.program_id = str(program_dict['_id'])
         program.name = program_dict['name']
-        program.xml = program_dict['xml']
+        if 'xml' in program_dict:
+            program.xml = program_dict['xml']
+        if 'js' in program_dict:
+            program.js = program_dict['js']
+        if 'language' in program_dict:
+            program.language = program_dict['language']
         return GetProgramResponse(program)
 
     def handle_delete(self, request):
@@ -107,6 +128,10 @@ class ProgramServer(object):
             mods['name'] = program.name
         if program.xml != '':
             mods['xml'] = program.xml
+        if program.js != '':
+            mods['js'] = program.js
+        if program.language != '':
+            mods['language'] = program.language
         self._manager.update(program.program_id, mods)
         return UpdateProgramResponse()
 
@@ -117,7 +142,12 @@ class ProgramServer(object):
             prog = Program()
             prog.program_id = str(program['_id'])
             prog.name = program['name']
-            prog.xml = program['xml']
+            if 'xml' in program:
+                prog.xml = program['xml']
+            if 'js' in program:
+                prog.js = program['js']
+            if 'language' in program:
+                prog.language = program['language']
             response.programs.append(prog)
         return response
 

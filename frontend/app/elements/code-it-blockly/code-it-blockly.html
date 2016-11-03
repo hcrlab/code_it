@@ -1,6 +1,10 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+
+<link rel="import" href="../code-it-blockly-toolbox/code-it-blockly-toolbox.html">
 <link rel="import" href="blockly-import.html">
+
 <dom-module id="code-it-blockly">
   <template>
     <style>
@@ -10,7 +14,7 @@
         height: 100%;
       }
       #blocklyDiv, #codeDiv {
-        height: 99%;
+        height: 100%;
         width: 100%;
         position: absolute;
       }
@@ -38,55 +42,18 @@
         padding: 6px 16px;
         height: 36px;
       }
-      .programName {
-        max-width: 500px;
-      }
-      .runstop {
+      iron-pages {
+        height: 100%;
         position: relative;
-        top: 16px;
-        color: #fff;
       }
-      .isrunning {
-        background-color: #D32F2F;
-      }
-      .notrunning {
-        background-color: #388E3C;
-      }
-      .closeToast {
-        text-transform: none;
+      iron-pages > section {
+        height: 100%;
       }
     </style>
     <code-it-blockly-toolbox id="toolboxElement"></code-it-blockly-toolbox>
     <div class="outer layout vertical">
-      <div class="controls layout horizontal">
-        <paper-input label="Program name" class="programName flex" value="{{name}}" on-change="onNameChange"></paper-input>
-        <paper-button raised class$="runstop {{runState}}" on-tap="handleRunStop">
-          <template is="dom-if" if$="{{!isRunning}}">
-            <iron-icon icon="av:play-arrow"></iron-icon> Run
-          </template>
-          <template is="dom-if" if$="{{isRunning}}">
-            <iron-icon icon="av:stop"></iron-icon> Stop
-          </template>
-        </paper-button>
-      </div>
-      <paper-tabs noink selected="{{selected}}" id="codeTabs">
-        <paper-tab>Program</paper-tab>
-        <paper-tab id="codeTab">Code</paper-tab>
-      </paper-tabs>
-      <iron-pages selected="{{selected}}" on-iron-select="handleTab" class="tabContent flex">
-        <section>
-          <div id="blocklyDiv"></div>
-        </section>
-        <section>
-          <div id="codeDiv">
-            <textarea disabled id="code">{{code}}</textarea>
-          </div>
-        </section>
-      </iron-pages>
+      <div id="blocklyDiv"></div>
     </div>
-    <paper-toast id="toast" duration="0">
-      <paper-button on-tap="closeToast" class="closeToast">Close</paper-button>
-    </paper-toast>
   </template>
   <script>
   (function() {
@@ -100,96 +67,13 @@
           type: Boolean,
           value: false,
         },
-        selected: {
-          type: Number,
-          value: 0,
-        },
+        programId: String,
         code: String,
-        runState: {
-          type: String,
-          value: 'notrunning', // Either 'isrunning' or 'notrunning'
-          computed: '_computeRunState(isRunning)',
-        },
-        programId: {
-          type: String,
-          value: '',
-          observer: '_handleProgramIdChanged',
-        },
-        name: String,
+        cleanCode: String,
         xml: String,
-        isRunning: {
-          type: Boolean,
-          value: false,
-        },
-        _errorTopic: Object,
       },
 
       ready: function() {
-        this.isRunningTopic = new ROSLIB.Topic({
-          ros: ROS,
-          name: '/code_it/is_program_running',
-          type: 'std_msgs/Bool'
-        });
-        var that = this;
-        this.isRunningTopic.subscribe(function(msg) {
-          that._handleIsRunningMsg(that, msg);
-        });
-
-        this._errorTopic = new ROSLIB.Topic({
-          ros: ROS,
-          name: '/code_it/errors',
-          type: 'std_msgs/String'
-        });
-        this._errorTopic.subscribe(function(msg) {
-          that.$.toast.text = msg.data;
-          that.$.toast.show();
-        });
-
-        this._runAction = new ROSLIB.ActionClient({
-          ros: ROS,
-          serverName: '/run_program',
-          actionName: 'code_it_msgs/RunProgramAction'
-        });
-      },
-
-      _handleIsRunningMsg: function(that, msg) {
-        that.isRunning = msg.data;
-      },
-
-      _handleProgramIdChanged: function() {
-        if (!this.programId) {
-          return;
-        }
-        var that = this;
-        var getClient = new ROSLIB.Service({
-          ros: ROS,
-          name: '/code_it/get_program',
-          serviceType: 'code_it_msgs/GetProgram'
-        });
-        var request = new ROSLIB.ServiceRequest({
-          program_id: that.programId
-        });
-        getClient.callService(request, function(result) {
-          that.name = result.program.name;
-          that.xml = result.program.xml;
-          var xmlDom = Blockly.Xml.textToDom(that.xml);
-
-          var workspace = Blockly.getMainWorkspace();
-          workspace.clear();
-          Blockly.Xml.domToWorkspace(xmlDom, workspace);
-        }); 
-
-        // Necessary to make the workspace show up initially for some reason.
-        if (this.injected) {
-          Blockly.svgResize(Blockly.getMainWorkspace());
-        }
-      },
-
-      handleTab: function(evt) {
-        if (this.selected === 0) {
-          this.inject();
-        }
-        evt.stopPropagation(); // TODO(jstn): this doesn't stop propagation.
       },
 
       inject: function() {
@@ -204,12 +88,13 @@
             minScale: 0.3,
             scaleSpeed: 1.2}
           });
-          Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-          Blockly.JavaScript.addReservedWords('highlightBlock');
           var that = this;
+          Blockly.JavaScript.addReservedWords('highlightBlock');
           var updateCode = function() {
-            var code = Blockly.JavaScript.workspaceToCode(workspace);
-            that.code = code;
+            Blockly.JavaScript.STATEMENT_PREFIX = null;
+            that.cleanCode = Blockly.JavaScript.workspaceToCode(workspace);
+            Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+            that.code = Blockly.JavaScript.workspaceToCode(workspace);
           };
           workspace.addChangeListener(updateCode);
           workspace.addChangeListener(function() {
@@ -217,24 +102,6 @@
           });
           this.injected = true;
         }
-      },
-
-      onNameChange: function() {
-        var that = this;
-        var updateClient = new ROSLIB.Service({
-          ros: ROS,
-          name: '/code_it/update_program',
-          serviceType: 'code_it_msgs/UpdateProgram'
-        });
-        var request = new ROSLIB.ServiceRequest({
-          program: {
-            program_id: that.programId,
-            name: that.name,
-          }
-        });
-        updateClient.callService(request, function(result) {
-          that.program = result.program;
-        }); 
       },
 
       onProgramChange: function(that) {
@@ -250,50 +117,35 @@
           program: {
             program_id: that.programId,
             xml: xmlText,
+            language: 'xml'
           }
         });
         updateClient.callService(request, function() {}); 
       },
 
-      _computeRunState: function(isRunning) {
-        if (isRunning) {
-          return 'isrunning';
-        } else {
-          return 'notrunning';
-        }
+      getCode: function() {
+        return this.code;
       },
 
-      handleRunStop: function() {
-        var that = this;
+      handleFeedback: function(feedback) {
         var workspace = Blockly.getMainWorkspace();
-
-        if (!this.isRunning) {
-          var goal = new ROSLIB.Goal({
-            actionClient: this._runAction,
-            goalMessage: {
-              program: that.code
-            }
-          });
-
-          goal.on('feedback', function(feedback) {
-            // Turn traceOn for every feedback message. Blockly turns tracing
-            // (and therefore highlighting) whenever the workspace is dragged.
-            workspace.traceOn(true);
-            workspace.highlightBlock(feedback.block_id);
-          });
-          // RunProgramAction doesn't have a result yet.
-          //goal.on('result', function(result) {
-          //});
-
-          goal.send();
-          console.log('Running program: ' + that.code);
-        } else {
-          this._runAction.cancel();
-        }
+        workspace.traceOn(true);
+        workspace.highlightBlock(feedback.block_id);
       },
 
-      closeToast: function() {
-        this.$.toast.close();
+      // program is a code_it Program msg, which contains name, program_id, and xml.
+      setProgram: function(program) {
+        this.xml = program.xml;
+        var xmlDom = Blockly.Xml.textToDom(this.xml);
+
+        var workspace = Blockly.getMainWorkspace();
+        workspace.clear();
+        Blockly.Xml.domToWorkspace(xmlDom, workspace);
+
+        // Necessary to make the workspace show up initially for some reason.
+        if (this.injected) {
+          Blockly.svgResize(Blockly.getMainWorkspace());
+        }
       },
     });
   })();

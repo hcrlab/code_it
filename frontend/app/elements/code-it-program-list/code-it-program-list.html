@@ -1,0 +1,205 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
+
+<dom-module id="code-it-program-list">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      paper-button {
+        @apply(--paper-font-button);
+        border-radius: 2px;
+        padding: 6px 16px;
+        height: 36px;
+      }
+      paper-button.generic:hover {
+        background-color: #e0e0e0;
+      }
+      paper-button.delete:hover {
+        background-color: #FFCDD2;
+      }
+      .create {
+        background-color: #ffc107;
+        color: var(--primary-text-color);
+        margin-left: 0;
+        margin-bottom: 10px;
+      }
+      .delete {
+        color: #D32F2F;
+      }
+      .listBack {
+        background-color: #fff;
+      }
+      .programList {
+        border-spacing: 0;
+          width: 100%;
+      }
+      .programList th, td {
+        border-bottom: 1px solid var(--divider-color);
+        padding: 5px 10px;
+      }
+      .programList th {
+        text-align: left;
+        padding: 15px;
+      }
+      .programList tr:last-child td {
+        border-bottom: none;
+      }
+      #confirmDeleteDialog {
+        --paper-dialog-background-color: #fff;
+          min-width: 275px;
+      }
+      #confirmDeleteDialog h1 {
+        @apply(--paper-font-title);
+      }
+      #confirmDeleteDialog paper-button:hover {
+        background-color: #fff;
+      }
+    </style>
+    <paper-button class="create" raised on-tap="onCreate"><iron-icon icon="add"></iron-icon> Create new program</paper-button>
+    <paper-material class="listBack">
+      <table class="programList">
+        <thead>
+          <tr>
+            <th>Program</th>
+            <th>Actions</th>
+            <th>Language</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template is="dom-repeat" items="{{programs}}">
+            <tr>
+              <td>{{item.name}}</td>
+              <td>
+                <paper-button class="generic" on-tap="onEdit" noink data-program-id$="{{item.program_id}}">Edit / Run</paper-button>
+                <paper-button class="generic" on-tap="onCopy" noink data-program-id$="{{item.program_id}}">Copy</paper-button>
+                <paper-button class="delete" noink data-program-id$="{{item.program_id}}" on-tap="onMaybeDelete">Delete</paper-button>
+              </td>
+              <td>
+                {{_languageString(item.language)}}
+              </td>
+            </tr>
+          </template>
+          <template is="dom-if" if="{{noPrograms}}">
+            <tr>
+              <td colspan="2">
+                No programs yet.
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </paper-material>
+    <paper-dialog id="confirmDeleteDialog" modal>
+      <h1>Delete program?</h1>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-confirm on-tap="onDelete">Delete</paper-button>
+      </div>
+    </paper-dialog>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'code-it-program-list',
+
+      properties: {
+        programs: {
+          type: Array,
+          value: [],
+        },
+        programToDelete: {
+          type: String,
+        },
+        noPrograms: {
+          type: Boolean,
+          computed: 'isEmpty(programs)'
+        },
+      },
+
+      update: function() {
+        var that = this;
+        var listClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/list_programs',
+          serviceType: 'code_it_msgs/ListPrograms'
+        });
+        var request = new ROSLIB.ServiceRequest({});
+        listClient.callService(request, function(result) {
+          that.programs = result.programs;
+        }); 
+      },
+      isEmpty: function(programs) {
+        return programs.length === 0;
+      },
+      onCreate: function() {
+        var addClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/add_program',
+          serviceType: 'code_it_msgs/AddProgram'
+        });
+        var request = new ROSLIB.ServiceRequest({});
+        addClient.callService(request, function(result) {
+          var program = result.program;
+          page.redirect('/program/' + program.program_id);
+        }); 
+      },
+      onCopy: function(evt) {
+        var programId = evt.srcElement.dataset.programId;
+        var copyClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/copy_program',
+          serviceType: 'code_it_msgs/CopyProgram'
+        });
+        var request = new ROSLIB.ServiceRequest({
+          program_id: programId
+        });
+        copyClient.callService(request, function(result) {
+          var program = result.program;
+          page.redirect('/program/' + program.program_id);
+        }); 
+      },
+      onEdit: function(evt) {
+        var programId = evt.srcElement.dataset.programId;
+        page.redirect('/program/' + programId);
+      },
+      onMaybeDelete: function(evt) {
+        this.programToDelete = evt.srcElement.dataset.programId;
+        this.$.confirmDeleteDialog.open();
+      },
+      onDelete: function() {
+        var that = this;
+        var deleteClient = new ROSLIB.Service({
+          ros: ROS,
+          name: '/code_it/delete_program',
+          serviceType: 'code_it_msgs/DeleteProgram'
+        });
+        var request = new ROSLIB.ServiceRequest({
+          program_id: that.programToDelete,
+        });
+        deleteClient.callService(request, function() {
+          that.programToDelete = '';
+          that.update();
+        }); 
+      },
+      _languageString: function(language) {
+        if (language === 'xml') {
+          return 'Blockly';
+        } else if (language === 'js') {
+          return 'JavaScript';
+        } else {
+          return 'Blockly';
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>

@@ -103,8 +103,8 @@ gulp.task('lint', function() {
     'app/elements/**/*.html',
     'gulpfile.js',
     '!app/scripts/eventemitter2.js',
-    '!app/scripts/roslib.js'
-    //'!app/elements/code-it-codemirror-editor/code-it-codemirror-editor.html'
+    '!app/scripts/roslib.js',
+    '!app/elements/code-it-codemirror-editor/codemirror/**/*'
   ])
       .pipe(reload({stream: true, once: true}))
 
