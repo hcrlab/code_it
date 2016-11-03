@@ -309,8 +309,8 @@ Robot = function() {
     });
   });
 
-  var runPbdAction = Meteor.wrapAsync(function(actionId, preregisteredLandmarks, callback) {
-    console.log('Running PbD action: ' + actionId);
+  var runPbdAction = Meteor.wrapAsync(function(name, preregisteredLandmarks, callback) {
+    console.log('Running PbD action: ' + name);
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/run_pbd_action',
@@ -332,7 +332,8 @@ Robot = function() {
     console.log('Pre-registered landmarks', preregistered);
 
     var request = new ROSLIB.ServiceRequest({
-      action_id: actionId,
+      action_id: '',
+      name: name,
       landmarks: preregistered
     });
 
