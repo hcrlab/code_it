@@ -86,8 +86,8 @@ Robot = function() {
 
   });
 
-  var findCustomLandmark = Meteor.wrapAsync(function(db_id, is_tabletop, callback) {
-    console.log('Finding custom landmark ' + db_id + ', on tabletop: ' + is_tabletop);
+  var findCustomLandmark = Meteor.wrapAsync(function(name, is_tabletop, callback) {
+    console.log('Finding custom landmark ' + name + ', on tabletop: ' + is_tabletop);
     var client = new ROSLIB.Service({
       ros: ROS,
       name: '/code_it/api/find_custom_landmark',
@@ -95,7 +95,7 @@ Robot = function() {
     });
 
     var request = new ROSLIB.ServiceRequest({
-      db_id: db_id,
+      name: name,
       is_tabletop: is_tabletop
     });
     client.callService(request, function(result) {

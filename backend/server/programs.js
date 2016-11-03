@@ -22,10 +22,10 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'displayMessage', interpreter.createNativeFunction(wrapper));
 
-  var wrapper = function(db_id, is_tabletop) {
-    var db_id = db_id ? db_id.toString() : '';
+  var wrapper = function(name, is_tabletop) {
+    var name = name ? name.toString() : '';
     var is_tabletop = is_tabletop ? is_tabletop.toBoolean() : false;
-    var landmarks = Robot.findCustomLandmark(db_id, is_tabletop);
+    var landmarks = Robot.findCustomLandmark(name, is_tabletop);
     var landmarks_arr = interpreter.toPseudoObject(landmarks);
     return landmarks_arr;
   };
