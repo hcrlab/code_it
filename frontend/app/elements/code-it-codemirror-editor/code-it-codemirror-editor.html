@@ -24,18 +24,39 @@
 
     // Autocompletions - only works for objects like robot, Math, etc.
     var _COMPLETIONS = [
+      {name: 'for (var i=0; i<list.length; i++) {\n}', doc: 'A for loop.'},
+      {name: 'for (var i in list) {\nvar item=list[i];\n}', doc: 'A for-each loop.'},
+      {name: 'while (true) {\n}', doc: 'A while loop.'},
+      {name: 'if (true) {\n}', doc: 'An if statement.'},
+      {name: 'break', doc: 'Break out of the current loop.'},
+      {name: 'continue', doc: 'Skip to the next iteration of the loop.'},
+      {name: 'function foo(arg1) {\n}', doc: 'Define a function.'},
       {
         name: 'robot',
         doc: 'The robot object.',
         children: [
-          {name: 'displayMessage', doc: 'Displays a message on the robot\'s screen.'},
-          {name: 'findCustomLandmark', doc: 'Finds the named object in the scene and returns a (possibly empty) list of their locations.'}
+          {name: 'askMultipleChoice("Question", ["Choice 1"])', doc: 'Asks a multiple choice question. The user\'s choice is returned.'},
+          {name: 'displayMessage("Message")', doc: 'Displays a message on the robot\'s screen.'},
+          {name: 'findCustomLandmark("Landmark name", /*isTabletop*/ true)', doc: 'Searches for the given custom landmark and returns a (possibly empty) list of landmarks found in the scene.'},
+          {name: 'lookAtDegrees(/* up */ 315, /* left */ 0)', doc: 'Look some number of degrees up and/or to the left.'},
+          {name: 'runPbdAction("Action name", /* landmarks */ {"Landmark name": landmark})', doc: 'Look some number of degrees up and/or to the left.'},
         ]
       },
       {
-        name: 'waitForDuration',
+        name: 'waitForDuration(/* seconds */ 2)',
         doc: 'Waits for the given number of seconds.'
       },
+      {name: 'getLandmarkX(landmark)', doc: 'Returns the X position of the landmark'},
+      {name: 'getLandmarkY(landmark)', doc: 'Returns the Y position of the landmark'},
+      {name: 'getLandmarkZ(landmark)', doc: 'Returns the Z position of the landmark'},
+      {name: 'ACTIONS_POKE_GLUE_BOTTLE', doc: '"Poke glue bottle"'},
+      {name: 'ACTIONS_PUT_TOMATO_CAN_IN_BROWN_BOX', doc: '"Put tomato can in brown box"'},
+      {name: 'ACTIONS_PUT_TOMATO_CAN_IN_GREEN_SQUARE', doc: '"Put tomato can in green square"'},
+      {name: 'ACTIONS_PUT_LID_ON_CAN_IN_GREEN_SQUARE', doc: '"Put lid on can in green square"'},
+      {name: 'LANDMARKS_GLUE_BOTTLE', doc: '"Glue bottle"'},
+      {name: 'LANDMARKS_TOMATO_CAN', doc: '"Tomato can"'},
+      {name: 'LANDMARKS_KROGER_CAN', doc: '"Kroger can"'},
+      {name: 'LANDMARKS_CAN_LID', doc: '"Can lid"'}
     ];
 
     Polymer({

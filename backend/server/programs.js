@@ -127,6 +127,52 @@ function interpreterApi(interpreter, scope) {
     }());
   }
   interpreter.setProperty(scope, 'highlightBlock', interpreter.createNativeFunction(wrapper));
+
+  // getX, getY, getZ
+  var wrapper = function(landmark) {
+    var landmark = landmark ? interpreter.toNativeObject(landmark) : {};
+    return interpreter.createPrimitive(function() {
+      if (!landmark || !landmark.pose || !landmark.pose.pose || !landmark.pose.pose.position || !landmark.pose.pose.position.x) {
+        return null;
+      }
+      return landmark.pose.pose.position.x;
+    }());
+  }
+  interpreter.setProperty(scope, 'getLandmarkX', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(landmark) {
+    var landmark = landmark ? interpreter.toNativeObject(landmark) : {};
+    return interpreter.createPrimitive(function() {
+      if (!landmark || !landmark.pose || !landmark.pose.pose || !landmark.pose.pose.position || !landmark.pose.pose.position.y) {
+        return null;
+      }
+      return landmark.pose.pose.position.y;
+    }());
+  }
+  interpreter.setProperty(scope, 'getLandmarkY', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(landmark) {
+    var landmark = landmark ? interpreter.toNativeObject(landmark) : {};
+    return interpreter.createPrimitive(function() {
+      if (!landmark || !landmark.pose || !landmark.pose.pose || !landmark.pose.pose.position || !landmark.pose.pose.position.z) {
+        return null;
+      }
+      return landmark.pose.pose.position.z;
+    }());
+  }
+  interpreter.setProperty(scope, 'getLandmarkZ', interpreter.createNativeFunction(wrapper));
+
+  // User study aliases - actions, landmarks
+  var actions = interpreter.createObject(interpreter.OBJECT);
+  interpreter.setProperty(scope, 'ACTIONS_POKE_GLUE_BOTTLE', interpreter.createPrimitive('Poke glue bottle'));
+  interpreter.setProperty(scope, 'ACTIONS_PUT_TOMATO_CAN_IN_BROWN_BOX', interpreter.createPrimitive('Put tomato can in brown box'));
+  interpreter.setProperty(scope, 'ACTIONS_PUT_TOMATO_CAN_IN_GREEN_SQUARE', interpreter.createPrimitive('Put tomato can in green square'));
+  interpreter.setProperty(scope, 'ACTIONS_PUT_LID_ON_CAN_IN_GREEN_SQUARE', interpreter.createPrimitive('Put lid on can in green square'));
+
+  interpreter.setProperty(scope, 'LANDMARKS_GLUE_BOTTLE', interpreter.createPrimitive('Glue bottle'));
+  interpreter.setProperty(scope, 'LANDMARKS_TOMATO_CAN', interpreter.createPrimitive('Tomato can'));
+  interpreter.setProperty(scope, 'LANDMARKS_KROGER_CAN', interpreter.createPrimitive('Kroger can'));
+  interpreter.setProperty(scope, 'LANDMARKS_CAN_LID', interpreter.createPrimitive('Can lid'));
 };
 
 Runtime = function() {
