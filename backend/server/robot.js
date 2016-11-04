@@ -324,8 +324,7 @@ Robot = function() {
     var preregistered = [];
     for (var id in preregisteredLandmarks) {
       var landmark = preregisteredLandmarks[id];
-      if (landmark && landmark.db_id) {
-        landmark.db_id = id;
+      if (landmark && landmark.name) {
         preregistered.push(landmark);
       }
     }
