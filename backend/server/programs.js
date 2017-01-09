@@ -168,9 +168,11 @@ function interpreterApi(interpreter, scope) {
   interpreter.setProperty(scope, 'ACTIONS_PUT_TOMATO_CAN_IN_BROWN_BOX', interpreter.createPrimitive('Put tomato can in brown box'));
   interpreter.setProperty(scope, 'ACTIONS_PUT_TOMATO_CAN_IN_GREEN_SQUARE', interpreter.createPrimitive('Put tomato can in green square'));
   interpreter.setProperty(scope, 'ACTIONS_PUT_LID_ON_CAN_IN_GREEN_SQUARE', interpreter.createPrimitive('Put lid on can in green square'));
+  interpreter.setProperty(scope, 'ACTIONS_PUT_TRIANGLE_BLOCK_INTO_BOX', interpreter.createPrimitive('Put triangle block into box'));
 
   interpreter.setProperty(scope, 'LANDMARKS_GLUE_BOTTLE', interpreter.createPrimitive('Glue bottle'));
   interpreter.setProperty(scope, 'LANDMARKS_TOMATO_CAN', interpreter.createPrimitive('Tomato can'));
+  interpreter.setProperty(scope, 'LANDMARKS_TRIANGLE_BLOCK', interpreter.createPrimitive('Triangle block'));
   interpreter.setProperty(scope, 'LANDMARKS_KROGER_CAN', interpreter.createPrimitive('Kroger can'));
   interpreter.setProperty(scope, 'LANDMARKS_CAN_LID', interpreter.createPrimitive('Can lid'));
 };

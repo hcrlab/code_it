@@ -31,6 +31,7 @@
       {name: 'break', doc: 'Break out of the current loop.'},
       {name: 'continue', doc: 'Skip to the next iteration of the loop.'},
       {name: 'function foo(arg1) {\n}', doc: 'Define a function.'},
+      {name: 'function getLeftmostLandmark(landmarks) {\n  /**\n   * Gets the leftmost landmark. Modify as needed.\n   * +x: forward (away from robot), -x: backward\n   * +y: left, -y: right\n   * +z: up, -z: down\n   */\n  var bestLandmark = landmarks[0];\n  for (var lIndex in landmarks) {\n    var l = landmarks[lIndex];\n    if (l.pose.pose.position.y > bestLandmark.pose.pose.position.y) {\n      bestLandmark = l;\n    }\n  }\n  return bestLandmark;\n}', doc: 'A function that gets the leftmost landmark from a list of landmarks.'},
       {
         name: 'robot',
         doc: 'The robot object.',
