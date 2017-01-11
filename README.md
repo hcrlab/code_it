@@ -78,6 +78,8 @@ You also need to install:
    To downgrade, type `meteor update --release 1.2` in the `backend` folder.
 1. Go to the `backend` folder and run `build.sh`.
    This will generate an application bundle that's ready to be deployed.
+   
+If you get an error `gif_lib.h header not found`, run `sudo apt-get install libgif-dev`.
 
 #### Deploy to [RWS](https://github.com/hcrlab/rws)
 If you are not using RWS, then simply serve the `www` folder as static content and use `roslaunch code_it app.launch` to run the backend.
