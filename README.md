@@ -138,7 +138,7 @@ Build your blocks using `python build.py` inside of the `blockly` folder.
 Finally, add the block to the Blockly toolbox, so that users can see the block and drag it into the program.
 To do that, edit `frontend/app/elements/code-it-blockly-toolbox/code-it-blockly-toolbox.html` and add your block to the toolbox according to the [toolbox documentation](https://developers.google.com/blockly/installation/toolbox).
 Because toolbox configurations can vary from robot to robot, we don't check in robot-specific blocks to the toolbox in this repository.
-You can tell Git not to track your toolbox changes using `git update-index --assume-unchanged frontend/app/elements/code-it-toolbox/code-it-toolbox.html`.
+You can tell Git not to track your toolbox changes using `git update-index --assume-unchanged frontend/app/elements/code-it-blockly-toolbox/code-it-blockly-toolbox.html`.
 
 ## About
 This project is based on *Custom Programs*, as described in [Design and Evaluation of a Rapid Programming System for Service Robots](https://drive.google.com/a/cs.washington.edu/file/d/0B77PnOCaAq8seFE2UFl6ZHBzZVk/view).
