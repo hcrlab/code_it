@@ -106,6 +106,12 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'setGripper', interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function (height) {
+    var height = height ? height.toNumber() : 0;
+    return interpreter.createPrimitive(Robot.setTorso(height));
+  };
+  interpreter.setProperty(myRobot, 'setTorso', interpreter.createNativeFunction(wrapper));
+
   var wrapper = function(tuck_left, tuck_right) {
     var tuck_left = tuck_left ? tuck_left.toBoolean() : false;
     var tuck_right = tuck_right ? tuck_right.toBoolean() : false;

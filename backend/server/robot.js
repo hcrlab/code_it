@@ -348,6 +348,7 @@ Robot = function() {
     });
   });
 
+
   var say = Meteor.wrapAsync(function(text, callback) {
     console.log('Saying: ' + text);
     var client = new ROSLIB.Service({
@@ -369,6 +370,7 @@ Robot = function() {
       callback(error ? error : 'Speech failed to run.', null);
     });
   });
+
 
   var setGripper = Meteor.wrapAsync(function(side, action, max_effort, callback) {
     console.log('Setting gripper, side: ' + side + ', ' + action);
@@ -396,6 +398,31 @@ Robot = function() {
     }, function(error) {
       callback(error ? error : 'Failed to set gripper.', null);
     });
+  });
+
+  var setTorso = Meteor.wrapAsync(function(height, callback){
+    console.log('Setting torso to ' + height + ' meters');
+    var client = new ROSLIB.Service({
+       ros:ROS,
+       name:'/code_it/api/set_torso',
+       serviceType:'code_it_msgs/SetTorso'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+        height:height
+    });
+
+    client.callService(request, function(result) {
+        setError(result.error);
+        if (result.error) {
+            callback(result.error, null); // No recovery.
+        } else {
+            callback(null, null);
+        }
+    }, function(error) {
+        callback(error ? error : 'Failed to set torso.', null);
+    });
+
   });
 
   var tuckArms = Meteor.wrapAsync(function(tuck_left, tuck_right, callback) {
@@ -449,6 +476,7 @@ Robot = function() {
     say: say,
     setError: setError,
     setGripper: setGripper,
+    setTorso: setTorso,
     tuckArms: tuckArms,
     waitForDuration: waitForDuration,
   };
