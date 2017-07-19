@@ -432,7 +432,7 @@
           </value>
         </block>
       </category-->
-      <category name="Robot torso, arm, and gripper" colour="20">
+      <category name="Robot arm and body" colour="20">
         <block type="robot_manipulation_set_torso">
           <value name="HEIGHT">
             <block type="math_number">
@@ -484,7 +484,7 @@
           </value>
         </block-->
       </category>
-      <!--category name="Robot navigation" colour="160">
+      <category name="Robot navigation" colour="160">
         <block type="variables_set">
           <field name="VAR">success</field>
           <value name="VALUE">
@@ -498,14 +498,14 @@
         </block>
         <block type="robot_movement_locations">
         </block>
-        <block type="variables_set">
+        <!--block type="variables_set">
           <field name="VAR">success</field>
           <value name="VALUE">
             <block type="robot_movement_go_to_dock">
             </block>
           </value>
-        </block>
-      </category-->
+        </block-->
+      </category>
       <category name="Robot sound" colour="65">
         <block type="robot_sound_say">
           <value name="TEXT">
@@ -514,14 +514,6 @@
             </block>
           </value>
         </block>
-	<block type="robot_sound_say_backwards">
-          <value name="TEXT">
-            <block type="text">
-              <field name="TEXT">dlrow olleH</field>
-            </block>
-          </value>
-        </block>
-
       </category>
       <category name="Program control" colour="120">
         <block type="robot_wait_for_seconds">
