@@ -433,7 +433,13 @@
         </block>
       </category-->
       <category name="Robot torso, arm, and gripper" colour="20">
-        <block type="robot_manipulation_set_torso"></block>
+        <block type="robot_manipulation_set_torso">
+          <value name="HEIGHT">
+            <block type="math_number">
+              <field name="NUM">0.4</field>
+            </block>
+          </value>
+        </block>
         <block type="robot_manipulation_open_gripper"></block>
         <block type="robot_manipulation_close_gripper"></block>
         <!--block type="robot_movement_tuck_arms"></block>
