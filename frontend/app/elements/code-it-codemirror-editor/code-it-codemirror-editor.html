@@ -14,6 +14,7 @@
       }
       #codemirrordiv {
         height: 100%;
+        font-size: 14px;
       }
     </style>
     <div id="codemirrordiv"></div>
@@ -24,39 +25,56 @@
 
     // Autocompletions - only works for objects like robot, Math, etc.
     var _COMPLETIONS = [
-      {name: 'for (var i=0; i<list.length; i++) {\n}', doc: 'A for loop.'},
+      {name: 'for (var i=0; i<10; i++) {\n}', doc: 'A for loop.'},
       {name: 'for (var i in list) {\nvar item=list[i];\n}', doc: 'A for-each loop.'},
       {name: 'while (true) {\n}', doc: 'A while loop.'},
       {name: 'if (true) {\n}', doc: 'An if statement.'},
       {name: 'break', doc: 'Break out of the current loop.'},
       {name: 'continue', doc: 'Skip to the next iteration of the loop.'},
+      {name: 'return', doc: 'Return from the current function.'},
       {name: 'function foo(arg1) {\n}', doc: 'Define a function.'},
       {
         name: 'robot',
         doc: 'The robot object.',
         children: [
-          {name: 'askMultipleChoice("Question", ["Choice 1"])', doc: 'Asks a multiple choice question. The user\'s choice is returned.'},
-          {name: 'displayMessage("Message")', doc: 'Displays a message on the robot\'s screen.'},
-          {name: 'findCustomLandmark("Landmark name", /*isTabletop*/ true)', doc: 'Searches for the given custom landmark and returns a (possibly empty) list of landmarks found in the scene.'},
-          {name: 'lookAtDegrees(/* up */ 315, /* left */ 0)', doc: 'Look some number of degrees up and/or to the left.'},
-          {name: 'runPbdAction("Action name", /* landmarks */ {"Landmark name": landmark})', doc: 'Look some number of degrees up and/or to the left.'},
+          {name: 'askMultipleChoice("Yes or no?", ["Yes", "No"])', doc: 'Asks a multiple choice question. The user\'s choice is returned.'},
+          {name: 'askMultipleChoice("Press Start", ["Start"])', doc: 'Waits for a button press.'},
+          {name: 'displayMessage("Hello world!")', doc: 'Displays a message on the robot\'s screen.'},
+          {name: 'displayMessage("Hello world!", "I\'m ready to help")', doc: 'Displays a main message and a smaller message on the robot\'s screen.'},
+          {name: 'closeGripper()', doc: 'Closes the gripper.'},
+          {name: 'openGripper()', doc: 'Opens the gripper.'},
+          {name: 'setTorso(0.4)', doc: 'Sets the robot\'s torso height, between 0 and 0.4 meters.'},
+          {name: 'runPbdProgram("Program name")', doc: 'Runs a Rapid PbD program with the given name.'},
+          {name: 'goTo("Home")', doc: 'Navigates the robot to a named location. Check the map for names.'},
+          {name: 'say("Hello world!")', doc: 'Make the robot say something.'},
+        ]
+      },
+      {
+        name: 'Math',
+        doc: 'Math library',
+        children: [
+          {name: 'sqrt(x)', doc: 'Square root.'},
+          {name: 'log(x)', doc: 'Natural logarithm'},
+          {name: 'exp(x)', doc: 'Exponential (e^x)'},
+          {name: 'pow(x, n)', doc: 'Power (x^n)'},
+          {name: 'sin(x)', doc: 'sin, x is in radians'},
+          {name: 'asin(x)', doc: 'arcsin, x is in radians'},
+          {name: 'cos(x)', doc: 'cos, x is in radians'},
+          {name: 'acos(x)', doc: 'arccos, x is in radians'},
+          {name: 'tan(x)', doc: 'tangent, x is in radians'},
+          {name: 'atan(x)', doc: 'arctangent, x is in radians'},
+          {name: 'PI', doc: 'pi'},
+          {name: 'E', doc: 'e'},
+          {name: 'round', doc: 'Rounds a number to the nearest integer.'},
+          {name: 'ceil', doc: 'Rounds a number up.'},
+          {name: 'floor', doc: 'Rounds a number down.'},
         ]
       },
       {
         name: 'waitForDuration(/* seconds */ 2)',
         doc: 'Waits for the given number of seconds.'
       },
-      {name: 'getLandmarkX(landmark)', doc: 'Returns the X position of the landmark'},
-      {name: 'getLandmarkY(landmark)', doc: 'Returns the Y position of the landmark'},
-      {name: 'getLandmarkZ(landmark)', doc: 'Returns the Z position of the landmark'},
-      {name: 'ACTIONS_POKE_GLUE_BOTTLE', doc: '"Poke glue bottle"'},
-      {name: 'ACTIONS_PUT_TOMATO_CAN_IN_BROWN_BOX', doc: '"Put tomato can in brown box"'},
-      {name: 'ACTIONS_PUT_TOMATO_CAN_IN_GREEN_SQUARE', doc: '"Put tomato can in green square"'},
-      {name: 'ACTIONS_PUT_LID_ON_CAN_IN_GREEN_SQUARE', doc: '"Put lid on can in green square"'},
-      {name: 'LANDMARKS_GLUE_BOTTLE', doc: '"Glue bottle"'},
-      {name: 'LANDMARKS_TOMATO_CAN', doc: '"Tomato can"'},
-      {name: 'LANDMARKS_KROGER_CAN', doc: '"Kroger can"'},
-      {name: 'LANDMARKS_CAN_LID', doc: '"Can lid"'}
+      {name: 'Infinity', doc: 'Represents infinity.' },
     ];
 
     Polymer({
