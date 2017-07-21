@@ -49,9 +49,20 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'goToDock', interpreter.createNativeFunction(wrapper));
 
-  var wrapper = function(gripper) {
+  var wrapper = function() {
     var gripper = gripper ? gripper.toString() : '';
-    return interpreter.createPrimitive(Robot.isGripperOpen(gripper));
+    return interpreter.createPrimitive(Robot.isGripperOpen('LEFT'));
+  };
+  interpreter.setProperty(myRobot, 'isLeftGripperOpen', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function() {
+    var gripper = gripper ? gripper.toString() : '';
+    return interpreter.createPrimitive(Robot.isGripperOpen('RIGHT'));
+  };
+  interpreter.setProperty(myRobot, 'isRightGripperOpen', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function() {
+    return interpreter.createPrimitive(Robot.isGripperOpen());
   };
   interpreter.setProperty(myRobot, 'isGripperOpen', interpreter.createNativeFunction(wrapper));
 
@@ -104,13 +115,53 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'say', interpreter.createNativeFunction(wrapper));
 
-  var wrapper = function(side, action, max_effort) {
-    var side = side ? side.toNumber() : 0;
-    var arm_id = action ? action.toNumber() : 0;
-    var max_effort = max_effort ? max_effort.toNumber() : -1;
-    return interpreter.createPrimitive(Robot.setGripper(side, arm_id, max_effort));
+  var wrapper = function() {
+    var side = 0; // For Fetch only
+    var action = 1; // Open
+    var max_effort = 0;
+    return interpreter.createPrimitive(Robot.setGripper(side, action, max_effort));
   };
-  interpreter.setProperty(myRobot, 'setGripper', interpreter.createNativeFunction(wrapper));
+  interpreter.setProperty(myRobot, 'openGripper', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(max_effort) {
+    var side = 0; // For Fetch only
+    var action = 2; // Open
+    var max_effort = max_effort ? max_effort.toNumber() : 0;
+    return interpreter.createPrimitive(Robot.setGripper(side, action, max_effort));
+  };
+  interpreter.setProperty(myRobot, 'closeGripper', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function() {
+    var side = 1; // Left
+    var action = 1; // Open
+    var max_effort = -1;
+    return interpreter.createPrimitive(Robot.setGripper(side, action, max_effort));
+  };
+  interpreter.setProperty(myRobot, 'openLeftGripper', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(max_effort) {
+    var side = 1; // Left
+    var action = 2; // Close
+    var max_effort = max_effort ? max_effort.toNumber() : -1;
+    return interpreter.createPrimitive(Robot.setGripper(side, action, max_effort));
+  };
+  interpreter.setProperty(myRobot, 'closeLeftGripper', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function() {
+    var side = 2; // Right
+    var action = 1; // Open
+    var max_effort = -1;
+    return interpreter.createPrimitive(Robot.setGripper(side, action, max_effort));
+  };
+  interpreter.setProperty(myRobot, 'openRightGripper', interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function(max_effort) {
+    var side = 2; // Right
+    var action = 2; // Close
+    var max_effort = max_effort ? max_effort.toNumber() : -1;
+    return interpreter.createPrimitive(Robot.setGripper(side, action, max_effort));
+  };
+  interpreter.setProperty(myRobot, 'closeRightGripper', interpreter.createNativeFunction(wrapper));
 
   var wrapper = function (height) {
     var height = height ? height.toNumber() : 0;
