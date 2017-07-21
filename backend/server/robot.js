@@ -359,7 +359,7 @@ Robot = function() {
     var request = new ROSLIB.ServiceRequest({
       action_id: '',
       name: name,
-      landmarks: {}
+      landmarks: []
     });
 
     client.callService(request, function(result) {
