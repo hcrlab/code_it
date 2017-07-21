@@ -39,13 +39,9 @@
         max-width: 500px;
       }
       .runstop {
-        position: relative;
-        top: 16px;
         color: #fff;
       }
       .convert {
-        position: relative;
-        top: 16px;
       }
       .isrunning {
         background-color: #D32F2F;
@@ -71,8 +67,8 @@
       }
     </style>
     <section class="vertical layout">
-      <div><paper-button on-tap="goToProgramList" class="generic" noink><iron-icon icon="arrow-back"></iron-icon> Back to program list</paper-button></div>
-      <div class="controls layout horizontal">
+      <div class="controls layout horizontal center wrap">
+        <paper-button on-tap="goToProgramList" class="generic" noink><iron-icon icon="arrow-back"></iron-icon> Back</paper-button>
         <paper-input label="Program name" class="programName flex" value="{{name}}" on-change="onNameChange"></paper-input>
         <paper-button raised class$="runstop {{runState}}" on-tap="handleRunStop">
           <template is="dom-if" if$="{{!isRunning}}">
@@ -82,8 +78,8 @@
             <iron-icon icon="av:stop"></iron-icon> Stop
           </template>
         </paper-button>
-        <div class="flex"></div>
         <template is="dom-if" if$="{{isBlockly}}">
+          <div class="flex"></div>
           <paper-button class="convert"
               on-tap="maybeConvertToCode"
               title="Convert this program to JavaScript code. This cannot be undone.">
@@ -99,8 +95,8 @@
     <paper-dialog id="confirmConvertDialog" modal>
       <h1>Convert to JavaScript?</h1>
       <p>
-      This will permanently convert this program to the JavaScript programming language.<br />
-      JavaScript programs use a text interface to program with.<br />
+        This will permanently convert this program to the JavaScript programming language.<br />
+        JavaScript programs use a text interface to program with.<br />
         After the conversion, the program cannot be converted back to Blockly.
       </p>
       <div class="buttons">
