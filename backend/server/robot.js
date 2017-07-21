@@ -348,6 +348,32 @@ Robot = function() {
     });
   });
 
+  var runPbdProgram = Meteor.wrapAsync(function(name, callback) {
+    console.log('Running Rapid PbD program: ' + name);
+    var client = new ROSLIB.Service({
+      ros: ROS,
+      name: '/code_it/api/run_pbd_action',
+      serviceType: 'code_it_msgs/RunPbdAction'
+    });
+
+    var request = new ROSLIB.ServiceRequest({
+      action_id: '',
+      name: name,
+      landmarks: {}
+    });
+
+    client.callService(request, function(result) {
+      console.log('Done executing Rapid PbD program ' + name + ', result:');
+      console.log(result);
+      setError(result.error);
+      if (result.error !== '') { // Program failed
+        callback(null, false); // result = false
+      }
+      callback(null, true); // Success
+    }, function(error) {
+      callback(error ? error : 'Failed to execute action.', null);
+    });
+  });
 
   var say = Meteor.wrapAsync(function(text, callback) {
     console.log('Saying: ' + text);
@@ -473,6 +499,7 @@ Robot = function() {
     pick: pick,
     place: place,
     runPbdAction: runPbdAction,
+    runPbdProgram: runPbdProgram,
     say: say,
     setError: setError,
     setGripper: setGripper,

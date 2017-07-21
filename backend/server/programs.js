@@ -92,6 +92,12 @@ function interpreterApi(interpreter, scope) {
   };
   interpreter.setProperty(myRobot, 'runPbdAction', interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function(name) {
+    var name = name ? name.toString() : '';
+    return interpreter.createPrimitive(Robot.runPbdProgram(name));
+  };
+  interpreter.setProperty(myRobot, 'runPbdProgram', interpreter.createNativeFunction(wrapper));
+
   var wrapper = function(text) {
     var text = text ? text.toString() : '';
     return interpreter.createPrimitive(Robot.say(text));
