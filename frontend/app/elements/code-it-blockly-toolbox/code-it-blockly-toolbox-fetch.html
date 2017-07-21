@@ -433,6 +433,20 @@
         </block>
       </category-->
       <category name="Robot arm and body" colour="20">
+        <block type="variables_set">
+          <field name="VAR">success</field>
+          <value name="VALUE">
+            <block type="robot_manipulation_run_pbd_program">
+              <value name="NAME">
+                <block type="robot_manipulation_pbd_programs">
+                </block>
+                <value>
+            </block>
+          </value>
+        </block>
+        <block type="robot_manipulation_open_gripper"></block>
+        <block type="robot_manipulation_open_gripper"></block>
+        <block type="robot_manipulation_close_gripper"></block>
         <block type="robot_manipulation_set_torso">
           <value name="HEIGHT">
             <block type="math_number">
@@ -440,8 +454,6 @@
             </block>
           </value>
         </block>
-        <block type="robot_manipulation_open_gripper"></block>
-        <block type="robot_manipulation_close_gripper"></block>
         <!--block type="robot_movement_tuck_arms"></block>
         <block type="robot_manipulation_set_gripper"></block>
         <block type="robot_manipulation_is_gripper_open"></block>
