@@ -153,7 +153,7 @@
         }); 
       },
       onCopy: function(evt) {
-        var programId = evt.srcElement.dataset.programId;
+        var programId = evt.target.dataset.programId;
         var copyClient = new ROSLIB.Service({
           ros: ROS,
           name: '/code_it/copy_program',
@@ -168,11 +168,11 @@
         }); 
       },
       onEdit: function(evt) {
-        var programId = evt.srcElement.dataset.programId;
+        var programId = evt.target.dataset.programId;
         page.redirect('/program/' + programId);
       },
       onMaybeDelete: function(evt) {
-        this.programToDelete = evt.srcElement.dataset.programId;
+        this.programToDelete = evt.target.dataset.programId;
         this.$.confirmDeleteDialog.open();
       },
       onDelete: function() {
