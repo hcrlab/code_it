@@ -1,5 +1,5 @@
 #!/bin/sh
-export NVM_DIR="/home/rws/.nvm"
+export NVM_DIR="/var/ros/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 nvm use 0.10.40
 cd ../build/bundle
