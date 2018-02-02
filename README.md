@@ -40,7 +40,7 @@ To install, you need to clone:
 
 You also need to install:
 - MongoDB - install MongoDB and pymongo
-  - Make sure pymongo is version 3 (e.g., 3.3), and if not, upgrade with `sudo pip install pymongo --upgrade`
+  - Make sure pymongo is version 3 (e.g., 3.4), and if not, upgrade with `sudo pip install pymongo==3.4`
 - Meteor - install from the [Meteor website](https://www.meteor.com/)
 - Node - It is highly recommended to use [nvm](https://github.com/creationix/nvm) to install node.
   `nvm` allows you to install and switch between arbitrary versions of node easily.
