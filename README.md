@@ -46,13 +46,13 @@ You also need to install:
   `nvm` allows you to install and switch between arbitrary versions of node easily.
   When deploying to production, Meteor requires an older version of node to build properly, whereas gulp requires a newer version of node.
   Use `nvm` to switch between the two.
-- From the `frontend` folder, run `npm install -g gulp bower && npm install && ./node_modules/bower/bin/bower install`
+- From the `frontend` folder, run `nvm use node; npm install -g gulp bower && npm install && bower update`
 
 ### Running
 1. `roslaunch rosbridge_server rosbridge_websocket.launch`
 1.  `rosrun code_it programs.py` - This is the backend that saves and loads the programs to and from MongoDB.
 1.  From the `backend` folder, run `nvm use 0.10.40; meteor` - This is the JavaScript interpreter that runs the programs.
-1.  From the `frontend` folder, run `nvm use node; gulp` - This is the frontend. Go to localhost:5000 to see the page.
+1.  From the `frontend` folder, run `nvm use node; gulp serve` - This is the frontend. Go to localhost:5000 to see the page.
 
 ### Deploying
 #### Build the frontend
