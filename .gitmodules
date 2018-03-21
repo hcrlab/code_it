@@ -6,4 +6,4 @@
 	url = git@github.com:jstnhuang/blockly.git
 [submodule "src/jsinterpreter"]
 	path = src/jsinterpreter
-	url = git@github.com:NeilFraser/JS-Interpreter.git
+	url = git@github.com:jstnhuang/JS-Interpreter.git
