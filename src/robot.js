@@ -10,7 +10,7 @@ class Robot {
     this.error = '';  // Most recent error message, empty string for no error.
   }
 
-  askMultipleChoice(question, choices, timeout, callback) {
+  askMultipleChoice(question, choices, callback) {
     rosnodejs.log.info('Asking: ' + question + ', choices: ' + choices);
     const service_name = '/code_it/api/ask_multiple_choice';
     const client =

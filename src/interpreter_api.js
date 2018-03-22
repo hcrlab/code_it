@@ -5,11 +5,8 @@ function interpreterApi(interpreter, scope, robot) {
   const robotObj = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
   interpreter.setProperty(scope, 'robot', robotObj);
 
-  let wrapper = function(question, choices, timeout, callback) {
+  let wrapper = function(question, choices, callback) {
     const choicesArr = interpreter.pseudoToNative(choices);
-    if (timeout) {
-      console.error('Error: timeout is no longer used in askMultipleChoice.');
-    }
     robot.askMultipleChoice(question, choicesArr, 0, callback);
   };
   interpreter.setProperty(
