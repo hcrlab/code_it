@@ -42,6 +42,9 @@ If you are actually interested in using these, please contact us by filing an is
 - [ ] Install [our fork of rosnodejs](https://github.com/jstnhuang/rosnodejs)
       ```
       npm install jstnhuang/rosnodejs
+      cd node_modules/rosnodejs
+      npm install
+      npm run compile
       ```
 - [ ] Generate messages: `node -e "rosnodejs = require('rosnodejs'); rosnodejs.loadAllPackages();"`
 - [ ] Build the frontend.
@@ -70,11 +73,21 @@ If you are actually interested in using these, please contact us by filing an is
 1. Go to the `frontend` folder and run `gulp`.
 1. This should generate a `www` folder in the root of the repository, with the built frontend.
 
-#### Deploy to [RWS](https://github.com/hcrlab/rws)
 If you are not using RWS, then simply serve the `www` folder as static content and use `roslaunch code_it pr2_app.launch` to run the backend.
 Be sure to double-check the contents of pr2_app.launch or fetch_app.launch, which are designed for the PR2 and Fetch robots running an instance of RWS.
 
+#### Deploy to [RWS](https://github.com/hcrlab/rws)
 If you are using RWS, then copy the repository (with the built frontend) to the RWS catkin workspace.
+- [ ] Create a symlink for `app.launch`:
+      ```
+      cd launch
+      ln -s fetch_app.launch app.launch
+      ```
+- [ ] Create a symlink for `code-it-blockly-toolbox.html`
+      ```
+      cd frontend/app/elements/code-it-blockly-toolbox/
+      ln -s code-it-blockly-toolbox-fetch.html code-it-blockly-toolbox.html
+      ```
 CodeIt! should appear in the app list.
 
 ## How to add / modify primitives
