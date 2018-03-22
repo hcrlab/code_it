@@ -10,7 +10,7 @@ class Robot {
     this.error = '';  // Most recent error message, empty string for no error.
   }
 
-  askMultipleChoice(question, choices, timeout, callback) {
+  askMultipleChoice(question, choices, callback) {
     rosnodejs.log.info('Asking: ' + question + ', choices: ' + choices);
     const service_name = '/code_it/api/ask_multiple_choice';
     const client =
@@ -177,7 +177,7 @@ class Robot {
     var z = Math.sin(DEGS_TO_RADS * up);
     // Empty string for the frame_id defaults to a frame that is located
     // near the head, facing the same direction as the robot.
-    lookAt(x, y, z, '', callback);
+    this.lookAt(x, y, z, '', callback);
   }
 
   runPbdAction(name, preregisteredLandmarks, callback) {

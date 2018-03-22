@@ -322,33 +322,6 @@
         <block type="variables_set">
           <field name="VAR">item</field>
           <value name="VALUE">
-            <block type="robot_display_ask_multiple_choice">
-              <value name="QUESTION">
-                <block type="text">
-                  <field name="TEXT">Yes or no?</field>
-                </block>
-              </value>
-              <value name="CHOICES">
-                <block type="lists_create_with">
-                  <mutation items="2"></mutation>
-                  <value name="ADD0">
-                    <block type="text">
-                      <field name="TEXT">Yes</field>
-                    </block>
-                  </value>
-                  <value name="ADD1">
-                    <block type="text">
-                      <field name="TEXT">No</field>
-                    </block>
-                  </value>
-                </block>
-              </value>
-            </block>
-          </value>
-        </block>
-        <block type="variables_set">
-          <field name="VAR">item</field>
-          <value name="VALUE">
             <block type="robot_display_ask_choice">
               <value name="QUESTION">
                 <block type="text">
@@ -386,9 +359,9 @@
           </value>
         </block>
       </category>
-      <category name="Robot head and vision" colour="230">
+      <!--category name="Robot head and vision" colour="230">
         <block type="robot_head_look_angles"></block>
-      </category>
+      </category-->
       <category name="Robot arm and body" colour="20">
         <block type="variables_set">
           <field name="VAR">success</field>
@@ -403,7 +376,7 @@
         </block>
         <block type="robot_manipulation_open_gripper"></block>
         <block type="robot_manipulation_close_gripper_with_effort"></block>
-        <block type="robot_manipulation_is_gripper_open"></block>
+        <!--block type="robot_manipulation_is_gripper_open"></block-->
         <block type="robot_manipulation_set_torso">
           <value name="HEIGHT">
             <block type="math_number">

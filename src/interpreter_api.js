@@ -5,12 +5,9 @@ function interpreterApi(interpreter, scope, robot) {
   const robotObj = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
   interpreter.setProperty(scope, 'robot', robotObj);
 
-  let wrapper = function(question, choices, timeout, callback) {
+  let wrapper = function(question, choices, callback) {
     const choicesArr = interpreter.pseudoToNative(choices);
-    if (timeout) {
-      console.error('Error: timeout is no longer used in askMultipleChoice.');
-    }
-    robot.askMultipleChoice(question, choicesArr, 0, callback);
+    robot.askMultipleChoice(question, choicesArr, callback);
   };
   interpreter.setProperty(
       robotObj, 'askMultipleChoice', interpreter.createAsyncFunction(wrapper));
@@ -96,10 +93,10 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'openGripper', interpreter.createAsyncFunction(wrapper));
 
-  wrapper = function(callback) {
+  wrapper = function(max_effort, callback) {
     var side = 0;    // For Fetch only
     var action = 2;  // Close
-    var max_effort = 120;
+    var max_effort = max_effort;
     robot.setGripper(side, action, max_effort, callback);
   };
   interpreter.setProperty(
