@@ -1,6 +1,3 @@
-[submodule "backend/packages/jsinterpreter"]
-	path = backend/packages/jsinterpreter
-	url = git@github.com:jstnhuang/JS-Interpreter.git
 [submodule "frontend/app/blockly"]
 	path = frontend/app/blockly
 	url = git@github.com:jstnhuang/blockly.git
