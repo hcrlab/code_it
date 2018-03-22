@@ -278,44 +278,6 @@
           </value>
         </block>
       </category>
-      <!--category name="Color" colour="20">
-        <block type="colour_picker"></block>
-        <block type="colour_random"></block>
-        <block type="colour_rgb">
-          <value name="RED">
-            <shadow type="math_number">
-              <field name="NUM">100</field>
-            </shadow>
-          </value>
-          <value name="GREEN">
-            <shadow type="math_number">
-              <field name="NUM">50</field>
-            </shadow>
-          </value>
-          <value name="BLUE">
-            <shadow type="math_number">
-              <field name="NUM">0</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="colour_blend">
-          <value name="COLOUR1">
-            <shadow type="colour_picker">
-              <field name="COLOUR">#ff0000</field>
-            </shadow>
-          </value>
-          <value name="COLOUR2">
-            <shadow type="colour_picker">
-              <field name="COLOUR">#3333ff</field>
-            </shadow>
-          </value>
-          <value name="RATIO">
-            <shadow type="math_number">
-              <field name="NUM">0.5</field>
-            </shadow>
-          </value>
-        </block>
-      </category-->
       <category name="Variables" colour="330" custom="VARIABLE"></category>
       <category name="Functions" colour="290" custom="PROCEDURE"></category>
       <sep></sep>
@@ -336,7 +298,7 @@
             </block>
           </next>
         </block>
-        <block type="robot_display_message_h1h2_no_timeout">
+        <block type="robot_display_message_h1h2">
           <value name="H1_TEXT">
             <block type="text">
               <field name="TEXT">Hello world!</field>
@@ -360,10 +322,10 @@
         <block type="variables_set">
           <field name="VAR">item</field>
           <value name="VALUE">
-            <block type="robot_display_ask_multiple_choice">
+            <block type="robot_display_ask_choice">
               <value name="QUESTION">
                 <block type="text">
-                  <field name="TEXT">What's your favorite color?</field>
+                  <field name="TEXT">Yes or no?</field>
                 </block>
               </value>
               <value name="CHOICES">
@@ -371,25 +333,20 @@
                   <mutation items="2"></mutation>
                   <value name="ADD0">
                     <block type="text">
-                      <field name="TEXT">Indigo</field>
+                      <field name="TEXT">Yes</field>
                     </block>
                   </value>
                   <value name="ADD1">
                     <block type="text">
-                      <field name="TEXT">Jade</field>
+                      <field name="TEXT">No</field>
                     </block>
                   </value>
-                </block>
-              </value>
-              <value name="TIMEOUT">
-                <block type="math_number">
-                  <field name="NUM">0</field>
                 </block>
               </value>
             </block>
           </value>
         </block>
-        <block type="robot_display_wait_for_button_press">
+        <block type="robot_display_wait_for_button">
           <value name="TEXT">
             <block type="text">
               <field name="TEXT">Press Start</field>
@@ -400,25 +357,9 @@
               <field name="TEXT">Start</field>
             </block>
           </value>
-          <value name="TIMEOUT">
-            <block type="math_number">
-              <field name="NUM">0</field>
-            </block>
-          </value>
         </block>
       </category>
       <category name="Robot head and vision" colour="230">
-        <block type="robot_head_look_angles">
-          <field name="UP">315</field>
-          <next>
-            <block type="variables_set">
-              <field name="VAR">objects</field>
-              <value name="VALUE">
-                <block type="robot_perception_find_objects"></block>
-              </value>
-            </block>
-          </next>
-        </block>
         <block type="robot_head_look_angles">
           <field name="UP">315</field>
           <next>
@@ -462,13 +403,6 @@
           </value>
         </block>
         <block type="robot_head_look_angles"></block>
-        <block type="robot_head_look_at">
-          <value name="OBJECT_OR_PERSON">
-            <block type="variables_get">
-              <field name="VAR">object</field>
-            </block>
-          </value>
-        </block>
       </category>
       <category name="Robot arm and hand" colour="20">
         <block type="robot_movement_tuck_arms"></block>
@@ -494,24 +428,6 @@
           </next>
         </block>
         <block type="robot_manipulation_set_right_gripper_with_effort"></block>
-        <block type="variables_set">
-          <field name="VAR">success</field>
-          <value name="VALUE">
-            <block type="robot_manipulation_pick_default">
-              <value name="OBJ">
-                <block type="variables_get">
-                  <field name="VAR">object</field>
-                </block>
-              </value>
-            </block>
-          </value>
-        </block>
-        <block type="variables_set">
-          <field name="VAR">success</field>
-          <value name="VALUE">
-            <block type="robot_manipulation_place_default"></block>
-          </value>
-        </block>
       </category>
       <category name="Robot navigation" colour="160">
         <block type="variables_set">
