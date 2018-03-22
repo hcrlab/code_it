@@ -48,7 +48,7 @@ If you are actually interested in using these, please contact us by filing an is
   ```
 - [ ] Generate messages: `node -e "rosnodejs = require('rosnodejs'); rosnodejs.loadAllPackages();"`
 - [ ] Build the frontend.
-      From the `frontend` folder, run `npm install && bower update`
+      From the `frontend` folder, run `npm install && bower update && gulp`
 
 ### Running
 1. `roslaunch rosbridge_server rosbridge_websocket.launch`
