@@ -107,9 +107,10 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'openGripper', interpreter.createAsyncFunction(wrapper));
 
-  wrapper = function(max_effort, callback) {
+  wrapper = function(callback) {
     var side = 0;    // For Fetch only
-    var action = 2;  // Open
+    var action = 2;  // Close
+    var max_effort = 120;
     robot.setGripper(side, action, max_effort, callback);
   };
   interpreter.setProperty(

@@ -253,7 +253,9 @@ class Robot {
   }
 
   setGripper(side, action, max_effort, callback) {
-    rosnodejs.log.info('Setting gripper, side: ' + side + ', ' + action);
+    rosnodejs.log.info(
+        'Setting gripper, side: ' + side + ', action: ' + action +
+        ', effort: ' + max_effort);
     const service_name = '/code_it/api/set_gripper';
     const client =
         this._nh.serviceClient(service_name, 'code_it_msgs/SetGripper');
