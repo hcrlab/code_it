@@ -1,7 +1,7 @@
 <launch>
   <!-- We are cheating by placing this in the robot bringup file instead -->
   <!--node pkg="code_it" type="programs.py" name="program_db" /-->
-  <node pkg="code_it" type="run_js_interpreter.sh" name="js_interpreter" cwd="node" />
+  <node pkg="code_it" type="program_server.js" name="code_it" />
   <node name="code_it_pr2" pkg="code_it_pr2" type="main_node" />
   <!-- For research purposes, we exclude pr2_pbd from here. It must be launched on its own. -->
   <!-- Disable social gaze for PbD. -->

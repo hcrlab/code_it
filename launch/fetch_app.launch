@@ -1,0 +1,6 @@
+<launch>
+  <!-- We are cheating by placing this in the robot bringup file instead -->
+  <!--node pkg="code_it" type="programs.py" name="program_db" /-->
+  <node pkg="code_it" type="program_server.js" name="code_it" />
+  <node name="code_it_fetch" pkg="code_it_fetch" type="main_node" />
+</launch>
