@@ -60,17 +60,6 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'isGripperOpen', interpreter.createAsyncFunction(wrapper));
 
-  wrapper = function(obj, callback) {
-    var obj = interpreter.pseudoToNative(obj);
-    var x = obj.pose.pose.position.x;
-    var y = obj.pose.pose.position.y;
-    var z = obj.pose.pose.position.z;
-    var frame_id = 'base_footprint';
-    robot.lookAt(x, y, z, frame_id, callback);
-  };
-  interpreter.setProperty(
-      robotObj, 'lookAt', interpreter.createAsyncFunction(wrapper));
-
   wrapper = function(up, left, callback) {
     robot.lookAtDegrees(up, left, callback);
   };
