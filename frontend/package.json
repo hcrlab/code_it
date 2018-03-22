@@ -1,8 +1,8 @@
 {
   "private": true,
   "devDependencies": {
-    "browser-sync": "^2.7.7",
-    "connect-history-api-fallback": "^1.1.0",
+    "browser-sync": "^2.23.6",
+    "connect-history-api-fallback": "^1.5.0",
     "del": "^2.0.2",
     "glob-all": "^3.0.1",
     "gulp": "^3.9.1",
@@ -39,5 +39,8 @@
   },
   "engines": {
     "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "moment": "^2.19.3"
   }
 }
