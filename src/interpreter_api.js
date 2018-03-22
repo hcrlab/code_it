@@ -7,7 +7,7 @@ function interpreterApi(interpreter, scope, robot) {
 
   let wrapper = function(question, choices, callback) {
     const choicesArr = interpreter.pseudoToNative(choices);
-    robot.askMultipleChoice(question, choicesArr, 0, callback);
+    robot.askMultipleChoice(question, choicesArr, callback);
   };
   interpreter.setProperty(
       robotObj, 'askMultipleChoice', interpreter.createAsyncFunction(wrapper));
