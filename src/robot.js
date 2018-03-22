@@ -177,7 +177,7 @@ class Robot {
     var z = Math.sin(DEGS_TO_RADS * up);
     // Empty string for the frame_id defaults to a frame that is located
     // near the head, facing the same direction as the robot.
-    lookAt(x, y, z, '', callback);
+    this.lookAt(x, y, z, '', callback);
   }
 
   runPbdAction(name, preregisteredLandmarks, callback) {
