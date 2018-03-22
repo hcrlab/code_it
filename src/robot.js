@@ -204,7 +204,9 @@ class Robot {
         const request = new code_it_msgs.srv.RunPbdAction.Request(
             {action_id: '', name: name, landmarks: preregistered});
         client.call(request).then((response) => {
-          this.error = response.error;
+          if (response.error !== '') {
+            rosnodejs.log.info(response.error);
+          }
           callback(response.error === '');
         });
       } else {
@@ -224,7 +226,9 @@ class Robot {
         const request = new code_it_msgs.srv.RunPbdAction.Request(
             {action_id: '', name: name, landmarks: []});
         client.call(request).then((response) => {
-          this.error = response.error;
+          if (response.error !== '') {
+            rosnodejs.log.info(response.error);
+          }
           callback(response.error === '');
         });
       } else {
