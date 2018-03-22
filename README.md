@@ -40,12 +40,12 @@ If you are actually interested in using these, please contact us by filing an is
 - [ ] [Install Node.js using NVM](https://github.com/hcrlab/wiki/blob/master/web_development/installing_node.md).
       [nvm](https://github.com/creationix/nvm) allows you to install and switch between arbitrary versions of node easily.
 - [ ] Install [our fork of rosnodejs](https://github.com/jstnhuang/rosnodejs)
-      ```
-      npm install jstnhuang/rosnodejs
-      cd node_modules/rosnodejs
-      npm install
-      npm run compile
-      ```
+  ```
+  npm install jstnhuang/rosnodejs
+  cd node_modules/rosnodejs
+  npm install
+  npm run compile
+  ```
 - [ ] Generate messages: `node -e "rosnodejs = require('rosnodejs'); rosnodejs.loadAllPackages();"`
 - [ ] Build the frontend.
       From the `frontend` folder, run `npm install && bower update`
