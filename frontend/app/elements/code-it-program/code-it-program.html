@@ -284,8 +284,6 @@
           });
 
           goal.on('feedback', function(feedback) {
-            // Turn traceOn for every feedback message. Blockly turns tracing
-            // (and therefore highlighting) whenever the workspace is dragged.
             editor.handleFeedback(feedback);
           });
           // RunProgramAction doesn't have a result yet.
