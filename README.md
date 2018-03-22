@@ -44,11 +44,15 @@ If you are actually interested in using these, please contact us by filing an is
   npm install jstnhuang/rosnodejs
   cd node_modules/rosnodejs
   npm install
-  npm run compile
   ```
 - [ ] Generate messages: `node -e "rosnodejs = require('rosnodejs'); rosnodejs.loadAllPackages();"`
 - [ ] Build the frontend.
-      From the `frontend` folder, run `npm install && bower update && gulp`
+      From the `frontend` folder, run:
+  ```
+  npm install
+  bower update
+  gulp
+  ```
 
 ### Running
 1. `roslaunch rosbridge_server rosbridge_websocket.launch`
