@@ -55,6 +55,8 @@ If you are actually interested in using these, please contact us by filing an is
   ```
 
 ### Running
+1. Run the robot simulation / robot startup
+1. Run the appropriate package for your robot: `code_it_pr2`, `code_it_fetch`, `code_it_turtlebot`
 1. `roslaunch rosbridge_server rosbridge_websocket.launch`
 1.  `rosrun code_it programs.py` - This is the backend that saves and loads the programs to and from MongoDB.
 1.  `rosrun code_it program_server.js` - This is the JavaScript interpreter that runs the programs.
