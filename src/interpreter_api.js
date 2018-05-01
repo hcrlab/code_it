@@ -138,6 +138,12 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'closeRightGripper', interpreter.createAsyncFunction(wrapper));
 
+  wrapper = function(height) {
+    robot.startTorso(height);
+  };
+  interpreter.setProperty(
+      robotObj, 'startTorso', interpreter.createNativeFunction(wrapper));
+
   wrapper = function(height, callback) {
     robot.setTorso(height, callback);
   };
@@ -169,7 +175,7 @@ function interpreterApi(interpreter, scope, robot) {
     if (!landmark || !landmark.pose || !landmark.pose.pose ||
         !landmark.pose.pose.position || !landmark.pose.pose.position.x) {
       return null;
-      }
+    }
     return landmark.pose.pose.position.x;
   };
   interpreter.setProperty(
@@ -180,7 +186,7 @@ function interpreterApi(interpreter, scope, robot) {
     if (!landmark || !landmark.pose || !landmark.pose.pose ||
         !landmark.pose.pose.position || !landmark.pose.pose.position.y) {
       return null;
-      }
+    }
     return landmark.pose.pose.position.y;
   };
   interpreter.setProperty(
@@ -191,7 +197,7 @@ function interpreterApi(interpreter, scope, robot) {
     if (!landmark || !landmark.pose || !landmark.pose.pose ||
         !landmark.pose.pose.position || !landmark.pose.pose.position.z) {
       return null;
-      }
+    }
     return landmark.pose.pose.position.z;
   };
   interpreter.setProperty(
