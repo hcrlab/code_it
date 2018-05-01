@@ -278,6 +278,15 @@ class Robot {
     });
   }
 
+  startTorso(height) {
+    rosnodejs.log.info('Starting to set torso to ' + height + ' meters');
+
+    const action_name = '/code_it/api/set_torso';
+    const torsoClient =
+        this._nh.actionClientInterface(action_name, 'code_it_msgs/SetTorso');
+    torsoClient.sendGoal({goal: {height: height}});
+  }
+
   setTorso(height, callback) {
     rosnodejs.log.info('Setting torso to ' + height + ' meters');
     const service_name = '/code_it/api/set_torso';
