@@ -1,6 +1,7 @@
 'use strict';
 
 const rosnodejs = require('rosnodejs');
+const actionlib_msgs = rosnodejs.require('actionlib_msgs');
 const code_it_msgs = rosnodejs.require('code_it_msgs');
 
 // The implementation of the primitives.
@@ -8,6 +9,20 @@ class Robot {
   constructor(nh) {
     this._nh = nh;
     this.error = '';  // Most recent error message, empty string for no error.
+    this.torsoClient = this._nh.actionClientInterface(
+        '/code_it/api/set_torso', 'code_it_msgs/SetTorso');
+    this.torsoClient.on('status', (msg) => {
+      if (msg.status_list.length == 0) {
+        this.torsoStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+      } else {
+        this.torsoStatus = msg.status_list[msg.status_list.length - 1].status;
+      }
+      if (msg.status_list.length > 1) {
+        rosnodejs.log.warn(
+            'There were ' + msg.status_list.length +
+            ' goals in the torso status_list.');
+      }
+    });
   }
 
   askMultipleChoice(question, choices, callback) {
@@ -280,11 +295,27 @@ class Robot {
 
   startTorso(height) {
     rosnodejs.log.info('Starting to set torso to ' + height + ' meters');
+    this.torsoClient.sendGoal({goal: {height: height}});
+  }
 
-    const action_name = '/code_it/api/set_torso';
-    const torsoClient =
-        this._nh.actionClientInterface(action_name, 'code_it_msgs/SetTorso');
-    torsoClient.sendGoal({goal: {height: height}});
+  isDone(resource) {
+    var status = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+    rosnodejs.log.info(resource);
+    if (resource === 'torso') {
+      status = this.torsoStatus;
+      rosnodejs.log.info(status);
+    }
+
+    if (status === actionlib_msgs.msg.GoalStatus.Constants.PREEMPTED ||
+        status === actionlib_msgs.msg.GoalStatus.Constants.RECALLED ||
+        status === actionlib_msgs.msg.GoalStatus.Constants.REJECTED ||
+        status === actionlib_msgs.msg.GoalStatus.Constants.ABORTED ||
+        status === actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED ||
+        status === actionlib_msgs.msg.GoalStatus.Constants.LOST) {
+      return true;
+    }
+
+    return false;
   }
 
   setTorso(height, callback) {
