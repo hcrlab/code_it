@@ -301,7 +301,7 @@ class Robot {
   isDone(resource) {
     var status = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
     rosnodejs.log.info(resource);
-    if (resource === 'torso') {
+    if (resource === 'TORSO') {
       status = this.torsoStatus;
       rosnodejs.log.info(status);
     }
