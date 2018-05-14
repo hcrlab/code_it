@@ -150,6 +150,12 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'isDone', interpreter.createNativeFunction(wrapper));
 
+  wrapper = function(resource) {
+    robot.cancel(resource);
+  };
+  interpreter.setProperty(
+      robotObj, 'cancel', interpreter.createNativeFunction(wrapper));
+
   wrapper = function(height, callback) {
     robot.setTorso(height, callback);
   };

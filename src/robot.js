@@ -318,6 +318,14 @@ class Robot {
     return false;
   }
 
+  cancel(resource) {
+    rosnodejs.log.info('Cancelling ', resource);
+    if (resource === 'TORSO') {
+      const goal = new actionlib_msgs.msg.GoalID();
+      this.torsoClient.cancel(goal.id);
+    }
+  }
+
   setTorso(height, callback) {
     rosnodejs.log.info('Setting torso to ' + height + ' meters');
     const service_name = '/code_it/api/set_torso';
