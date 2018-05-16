@@ -144,6 +144,12 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'startTorso', interpreter.createNativeFunction(wrapper));
 
+  wrapper = function(pan, tilt) {
+    robot.startHead(pan, tilt);
+  };
+  interpreter.setProperty(
+      robotObj, 'startHead', interpreter.createNativeFunction(wrapper));
+
   wrapper = function(resource) {
     return robot.isDone(resource);
   };

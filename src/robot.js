@@ -9,6 +9,7 @@ class Robot {
   constructor(nh) {
     this._nh = nh;
     this.error = '';  // Most recent error message, empty string for no error.
+
     this.torsoClient = this._nh.actionClientInterface(
         '/code_it/api/set_torso', 'code_it_msgs/SetTorso');
     this.torsoClient.on('status', (msg) => {
@@ -21,6 +22,21 @@ class Robot {
         rosnodejs.log.warn(
             'There were ' + msg.status_list.length +
             ' goals in the torso status_list.');
+      }
+    });
+
+    this.headClient = this._nh.actionClientInterface(
+        '/code_it/api/move_head', 'code_it_msgs/MoveHead');
+    this.headClient.on('status', (msg) => {
+      if (msg.status_list.length == 0) {
+        this.headStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+      } else {
+        this.headStatus = msg.status_list[msg.status_list.length - 1].status;
+      }
+      if (msg.status_list.length > 1) {
+        rosnodejs.log.warn(
+            'There were ' + msg.status_list.length +
+            ' goals in the head status_list.');
       }
     });
   }
@@ -298,11 +314,22 @@ class Robot {
     this.torsoClient.sendGoal({goal: {height: height}});
   }
 
+  startHead(pan, tilt) {
+    rosnodejs.log.info(
+        'Starting to move head to ' + pan + ', ' + tilt + ' degrees');
+    this.headClient.sendGoal({goal: {pan_degrees: pan, tilt_degrees: tilt}});
+  }
+
   isDone(resource) {
     var status = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
     rosnodejs.log.info(resource);
     if (resource === 'TORSO') {
       status = this.torsoStatus;
+      rosnodejs.log.info(status);
+    }
+
+    if (resource === 'HEAD') {
+      status = this.headStatus;
       rosnodejs.log.info(status);
     }
 
@@ -324,6 +351,7 @@ class Robot {
       const goal = new actionlib_msgs.msg.GoalID();
       this.torsoClient.cancel(goal.id);
     }
+    // add cancel for HEAD
   }
 
   setTorso(height, callback) {
