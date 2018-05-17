@@ -1,0 +1,21 @@
+{
+  "name": "code_it",
+  "version": "1.0.0",
+  "description": "JavaScript backend for high-level robot programming.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hcrlab/code_it.git"
+  },
+  "author": "Justin Huang",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/hcrlab/code_it/issues"
+  },
+  "homepage": "https://github.com/hcrlab/code_it#readme",
+  "dependencies": {
+    "rosnodejs": "2.2.0"
+  }
+}
