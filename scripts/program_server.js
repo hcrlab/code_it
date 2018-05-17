@@ -9,19 +9,21 @@ const Robot = require('../src/robot.js');
 if (require.main === module) {
   rosnodejs.initNode('code_it').then((nh) => {
     const isRunningPub = nh.advertise(
-        'code_it/is_program_running', 'std_msgs/Bool', {latching: true, tcpNoDelay: true});
+        'code_it/is_program_running', 'std_msgs/Bool',
+        {latching: true, tcpNoDelay: true});
     const errorPub = nh.advertise('code_it/errors', 'std_msgs/String');
 
     const programServer = new rosnodejs.ActionServer(
         {nh, type: 'code_it_msgs/RunProgram', actionServer: 'run_program'});
     const robot = new Robot(nh);
     const runtime = new Runtime(robot, isRunningPub, errorPub);
-    programServer.on('goal', (goal) => {
-      runtime.execute(goal);
+    programServer.on('goal', (goalHandle) => {
+      runtime.execute(goalHandle);
     });
     programServer.on('cancel', () => {
       runtime.stop();
     });
+    programServer.start();
     rosnodejs.on('shutdown', () => {
       isRunningPub.publish({data: false});
       runtime.shutdown();

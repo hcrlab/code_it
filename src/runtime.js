@@ -23,7 +23,7 @@ class Runtime {
   }
 
   execute(goalHandle) {
-    const program = goalHandle.goal.program;
+    const program = goalHandle.getGoal().program;
     const interpreter =
         new jsinterpreter.Interpreter(program, (interpreter, scope) => {
           interpreterApi(interpreter, scope, this._robot);
