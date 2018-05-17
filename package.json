@@ -16,6 +16,6 @@
   },
   "homepage": "https://github.com/hcrlab/code_it#readme",
   "dependencies": {
-    "rosnodejs": "2.2.0"
+    "rosnodejs": "git+https://github.com/jstnhuang/rosnodejs#kinetic-devel_dist"
   }
 }
