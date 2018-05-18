@@ -384,6 +384,37 @@
             </block>
           </value>
         </block>
+        <block type="controls_whileUntil">
+          <field name="MODE">WHILE</field>
+          <value name="BOOL">
+            <block type="logic_negate">
+              <value name="BOOL">
+                <block type="robot_is_done_fetch">
+                  <field name="NAME">TORSO</field>
+                </block>
+              </value>
+            </block>
+          </value>
+          <statement name="DO">
+            <block type="robot_wait_for_seconds">
+              <value name="SECONDS">
+                <block type="math_number">
+                  <field name="NUM">0.2</field>
+                </block>
+              </value>
+            </block>
+          </statement>
+        </block>
+        <block type="robot_cancel_fetch">
+          <field name="NAME">TORSO</field>
+        </block>
+        <block type="robot_manipulation_set_torso">
+          <value name="HEIGHT">
+            <block type="math_number">
+              <field name="NUM">0.4</field>
+            </block>
+          </value>
+        </block>
 	<block type="robot_start_head">
  	  <value name="PAN">
 	    <block type="math_number">

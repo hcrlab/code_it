@@ -354,20 +354,12 @@ class Robot {
 
   setTorso(height, callback) {
     rosnodejs.log.info('Setting torso to ' + height + ' meters');
-    const service_name = '/code_it/api/set_torso';
-    const client =
-        this._nh.serviceClient(service_name, 'code_it_msgs/SetTorso');
-    this._nh.waitForService(service_name, 1000).then((ok) => {
-      if (ok) {
-        const request = new code_it_msgs.srv.SetTorso.Request({height: height});
-        client.call(request).then((response) => {
-          this.error = response.error;
-          callback();
-        });
-      } else {
-        this.error = 'SetTorso service not available!';
-        callback();
+    this.torsoClient.sendGoal({goal: {height: height}});
+    this.torsoClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
       }
+      callback();
     });
   }
 
