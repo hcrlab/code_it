@@ -377,12 +377,30 @@
         <block type="robot_manipulation_open_gripper"></block>
         <block type="robot_manipulation_close_gripper_with_effort"></block>
         <!--block type="robot_manipulation_is_gripper_open"></block-->
-        <block type="robot_manipulation_set_torso">
+        <block type="robot_start_torso">
           <value name="HEIGHT">
             <block type="math_number">
               <field name="NUM">0.4</field>
             </block>
           </value>
+        </block>
+	<block type="robot_start_head">
+ 	  <value name="PAN">
+	    <block type="math_number">
+	      <field name="NUM">0.0</field>
+	    </block>
+	  </value>
+ 	  <value name="TILT">
+	    <block type="math_number">
+	      <field name="NUM">0.0</field>
+	    </block>
+	  </value>
+	</block> 
+        <block type="robot_is_done_fetch">
+          <field name="NAME">choose an option</field>
+        </block>
+        <block type="robot_cancel_fetch">
+          <field name="NAME">choose an option</field>
         </block>
       </category>
       <category name="Robot navigation" colour="160">

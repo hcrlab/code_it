@@ -9,7 +9,8 @@ const Robot = require('../src/robot.js');
 if (require.main === module) {
   rosnodejs.initNode('code_it').then((nh) => {
     const isRunningPub = nh.advertise(
-        'code_it/is_program_running', 'std_msgs/Bool', {latching: true, tcpNoDelay: true});
+        'code_it/is_program_running', 'std_msgs/Bool',
+        {latching: true, tcpNoDelay: true});
     const errorPub = nh.advertise('code_it/errors', 'std_msgs/String');
 
     const programServer = new rosnodejs.ActionServer(

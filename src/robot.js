@@ -346,10 +346,8 @@ class Robot {
   }
 
   cancel(resource) {
-    rosnodejs.log.info('Cancelling ', resource);
     if (resource === 'TORSO') {
-      const goal = new actionlib_msgs.msg.GoalID();
-      this.torsoClient.cancel(goal.id);
+      this.torsoClient.cancel();
     }
     // add cancel for HEAD
   }
