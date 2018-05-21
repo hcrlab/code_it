@@ -348,8 +348,14 @@ class Robot {
   cancel(resource) {
     if (resource === 'TORSO') {
       this.torsoClient.cancel();
+    } else if (resource === 'HEAD') {
+      this.headClient.cancel();
     }
-    // add cancel for HEAD
+  }
+
+  cancelAll() {
+    this.torsoClient.cancel();
+    this.headClient.cancel();
   }
 
   setTorso(height, callback) {
