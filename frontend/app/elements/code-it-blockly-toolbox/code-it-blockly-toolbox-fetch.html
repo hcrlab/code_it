@@ -423,7 +423,15 @@
 	      <field name="NUM">0.0</field>
 	    </block>
 	  </value>
-	</block> 
+	</block>
+	<block type="robot_start_open_gripper"></block>
+        <block type="robot_start_close_gripper">
+          <value name="FORCE">
+            <block type="math_number">
+              <field name="NUM">75</field>
+            </block>
+          </value>
+        </block>
         <block type="robot_is_done_fetch">
           <field name="NAME">&lt;Select an option&gt;</field>
         </block>
