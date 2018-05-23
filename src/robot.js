@@ -39,6 +39,21 @@ class Robot {
             ' goals in the head status_list.');
       }
     });
+
+    this.gripperClient = this._nh.actionClientInterface(
+        '/code_it/api/set_gripper', 'code_it_msgs/SetGripper');
+    this.gripperClient.on('status', (msg) => {
+      if (msg.status_list.length == 0) {
+        this.gripperStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+      } else {
+        this.gripperStatus = msg.status_list[msg.status_list.length - 1].status;
+      }
+      if (msg.status_list.length > 1) {
+        rosnodejs.log.warn(
+            'There were ' + msg.status_list.length +
+            ' goals in the gripper status_list.');
+      }
+    });
   }
 
   askMultipleChoice(question, choices, callback) {
@@ -320,6 +335,17 @@ class Robot {
     this.headClient.sendGoal({goal: {pan_degrees: pan, tilt_degrees: tilt}});
   }
 
+  startOpenGripper() {
+    rosnodejs.log.info('Starting to open gripper');
+    this.gripperClient.sendGoal({goal: {gripper: 0, action: 1, max_effort: 0}});
+  }
+
+  startCloseGripper(force) {
+    rosnodejs.log.info('Starting to close gripper with ' + force + ' N');
+    this.gripperClient.sendGoal(
+        {goal: {gripper: 0, action: 2, max_effort: force}});
+  }
+
   isDone(resource) {
     var status = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
     rosnodejs.log.info(resource);
@@ -330,6 +356,10 @@ class Robot {
 
     if (resource === 'HEAD') {
       status = this.headStatus;
+      rosnodejs.log.info(status);
+    }
+    if (resource === 'GRIPPER') {
+      status = this.gripperStatus;
       rosnodejs.log.info(status);
     }
 
@@ -350,12 +380,15 @@ class Robot {
       this.torsoClient.cancel();
     } else if (resource === 'HEAD') {
       this.headClient.cancel();
+    } else if (resource === 'GRIPPER') {
+      this.gripperClient.cancel();
     }
   }
 
   cancelAll() {
     this.torsoClient.cancel();
     this.headClient.cancel();
+    this.gripperClient.cancel();
   }
 
   setTorso(height, callback) {

@@ -150,6 +150,18 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'startHead', interpreter.createNativeFunction(wrapper));
 
+  wrapper = function() {
+    robot.startOpenGripper();
+  };
+  interpreter.setProperty(
+      robotObj, 'startOpenGripper', interpreter.createNativeFunction(wrapper));
+
+  wrapper = function(force) {
+    robot.startCloseGripper(force);
+  };
+  interpreter.setProperty(
+      robotObj, 'startCloseGripper', interpreter.createNativeFunction(wrapper));
+
   wrapper = function(resource) {
     return robot.isDone(resource);
   };
