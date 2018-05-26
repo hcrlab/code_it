@@ -319,10 +319,37 @@
             </block>
           </next>
         </block>
-        <block type="variables_set">
+        <!--- <block type="variables_set">
           <field name="VAR">item</field>
           <value name="VALUE">
             <block type="robot_display_ask_choice">
+              <value name="QUESTION">
+                <block type="text">
+                  <field name="TEXT">Yes or no?</field>
+                </block>
+              </value>
+              <value name="CHOICES">
+                <block type="lists_create_with">
+                  <mutation items="2"></mutation>
+                  <value name="ADD0">
+                    <block type="text">
+                      <field name="TEXT">Yes</field>
+                    </block>
+                  </value>
+                  <value name="ADD1">
+                    <block type="text">
+                      <field name="TEXT">No</field>
+                    </block>
+                  </value>
+                </block>
+              </value>
+            </block>
+          </value>
+	</block> -->
+	<block type="variables_set">
+          <field name="VAR">item</field>
+          <value name="VALUE">
+            <block type="robot_start_ask_mc">
               <value name="QUESTION">
                 <block type="text">
                   <field name="TEXT">Yes or no?</field>

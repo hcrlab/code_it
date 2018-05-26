@@ -54,28 +54,27 @@ class Robot {
             ' goals in the gripper status_list.');
       }
     });
-  }
 
-  askMultipleChoice(question, choices, callback) {
-    rosnodejs.log.info('Asking: ' + question + ', choices: ' + choices);
-    const service_name = '/code_it/api/ask_multiple_choice';
-    const client =
-        this._nh.serviceClient(service_name, 'code_it_msgs/AskMultipleChoice');
-    this._nh.waitForService(service_name, 1000).then((ok) => {
-      if (ok) {
-        const request = new code_it_msgs.srv.AskMultipleChoice.Request({
-          question: question,
-          choices: choices,
-        });
-        client.call(request).then((response) => {
-          this.error = response.error;
-          callback(response.choice);
-        });
+    this.askClient = this._nh.actionClientInterface(
+        '/code_it/api/ask_multiple_choice', 'code_it_msgs/AskMultipleChoice');
+    this.askClient.on('status', (msg) => {
+      if (msg.status_list.length == 0) {
+        this.askStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
       } else {
-        this.error = 'AskMultipleChoice service not available!';
-        callback('');
+        this.askStatus = msg.status_list[msg.status_list.length - 1].status;
+      }
+      if (msg.status_list.length > 1) {
+        rosnodejs.log.warn(
+            'There were ' + msg.status_list.length +
+            ' goals in the ask_multiple_choice status_list.');
       }
     });
+  }
+
+  startAskMultipleChoice(question, choices) {
+    rosnodejs.log.info(
+        'Starting to ask: ' + question + ', choices: ' + choices);
+    this.askClient.sendGoal({goal: {question: question, choices: choices}});
   }
 
   displayMessage(h1text, h2text, callback) {
@@ -302,28 +301,6 @@ class Robot {
     });
   }
 
-  setGripper(side, action, max_effort, callback) {
-    rosnodejs.log.info(
-        'Setting gripper, side: ' + side + ', action: ' + action +
-        ', effort: ' + max_effort);
-    const service_name = '/code_it/api/set_gripper';
-    const client =
-        this._nh.serviceClient(service_name, 'code_it_msgs/SetGripper');
-    this._nh.waitForService(service_name, 1000).then((ok) => {
-      if (ok) {
-        const request = new code_it_msgs.srv.SetGripper.Request(
-            {gripper: {id: side}, action: action, max_effort: max_effort});
-        client.call(request).then((response) => {
-          this.error = response.error;
-          callback();
-        });
-      } else {
-        this.error = 'SetGripper service not available!';
-        callback();
-      }
-    });
-  }
-
   startTorso(height) {
     rosnodejs.log.info('Starting to set torso to ' + height + ' meters');
     this.torsoClient.sendGoal({goal: {height: height}});
@@ -352,15 +329,14 @@ class Robot {
     if (resource === 'TORSO') {
       status = this.torsoStatus;
       rosnodejs.log.info(status);
-    }
-
-    if (resource === 'HEAD') {
+    } else if (resource === 'HEAD') {
       status = this.headStatus;
       rosnodejs.log.info(status);
-    }
-    if (resource === 'GRIPPER') {
+    } else if (resource === 'GRIPPER') {
       status = this.gripperStatus;
       rosnodejs.log.info(status);
+    } else if (resource === 'SCREEN') {
+      status = this.askStatus;
     }
 
     if (status === actionlib_msgs.msg.GoalStatus.Constants.PREEMPTED ||
@@ -382,6 +358,8 @@ class Robot {
       this.headClient.cancel();
     } else if (resource === 'GRIPPER') {
       this.gripperClient.cancel();
+    } else if (resource === 'SCREEN') {
+      this.askClient.cancel();
     }
   }
 
@@ -389,12 +367,26 @@ class Robot {
     this.torsoClient.cancel();
     this.headClient.cancel();
     this.gripperClient.cancel();
+    this.askClient.cancel();
   }
 
   setTorso(height, callback) {
     rosnodejs.log.info('Setting torso to ' + height + ' meters');
     this.torsoClient.sendGoal({goal: {height: height}});
     this.torsoClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback();
+    });
+  }
+
+  setGripper(side, action, max_effort, callback) {
+    rosnodejs.log.info(
+        'Setting gripper, action: ' + action + ', effort: ' + max_effort);
+    this.gripperClient.sendGoal(
+        {goal: {gripper: 0, action: action, max_effort: max_effort}});
+    this.gripperClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
