@@ -157,7 +157,8 @@ function interpreterApi(interpreter, scope, robot) {
       robotObj, 'startOpenGripper', interpreter.createNativeFunction(wrapper));
 
   wrapper = function(question, choices) {
-    robot.startAskMultipleChoice(question, choices);
+    const choicesArr = interpreter.pseudoToNative(choices);
+    robot.startAskMultipleChoice(question, choicesArr);
   };
   interpreter.setProperty(
       robotObj, 'startAskMultipleChoice',
