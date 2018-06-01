@@ -177,6 +177,12 @@ function interpreterApi(interpreter, scope, robot) {
       robotObj, 'isDone', interpreter.createNativeFunction(wrapper));
 
   wrapper = function(resource) {
+    return robot.getResult(resource);
+  };
+  interpreter.setProperty(
+      robotObj, 'getResult', interpreter.createNativeFunction(wrapper));
+
+  wrapper = function(resource) {
     robot.cancel(resource);
   };
   interpreter.setProperty(

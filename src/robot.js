@@ -18,11 +18,6 @@ class Robot {
       } else {
         this.torsoStatus = msg.status_list[msg.status_list.length - 1].status;
       }
-      if (msg.status_list.length > 1) {
-        rosnodejs.log.warn(
-            'There were ' + msg.status_list.length +
-            ' goals in the torso status_list.');
-      }
     });
 
     this.headClient = this._nh.actionClientInterface(
@@ -32,11 +27,6 @@ class Robot {
         this.headStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
       } else {
         this.headStatus = msg.status_list[msg.status_list.length - 1].status;
-      }
-      if (msg.status_list.length > 1) {
-        rosnodejs.log.warn(
-            'There were ' + msg.status_list.length +
-            ' goals in the head status_list.');
       }
     });
 
@@ -48,25 +38,16 @@ class Robot {
       } else {
         this.gripperStatus = msg.status_list[msg.status_list.length - 1].status;
       }
-      if (msg.status_list.length > 1) {
-        rosnodejs.log.warn(
-            'There were ' + msg.status_list.length +
-            ' goals in the gripper status_list.');
-      }
     });
 
     this.askClient = this._nh.actionClientInterface(
         '/code_it/api/ask_multiple_choice', 'code_it_msgs/AskMultipleChoice');
+    this.askMCResult = null;
     this.askClient.on('status', (msg) => {
       if (msg.status_list.length == 0) {
         this.askStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
       } else {
         this.askStatus = msg.status_list[msg.status_list.length - 1].status;
-      }
-      if (msg.status_list.length > 1) {
-        rosnodejs.log.warn(
-            'There were ' + msg.status_list.length +
-            ' goals in the ask_multiple_choice status_list.');
       }
     });
   }
@@ -342,12 +323,16 @@ class Robot {
   startAskMultipleChoice(question, choices) {
     rosnodejs.log.info(
         'Starting to ask: ' + question + ', choices: ' + choices);
+    this.askMCResult = null;
     this.askClient.sendGoal({goal: {question: question, choices: choices}});
+    this.askClient.once('result', (msg) => {
+      this.askMCResult = msg.result.choice;
+    });
   }
 
   isDone(resource) {
     var status = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
-    rosnodejs.log.info(resource);
+    rosnodejs.log.info('Checking if ' + resource + ' is done');
     if (resource === 'TORSO') {
       status = this.torsoStatus;
       rosnodejs.log.info(status);
@@ -371,6 +356,10 @@ class Robot {
     }
 
     return false;
+  }
+
+  getResult(resource) {
+    return this.askMCResult;
   }
 
   cancel(resource) {
