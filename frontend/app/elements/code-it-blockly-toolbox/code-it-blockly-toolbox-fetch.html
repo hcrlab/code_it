@@ -371,7 +371,9 @@
 	<block type="variables_set">
           <field name="VAR">item</field>
           <value name="VALUE">
-            <block type="robot_get_result"></block>
+            <block type="robot_get_result">
+	      <field name="NAME">&lt;Select an option&gt;</field>
+	    </block>
 	  </value>
 	</block>
         <block type="robot_display_wait_for_button">
