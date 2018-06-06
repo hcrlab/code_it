@@ -247,7 +247,7 @@ class Robot {
             {action_id: '', name: name, landmarks: preregistered});
         client.call(request).then((response) => {
           if (response.error !== '') {
-            rosnodejs.log.info(response.error);
+            rosnodejs.log.info('Error', response.error);
           }
           callback(response.error === '');
         });
@@ -269,7 +269,7 @@ class Robot {
             {action_id: '', name: name, landmarks: []});
         client.call(request).then((response) => {
           if (response.error !== '') {
-            rosnodejs.log.info(response.error);
+            rosnodejs.log.info('Error', response.error);
           }
           callback(response.error === '');
         });
@@ -332,16 +332,16 @@ class Robot {
 
   isDone(resource) {
     var status = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
-    rosnodejs.log.info('Checking if ' + resource + ' is done');
+    //rosnodejs.log.info('Checking if ' + resource + ' is done');
     if (resource === 'TORSO') {
       status = this.torsoStatus;
-      rosnodejs.log.info(status);
+      //rosnodejs.log.info(status);
     } else if (resource === 'HEAD') {
       status = this.headStatus;
-      rosnodejs.log.info(status);
+      //rosnodejs.log.info(status);
     } else if (resource === 'GRIPPER') {
       status = this.gripperStatus;
-      rosnodejs.log.info(status);
+      //rosnodejs.log.info(status);
     } else if (resource === 'SCREEN') {
       status = this.askStatus;
     }
