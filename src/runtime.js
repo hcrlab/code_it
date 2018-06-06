@@ -39,7 +39,7 @@ class Runtime {
         this._onProgramEnd();
         goalHandle.setCancelled({});
         return;
-        }
+      }
       try {
         var ok = interpreter.step();
         if (ok) {
@@ -47,7 +47,7 @@ class Runtime {
           if (error) {
             this._publishError(error);
             this._robot.error = '';
-            }
+          }
           if (lastBlockId !== interpreter.blockId) {
             lastBlockId = interpreter.blockId;
             var feedback = {block_id: interpreter.blockId || ''};
@@ -76,6 +76,7 @@ class Runtime {
 
   stop() {
     rosnodejs.log.info('Program was stopped by the user.');
+    this._robot.cancelAll();
     this._isRunning = false;
   }
 

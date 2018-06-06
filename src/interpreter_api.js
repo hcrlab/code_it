@@ -138,6 +138,56 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'closeRightGripper', interpreter.createAsyncFunction(wrapper));
 
+  wrapper = function(height) {
+    robot.startTorso(height);
+  };
+  interpreter.setProperty(
+      robotObj, 'startTorso', interpreter.createNativeFunction(wrapper));
+
+  wrapper = function(pan, tilt) {
+    robot.startHead(pan, tilt);
+  };
+  interpreter.setProperty(
+      robotObj, 'startHead', interpreter.createNativeFunction(wrapper));
+
+  wrapper = function() {
+    robot.startOpenGripper();
+  };
+  interpreter.setProperty(
+      robotObj, 'startOpenGripper', interpreter.createNativeFunction(wrapper));
+
+  wrapper = function(question, choices) {
+    const choicesArr = interpreter.pseudoToNative(choices);
+    robot.startAskMultipleChoice(question, choicesArr);
+  };
+  interpreter.setProperty(
+      robotObj, 'startAskMultipleChoice',
+      interpreter.createNativeFunction(wrapper));
+
+  wrapper = function(force) {
+    robot.startCloseGripper(force);
+  };
+  interpreter.setProperty(
+      robotObj, 'startCloseGripper', interpreter.createNativeFunction(wrapper));
+
+  wrapper = function(resource) {
+    return robot.isDone(resource);
+  };
+  interpreter.setProperty(
+      robotObj, 'isDone', interpreter.createNativeFunction(wrapper));
+
+  wrapper = function(resource) {
+    return robot.getResult(resource);
+  };
+  interpreter.setProperty(
+      robotObj, 'getResult', interpreter.createNativeFunction(wrapper));
+
+  wrapper = function(resource) {
+    robot.cancel(resource);
+  };
+  interpreter.setProperty(
+      robotObj, 'cancel', interpreter.createNativeFunction(wrapper));
+
   wrapper = function(height, callback) {
     robot.setTorso(height, callback);
   };
@@ -169,7 +219,7 @@ function interpreterApi(interpreter, scope, robot) {
     if (!landmark || !landmark.pose || !landmark.pose.pose ||
         !landmark.pose.pose.position || !landmark.pose.pose.position.x) {
       return null;
-      }
+    }
     return landmark.pose.pose.position.x;
   };
   interpreter.setProperty(
@@ -180,7 +230,7 @@ function interpreterApi(interpreter, scope, robot) {
     if (!landmark || !landmark.pose || !landmark.pose.pose ||
         !landmark.pose.pose.position || !landmark.pose.pose.position.y) {
       return null;
-      }
+    }
     return landmark.pose.pose.position.y;
   };
   interpreter.setProperty(
@@ -191,7 +241,7 @@ function interpreterApi(interpreter, scope, robot) {
     if (!landmark || !landmark.pose || !landmark.pose.pose ||
         !landmark.pose.pose.position || !landmark.pose.pose.position.z) {
       return null;
-      }
+    }
     return landmark.pose.pose.position.z;
   };
   interpreter.setProperty(
