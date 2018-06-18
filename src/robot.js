@@ -337,7 +337,10 @@ class Robot {
       rosnodejs.log.info(status);
     } else if (resource === 'SCREEN') {
       status = this.askStatus;
+    } else if (resource === 'NAVIGATION') {
+      status = this.goToStatus;
     }
+
 
     if (status === actionlib_msgs.msg.GoalStatus.Constants.PREEMPTED ||
         status === actionlib_msgs.msg.GoalStatus.Constants.RECALLED ||
@@ -364,6 +367,8 @@ class Robot {
       this.gripperClient.cancel();
     } else if (resource === 'SCREEN') {
       this.askClient.cancel();
+    } else if (resource === 'NAVIGATION') {
+      this.goToClient.cancel();
     }
   }
 
@@ -372,6 +377,7 @@ class Robot {
     this.headClient.cancel();
     this.gripperClient.cancel();
     this.askClient.cancel();
+    this.goToClient.cancel();
   }
 
   setTorso(height, callback) {
