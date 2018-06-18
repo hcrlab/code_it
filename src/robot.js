@@ -50,6 +50,16 @@ class Robot {
         this.askStatus = msg.status_list[msg.status_list.length - 1].status;
       }
     });
+
+    this.goToClient = this._nh.actionClientInterface(
+        '/code_it/api/go_to', 'code_it_msgs/GoTo');
+    this.goToClient.on('status', (msg) => {
+      if (msg.status_list.length == 0) {
+        this.goToStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+      } else {
+        this.goToStatus = msg.status_list[msg.status_list.length - 1].status;
+      }
+    });
   }
 
   displayMessage(h1text, h2text, callback) {
@@ -306,6 +316,11 @@ class Robot {
     this.askClient.once('result', (msg) => {
       this.askMCResult = msg.result.choice;
     });
+  }
+
+  startGoTo(location) {
+    rosnodejs.log.info('Starting to go to: ' + location);
+    this.goToClient.sendGoal({goal: {location: location}});
   }
 
   isDone(resource) {

@@ -164,6 +164,12 @@ function interpreterApi(interpreter, scope, robot) {
       robotObj, 'startAskMultipleChoice',
       interpreter.createNativeFunction(wrapper));
 
+  wrapper = function(location) {
+    robot.startGoTo(location);
+  };
+  interpreter.setProperty(
+      robotObj, 'startGoTo', interpreter.createNativeFunction(wrapper));
+
   wrapper = function(force) {
     robot.startCloseGripper(force);
   };
