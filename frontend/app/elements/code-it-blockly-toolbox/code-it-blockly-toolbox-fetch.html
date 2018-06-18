@@ -475,13 +475,19 @@
           <value name="VALUE">
             <block type="robot_movement_go_to">
               <value name="LOCATION">
-                <block type="robot_movement_locations">
+                <block type="robot_locations">
                 </block>
               </value>
             </block>
           </value>
         </block>
-        <block type="robot_movement_locations">
+        <block type="robot_start_go_to">
+          <value name="LOCATION">
+            <block type="robot_locations">
+            </block>
+          </value>
+        </block>	
+        <block type="robot_locations">
         </block>
       </category>
       <category name="Robot sound" colour="65">
