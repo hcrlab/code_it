@@ -52,28 +52,6 @@ class Robot {
     });
   }
 
-  askMultipleChoice(question, choices, callback) {
-    rosnodejs.log.info('Asking: ' + question + ', choices: ' + choices);
-    const service_name = '/code_it/api/ask_multiple_choice';
-    const client =
-        this._nh.serviceClient(service_name, 'code_it_msgs/AskMultipleChoice');
-    this._nh.waitForService(service_name, 1000).then((ok) => {
-      if (ok) {
-        const request = new code_it_msgs.srv.AskMultipleChoice.Request({
-          question: question,
-          choices: choices,
-        });
-        client.call(request).then((response) => {
-          this.error = response.error;
-          callback(response.choice);
-        });
-      } else {
-        this.error = 'AskMultipleChoice service not available!';
-        callback('');
-      }
-    });
-  }
-
   displayMessage(h1text, h2text, callback) {
     rosnodejs.log.info('Displaying h1: ' + h1text + ', h2: ' + h2text);
     const service_name = '/code_it/api/display_message';
@@ -398,6 +376,17 @@ class Robot {
     this.gripperClient.sendGoal(
         {goal: {gripper: 0, action: action, max_effort: max_effort}});
     this.gripperClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback();
+    });
+  }
+
+  askMultipleChoice(question, choices, callback) {
+    rosnodejs.log.info('Asking: ' + question + ', choices: ' + choices);
+    this.askClient.sendGoal({goal: {question: question, choices: choices}});
+    this.askClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
