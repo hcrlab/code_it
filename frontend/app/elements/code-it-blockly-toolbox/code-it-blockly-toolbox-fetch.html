@@ -398,11 +398,17 @@
           <value name="VALUE">
             <block type="robot_manipulation_run_pbd_program">
               <value name="NAME">
-                <block type="robot_manipulation_pbd_programs">
+                <block type="robot_pbd_programs">
                 </block>
                 <value>
             </block>
           </value>
+        </block>
+	<block type="robot_start_rapid_pbd">
+          <value name="PROGRAM">
+            <block type="robot_pbd_programs">
+            </block>
+          <value>
         </block>
         <block type="robot_manipulation_open_gripper"></block>
         <block type="robot_manipulation_close_gripper_with_effort"></block>

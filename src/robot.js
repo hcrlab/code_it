@@ -60,6 +60,17 @@ class Robot {
         this.goToStatus = msg.status_list[msg.status_list.length - 1].status;
       }
     });
+
+    this.rapidPbDClient = this._nh.actionClientInterface(
+        '/code_it/api/run_program', 'code_it_msgs/RunProgram');
+    this.rapidPbDClient.on('status', (msg) => {
+      if (msg.status_list.length == 0) {
+        this.rapidPbDStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+      } else {
+        this.rapidPbDStatus =
+            msg.status_list[msg.status_list.length - 1].status;
+      }
+    });
   }
 
   displayMessage(h1text, h2text, callback) {
@@ -323,6 +334,11 @@ class Robot {
     this.goToClient.sendGoal({goal: {location: location}});
   }
 
+  startRapidPbD(program) {
+    rosnodejs.log.info('Starting to run: ' + program);
+    this.rapidPbDClient.sendGoal({goal: {program: program}});
+  }
+
   isDone(resource) {
     var status = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
     rosnodejs.log.info('Checking if ' + resource + ' is done');
@@ -339,6 +355,8 @@ class Robot {
       status = this.askStatus;
     } else if (resource === 'NAVIGATION') {
       status = this.goToStatus;
+    } else if (resource === 'PBD') {
+      status = this.rapidPbDStatus;
     }
 
 
@@ -369,6 +387,8 @@ class Robot {
       this.askClient.cancel();
     } else if (resource === 'NAVIGATION') {
       this.goToClient.cancel();
+    } else if (resource === 'PBD') {
+      this.rapidPbDClient.cancel();
     }
   }
 
@@ -378,6 +398,7 @@ class Robot {
     this.gripperClient.cancel();
     this.askClient.cancel();
     this.goToClient.cancel();
+    this.rapidPbDClient.cancel();
   }
 
   setTorso(height, callback) {

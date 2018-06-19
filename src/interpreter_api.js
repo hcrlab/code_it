@@ -156,6 +156,12 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'startOpenGripper', interpreter.createNativeFunction(wrapper));
 
+  wrapper = function(force) {
+    robot.startCloseGripper(force);
+  };
+  interpreter.setProperty(
+      robotObj, 'startCloseGripper', interpreter.createNativeFunction(wrapper));
+
   wrapper = function(question, choices) {
     const choicesArr = interpreter.pseudoToNative(choices);
     robot.startAskMultipleChoice(question, choicesArr);
@@ -170,11 +176,11 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'startGoTo', interpreter.createNativeFunction(wrapper));
 
-  wrapper = function(force) {
-    robot.startCloseGripper(force);
+  wrapper = function(program) {
+    robot.startRapidPbD(program);
   };
   interpreter.setProperty(
-      robotObj, 'startCloseGripper', interpreter.createNativeFunction(wrapper));
+      robotObj, 'startRapidPbD', interpreter.createNativeFunction(wrapper));
 
   wrapper = function(resource) {
     return robot.isDone(resource);
