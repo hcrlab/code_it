@@ -62,7 +62,7 @@ class Robot {
     });
 
     this.rapidPbDClient = this._nh.actionClientInterface(
-        '/code_it/api/run_program', 'code_it_msgs/RunProgram');
+        '/code_it/api/run_pbd_action', 'code_it_msgs/RunPbdAction');
     this.rapidPbDClient.on('status', (msg) => {
       if (msg.status_list.length == 0) {
         this.rapidPbDStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
@@ -110,24 +110,6 @@ class Robot {
       } else {
         this.error = 'FindCustomLandmarks service not available!';
         callback([]);
-      }
-    });
-  }
-
-  goTo(location, callback) {
-    rosnodejs.log.info('Going to: ' + location);
-    const service_name = '/code_it/api/go_to';
-    const client = this._nh.serviceClient(service_name, 'code_it_msgs/GoTo');
-    this._nh.waitForService(service_name, 1000).then((ok) => {
-      if (ok) {
-        const request = new code_it_msgs.srv.GoTo.Request({location: location});
-        client.call(request).then((response) => {
-          this.error = response.error;
-          callback(response.error === '');
-        });
-      } else {
-        this.error = 'GoTo service not available!';
-        callback(false);
       }
     });
   }
@@ -257,28 +239,6 @@ class Robot {
     });
   }
 
-  runRapidPbdProgram(name, callback) {
-    rosnodejs.log.info('Running Rapid PbD program: ' + name);
-    const service_name = '/code_it/api/run_pbd_action';
-    const client =
-        this._nh.serviceClient(service_name, 'code_it_msgs/RunPbdAction');
-    this._nh.waitForService(service_name, 1000).then((ok) => {
-      if (ok) {
-        const request = new code_it_msgs.srv.RunPbdAction.Request(
-            {action_id: '', name: name, landmarks: []});
-        client.call(request).then((response) => {
-          if (response.error !== '') {
-            rosnodejs.log.info(response.error);
-          }
-          callback(response.error === '');
-        });
-      } else {
-        this.error = 'RunPbdAction service not available!';
-        callback(false);
-      }
-    });
-  }
-
   say(text, callback) {
     rosnodejs.log.info('Saying: ' + text);
     const service_name = '/code_it/api/say';
@@ -336,7 +296,8 @@ class Robot {
 
   startRapidPbD(program) {
     rosnodejs.log.info('Starting to run: ' + program);
-    this.rapidPbDClient.sendGoal({goal: {program: program}});
+    this.rapidPbDClient.sendGoal(
+        {goal: {action_id: '', name: program, landmarks: []}});
   }
 
   isDone(resource) {
@@ -429,6 +390,29 @@ class Robot {
     rosnodejs.log.info('Asking: ' + question + ', choices: ' + choices);
     this.askClient.sendGoal({goal: {question: question, choices: choices}});
     this.askClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback();
+    });
+  }
+
+  goTo(location, callback) {
+    rosnodejs.log.info('Going to: ' + location);
+    this.goToClient.sendGoal({goal: {location: location}});
+    this.goToClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback();
+    });
+  }
+
+  runRapidPbdProgram(name, callback) {
+    rosnodejs.log.info('Running Rapid PbD program: ' + name);
+    this.rapidPbDClient.sendGoal(
+        {goal: {action_id: '', name: name, landmarks: []}});
+    this.rapidPbDClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
