@@ -62,7 +62,7 @@ class Robot {
     });
 
     this.rapidPbDClient = this._nh.actionClientInterface(
-        '/code_it/api/run_pbd_action', 'code_it_msgs/RunPbdAction');
+        '/code_it/api/run_pbd_action', 'code_it_msgs/RunPbdActionAction');
     this.rapidPbDClient.on('status', (msg) => {
       if (msg.status_list.length == 0) {
         this.rapidPbDStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
