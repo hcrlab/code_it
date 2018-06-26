@@ -51,6 +51,16 @@ class Robot {
       }
     });
 
+    this.displayClient = this._nh.actionClientInterface(
+        '/code_it/api/display_message', 'code_it_msgs/DisplayMessage');
+    this.displayClient.on('status', (msg) => {
+      if (msg.status_list.length == 0) {
+        this.displayStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+      } else {
+        this.displayStatus = msg.status_list[msg.status_list.length - 1].status;
+      }
+    });
+
     this.goToClient = this._nh.actionClientInterface(
         '/code_it/api/go_to', 'code_it_msgs/GoTo');
     this.goToClient.on('status', (msg) => {
@@ -289,6 +299,11 @@ class Robot {
     });
   }
 
+  startDisplayMessage(h1text, h2text) {
+    rosnodejs.log.info('Starting to display h1: ' + h1text + ', h2: ' + h2text);
+    this.displayClient.sendGoal({goal: {h1_text: h1text, h2_text: h2text}});
+  }
+		
   startGoTo(location) {
     rosnodejs.log.info('Starting to go to: ' + location);
     this.goToClient.sendGoal({goal: {location: location}});

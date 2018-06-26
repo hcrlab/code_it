@@ -170,6 +170,13 @@ function interpreterApi(interpreter, scope, robot) {
       robotObj, 'startAskMultipleChoice',
       interpreter.createNativeFunction(wrapper));
 
+  wrapper = function(h1text, h2text) {
+    robot.startDisplayMessage(h1text, h2text);
+  };
+  interpreter.setProperty(
+      robotObj, 'startDisplayMessage',
+      interpreter.createNativeFunction(wrapper));
+
   wrapper = function(location) {
     robot.startGoTo(location);
   };
