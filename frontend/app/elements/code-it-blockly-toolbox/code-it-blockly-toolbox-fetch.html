@@ -367,6 +367,15 @@
               </value>
             </block>
           </value>
+          <next>
+            <block type="robot_wait_for_seconds">
+              <value name="SECONDS">
+                <block type="math_number">
+                  <field name="NUM">2</field>
+                </block>
+              </value>
+            </block>
+          </next>
         </block>
 	<block type="variables_set">
           <field name="VAR">item</field>
