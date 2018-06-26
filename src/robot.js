@@ -83,26 +83,6 @@ class Robot {
     });
   }
 
-  displayMessage(h1text, h2text, callback) {
-    rosnodejs.log.info('Displaying h1: ' + h1text + ', h2: ' + h2text);
-    const service_name = '/code_it/api/display_message';
-    const client =
-        this._nh.serviceClient(service_name, 'code_it_msgs/DisplayMessage');
-    this._nh.waitForService(service_name, 1000).then((ok) => {
-      if (ok) {
-        const request = new code_it_msgs.srv.DisplayMessage.Request(
-            {h1_text: h1text, h2_text: h2text});
-        client.call(request).then((response) => {
-          this.error = response.error;
-          callback();
-        });
-      } else {
-        this.error = 'DisplayMessage service not available!';
-        callback();
-      }
-    });
-  }
-
   findCustomLandmark(name, is_tabletop, callback) {
     rosnodejs.log.info(
         'Finding custom landmark ' + name + ', on tabletop: ' + is_tabletop);
@@ -405,6 +385,17 @@ class Robot {
     rosnodejs.log.info('Asking: ' + question + ', choices: ' + choices);
     this.askClient.sendGoal({goal: {question: question, choices: choices}});
     this.askClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback();
+    });
+  }
+
+  displayMessage(h1text, h2text, callback) {
+    rosnodejs.log.info('Displaying h1: ' + h1text + ', h2: ' + h2text);
+    this.displayClient.sendGoal({goal: {h1_text: h1text, h2_text: h2text}});
+    this.displayClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
