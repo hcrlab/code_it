@@ -286,7 +286,7 @@ class Robot {
     rosnodejs.log.info('Starting to display h1: ' + h1text + ', h2: ' + h2text);
     this.displayClient.sendGoal({goal: {h1_text: h1text, h2_text: h2text}});
   }
-		
+
   startGoTo(location) {
     rosnodejs.log.info('Starting to go to: ' + location);
     this.goToClient.sendGoal({goal: {location: location}});
@@ -300,7 +300,8 @@ class Robot {
 
   isDone(resource) {
     var status = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
-    rosnodejs.log.info('Checking if ' + resource + ' is done');
+    rosnodejs.log.info(
+        'Checking ' + this.askStatus + ', ' + this.displayStatus);
     if (resource === 'TORSO') {
       status = this.torsoStatus;
       rosnodejs.log.info(status);
@@ -345,6 +346,7 @@ class Robot {
       this.gripperClient.cancel();
     } else if (resource === 'SCREEN') {
       this.askClient.cancel();
+      this.displayClient.cancel();
     } else if (resource === 'NAVIGATION') {
       this.goToClient.cancel();
     } else if (resource === 'PBD') {
@@ -360,6 +362,7 @@ class Robot {
     this.headClient.cancel();
     this.gripperClient.cancel();
     this.askClient.cancel();
+    this.displayClient.cancel();
     this.goToClient.cancel();
     this.rapidPbDClient.cancel();
     this.timer_on = false;
@@ -457,14 +460,13 @@ class Robot {
     });
   }
 
-  startTimer(seconds, callback) {
-    if (seconds <= 0) {
-      callback();
+  startTimer(seconds) {
+    if (seconds > 0) {
+      this.timer_on = true;
+      this.timer_id = setTimeout(() => {
+        this.timer_on = false;
+      }, seconds * 1000);
     }
-    this.timer_on = true;
-    this.timer_id = setTimeout(() => {
-	              callback(); this.timer_on = false;
-                    }, seconds * 1000);
   }
 
   waitForDuration(seconds, callback) {
