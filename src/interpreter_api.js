@@ -220,6 +220,12 @@ function interpreterApi(interpreter, scope, robot) {
       robotObj, 'tuckArms', interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(seconds, callback) {
+    robot.startTimer(seconds, callback);
+  };
+  interpreter.setProperty(
+      scope, 'startTimer', interpreter.createAsyncFunction(wrapper));
+
+  wrapper = function(seconds, callback) {
     robot.waitForDuration(seconds, callback);
   };
   interpreter.setProperty(

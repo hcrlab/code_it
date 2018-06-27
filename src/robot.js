@@ -10,6 +10,9 @@ class Robot {
     this._nh = nh;
     this.error = '';  // Most recent error message, empty string for no error.
 
+    this.timer_on = false;
+    this.timer_id = '';
+
     this.torsoClient = this._nh.actionClientInterface(
         '/code_it/api/set_torso', 'code_it_msgs/SetTorso');
     this.torsoClient.on('status', (msg) => {
@@ -313,8 +316,9 @@ class Robot {
       status = this.goToStatus;
     } else if (resource === 'PBD') {
       status = this.rapidPbDStatus;
+    } else if (resource === 'TIMER') {
+      return !this.timer_on;
     }
-
 
     if (status === actionlib_msgs.msg.GoalStatus.Constants.PREEMPTED ||
         status === actionlib_msgs.msg.GoalStatus.Constants.RECALLED ||
@@ -345,6 +349,9 @@ class Robot {
       this.goToClient.cancel();
     } else if (resource === 'PBD') {
       this.rapidPbDClient.cancel();
+    } else if (resource === 'TIMER') {
+      this.timer_on = false;
+      clearTimeout(this.timer_id);
     }
   }
 
@@ -355,6 +362,8 @@ class Robot {
     this.askClient.cancel();
     this.goToClient.cancel();
     this.rapidPbDClient.cancel();
+    this.timer_on = false;
+    clearTimeout(this.timer_id);
   }
 
   setTorso(height, callback) {
@@ -446,6 +455,16 @@ class Robot {
         callback();
       }
     });
+  }
+
+  startTimer(seconds, callback) {
+    if (seconds <= 0) {
+      callback();
+    }
+    this.timer_on = true;
+    this.timer_id = setTimeout(() => {
+	              callback(); this.timer_on = false;
+                    }, seconds * 1000);
   }
 
   waitForDuration(seconds, callback) {
