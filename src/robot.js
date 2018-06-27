@@ -276,10 +276,10 @@ class Robot {
     rosnodejs.log.info(
         'Starting to ask: ' + question + ', choices: ' + choices);
     this.askMCResult = null;
-    this.askClient.sendGoal({goal: {question: question, choices: choices}});
     this.askClient.once('result', (msg) => {
       this.askMCResult = msg.result.choice;
     });
+    this.askClient.sendGoal({goal: {question: question, choices: choices}});
   }
 
   startDisplayMessage(h1text, h2text) {
@@ -311,7 +311,7 @@ class Robot {
     } else if (resource === 'GRIPPER') {
       status = this.gripperStatus;
       rosnodejs.log.info(status);
-    } else if (resource === 'SCREEN') {
+    } else if (resource === 'QUESTION') {
       status = this.askStatus;
     } else if (resource === 'NAVIGATION') {
       status = this.goToStatus;
@@ -344,9 +344,8 @@ class Robot {
       this.headClient.cancel();
     } else if (resource === 'GRIPPER') {
       this.gripperClient.cancel();
-    } else if (resource === 'SCREEN') {
+    } else if (resource === 'QUESTION') {
       this.askClient.cancel();
-      this.displayClient.cancel();
     } else if (resource === 'NAVIGATION') {
       this.goToClient.cancel();
     } else if (resource === 'PBD') {
@@ -362,7 +361,6 @@ class Robot {
     this.headClient.cancel();
     this.gripperClient.cancel();
     this.askClient.cancel();
-    this.displayClient.cancel();
     this.goToClient.cancel();
     this.rapidPbDClient.cancel();
     this.timer_on = false;
@@ -371,71 +369,71 @@ class Robot {
 
   setTorso(height, callback) {
     rosnodejs.log.info('Setting torso to ' + height + ' meters');
-    this.torsoClient.sendGoal({goal: {height: height}});
     this.torsoClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
       callback();
     });
+    this.torsoClient.sendGoal({goal: {height: height}});
   }
 
   setGripper(side, action, max_effort, callback) {
     rosnodejs.log.info(
         'Setting gripper, action: ' + action + ', effort: ' + max_effort);
-    this.gripperClient.sendGoal(
-        {goal: {gripper: 0, action: action, max_effort: max_effort}});
     this.gripperClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
       callback();
     });
+    this.gripperClient.sendGoal(
+        {goal: {gripper: 0, action: action, max_effort: max_effort}});
   }
 
   askMultipleChoice(question, choices, callback) {
     rosnodejs.log.info('Asking: ' + question + ', choices: ' + choices);
-    this.askClient.sendGoal({goal: {question: question, choices: choices}});
     this.askClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
       callback();
     });
+    this.askClient.sendGoal({goal: {question: question, choices: choices}});
   }
 
   displayMessage(h1text, h2text, callback) {
     rosnodejs.log.info('Displaying h1: ' + h1text + ', h2: ' + h2text);
-    this.displayClient.sendGoal({goal: {h1_text: h1text, h2_text: h2text}});
     this.displayClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
       callback();
     });
+    this.displayClient.sendGoal({goal: {h1_text: h1text, h2_text: h2text}});
   }
 
   goTo(location, callback) {
     rosnodejs.log.info('Going to: ' + location);
-    this.goToClient.sendGoal({goal: {location: location}});
     this.goToClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
       callback();
     });
+    this.goToClient.sendGoal({goal: {location: location}});
   }
 
   runRapidPbdProgram(name, callback) {
     rosnodejs.log.info('Running Rapid PbD program: ' + name);
-    this.rapidPbDClient.sendGoal(
-        {goal: {action_id: '', name: name, landmarks: []}});
     this.rapidPbDClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
       callback();
     });
+    this.rapidPbDClient.sendGoal(
+        {goal: {action_id: '', name: name, landmarks: []}});
   }
 
   tuckArms(tuck_left, tuck_right, callback) {
@@ -461,6 +459,7 @@ class Robot {
   }
 
   startTimer(seconds) {
+    clearTimeout(this.timer_id);
     if (seconds > 0) {
       this.timer_on = true;
       this.timer_id = setTimeout(() => {
