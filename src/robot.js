@@ -86,7 +86,7 @@ class Robot {
     });
   }
 
-// Service implemented actions
+  // Service implemented actions
 
   findCustomLandmark(name, is_tabletop, callback) {
     rosnodejs.log.info(
@@ -223,7 +223,7 @@ class Robot {
             {action_id: '', name: name, landmarks: preregistered});
         client.call(request).then((response) => {
           if (response.error !== '') {
-            rosnodejs.log.info(response.error);
+            rosnodejs.log.info('Error', response.error);
           }
           callback(response.error === '');
         });
@@ -274,8 +274,8 @@ class Robot {
     });
   }
 
-// Concurrent action implementation
-	
+  // Concurrent action implementation
+
   startAskMultipleChoice(question, choices) {
     rosnodejs.log.info(
         'Starting to ask: ' + question + ', choices: ' + choices);
@@ -338,13 +338,10 @@ class Robot {
     var status = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
     if (resource === 'TORSO') {
       status = this.torsoStatus;
-      rosnodejs.log.info(status);
     } else if (resource === 'HEAD') {
       status = this.headStatus;
-      rosnodejs.log.info(status);
     } else if (resource === 'GRIPPER') {
       status = this.gripperStatus;
-      rosnodejs.log.info(status);
     } else if (resource === 'QUESTION') {
       status = this.askStatus;
     } else if (resource === 'NAVIGATION') {
@@ -401,7 +398,7 @@ class Robot {
     clearTimeout(this.timer_id);
   }
 
-// Consecutive action implementation
+  // Consecutive action implementation
 
   askMultipleChoice(question, choices, callback) {
     rosnodejs.log.info('Asking: ' + question + ', choices: ' + choices);
