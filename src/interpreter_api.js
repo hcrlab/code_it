@@ -5,7 +5,7 @@ function interpreterApi(interpreter, scope, robot) {
   const robotObj = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
   interpreter.setProperty(scope, 'robot', robotObj);
 
-  wrapper = function(name, is_tabletop, callback) {
+  let wrapper = function(name, is_tabletop, callback) {
     function nativeToPseudoCallback(result) {
       callback(interpreter.nativeToPseudo(result));
     }
@@ -140,7 +140,7 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'cancel', interpreter.createNativeFunction(wrapper));
 
-  let wrapper = function(question, choices, callback) {
+  wrapper = function(question, choices, callback) {
     const choicesArr = interpreter.pseudoToNative(choices);
     robot.askMultipleChoice(question, choicesArr, callback);
   };
