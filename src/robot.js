@@ -10,13 +10,37 @@ class Robot {
     this._nh = nh;
     this.error = '';  // Most recent error message, empty string for no error.
 
-    this.torsoClient = this._nh.actionClientInterface(
-        '/code_it/api/set_torso', 'code_it_msgs/SetTorso');
-    this.torsoClient.on('status', (msg) => {
+    this.timer_on = false;
+    this.timer_id = '';
+
+    this.askClient = this._nh.actionClientInterface(
+        '/code_it/api/ask_multiple_choice', 'code_it_msgs/AskMultipleChoice');
+    this.askMCResult = null;
+    this.askClient.on('status', (msg) => {
       if (msg.status_list.length == 0) {
-        this.torsoStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+        this.askStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
       } else {
-        this.torsoStatus = msg.status_list[msg.status_list.length - 1].status;
+        this.askStatus = msg.status_list[msg.status_list.length - 1].status;
+      }
+    });
+
+    this.displayClient = this._nh.actionClientInterface(
+        '/code_it/api/display_message', 'code_it_msgs/DisplayMessage');
+    this.displayClient.on('status', (msg) => {
+      if (msg.status_list.length == 0) {
+        this.displayStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+      } else {
+        this.displayStatus = msg.status_list[msg.status_list.length - 1].status;
+      }
+    });
+
+    this.goToClient = this._nh.actionClientInterface(
+        '/code_it/api/go_to', 'code_it_msgs/GoTo');
+    this.goToClient.on('status', (msg) => {
+      if (msg.status_list.length == 0) {
+        this.goToStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+      } else {
+        this.goToStatus = msg.status_list[msg.status_list.length - 1].status;
       }
     });
 
@@ -30,6 +54,17 @@ class Robot {
       }
     });
 
+    this.rapidPbDClient = this._nh.actionClientInterface(
+        '/code_it/api/run_pbd_action', 'code_it_msgs/RunPbdAction');
+    this.rapidPbDClient.on('status', (msg) => {
+      if (msg.status_list.length == 0) {
+        this.rapidPbDStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+      } else {
+        this.rapidPbDStatus =
+            msg.status_list[msg.status_list.length - 1].status;
+      }
+    });
+
     this.gripperClient = this._nh.actionClientInterface(
         '/code_it/api/set_gripper', 'code_it_msgs/SetGripper');
     this.gripperClient.on('status', (msg) => {
@@ -40,59 +75,18 @@ class Robot {
       }
     });
 
-    this.askClient = this._nh.actionClientInterface(
-        '/code_it/api/ask_multiple_choice', 'code_it_msgs/AskMultipleChoice');
-    this.askMCResult = null;
-    this.askClient.on('status', (msg) => {
+    this.torsoClient = this._nh.actionClientInterface(
+        '/code_it/api/set_torso', 'code_it_msgs/SetTorso');
+    this.torsoClient.on('status', (msg) => {
       if (msg.status_list.length == 0) {
-        this.askStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+        this.torsoStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
       } else {
-        this.askStatus = msg.status_list[msg.status_list.length - 1].status;
+        this.torsoStatus = msg.status_list[msg.status_list.length - 1].status;
       }
     });
   }
 
-  askMultipleChoice(question, choices, callback) {
-    rosnodejs.log.info('Asking: ' + question + ', choices: ' + choices);
-    const service_name = '/code_it/api/ask_multiple_choice';
-    const client =
-        this._nh.serviceClient(service_name, 'code_it_msgs/AskMultipleChoice');
-    this._nh.waitForService(service_name, 1000).then((ok) => {
-      if (ok) {
-        const request = new code_it_msgs.srv.AskMultipleChoice.Request({
-          question: question,
-          choices: choices,
-        });
-        client.call(request).then((response) => {
-          this.error = response.error;
-          callback(response.choice);
-        });
-      } else {
-        this.error = 'AskMultipleChoice service not available!';
-        callback('');
-      }
-    });
-  }
-
-  displayMessage(h1text, h2text, callback) {
-    rosnodejs.log.info('Displaying h1: ' + h1text + ', h2: ' + h2text);
-    const service_name = '/code_it/api/display_message';
-    const client =
-        this._nh.serviceClient(service_name, 'code_it_msgs/DisplayMessage');
-    this._nh.waitForService(service_name, 1000).then((ok) => {
-      if (ok) {
-        const request = new code_it_msgs.srv.DisplayMessage.Request(
-            {h1_text: h1text, h2_text: h2text});
-        client.call(request).then((response) => {
-          this.error = response.error;
-          callback();
-        });
-      } else {
-        this.error = 'DisplayMessage service not available!';
-        callback();
-      }
-    });
-  }
+  // Service implemented actions
 
   findCustomLandmark(name, is_tabletop, callback) {
     rosnodejs.log.info(
@@ -111,24 +105,6 @@ class Robot {
       } else {
         this.error = 'FindCustomLandmarks service not available!';
         callback([]);
-      }
-    });
-  }
-
-  goTo(location, callback) {
-    rosnodejs.log.info('Going to: ' + location);
-    const service_name = '/code_it/api/go_to';
-    const client = this._nh.serviceClient(service_name, 'code_it_msgs/GoTo');
-    this._nh.waitForService(service_name, 1000).then((ok) => {
-      if (ok) {
-        const request = new code_it_msgs.srv.GoTo.Request({location: location});
-        client.call(request).then((response) => {
-          this.error = response.error;
-          callback(response.error === '');
-        });
-      } else {
-        this.error = 'GoTo service not available!';
-        callback(false);
       }
     });
   }
@@ -258,28 +234,6 @@ class Robot {
     });
   }
 
-  runRapidPbdProgram(name, callback) {
-    rosnodejs.log.info('Running Rapid PbD program: ' + name);
-    const service_name = '/code_it/api/run_pbd_action';
-    const client =
-        this._nh.serviceClient(service_name, 'code_it_msgs/RunPbdAction');
-    this._nh.waitForService(service_name, 1000).then((ok) => {
-      if (ok) {
-        const request = new code_it_msgs.srv.RunPbdAction.Request(
-            {action_id: '', name: name, landmarks: []});
-        client.call(request).then((response) => {
-          if (response.error !== '') {
-            rosnodejs.log.info('Error', response.error);
-          }
-          callback(response.error === '');
-        });
-      } else {
-        this.error = 'RunPbdAction service not available!';
-        callback(false);
-      }
-    });
-  }
-
   say(text, callback) {
     rosnodejs.log.info('Saying: ' + text);
     const service_name = '/code_it/api/say';
@@ -298,9 +252,48 @@ class Robot {
     });
   }
 
-  startTorso(height) {
-    rosnodejs.log.info('Starting to set torso to ' + height + ' meters');
-    this.torsoClient.sendGoal({goal: {height: height}});
+  tuckArms(tuck_left, tuck_right, callback) {
+    rosnodejs.log.info(
+        'Setting arms, tuck left: ' + tuck_left +
+        ', tuck_right: ' + tuck_right);
+    const service_name = '/code_it/api/tuck_arms';
+    const client =
+        this._nh.serviceClient(service_name, 'code_it_msgs/TuckArms');
+    this._nh.waitForService(service_name, 1000).then((ok) => {
+      if (ok) {
+        const request = new code_it_msgs.srv.TuckArms.Request(
+            {tuck_left: tuck_left, tuck_right: tuck_right});
+        client.call(request).then((response) => {
+          this.error = response.error;
+          callback();
+        });
+      } else {
+        this.error = 'TuckArms service not available!';
+        callback();
+      }
+    });
+  }
+
+  // Concurrent action implementation
+
+  startAskMultipleChoice(question, choices) {
+    rosnodejs.log.info(
+        'Starting to ask: ' + question + ', choices: ' + choices);
+    this.askMCResult = null;
+    this.askClient.once('result', (msg) => {
+      this.askMCResult = msg.result.choice;
+    });
+    this.askClient.sendGoal({goal: {question: question, choices: choices}});
+  }
+
+  startDisplayMessage(h1text, h2text) {
+    rosnodejs.log.info('Starting to display h1: ' + h1text + ', h2: ' + h2text);
+    this.displayClient.sendGoal({goal: {h1_text: h1text, h2_text: h2text}});
+  }
+
+  startGoTo(location) {
+    rosnodejs.log.info('Starting to go to: ' + location);
+    this.goToClient.sendGoal({goal: {location: location}});
   }
 
   startHead(pan, tilt) {
@@ -309,9 +302,10 @@ class Robot {
     this.headClient.sendGoal({goal: {pan_degrees: pan, tilt_degrees: tilt}});
   }
 
-  startOpenGripper() {
-    rosnodejs.log.info('Starting to open gripper');
-    this.gripperClient.sendGoal({goal: {gripper: 0, action: 1, max_effort: 0}});
+  startRapidPbD(program) {
+    rosnodejs.log.info('Starting to run: ' + program);
+    this.rapidPbDClient.sendGoal(
+        {goal: {action_id: '', name: program, landmarks: []}});
   }
 
   startCloseGripper(force) {
@@ -320,30 +314,42 @@ class Robot {
         {goal: {gripper: 0, action: 2, max_effort: force}});
   }
 
-  startAskMultipleChoice(question, choices) {
-    rosnodejs.log.info(
-        'Starting to ask: ' + question + ', choices: ' + choices);
-    this.askMCResult = null;
-    this.askClient.sendGoal({goal: {question: question, choices: choices}});
-    this.askClient.once('result', (msg) => {
-      this.askMCResult = msg.result.choice;
-    });
+  startOpenGripper() {
+    rosnodejs.log.info('Starting to open gripper');
+    this.gripperClient.sendGoal({goal: {gripper: 0, action: 1, max_effort: 0}});
+  }
+
+  startTorso(height) {
+    rosnodejs.log.info('Starting to set torso to ' + height + ' meters');
+    this.torsoClient.sendGoal({goal: {height: height}});
+  }
+
+  startTimer(seconds) {
+    clearTimeout(this.timer_id);
+    if (seconds > 0) {
+      this.timer_on = true;
+      this.timer_id = setTimeout(() => {
+        this.timer_on = false;
+      }, seconds * 1000);
+    }
   }
 
   isDone(resource) {
     var status = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
-    //rosnodejs.log.info('Checking if ' + resource + ' is done');
     if (resource === 'TORSO') {
       status = this.torsoStatus;
-      //rosnodejs.log.info(status);
     } else if (resource === 'HEAD') {
       status = this.headStatus;
-      //rosnodejs.log.info(status);
     } else if (resource === 'GRIPPER') {
       status = this.gripperStatus;
-      //rosnodejs.log.info(status);
-    } else if (resource === 'SCREEN') {
+    } else if (resource === 'QUESTION') {
       status = this.askStatus;
+    } else if (resource === 'NAVIGATION') {
+      status = this.goToStatus;
+    } else if (resource === 'PBD') {
+      status = this.rapidPbDStatus;
+    } else if (resource === 'TIMER') {
+      return !this.timer_on;
     }
 
     if (status === actionlib_msgs.msg.GoalStatus.Constants.PREEMPTED ||
@@ -369,8 +375,15 @@ class Robot {
       this.headClient.cancel();
     } else if (resource === 'GRIPPER') {
       this.gripperClient.cancel();
-    } else if (resource === 'SCREEN') {
+    } else if (resource === 'QUESTION') {
       this.askClient.cancel();
+    } else if (resource === 'NAVIGATION') {
+      this.goToClient.cancel();
+    } else if (resource === 'PBD') {
+      this.rapidPbDClient.cancel();
+    } else if (resource === 'TIMER') {
+      this.timer_on = false;
+      clearTimeout(this.timer_id);
     }
   }
 
@@ -379,52 +392,81 @@ class Robot {
     this.headClient.cancel();
     this.gripperClient.cancel();
     this.askClient.cancel();
+    this.goToClient.cancel();
+    this.rapidPbDClient.cancel();
+    this.timer_on = false;
+    clearTimeout(this.timer_id);
   }
 
-  setTorso(height, callback) {
-    rosnodejs.log.info('Setting torso to ' + height + ' meters');
-    this.torsoClient.sendGoal({goal: {height: height}});
-    this.torsoClient.once('result', (actionResult) => {
+  // Consecutive action implementation
+
+  askMultipleChoice(question, choices, callback) {
+    rosnodejs.log.info('Asking: ' + question + ', choices: ' + choices);
+    this.askClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
       callback();
     });
+    this.askClient.sendGoal({goal: {question: question, choices: choices}});
+  }
+
+  displayMessage(h1text, h2text, callback) {
+    rosnodejs.log.info('Displaying h1: ' + h1text + ', h2: ' + h2text);
+    this.displayClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback();
+    });
+    this.displayClient.sendGoal({goal: {h1_text: h1text, h2_text: h2text}});
+  }
+
+  goTo(location, callback) {
+    rosnodejs.log.info('Going to: ' + location);
+    this.goToClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback();
+    });
+    this.goToClient.sendGoal({goal: {location: location}});
+  }
+
+  runRapidPbdProgram(name, callback) {
+    rosnodejs.log.info('Running Rapid PbD program: ' + name);
+    this.rapidPbDClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback();
+    });
+    this.rapidPbDClient.sendGoal(
+        {goal: {action_id: '', name: name, landmarks: []}});
   }
 
   setGripper(side, action, max_effort, callback) {
     rosnodejs.log.info(
         'Setting gripper, action: ' + action + ', effort: ' + max_effort);
-    this.gripperClient.sendGoal(
-        {goal: {gripper: 0, action: action, max_effort: max_effort}});
     this.gripperClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
       callback();
     });
+    this.gripperClient.sendGoal(
+        {goal: {gripper: 0, action: action, max_effort: max_effort}});
   }
 
-  tuckArms(tuck_left, tuck_right, callback) {
-    rosnodejs.log.info(
-        'Setting arms, tuck left: ' + tuck_left +
-        ', tuck_right: ' + tuck_right);
-    const service_name = '/code_it/api/tuck_arms';
-    const client =
-        this._nh.serviceClient(service_name, 'code_it_msgs/TuckArms');
-    this._nh.waitForService(service_name, 1000).then((ok) => {
-      if (ok) {
-        const request = new code_it_msgs.srv.TuckArms.Request(
-            {tuck_left: tuck_left, tuck_right: tuck_right});
-        client.call(request).then((response) => {
-          this.error = response.error;
-          callback();
-        });
-      } else {
-        this.error = 'TuckArms service not available!';
-        callback();
+  setTorso(height, callback) {
+    rosnodejs.log.info('Setting torso to ' + height + ' meters');
+    this.torsoClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
       }
+      callback();
     });
+    this.torsoClient.sendGoal({goal: {height: height}});
   }
 
   waitForDuration(seconds, callback) {
