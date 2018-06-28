@@ -332,7 +332,7 @@
                 <block type="lists_create_with">
                   <mutation items="2"></mutation>
                   <value name="ADD0">
-                    <block type="text">
+		    <block type="text">
                       <field name="TEXT">Yes</field>
                     </block>
                   </value>
@@ -345,7 +345,19 @@
               </value>
             </block>
           </value>
-	</block> -->
+	</block-->
+        <block type="robot_display_wait_for_button">
+          <value name="TEXT">
+            <block type="text">
+              <field name="TEXT">Press Start</field>
+            </block>
+          </value>
+          <value name="BUTTON">
+            <block type="text">
+              <field name="TEXT">Start</field>
+            </block>
+          </value>
+        </block>
         <block type="robot_start_ask_mc">
           <value name="QUESTION">
             <block type="text">
@@ -385,23 +397,11 @@
 	    </block>
 	  </value>
 	</block>
-        <block type="robot_display_wait_for_button">
-          <value name="TEXT">
-            <block type="text">
-              <field name="TEXT">Press Start</field>
-            </block>
-          </value>
-          <value name="BUTTON">
-            <block type="text">
-              <field name="TEXT">Start</field>
-            </block>
-          </value>
-        </block>
       </category>
       <!--category name="Robot head and vision" colour="230">
         <block type="robot_head_look_angles"></block>
       </category-->
-      <category name="Robot arm and body" colour="20">
+      <category name="Consecutive Robot Actions" colour="230">
         <block type="variables_set">
           <field name="VAR">success</field>
           <value name="VALUE">
@@ -413,44 +413,50 @@
             </block>
           </value>
         </block>
-	<block type="robot_start_rapid_pbd">
-          <value name="PROGRAM">
-            <block type="robot_pbd_programs">
+	<block type="variables_set">
+          <field name="VAR">success</field>
+          <value name="VALUE">
+            <block type="robot_movement_go_to">
+              <value name="LOCATION">
+                <block type="robot_locations">
+                </block>
+              </value>
             </block>
-          <value>
+          </value>
         </block>
         <block type="robot_manipulation_open_gripper"></block>
         <block type="robot_manipulation_close_gripper_with_effort"></block>
         <!--block type="robot_manipulation_is_gripper_open"></block-->
-        <block type="robot_start_torso">
+        <block type="robot_manipulation_set_torso">
           <value name="HEIGHT">
             <block type="math_number">
               <field name="NUM">0.4</field>
             </block>
           </value>
         </block>
-        <block type="controls_whileUntil">
-          <field name="MODE">WHILE</field>
-          <value name="BOOL">
-            <block type="logic_negate">
-              <value name="BOOL">
-                <block type="robot_is_done_fetch">
-                  <field name="NAME">TORSO</field>
-                </block>
-              </value>
+      </category>
+      <category name="Concurrent Robot Actions" colour="160">
+	<block type="robot_start_rapid_pbd">
+          <value name="PROGRAM">
+            <block type="robot_pbd_programs">
+            </block>
+          <value>
+        </block>
+        <block type="robot_start_go_to">
+          <value name="LOCATION">
+            <block type="robot_locations">
             </block>
           </value>
-          <statement name="DO">
-            <block type="robot_wait_for_seconds">
-              <value name="SECONDS">
-                <block type="math_number">
-                  <field name="NUM">0.2</field>
-                </block>
-              </value>
+        </block>	
+	<block type="robot_start_open_gripper"></block>
+        <block type="robot_start_close_gripper">
+          <value name="FORCE">
+            <block type="math_number">
+              <field name="NUM">75</field>
             </block>
-          </statement>
+          </value>
         </block>
-        <block type="robot_manipulation_set_torso">
+        <block type="robot_start_torso">
           <value name="HEIGHT">
             <block type="math_number">
               <field name="NUM">0.4</field>
@@ -469,41 +475,6 @@
 	    </block>
 	  </value>
 	</block>
-	<block type="robot_start_open_gripper"></block>
-        <block type="robot_start_close_gripper">
-          <value name="FORCE">
-            <block type="math_number">
-              <field name="NUM">75</field>
-            </block>
-          </value>
-        </block>
-        <block type="robot_is_done_fetch">
-          <field name="NAME">&lt;Select an option&gt;</field>
-        </block>
-        <block type="robot_cancel_fetch">
-          <field name="NAME">&lt;Select an option&gt;</field>
-        </block>
-      </category>
-      <category name="Robot navigation" colour="160">
-        <block type="variables_set">
-          <field name="VAR">success</field>
-          <value name="VALUE">
-            <block type="robot_movement_go_to">
-              <value name="LOCATION">
-                <block type="robot_locations">
-                </block>
-              </value>
-            </block>
-          </value>
-        </block>
-        <block type="robot_start_go_to">
-          <value name="LOCATION">
-            <block type="robot_locations">
-            </block>
-          </value>
-        </block>	
-        <block type="robot_locations">
-        </block>
       </category>
       <category name="Robot sound" colour="65">
         <block type="robot_sound_say">
@@ -529,6 +500,36 @@
             </block>
           </value>
         </block>
+        <block type="robot_is_done_fetch">
+          <field name="NAME">&lt;Select an option&gt;</field>
+        </block>
+        <block type="robot_cancel_fetch">
+          <field name="NAME">&lt;Select an option&gt;</field>
+        </block>
+      </category>
+      <category name="Standard library" colour="20">
+        <block type="controls_whileUntil">
+          <field name="MODE">WHILE</field>
+          <value name="BOOL">
+            <block type="logic_negate">
+              <value name="BOOL">
+                <block type="robot_is_done_fetch">
+                  <field name="NAME">TORSO</field>
+                </block>
+              </value>
+            </block>
+          </value>
+          <statement name="DO">
+            <block type="robot_wait_for_seconds">
+              <value name="SECONDS">
+                <block type="math_number">
+                  <field name="NUM">0.2</field>
+                </block>
+              </value>
+            </block>
+          </statement>
+        </block>
+
       </category>
       <sep></sep>
     </xml>
