@@ -12,7 +12,8 @@ CodeIt! is compatible with [RWS](https://github.com/hcrlab/rws).
 ## How it works
 CodeIt! provides a frontend and a backend.
 The frontend is a website that lets you create programs with the Blockly programming interface.
-It also has a simple interface for adding, updating, or deleting programs.
+It also has a simple interface for adding, updating, or deleting programs. For more information on 
+how to use CodeIt!, refer to this [tutorial](https://docs.google.com/document/d/1ASumNjsR-ZrqVxX0zxlFZWV1UzRAAaSWH-W65ZyPcLo/edit?usp=sharing).
 
 The backend provides a ROS actionlib server that runs JavaScript programs.
 The programs are run through a sandboxed interpreter.
