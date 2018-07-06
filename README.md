@@ -9,6 +9,10 @@ CodeIt! is compatible with [RWS](https://github.com/hcrlab/rws).
 <img alt="Screenshot of CodeIt! programming interface" src="https://cloud.githubusercontent.com/assets/1175286/13483675/77a27a02-e0ab-11e5-8c65-40e44c49d274.png" width="450" />
 <img alt="Screenshot of CodeIt! program list" src="https://cloud.githubusercontent.com/assets/1175286/13483676/79681482-e0ab-11e5-8bd1-5556c81fd12c.png" width="400" />
 
+## Links
+- [Tutorial: How to use CodeIt!](https://docs.google.com/document/d/1ASumNjsR-ZrqVxX0zxlFZWV1UzRAAaSWH-W65ZyPcLo/edit?usp=sharing)
+- Developer guide: see the rest of the README below
+
 ## How it works
 CodeIt! provides a frontend and a backend.
 The frontend is a website that lets you create programs with the Blockly programming interface.
