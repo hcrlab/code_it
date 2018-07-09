@@ -43,16 +43,15 @@ If you are actually interested in using these, please contact us by filing an is
 - [ ] Install pymongo 3.4: `sudo pip install pymongo==3.4`
 - [ ] [Install Node.js using NVM](https://github.com/hcrlab/wiki/blob/master/web_development/installing_node.md).
       [nvm](https://github.com/creationix/nvm) allows you to install and switch between arbitrary versions of node easily.
-- [ ] Install [our fork of rosnodejs](https://github.com/jstnhuang/rosnodejs)
+- [ ] Install npm dependencies, including our fork of rosnodejs
   ```
-  npm install jstnhuang/rosnodejs
-  cd node_modules/rosnodejs
   npm install
   ```
 - [ ] Generate messages: `node -e "rosnodejs = require('rosnodejs'); rosnodejs.loadAllPackages();"`
 - [ ] Build the frontend.
       From the `frontend` folder, run:
   ```
+  npm install -g bower gulp
   npm install
   bower update
   gulp
