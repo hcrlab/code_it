@@ -49,7 +49,7 @@ If you are actually interested in using these, please contact us by filing an is
   ```
 - [ ] Generate messages: `node -e "rosnodejs = require('rosnodejs'); rosnodejs.loadAllPackages();"`
 - [ ] Build the frontend.
-      From the `frontend` folder, run:
+      From the `frontend` folder, run (note that you may have issues with certain versions of gulp, version 3.9.1 is known to work):
   ```
   npm install -g bower gulp
   npm install
