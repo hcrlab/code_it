@@ -529,7 +529,7 @@
             </block>
           </statement>
         </block>
-	<block type="robot_start_ask_mc">
+        <block type="robot_start_ask_mc">
           <value name="QUESTION">
             <block type="text">
               <field name="TEXT">Yes or no?</field>
@@ -571,46 +571,46 @@
                   </value>
                 </block>
               </statement>
-	      <next>
-	        <block type="variables_set">
-	          <field name="VAR">item</field>
+              <next>
+                <block type="variables_set">
+                  <field name="VAR">item</field>
                   <value name="VALUE">
-		    <block type="robot_get_result">
-		      <field name="NAME">QUESTION</field>
-		    </block>
+                    <block type="robot_get_result">
+                      <field name="NAME">QUESTION</field>
+                    </block>
                   </value>
-	          <next>
+                  <next>
                     <block type="controls_if">
-	              <mutation elseif="1"></mutation> 
+                      <mutation elseif="1"></mutation> 
                       <value name="IF0">
-	                <block type="logic_compare">
-		          <field name="OP">EQ</field>
-		          <value name="A">
-		            <block type="variables_get">
-		              <field name="VAR">item</field>
-		            </block>
-		          </value>
-		          <value name="B">
-		            <block type="text">
-		              <field name="TEXT">Yes</field>
-		            </block>
-	                  </value>
-	  	        </block>
-	              </value>
-	              <value name="IF1">
-	                <block type="logic_compare">
-		          <field name="OP">EQ</field>
-		          <value name="A">
-		            <block type="variables_get">
-		              <field name="VAR">item</field>
-		            </block>
-		          </value>
-		          <value name="B">
-		            <block type="text">
-		              <field name="TEXT">No</field>
-		            </block>
-	                  </value>
-		        </block>
+                        <block type="logic_compare">
+                          <field name="OP">EQ</field>
+                          <value name="A">
+                            <block type="variables_get">
+                              <field name="VAR">item</field>
+                            </block>
+                          </value>
+                          <value name="B">
+                            <block type="text">
+                              <field name="TEXT">Yes</field>
+                            </block>
+                          </value>
+                        </block>
+                      </value>
+                      <value name="IF1">
+                        <block type="logic_compare">
+                          <field name="OP">EQ</field>
+                          <value name="A">
+                            <block type="variables_get">
+                              <field name="VAR">item</field>
+                            </block>
+                          </value>
+                          <value name="B">
+                            <block type="text">
+                              <field name="TEXT">No</field>
+                            </block>
+                          </value>
+                        </block>
 	              </value>
 	            </block>
 	          </next>
@@ -662,15 +662,15 @@
 			    <block type="controls_flow_statements">
 			      <field name="FLOW">BREAK</field>
 			    </block>
-			  </next>
-			</block>
-	 	      </statement>
+                          </next>
+                        </block>
+                      </statement>
                     </block>
                   </statement>
                 </block>
-	      </next>
+              </next>
             </block>
-	  </next>
+          </next>
         </block>
       </category>
       <sep></sep>
