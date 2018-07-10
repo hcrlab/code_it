@@ -611,57 +611,57 @@
                             </block>
                           </value>
                         </block>
-	              </value>
-	            </block>
-	          </next>
+                      </value>
+                    </block>
+                  </next>
                 </block>
-	      </next>
+              </next>
             </block>
-	  </next>
-	</block>
-	<block type="robot_start_timer">
+          </next>
+        </block>
+        <block type="robot_start_timer">
           <value name="SECONDS">
             <block type="math_number">
               <field name="NUM">10</field>
             </block>
           </value>
-	  <next>
+          <next>
             <block type="robot_start_go_to">
               <value name="LOCATION">
                 <block type="robot_locations"></block>
               </value>
-	      <next>
-	        <block type="custom_controls_repeat_forever">
+              <next>
+                <block type="custom_controls_repeat_forever">
                   <statement name="DO">
                     <block type="controls_if">
                       <mutation elseif="1"></mutation>
-		      <value name="IF0">
+                      <value name="IF0">
                         <block type="robot_is_done_fetch">
                           <field name="NAME">TIMER</field>
                         </block>
-		      </value>
-		      <statement name="DO0">
-		        <block type="robot_cancel_fetch">
-			  <field name="NAME">NAVIGATION</field>
-		          <next>
-			    <block type="controls_flow_statements">
-			      <field name="FLOW">BREAK</field>
-			    </block>
-			  </next>
-			</block>
-	 	      </statement>
-		      <value name="IF1">
+                      </value>
+                      <statement name="DO0">
+                        <block type="robot_cancel_fetch">
+                          <field name="NAME">NAVIGATION</field>
+                          <next>
+                            <block type="controls_flow_statements">
+                              <field name="FLOW">BREAK</field>
+                            </block>
+                          </next>
+                        </block>
+                      </statement>
+                      <value name="IF1">
                         <block type="robot_is_done_fetch">
                           <field name="NAME">NAVIGATION</field>
                         </block>
-		      </value>
-		      <statement name="DO1">
-		        <block type="robot_cancel_fetch">
-			  <field name="NAME">TIMER</field>
-		          <next>
-			    <block type="controls_flow_statements">
-			      <field name="FLOW">BREAK</field>
-			    </block>
+                      </value>
+                      <statement name="DO1">
+                        <block type="robot_cancel_fetch">
+                          <field name="NAME">TIMER</field>
+                          <next>
+                            <block type="controls_flow_statements">
+                              <field name="FLOW">BREAK</field>
+                            </block>
                           </next>
                         </block>
                       </statement>
