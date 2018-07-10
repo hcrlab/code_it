@@ -485,7 +485,7 @@
           </value>
         </block>
       </category>
-      <category name="Program control" colour="120">
+      <category name="Program control" colour="345">
         <block type="robot_start_timer">
           <value name="SECONDS">
             <block type="math_number">
@@ -529,7 +529,149 @@
             </block>
           </statement>
         </block>
-
+        <block type="robot_start_ask_mc">
+          <value name="QUESTION">
+            <block type="text">
+              <field name="TEXT">Yes or no?</field>
+            </block>
+          </value>
+          <value name="CHOICES">
+            <block type="lists_create_with">
+              <mutation items="2"></mutation>
+              <value name="ADD0">
+                <block type="text">
+                  <field name="TEXT">Yes</field>
+                </block>
+              </value>
+              <value name="ADD1">
+                <block type="text">
+                  <field name="TEXT">No</field>
+                </block>
+              </value>
+            </block>
+          </value>
+          <next>
+            <block type="controls_whileUntil">
+              <field name="MODE">WHILE</field>
+              <value name="BOOL">
+                <block type="logic_negate">
+                  <value name="BOOL">
+                    <block type="robot_is_done_fetch">
+                      <field name="NAME">QUESTION</field>
+                    </block>
+                  </value>
+                </block>
+              </value>
+              <statement name="DO">
+                <block type="robot_wait_for_seconds">
+                  <value name="SECONDS">
+                    <block type="math_number">
+                      <field name="NUM">0.2</field>
+                    </block>
+                  </value>
+                </block>
+              </statement>
+              <next>
+                <block type="variables_set">
+                  <field name="VAR">item</field>
+                  <value name="VALUE">
+                    <block type="robot_get_result">
+                      <field name="NAME">QUESTION</field>
+                    </block>
+                  </value>
+                  <next>
+                    <block type="controls_if">
+                      <mutation elseif="1"></mutation> 
+                      <value name="IF0">
+                        <block type="logic_compare">
+                          <field name="OP">EQ</field>
+                          <value name="A">
+                            <block type="variables_get">
+                              <field name="VAR">item</field>
+                            </block>
+                          </value>
+                          <value name="B">
+                            <block type="text">
+                              <field name="TEXT">Yes</field>
+                            </block>
+                          </value>
+                        </block>
+                      </value>
+                      <value name="IF1">
+                        <block type="logic_compare">
+                          <field name="OP">EQ</field>
+                          <value name="A">
+                            <block type="variables_get">
+                              <field name="VAR">item</field>
+                            </block>
+                          </value>
+                          <value name="B">
+                            <block type="text">
+                              <field name="TEXT">No</field>
+                            </block>
+                          </value>
+                        </block>
+                      </value>
+                    </block>
+                  </next>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
+        <block type="robot_start_timer">
+          <value name="SECONDS">
+            <block type="math_number">
+              <field name="NUM">10</field>
+            </block>
+          </value>
+          <next>
+            <block type="robot_start_go_to">
+              <value name="LOCATION">
+                <block type="robot_locations"></block>
+              </value>
+              <next>
+                <block type="custom_controls_repeat_forever">
+                  <statement name="DO">
+                    <block type="controls_if">
+                      <mutation elseif="1"></mutation>
+                      <value name="IF0">
+                        <block type="robot_is_done_fetch">
+                          <field name="NAME">TIMER</field>
+                        </block>
+                      </value>
+                      <statement name="DO0">
+                        <block type="robot_cancel_fetch">
+                          <field name="NAME">NAVIGATION</field>
+                          <next>
+                            <block type="controls_flow_statements">
+                              <field name="FLOW">BREAK</field>
+                            </block>
+                          </next>
+                        </block>
+                      </statement>
+                      <value name="IF1">
+                        <block type="robot_is_done_fetch">
+                          <field name="NAME">NAVIGATION</field>
+                        </block>
+                      </value>
+                      <statement name="DO1">
+                        <block type="robot_cancel_fetch">
+                          <field name="NAME">TIMER</field>
+                          <next>
+                            <block type="controls_flow_statements">
+                              <field name="FLOW">BREAK</field>
+                            </block>
+                          </next>
+                        </block>
+                      </statement>
+                    </block>
+                  </statement>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
       </category>
       <sep></sep>
     </xml>
