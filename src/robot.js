@@ -406,7 +406,7 @@ class Robot {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
-      callback();
+      callback(actionResult.result.choice);
     });
     this.askClient.sendGoal({goal: {question: question, choices: choices}});
   }
