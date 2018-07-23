@@ -433,6 +433,17 @@ class Robot {
     this.goToClient.sendGoal({goal: {location: location}});
   }
 
+  moveHead(pan, tilt, callback) {
+    rosnodejs.log.info('Moving head to: ' + pan + ', ' + tilt + ' degrees');
+    this.headClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback();
+    });
+    this.headClient.sendGoal({goal: {pan_degrees: pan, tilt_degrees: tilt}});
+  }
+
   runRapidPbdProgram(name, callback) {
     rosnodejs.log.info('Running Rapid PbD program: ' + name);
     this.rapidPbDClient.once('result', (actionResult) => {
