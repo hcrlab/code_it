@@ -450,7 +450,7 @@ class Robot {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
-      callback();
+      callback(actionResult.result.error === '');
     });
     this.rapidPbDClient.sendGoal(
         {goal: {action_id: '', name: name, landmarks: []}});
