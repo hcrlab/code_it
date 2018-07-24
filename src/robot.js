@@ -428,7 +428,7 @@ class Robot {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
-      callback();
+      callback(actionResult.result.error === '');
     });
     this.goToClient.sendGoal({goal: {location: location}});
   }
