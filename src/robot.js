@@ -86,6 +86,9 @@ class Robot {
         this.torsoStatus = msg.status_list[msg.status_list.length - 1].status;
       }
     });
+
+    this.positionClient = this._nh.actionClientInterface(
+        '/code_it/api/get_position', 'code_it_msgs/GetPosition');
   }
 
   // Service implemented actions
@@ -494,6 +497,17 @@ class Robot {
       callback();
     });
     this.torsoClient.sendGoal({goal: {height: height}});
+  }
+
+  getPosition(resource, callback) {
+    rosnodejs.log.info('Getting position of ' + resource);
+    this.positiionClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback(actionResult.result.position);
+    });
+    this.positionClient.sendGoal({goal: {name: resource}});
   }
 
   waitForDuration(seconds, callback) {
