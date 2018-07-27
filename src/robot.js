@@ -501,7 +501,7 @@ class Robot {
 
   getPosition(resource, callback) {
     rosnodejs.log.info('Getting position of ' + resource);
-    this.positiionClient.once('result', (actionResult) => {
+    this.positionClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
