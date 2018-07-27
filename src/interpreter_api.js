@@ -219,6 +219,12 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'closeRightGripper', interpreter.createAsyncFunction(wrapper));
 
+  wrapper = function(pan, tilt, callback) {
+    robot.moveHead(pan, tilt, callback);
+  };
+  interpreter.setProperty(
+      robotObj, 'moveHead', interpreter.createAsyncFunction(wrapper));
+
   wrapper = function(height, callback) {
     robot.setTorso(height, callback);
   };
