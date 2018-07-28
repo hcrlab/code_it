@@ -278,7 +278,7 @@
           </value>
         </block>
       </category>
-      <category name="Variables" colour="330" custom="VARIABLE"></category>
+      <category name="Variables" colour="195" custom="VARIABLE"></category>
       <category name="Functions" colour="290" custom="PROCEDURE"></category>
       <sep></sep>
       <category name="Robot screen" colour="260">
@@ -395,7 +395,7 @@
             <block type="robot_get_result">
               <field name="NAME">&lt;Select an option&gt;</field>
             </block>
-	        </value>
+          </value>
         </block>
       </category>
       <!--category name="Robot head and vision" colour="230">
@@ -434,7 +434,7 @@
             </block>
           </value>
         </block>
-	<block type="robot_manipulation_move_head">
+        <block type="robot_manipulation_move_head">
           <value name="PAN">
             <block type="math_number">
               <field name="NUM">0.0</field>
@@ -460,6 +460,14 @@
             </block>
           </value>
         </block>	
+        <block type="variables_set">
+          <field name="VAR">success</field>
+          <value name="VALUE">
+            <block type="robot_get_result">
+              <field name="NAME">&lt;Select an option&gt;</field>
+            </block>
+          </value>
+        </block>
         <block type="robot_start_open_gripper"></block>
         <block type="robot_start_close_gripper">
           <value name="FORCE">
@@ -517,6 +525,22 @@
         </block>
         <block type="robot_cancel_fetch">
           <field name="NAME">&lt;Select an option&gt;</field>
+        </block>
+        <block type="variables_set">
+          <field name="VAR">item</field>
+          <value name="VALUE">
+            <block type="robot_get_result">
+              <field name="NAME">&lt;Select an option&gt;</field>
+            </block>
+          </value>
+        </block>
+        <block type="variables_set">
+          <field name="VAR">item</field>
+          <value name="VALUE">
+            <block type="robot_get_position">
+              <field name="NAME">&lt;Select an option&gt;</field>
+            </block>
+          </value>
         </block>
       </category>
       <category name="Standard library" colour="20">

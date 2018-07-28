@@ -231,6 +231,12 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'setTorso', interpreter.createAsyncFunction(wrapper));
 
+  wrapper = function(resource, callback) {
+    robot.getPosition(resource, callback);
+  };
+  interpreter.setProperty(
+      robotObj, 'getPosition', interpreter.createAsyncFunction(wrapper));
+
   wrapper = function(seconds, callback) {
     robot.waitForDuration(seconds, callback);
   };
