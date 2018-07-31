@@ -271,6 +271,14 @@ function interpreterApi(interpreter, scope, robot) {
   };
   interpreter.setProperty(
       scope, 'getLandmarkZ', interpreter.createNativeFunction(wrapper));
+	
+  wrapper = function(){
+      robot.slipGripper();
+  };
+  interpreter.setProperty(
+      robotObj, 'isSlipped', interpreter.createNativeFunction(wrapper));
+
+  
 }
 
 module.exports = interpreterApi;

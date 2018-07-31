@@ -64,6 +64,17 @@ class Robot {
             msg.status_list[msg.status_list.length - 1].status;
       }
     });
+     
+    this.slipGripperClient = this._nh.actionClientInterface(
+	    '/code_it/api/slip_gripper' , 'code_it_msgs/SlipGripper');
+    this.slipGripperClient.on('status', (msg) => {
+        if(msg.status_list.length == 0){    
+          this.torsoStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+        } else {
+          this.torsoStatus = msg.status_list[msg.status_list.length - 1].status;
+    	}
+    });
+    
 
     this.gripperClient = this._nh.actionClientInterface(
         '/code_it/api/set_gripper', 'code_it_msgs/SetGripper');
@@ -323,6 +334,10 @@ class Robot {
     rosnodejs.log.info('Starting to set torso to ' + height + ' meters');
     this.torsoClient.sendGoal({goal: {height: height}});
   }
+  slipGripper(){
+    rosnodejs.log.info('check slipping');
+    this.slipGripperClient.sendGoal();
+  }
 
   startTimer(seconds) {
     clearTimeout(this.timer_id);
@@ -477,6 +492,7 @@ class Robot {
       callback();
     }, seconds * 1000);
   }
+
 }
 
 module.exports = Robot;
