@@ -276,7 +276,7 @@ function interpreterApi(interpreter, scope, robot) {
       robot.slipGripper();
   };
   interpreter.setProperty(
-      robotObj, 'isSlipped', interpreter.createNativeFunction(wrapper));
+      robotObj, 'slipGripper', interpreter.createNativeFunction(wrapper));
 
   
 }

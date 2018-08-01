@@ -152,28 +152,6 @@ class Robot {
     } else if (gripper === 'RIGHT') {
       gripper_id = 2;
     }
-
-
-
-  slipGripper(gripper, callback) {
-    rosnodejs.log.info('Checking ' + gripper + ' gripper state.');
-    const service_name = '/code_it/api/slip_gripper'; //do we need to make this?? no.
-    const client =
-        this._nh.serviceClient(service_name, 'code_it_msgs/SlipGripper');
-
-    let gripper_id = 0;
-    if (gripper === 'LEFT') {
-      gripper_id = 1;
-    } else if (gripper === 'RIGHT') {
-      gripper_id = 2;
-    }
-
-
-
-
-
-
-
     this._nh.waitForService(service_name, 1000).then((ok) => {
       if (ok) {
         const request = new code_it_msgs.srv.IsGripperOpen.Request(
@@ -357,7 +335,8 @@ class Robot {
   }
   slipGripper(){
     rosnodejs.log.info('check slipping');
-    this.slipGripperClient.sendGoal();
+    this.slipGripperClient.sendGoal({goal:{}});
+    return true;
   }
 
   startTimer(seconds) {
