@@ -326,13 +326,16 @@ class Robot {
     rosnodejs.log.info('Starting to set torso to ' + height + ' meters');
     this.torsoClient.sendGoal({goal: {height: height}});
   }
-  slipGripper(){
+  slipGripper(callback){
     rosnodejs.log.info('check slipping');
     this.slipGripperClient.sendGoal({goal:{}});
     this.slipGripperResult = null;
     this.slipGripperClient.once('result', (msg) => {
       this.slipGripperResult = msg.result.slipped;
+	    callback(this.slipGripperResult);
     });
+   // callback(this.slipGripperResult);
+    //  callback(true);
   }
 
   startTimer(seconds) {
