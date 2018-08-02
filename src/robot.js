@@ -89,6 +89,9 @@ class Robot {
 
     this.positionClient = this._nh.actionClientInterface(
         '/code_it/api/get_position', 'code_it_msgs/GetPosition');
+
+    this.locationClient = this._nh.actionClientInterface(
+        '/code_it/api/get_location', 'code_it_msgs/GetLocation');
   }
 
   // Service implemented actions
@@ -508,6 +511,17 @@ class Robot {
       callback(actionResult.result.position);
     });
     this.positionClient.sendGoal({goal: {name: resource}});
+  }
+
+  getLocation(callback) {
+    rosnodejs.log.info('Getting location of the robot');
+    this.locationClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback(actionResult.result.name);
+    });
+    this.locationClient.sendGoal({goal: {}});
   }
 
   waitForDuration(seconds, callback) {
