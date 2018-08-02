@@ -67,15 +67,8 @@ class Robot {
      
     this.slipGripperClient = this._nh.actionClientInterface(
 	    '/code_it/api/slip_gripper' , 'code_it_msgs/SlipGripper');
-    this.slipGripperClient.on('status', (msg) => {
-        if(msg.status_list.length == 0){    
-          this.torsoStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
-        } else {
-          this.torsoStatus = msg.status_list[msg.status_list.length - 1].status;
-    	}
-    });
-    
-
+    this.slipGripperResult = null;
+   
     this.gripperClient = this._nh.actionClientInterface(
         '/code_it/api/set_gripper', 'code_it_msgs/SetGripper');
     this.gripperClient.on('status', (msg) => {
@@ -336,7 +329,10 @@ class Robot {
   slipGripper(){
     rosnodejs.log.info('check slipping');
     this.slipGripperClient.sendGoal({goal:{}});
-    return true;
+    this.slipGripperResult = null;
+    this.slipGripperClient.once('result', (msg) => {
+      this.slipGripperResult = msg.result.slipped;
+    });
   }
 
   startTimer(seconds) {
@@ -382,6 +378,8 @@ class Robot {
   getResult(resource) {
     return this.askMCResult;
   }
+
+  
 
   cancel(resource) {
     if (resource === 'TORSO') {
