@@ -277,7 +277,12 @@ function interpreterApi(interpreter, scope, robot) {
   };
   interpreter.setProperty(
       robotObj, 'slipGripper', interpreter.createAsyncFunction(wrapper));
-
+	
+  wrapper = function(){
+      robot.startCheckingGripper();
+  };
+  interpreter.setProperty(
+       robotObj, 'startCheckingGripper', interpreter.createNativeFunction(wrapper));
   
 }
 

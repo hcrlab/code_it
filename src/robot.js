@@ -68,6 +68,9 @@ class Robot {
     this.slipGripperClient = this._nh.actionClientInterface(
 	    '/code_it/api/slip_gripper' , 'code_it_msgs/SlipGripper');
     this.slipGripperResult = null;
+    
+    this.startCheckingGripperClient = this._nh.actionClientInterface(
+	    '/code_it/api/start_checking_gripper', 'code_it_msgs/StartCheckingGripper');
    
     this.gripperClient = this._nh.actionClientInterface(
         '/code_it/api/set_gripper', 'code_it_msgs/SetGripper');
@@ -327,15 +330,17 @@ class Robot {
     this.torsoClient.sendGoal({goal: {height: height}});
   }
   slipGripper(callback){
-    rosnodejs.log.info('check slipping');
     this.slipGripperClient.sendGoal({goal:{}});
     this.slipGripperResult = null;
     this.slipGripperClient.once('result', (msg) => {
       this.slipGripperResult = msg.result.slipped;
 	    callback(this.slipGripperResult);
     });
-   // callback(this.slipGripperResult);
-    //  callback(true);
+  }
+  
+  startCheckingGripper(){
+    rosnodejs.log.info('Starting to check if gripper slipped');
+    this.startCheckingGripperClient.sendGoal({goal: {startCheckingIfSlipped: true}});
   }
 
   startTimer(seconds) {
