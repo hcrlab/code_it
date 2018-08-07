@@ -341,6 +341,11 @@ class Robot {
   startCheckingGripper(){
     rosnodejs.log.info('Starting to check if gripper slipped');
     this.startCheckingGripperClient.sendGoal({goal: {startCheckingIfSlipped: true}});
+   }
+  
+  resetCheckingGripper(){
+    rosnodejs.log.info('Resetting slip gripper block.');
+    this.startCheckingGripperClient.sendGoal({goal: {startCheckingIfSlipped: false}});
   }
 
   startTimer(seconds) {
