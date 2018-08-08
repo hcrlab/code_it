@@ -18,6 +18,7 @@ class Runtime {
   }
 
   _onProgramEnd() {
+    this._robot.resetRobotSensors();
     rosnodejs.log.info('The program has ended.');
     this._isRunningPub.publish({data: false});
   }
