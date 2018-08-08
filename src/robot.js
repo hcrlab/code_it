@@ -69,8 +69,8 @@ class Robot {
 	    '/code_it/api/slip_gripper' , 'code_it_msgs/SlipGripper');
     this.slipGripperResult = null;
     
-    this.startCheckingGripperClient = this._nh.actionClientInterface(
-	    '/code_it/api/start_checking_gripper', 'code_it_msgs/StartCheckingGripper');
+    this.resetSensorsClient = this._nh.actionClientInterface(
+	    '/code_it/api/reset_sensors', 'code_it_msgs/Empty');
    
     this.gripperClient = this._nh.actionClientInterface(
         '/code_it/api/set_gripper', 'code_it_msgs/SetGripper');
@@ -337,15 +337,10 @@ class Robot {
 	    callback(this.slipGripperResult);
     });
   }
-  
-  startCheckingGripper(){
-    rosnodejs.log.info('Starting to check if gripper slipped');
-    this.startCheckingGripperClient.sendGoal({goal: {startCheckingIfSlipped: true}});
-   }
-  
-  resetCheckingGripper(){
-    rosnodejs.log.info('Resetting slip gripper block.');
-    this.startCheckingGripperClient.sendGoal({goal: {startCheckingIfSlipped: false}});
+    
+  resetRobotSensors(){
+    rosnodejs.log.info('Resetting robot sensor blocks.');
+    this.resetSensorsClient.sendGoal({goal: {}});
   }
 
   startTimer(seconds) {
