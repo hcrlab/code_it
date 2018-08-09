@@ -66,7 +66,14 @@ class Robot {
             msg.status_list[msg.status_list.length - 1].status;
       }
     });
-
+     
+    this.slipGripperClient = this._nh.actionClientInterface(
+	    '/code_it/api/slip_gripper' , 'code_it_msgs/SlipGripper');
+    this.slipGripperResult = null;
+    
+    this.resetSensorsClient = this._nh.actionClientInterface(
+	    '/code_it/api/reset_sensors', 'code_it_msgs/Empty');
+   
     this.gripperClient = this._nh.actionClientInterface(
         '/code_it/api/set_gripper', 'code_it_msgs/SetGripper');
     this.gripperClient.on('status', (msg) => {
@@ -149,7 +156,6 @@ class Robot {
     } else if (gripper === 'RIGHT') {
       gripper_id = 2;
     }
-
     this._nh.waitForService(service_name, 1000).then((ok) => {
       if (ok) {
         const request = new code_it_msgs.srv.IsGripperOpen.Request(
@@ -339,6 +345,19 @@ class Robot {
     rosnodejs.log.info('Starting to set torso to ' + height + ' meters');
     this.torsoClient.sendGoal({goal: {height: height}});
   }
+  slipGripper(callback){
+    this.slipGripperClient.sendGoal({goal:{}});
+    this.slipGripperResult = null;
+    this.slipGripperClient.once('result', (msg) => {
+      this.slipGripperResult = msg.result.slipped;
+	    callback(this.slipGripperResult);
+    });
+  }
+    
+  resetRobotSensors(){
+    rosnodejs.log.info('Resetting robot sensor blocks.');
+    this.resetSensorsClient.sendGoal({goal: {}});
+  }
 
   startTimer(seconds) {
     clearTimeout(this.timer_id);
@@ -389,6 +408,8 @@ class Robot {
       return this.rapidPbDResult;
     }
   }
+
+  
 
   cancel(resource) {
     if (resource === 'TORSO') {
@@ -532,6 +553,7 @@ class Robot {
       callback();
     }, seconds * 1000);
   }
+
 }
 
 module.exports = Robot;

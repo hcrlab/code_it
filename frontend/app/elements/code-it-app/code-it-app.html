@@ -65,9 +65,14 @@
       },
 
       ready: function() {
-        if (window.location.port === '' || window.location.port === '5001') {
-          this.baseUrl = '/a/code_it/';
-        }
+       //changed this function according to github.com/hcrlab/codeit
+       if (window.location.port === '') {
+           this.baseUrl = '/'; // Was /a/code_it/index.html/
+       }
+       // for RWS
+       // if (window.location.port === '' || window.location.port === '5001') {
+       //   this.baseUrl = '/a/code_it/';
+       // }
       },
 
       handleRouteChange: function() {
