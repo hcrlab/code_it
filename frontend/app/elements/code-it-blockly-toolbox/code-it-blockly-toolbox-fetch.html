@@ -389,19 +389,11 @@
             </block>
           </next>
         </block>
-        <block type="variables_set">
-          <field name="VAR">item</field>
-          <value name="VALUE">
-            <block type="robot_get_result">
-              <field name="NAME">&lt;Select an option&gt;</field>
-            </block>
-          </value>
-        </block>
       </category>
       <!--category name="Robot head and vision" colour="230">
         <block type="robot_head_look_angles"></block>
       </category-->
-      <category name="Consecutive Robot Actions" colour="230">
+      <category name="Sequential robot actions" colour="230">
         <block type="variables_set">
           <field name="VAR">success</field>
           <value name="VALUE">
@@ -447,7 +439,7 @@
           </value>
         </block>
       </category>
-      <category name="Concurrent Robot Actions" colour="160">
+      <category name="Parallel robot actions" colour="160">
         <block type="robot_start_rapid_pbd">
           <value name="PROGRAM">
             <block type="robot_pbd_programs">
@@ -461,7 +453,7 @@
           </value>
         </block>	
         <block type="variables_set">
-          <field name="VAR">success</field>
+          <field name="VAR">item</field>
           <value name="VALUE">
             <block type="robot_get_result">
               <field name="NAME">&lt;Select an option&gt;</field>
@@ -505,7 +497,7 @@
           </value>
         </block>
       </category>
-      <category name="Program control" colour="120">
+      <category name="Time" colour="120">
         <block type="robot_start_timer">
           <value name="SECONDS">
             <block type="math_number">
@@ -520,8 +512,15 @@
             </block>
           </value>
         </block>
-        <block type="robot_is_done_fetch">
-          <field name="NAME">&lt;Select an option&gt;</field>
+      </category>
+      <category name="Action event listeners" colour="345">
+        <block type="variables_set">
+          <field name="VAR">success</field>
+          <value name="VALUE">
+            <block type="robot_is_done_fetch">
+              <field name="NAME">&lt;Select an option&gt;</field>
+            </block>
+          </value>
         </block>
         <block type="robot_cancel_fetch">
           <field name="NAME">&lt;Select an option&gt;</field>
@@ -548,9 +547,12 @@
             <block type="robot_get_location"></block>
           </value>
         </block>
-      </category>
-      <category name="Robot Sensors" colour="345">
-          <block type="slip_gripper"></block>
+        <block type="variables_set">
+          <field name="VAR">success</field>
+          <value name="VALUE">
+            <block type="slip_gripper"></block>
+	  </value>
+	</block>
       </category>
       <category name="Standard library" colour="20">
         <block type="controls_whileUntil">
