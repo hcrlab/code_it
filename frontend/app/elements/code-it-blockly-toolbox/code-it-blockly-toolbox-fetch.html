@@ -601,26 +601,8 @@
             </block>
           </value>
           <next>
-            <block type="controls_whileUntil">
-              <field name="MODE">WHILE</field>
-              <value name="BOOL">
-                <block type="logic_negate">
-                  <value name="BOOL">
-                    <block type="robot_is_done_fetch">
-                      <field name="NAME">QUESTION</field>
-                    </block>
-                  </value>
-                </block>
-              </value>
-              <statement name="DO">
-                <block type="robot_wait_for_seconds">
-                  <value name="SECONDS">
-                    <block type="math_number">
-                      <field name="NUM">0.2</field>
-                    </block>
-                  </value>
-                </block>
-              </statement>
+            <block type="robot_wait_for_action_fetch">
+	      <field name="NAME">QUESTION</field>
               <next>
                 <block type="variables_set">
                   <field name="VAR">item</field>
