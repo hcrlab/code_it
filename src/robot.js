@@ -404,7 +404,21 @@ class Robot {
     if (this.isDone(resource)) {
       callback();
     } else {
-      this.torsoClient.once('result', (actionResult) => {
+      var client = null;
+      if (resource === 'TORSO') {
+        client = this.torsoClient;
+      } else if (resource === 'HEAD') {
+        client = this.headClient;
+      } else if (resource === 'GRIPPER') {
+        client = this.gripperClient;
+      } else if (resource === 'QUESTION') {
+        client = this.askClient;
+      } else if (resource === 'NAVIGATION') {
+        client = this.goToClient;
+      } else if (resource === 'PBD') {
+        client = this.rapidPbDClient;
+      }
+      client.once('result', (actionResult) => {
         callback();
       });
     }
