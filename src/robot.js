@@ -399,6 +399,16 @@ class Robot {
     return false;
   }
 
+  waitForAction(resource, callback) {
+    callback(() => {while(!this.isDone(resource)) {}});
+
+    //while (!this.isDone(resource)) {
+      //callback();
+      //rosnodejs.log.info("Resource: " + resource + " status: " + this.isDone(resource));
+    //}
+    rosnodejs.log.info("Result: " + this.isDone(resource));
+  }
+
   getResult(resource) {
     if (resource === 'QUESTION') {
       return this.askMCResult;
@@ -408,9 +418,7 @@ class Robot {
       return this.rapidPbDResult;
     }
   }
-
   
-
   cancel(resource) {
     if (resource === 'TORSO') {
       this.torsoClient.cancel();
