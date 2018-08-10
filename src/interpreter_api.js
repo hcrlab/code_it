@@ -128,6 +128,12 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'isDone', interpreter.createNativeFunction(wrapper));
 
+  wrapper = function(resource, callback) {
+    return robot.waitForAction(resource, callback);
+  };
+  interpreter.setProperty(
+      robotObj, 'waitForAction', interpreter.createAsyncFunction(wrapper));
+
   wrapper = function(resource) {
     return robot.getResult(resource);
   };

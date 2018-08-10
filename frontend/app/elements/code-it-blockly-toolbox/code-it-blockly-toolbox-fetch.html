@@ -390,6 +390,15 @@
           </next>
         </block>
       </category>
+      <category name="Robot sound" colour="65">
+        <block type="robot_sound_say">
+          <value name="TEXT">
+            <block type="text">
+              <field name="TEXT">Hello world!</field>
+            </block>
+          </value>
+        </block>
+      </category>
       <!--category name="Robot head and vision" colour="230">
         <block type="robot_head_look_angles"></block>
       </category-->
@@ -488,31 +497,6 @@
           </value>
         </block>
       </category>
-      <category name="Robot sound" colour="65">
-        <block type="robot_sound_say">
-          <value name="TEXT">
-            <block type="text">
-              <field name="TEXT">Hello world!</field>
-            </block>
-          </value>
-        </block>
-      </category>
-      <category name="Time" colour="120">
-        <block type="robot_start_timer">
-          <value name="SECONDS">
-            <block type="math_number">
-              <field name="NUM">10</field>
-            </block>
-          </value>
-        </block>
-        <block type="robot_wait_for_seconds">
-          <value name="SECONDS">
-            <block type="math_number">
-              <field name="NUM">2</field>
-            </block>
-          </value>
-        </block>
-      </category>
       <category name="Action event listeners" colour="345">
         <block type="variables_set">
           <field name="VAR">success</field>
@@ -521,6 +505,9 @@
               <field name="NAME">&lt;Select an option&gt;</field>
             </block>
           </value>
+        </block>
+        <block type="robot_wait_for_action_fetch">
+          <field name="NAME">&lt;Select an option&gt;</field>
         </block>
         <block type="robot_cancel_fetch">
           <field name="NAME">&lt;Select an option&gt;</field>
@@ -553,6 +540,22 @@
             <block type="slip_gripper"></block>
 	  </value>
 	</block>
+      </category>
+      <category name="Time" colour="120">
+        <block type="robot_start_timer">
+          <value name="SECONDS">
+            <block type="math_number">
+              <field name="NUM">10</field>
+            </block>
+          </value>
+        </block>
+        <block type="robot_wait_for_seconds">
+          <value name="SECONDS">
+            <block type="math_number">
+              <field name="NUM">2</field>
+            </block>
+          </value>
+        </block>
       </category>
       <category name="Standard library" colour="20">
         <block type="controls_whileUntil">
