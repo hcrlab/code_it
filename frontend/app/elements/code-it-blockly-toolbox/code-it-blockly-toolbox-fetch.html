@@ -508,7 +508,21 @@
         </block>
       </category>
       <category name="Robot Sensors" colour="345">
-          <block type="slip_gripper"></block>
+        <block type="slip_gripper"></block>
+	<block type="speech_input">
+	  <value name="SECONDS">
+	    <block type="math_number">
+              <field name="NUM">15</field>
+	    </block>
+	  </value>
+	</block>
+	<block type="text_contains">
+	    <value name="INPUT">
+	      <block type="text">
+	         <field name="INPUT">Hello astro!</field>
+	     </block>
+	   </value>
+	  </block>
       </category>
       <category name="Standard library" colour="20">
         <block type="controls_whileUntil">
