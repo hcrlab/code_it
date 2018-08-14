@@ -356,7 +356,6 @@ class Robot {
   }
 
   resetRobotSensors() {
-    rosnodejs.log.info('Resetting robot sensor blocks.');
     this.resetSensorsClient.sendGoal({goal: {}});
   }
 
