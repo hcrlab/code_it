@@ -400,7 +400,8 @@ class Robot {
     return false;
   }
 
-  waitForAction(resource, callback) {
+  waitHelper(resource, callback) {
+    rosnodejs.log.info('resource test: ' + resource);
     if (this.isDone(resource)) {
       callback();
     } else {
@@ -419,8 +420,24 @@ class Robot {
         client = this.rapidPbDClient;
       }
       client.once('result', (actionResult) => {
+        rosnodejs.log.info('result: ' + actionResult + ' ' + resource);
         callback();
       });
+    }
+  }
+
+  async waitForAction(resource, callback) {
+    if (resource === 'ALL_ACTIONS') {
+      // not currently functioning //
+      var a = await this.waitHelper('TORSO', callback);
+      var b = await this.waitHelper('HEAD', callback);
+      var c = await this.waitHelper('GRIPPER', callback);
+      rosnodejs.log.info(await a);
+      rosnodejs.log.info(await b);
+      rosnodejs.log.info(await c);
+      callback();
+    } else {
+      await this.waitHelper(resource, callback);
     }
   }
 
@@ -577,5 +594,4 @@ class Robot {
     }, seconds * 1000);
   }
 }
-
 module.exports = Robot;

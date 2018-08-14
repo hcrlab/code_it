@@ -426,7 +426,13 @@
           </value>
         </block>
         <block type="robot_manipulation_open_gripper"></block>
-        <block type="robot_manipulation_close_gripper_with_effort"></block>
+        <block type="robot_manipulation_close_gripper_with_effort">
+          <value name="FORCE">
+            <block type="math_number">
+              <field name="NUM">75</field>
+            </block>
+          </value>
+	</block>
         <!--block type="robot_manipulation_is_gripper_open"></block-->
         <block type="robot_manipulation_set_torso">
           <value name="HEIGHT">
