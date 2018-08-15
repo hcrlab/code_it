@@ -277,7 +277,18 @@ function interpreterApi(interpreter, scope, robot) {
   };
   interpreter.setProperty(
       robotObj, 'slipGripper', interpreter.createAsyncFunction(wrapper));
-	
+
+  wrapper = function(time, callback){
+      robot.collectSpeech(time, callback);
+  };
+  interpreter.setProperty(
+      robotObj, 'collectSpeech', interpreter.createAsyncFunction(wrapper));
+  
+  wrapper = function(speech_data, program_input, callback){
+      robot.speechContains(speech_data, program_input, callback);
+  };
+  interpreter.setProperty(
+      robotObj, 'speechContains', interpreter.createAsyncFunction(wrapper));
 }
 
 module.exports = interpreterApi;

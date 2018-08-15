@@ -69,6 +69,13 @@ class Robot {
 	    '/code_it/api/slip_gripper' , 'code_it_msgs/SlipGripper');
     this.slipGripperResult = null;
     
+    this.collectSpeechClient = this._nh.actionClientInterface(
+	    '/code_it/api/collect_speech', 'code_it_msgs/CollectSpeech');	  
+    
+    this.speechContainsClient = this._nh.actionClientInterface(
+            '/code_it/api/speech_contains', 'code_it_msgs/SpeechContains');
+    this.speechContainsResult = null;
+
     this.resetSensorsClient = this._nh.actionClientInterface(
 	    '/code_it/api/reset_sensors', 'code_it_msgs/Empty');
    
@@ -337,7 +344,23 @@ class Robot {
 	    callback(this.slipGripperResult);
     });
   }
-    
+
+  collectSpeech(time, callback){
+    this.collectSpeechClient.sendGoal({goal: {time: time}});
+    this.collectSpeechClient.once('result', (msg) => {
+	callback(msg.result.data);
+    });
+  }
+  
+  speechContains(speech_data, program_input, callback){
+    this.speechContainsClient.sendGoal({goal: {speech_data: speech_data, program_input: program_input}});
+    this.speechContainsResult = null;
+    this.speechContainsClient.once('result', (msg) => {
+	this.speechContainsResult = msg.result.contains;
+	callback(this.speechContainsResult);
+    });
+  }  
+  
   resetRobotSensors(){
     rosnodejs.log.info('Resetting robot sensor blocks.');
     this.resetSensorsClient.sendGoal({goal: {}});
