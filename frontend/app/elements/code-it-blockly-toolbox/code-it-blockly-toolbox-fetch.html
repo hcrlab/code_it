@@ -509,17 +509,22 @@
       </category>
       <category name="Robot Sensors" colour="345">
         <block type="slip_gripper"></block>
-	<block type="speech_input">
-	  <value name="SECONDS">
-	    <block type="math_number">
-              <field name="NUM">15</field>
+	<block type="variables_set">
+	  <field name="VAR">speech input</field>
+          <value name="VALUE"> 
+            <block type="speech_input">
+	      <value name="SECONDS">
+	        <block type="math_number">
+                 <field name="NUM">15</field>
+	        </block>
+	      </value>
 	    </block>
 	  </value>
 	</block>
 	<block type="text_contains">
 	    <value name="INPUT">
 	      <block type="text">
-	         <field name="INPUT">Hello astro!</field>
+	         <field name="TEXT">Hello astro!</field>
 	     </block>
 	   </value>
 	  </block>
