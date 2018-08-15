@@ -399,8 +399,24 @@ class Robot {
     return false;
   }
 
-  waitHelper(resource, callback) {
-    rosnodejs.log.info('resource test: ' + resource);
+  // had the current waitForAction uncommented code inside
+  // waitHelper(resource, callback) {}
+
+  async waitForAction(resource, callback) {
+    /* if (resource === 'ALL_ACTIONS') {
+      // this doesn't work //
+      var a = await this.waitHelper('TORSO', callback);
+      var b = await this.waitHelper('HEAD', callback);
+      var c = await this.waitHelper('GRIPPER', callback);
+      rosnodejs.log.info(await a);
+      rosnodejs.log.info(await b);
+      rosnodejs.log.info(await c);
+    } else {
+      // this worked //
+      await this.waitHelper(resource, callback);
+    } */
+
+    rosnodejs.log.info('Waiting for ' + resource + ' to be done');
     if (this.isDone(resource)) {
       callback();
     } else {
@@ -419,24 +435,8 @@ class Robot {
         client = this.rapidPbDClient;
       }
       client.once('result', (actionResult) => {
-        rosnodejs.log.info('result: ' + actionResult + ' ' + resource);
         callback();
       });
-    }
-  }
-
-  async waitForAction(resource, callback) {
-    if (resource === 'ALL_ACTIONS') {
-      // not currently functioning //
-      var a = await this.waitHelper('TORSO', callback);
-      var b = await this.waitHelper('HEAD', callback);
-      var c = await this.waitHelper('GRIPPER', callback);
-      rosnodejs.log.info(await a);
-      rosnodejs.log.info(await b);
-      rosnodejs.log.info(await c);
-      callback();
-    } else {
-      await this.waitHelper(resource, callback);
     }
   }
 
