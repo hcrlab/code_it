@@ -504,14 +504,13 @@
         </block>
       </category>
       <category name="Action event listeners" colour="345">
-        <block type="variables_set">
-          <field name="VAR">success</field>
-          <value name="VALUE">
+        <block type="controls_if">
+          <value name="IF0">
             <block type="robot_is_done_fetch">
               <field name="NAME">&lt;Select an option&gt;</field>
             </block>
           </value>
-        </block>
+	</block>
         <block type="robot_wait_for_action_fetch">
           <field name="NAME">&lt;Select an option&gt;</field>
         </block>
@@ -540,11 +539,10 @@
             <block type="robot_get_location"></block>
           </value>
         </block>
-        <block type="variables_set">
-          <field name="VAR">success</field>
-          <value name="VALUE">
+        <block type="controls_if">
+          <value name="IF0">
             <block type="slip_gripper"></block>
-	  </value>
+          </value>
 	</block>
       </category>
       <category name="Time" colour="120">
