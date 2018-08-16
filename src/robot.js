@@ -66,14 +66,14 @@ class Robot {
             msg.status_list[msg.status_list.length - 1].status;
       }
     });
-     
+
     this.slipGripperClient = this._nh.actionClientInterface(
-	    '/code_it/api/slip_gripper' , 'code_it_msgs/SlipGripper');
+        '/code_it/api/slip_gripper', 'code_it_msgs/SlipGripper');
     this.slipGripperResult = null;
-    
+
     this.resetSensorsClient = this._nh.actionClientInterface(
-	    '/code_it/api/reset_sensors', 'code_it_msgs/Empty');
-   
+        '/code_it/api/reset_sensors', 'code_it_msgs/Empty');
+
     this.gripperClient = this._nh.actionClientInterface(
         '/code_it/api/set_gripper', 'code_it_msgs/SetGripper');
     this.gripperClient.on('status', (msg) => {
@@ -96,6 +96,9 @@ class Robot {
 
     this.positionClient = this._nh.actionClientInterface(
         '/code_it/api/get_position', 'code_it_msgs/GetPosition');
+
+    this.locationClient = this._nh.actionClientInterface(
+        '/code_it/api/get_location', 'code_it_msgs/GetLocation');
   }
 
   // Service implemented actions
@@ -342,17 +345,17 @@ class Robot {
     rosnodejs.log.info('Starting to set torso to ' + height + ' meters');
     this.torsoClient.sendGoal({goal: {height: height}});
   }
-  slipGripper(callback){
-    this.slipGripperClient.sendGoal({goal:{}});
+
+  slipGripper(callback) {
+    this.slipGripperClient.sendGoal({goal: {}});
     this.slipGripperResult = null;
     this.slipGripperClient.once('result', (msg) => {
       this.slipGripperResult = msg.result.slipped;
-	    callback(this.slipGripperResult);
+      callback(this.slipGripperResult);
     });
   }
-    
-  resetRobotSensors(){
-    rosnodejs.log.info('Resetting robot sensor blocks.');
+
+  resetRobotSensors() {
     this.resetSensorsClient.sendGoal({goal: {}});
   }
 
@@ -396,6 +399,47 @@ class Robot {
     return false;
   }
 
+  // had the current waitForAction uncommented code inside
+  // waitHelper(resource, callback) {}
+
+  async waitForAction(resource, callback) {
+    /* if (resource === 'ALL_ACTIONS') {
+      // this doesn't work //
+      var a = await this.waitHelper('TORSO', callback);
+      var b = await this.waitHelper('HEAD', callback);
+      var c = await this.waitHelper('GRIPPER', callback);
+      rosnodejs.log.info(await a);
+      rosnodejs.log.info(await b);
+      rosnodejs.log.info(await c);
+    } else {
+      // this worked //
+      await this.waitHelper(resource, callback);
+    } */
+
+    rosnodejs.log.info('Waiting for ' + resource + ' to be done');
+    if (this.isDone(resource)) {
+      callback();
+    } else {
+      var client = null;
+      if (resource === 'TORSO') {
+        client = this.torsoClient;
+      } else if (resource === 'HEAD') {
+        client = this.headClient;
+      } else if (resource === 'GRIPPER') {
+        client = this.gripperClient;
+      } else if (resource === 'QUESTION') {
+        client = this.askClient;
+      } else if (resource === 'NAVIGATION') {
+        client = this.goToClient;
+      } else if (resource === 'PBD') {
+        client = this.rapidPbDClient;
+      }
+      client.once('result', (actionResult) => {
+        callback();
+      });
+    }
+  }
+
   getResult(resource) {
     if (resource === 'QUESTION') {
       return this.askMCResult;
@@ -405,8 +449,6 @@ class Robot {
       return this.rapidPbDResult;
     }
   }
-
-  
 
   cancel(resource) {
     if (resource === 'TORSO') {
@@ -531,6 +573,17 @@ class Robot {
     this.positionClient.sendGoal({goal: {name: resource}});
   }
 
+  getLocation(callback) {
+    rosnodejs.log.info('Getting location of the robot');
+    this.locationClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback(actionResult.result.name);
+    });
+    this.locationClient.sendGoal({goal: {}});
+  }
+
   waitForDuration(seconds, callback) {
     if (seconds <= 0) {
       callback();
@@ -539,7 +592,5 @@ class Robot {
       callback();
     }, seconds * 1000);
   }
-
 }
-
 module.exports = Robot;
