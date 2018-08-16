@@ -346,13 +346,16 @@ class Robot {
   }
 
   collectSpeech(time, callback){
+    rosnodejs.log.info("collecting speech");
     this.collectSpeechClient.sendGoal({goal: {time: time}});
     this.collectSpeechClient.once('result', (msg) => {
+	rosnodejs.log.info(msg.result.data);
 	callback(msg.result.data);
     });
   }
   
-  speechContains(speech_data, program_input, callback){
+  speechContains(speech_data, program_input, callback){ //this fn is not getting called for some reason
+    rosnodejs.log.info("checking if speech contains a phrase");
     this.speechContainsClient.sendGoal({goal: {speech_data: speech_data, program_input: program_input}});
     this.speechContainsResult = null;
     this.speechContainsClient.once('result', (msg) => {
@@ -438,6 +441,9 @@ class Robot {
     this.askClient.cancel();
     this.goToClient.cancel();
     this.rapidPbDClient.cancel();
+    this.slipGripperClient.cancel();
+    this.collectSpeechClient.cancel();
+    this.speechContainsClient.cancel();
     this.timer_on = false;
     clearTimeout(this.timer_id);
   }
