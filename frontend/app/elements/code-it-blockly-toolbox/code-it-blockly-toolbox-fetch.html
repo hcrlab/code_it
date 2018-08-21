@@ -521,6 +521,18 @@
 	    </block>
 	  </value>
 	</block>
+	<block type="variables_set">
+	  <field name="VAR">speech input</field>
+	  <value name="VALUE">
+	    <block type="speech_input_wake_word">
+	      <value name="WAKE_WORD">
+		<block type="text">
+		  <field name="TEXT">wake word</field>
+		</block>
+              </value>
+	    </block>
+	  </value>
+	</block>
 	<block type="speech_contains">
 	    <value name="phrase">
 	      <block type="text">

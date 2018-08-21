@@ -70,8 +70,11 @@ class Robot {
     this.slipGripperResult = null;
     
     this.collectSpeechClient = this._nh.actionClientInterface(
-	    '/code_it/api/collect_speech', 'code_it_msgs/CollectSpeech');	  
+	    '/code_it/api/collect_speech', 'code_it_msgs/CollectSpeech');
     
+    this.collectSpeechWakeWordClient = this._nh.actionClientInterface(
+	'/code_it/api/collect_speech', 'code_it_msgs/CollectSpeechWakeWord');
+
     this.speechContainsClient = this._nh.actionClientInterface(
             '/code_it/api/speech_contains', 'code_it_msgs/SpeechContains');
     this.speechContainsResult = null;
@@ -336,7 +339,7 @@ class Robot {
     rosnodejs.log.info('Starting to set torso to ' + height + ' meters');
     this.torsoClient.sendGoal({goal: {height: height}});
   }
-  slipGripper(callback){
+  slipGripper(callback) {
     this.slipGripperClient.sendGoal({goal:{}});
     this.slipGripperResult = null;
     this.slipGripperClient.once('result', (msg) => {
@@ -345,16 +348,25 @@ class Robot {
     });
   }
 
-  collectSpeech(time, callback){
-    rosnodejs.log.info("collecting speech");
+  collectSpeech(time, callback) {
+    rosnodejs.log.info("collecting speech for " + time + " seconds");
     this.collectSpeechClient.sendGoal({goal: {time: time}});
     this.collectSpeechClient.once('result', (msg) => {
 	rosnodejs.log.info(msg.result.data);
 	callback(msg.result.data);
     });
   }
+
+  collectSpeechWakeWord(wake_word, callback) {
+    rosnodejs.log.info("collecting speech (waiting for " + wake_word + ")");
+    this.collectSpeechWakeWordClient.sendGoal({goal: {wake_word: wake_word}});
+    this.collectSpeechClient.once('result', (msg) => {
+	rosnodejs.log.info(msg.result.data);
+	callback(msg.result.data);
+    });
+  }
   
-  speechContains(speech_data, program_input, callback){ //this fn is not getting called for some reason
+  speechContains(speech_data, program_input, callback) { 
     rosnodejs.log.info("checking if speech contains a phrase");
     this.speechContainsClient.sendGoal({goal: {speech_data: speech_data, program_input: program_input}});
     this.speechContainsResult = null;
