@@ -281,7 +281,6 @@ function interpreterApi(interpreter, scope, robot) {
   wrapper = function(time, callback) {
       robot.collectSpeech(time, callback);
   };
-
   interpreter.setProperty(
       robotObj, 'collectSpeech', interpreter.createAsyncFunction(wrapper)); 
   
