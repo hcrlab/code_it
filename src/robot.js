@@ -70,6 +70,16 @@ class Robot {
     this.slipGripperClient = this._nh.actionClientInterface(
         '/code_it/api/slip_gripper', 'code_it_msgs/SlipGripper');
     this.slipGripperResult = null;
+    
+    this.collectSpeechClient = this._nh.actionClientInterface(
+	    '/code_it/api/collect_speech', 'code_it_msgs/CollectSpeech');
+    
+    this.collectSpeechWakeWordClient = this._nh.actionClientInterface(
+	'/code_it/api/collect_speech_wake_word', 'code_it_msgs/CollectSpeechWakeWord');
+
+    this.speechContainsClient = this._nh.actionClientInterface(
+            '/code_it/api/speech_contains', 'code_it_msgs/SpeechContains');
+    this.speechContainsResult = null;
 
     this.resetSensorsClient = this._nh.actionClientInterface(
         '/code_it/api/reset_sensors', 'code_it_msgs/Empty');
@@ -355,6 +365,36 @@ class Robot {
     });
   }
 
+
+  collectSpeech(time, callback) {
+    rosnodejs.log.info("collecting speech for " + time + " seconds");
+    this.collectSpeechClient.sendGoal({goal: {time: time}});
+    this.collectSpeechClient.once('result', (msg) => {
+	rosnodejs.log.info(msg.result.data);
+	callback(msg.result.data);
+    });
+  }
+
+  collectSpeechWakeWord(wake_word, callback) {
+    rosnodejs.log.info("collecting speech (waiting for " + wake_word + ")");
+    this.collectSpeechWakeWordClient.sendGoal({goal: {wake_word: wake_word}});
+    this.collectSpeechWakeWordClient.once('result', (msg) => {
+	rosnodejs.log.info(msg.result.data);
+	callback(msg.result.data);
+    });
+  }
+  
+  speechContains(speech_data, program_input, callback) { 
+    rosnodejs.log.info("checking if speech contains a phrase");
+    this.speechContainsClient.sendGoal({goal: {speech_data: speech_data, program_input: program_input}});
+    this.speechContainsResult = null;
+    this.speechContainsClient.once('result', (msg) => {
+	this.speechContainsResult = msg.result.contains;
+	callback(this.speechContainsResult);
+    });
+  }  
+  
+
   resetRobotSensors() {
     this.resetSensorsClient.sendGoal({goal: {}});
   }
@@ -476,6 +516,10 @@ class Robot {
     this.askClient.cancel();
     this.goToClient.cancel();
     this.rapidPbDClient.cancel();
+    this.slipGripperClient.cancel();
+    this.collectSpeechClient.cancel();
+    this.speechContainsClient.cancel();
+    this.collectSpeechWakeWordClient.cancel();
     this.timer_on = false;
     clearTimeout(this.timer_id);
   }
