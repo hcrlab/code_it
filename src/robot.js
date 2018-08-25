@@ -36,6 +36,7 @@ class Robot {
 
     this.goToClient = this._nh.actionClientInterface(
         '/code_it/api/go_to', 'code_it_msgs/GoTo');
+    this.goToResult = null;
     this.goToClient.on('status', (msg) => {
       if (msg.status_list.length == 0) {
         this.goToStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
@@ -56,6 +57,7 @@ class Robot {
 
     this.rapidPbDClient = this._nh.actionClientInterface(
         '/code_it/api/run_pbd_action', 'code_it_msgs/RunPbdAction');
+    this.rapidPbDResult = null;
     this.rapidPbDClient.on('status', (msg) => {
       if (msg.status_list.length == 0) {
         this.rapidPbDStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
@@ -64,9 +66,9 @@ class Robot {
             msg.status_list[msg.status_list.length - 1].status;
       }
     });
-     
+
     this.slipGripperClient = this._nh.actionClientInterface(
-	    '/code_it/api/slip_gripper' , 'code_it_msgs/SlipGripper');
+        '/code_it/api/slip_gripper', 'code_it_msgs/SlipGripper');
     this.slipGripperResult = null;
     
     this.collectSpeechClient = this._nh.actionClientInterface(
@@ -80,8 +82,8 @@ class Robot {
     this.speechContainsResult = null;
 
     this.resetSensorsClient = this._nh.actionClientInterface(
-	    '/code_it/api/reset_sensors', 'code_it_msgs/Empty');
-   
+        '/code_it/api/reset_sensors', 'code_it_msgs/Empty');
+
     this.gripperClient = this._nh.actionClientInterface(
         '/code_it/api/set_gripper', 'code_it_msgs/SetGripper');
     this.gripperClient.on('status', (msg) => {
@@ -101,6 +103,12 @@ class Robot {
         this.torsoStatus = msg.status_list[msg.status_list.length - 1].status;
       }
     });
+
+    this.positionClient = this._nh.actionClientInterface(
+        '/code_it/api/get_position', 'code_it_msgs/GetPosition');
+
+    this.locationClient = this._nh.actionClientInterface(
+        '/code_it/api/get_location', 'code_it_msgs/GetLocation');
   }
 
   // Service implemented actions
@@ -309,6 +317,10 @@ class Robot {
 
   startGoTo(location) {
     rosnodejs.log.info('Starting to go to: ' + location);
+    this.goToResult = null;
+    this.goToClient.once('result', (msg) => {
+      this.goToResult = (msg.result.error === '');
+    });
     this.goToClient.sendGoal({goal: {location: location}});
   }
 
@@ -320,6 +332,10 @@ class Robot {
 
   startRapidPbD(program) {
     rosnodejs.log.info('Starting to run: ' + program);
+    this.rapidPbDResult = null;
+    this.rapidPbDClient.once('result', (msg) => {
+      this.rapidPbDResult = (msg.result.error === '');
+    });
     this.rapidPbDClient.sendGoal(
         {goal: {action_id: '', name: program, landmarks: []}});
   }
@@ -339,15 +355,16 @@ class Robot {
     rosnodejs.log.info('Starting to set torso to ' + height + ' meters');
     this.torsoClient.sendGoal({goal: {height: height}});
   }
-  
+
   slipGripper(callback) {
-    this.slipGripperClient.sendGoal({goal:{}});
+    this.slipGripperClient.sendGoal({goal: {}});
     this.slipGripperResult = null;
     this.slipGripperClient.once('result', (msg) => {
       this.slipGripperResult = msg.result.slipped;
-	    callback(this.slipGripperResult);
+      callback(this.slipGripperResult);
     });
   }
+
 
   collectSpeech(time, callback) {
     rosnodejs.log.info("collecting speech for " + time + " seconds");
@@ -377,8 +394,8 @@ class Robot {
     });
   }  
   
-  resetRobotSensors(){
-    rosnodejs.log.info('Resetting robot sensor blocks.');
+
+  resetRobotSensors() {
     this.resetSensorsClient.sendGoal({goal: {}});
   }
 
@@ -422,11 +439,56 @@ class Robot {
     return false;
   }
 
-  getResult(resource) {
-    return this.askMCResult;
+  // had the current waitForAction uncommented code inside
+  // waitHelper(resource, callback) {}
+
+  async waitForAction(resource, callback) {
+    /* if (resource === 'ALL_ACTIONS') {
+      // this doesn't work //
+      var a = await this.waitHelper('TORSO', callback);
+      var b = await this.waitHelper('HEAD', callback);
+      var c = await this.waitHelper('GRIPPER', callback);
+      rosnodejs.log.info(await a);
+      rosnodejs.log.info(await b);
+      rosnodejs.log.info(await c);
+    } else {
+      // this worked //
+      await this.waitHelper(resource, callback);
+    } */
+
+    rosnodejs.log.info('Waiting for ' + resource + ' to be done');
+    if (this.isDone(resource)) {
+      callback();
+    } else {
+      var client = null;
+      if (resource === 'TORSO') {
+        client = this.torsoClient;
+      } else if (resource === 'HEAD') {
+        client = this.headClient;
+      } else if (resource === 'GRIPPER') {
+        client = this.gripperClient;
+      } else if (resource === 'QUESTION') {
+        client = this.askClient;
+      } else if (resource === 'NAVIGATION') {
+        client = this.goToClient;
+      } else if (resource === 'PBD') {
+        client = this.rapidPbDClient;
+      }
+      client.once('result', (actionResult) => {
+        callback();
+      });
+    }
   }
 
-  
+  getResult(resource) {
+    if (resource === 'QUESTION') {
+      return this.askMCResult;
+    } else if (resource === 'NAVIGATION') {
+      return this.goToResult;
+    } else if (resource === 'PBD') {
+      return this.rapidPbDResult;
+    }
+  }
 
   cancel(resource) {
     if (resource === 'TORSO') {
@@ -470,7 +532,7 @@ class Robot {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
-      callback();
+      callback(actionResult.result.choice);
     });
     this.askClient.sendGoal({goal: {question: question, choices: choices}});
   }
@@ -492,9 +554,20 @@ class Robot {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
-      callback();
+      callback(actionResult.result.error === '');
     });
     this.goToClient.sendGoal({goal: {location: location}});
+  }
+
+  moveHead(pan, tilt, callback) {
+    rosnodejs.log.info('Moving head to: ' + pan + ', ' + tilt + ' degrees');
+    this.headClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback();
+    });
+    this.headClient.sendGoal({goal: {pan_degrees: pan, tilt_degrees: tilt}});
   }
 
   runRapidPbdProgram(name, callback) {
@@ -503,7 +576,7 @@ class Robot {
       if (actionResult.result.error !== '') {
         this.error = actionResult.result.error;
       }
-      callback();
+      callback(actionResult.result.error === '');
     });
     this.rapidPbDClient.sendGoal(
         {goal: {action_id: '', name: name, landmarks: []}});
@@ -533,6 +606,28 @@ class Robot {
     this.torsoClient.sendGoal({goal: {height: height}});
   }
 
+  getPosition(resource, callback) {
+    rosnodejs.log.info('Getting position of ' + resource);
+    this.positionClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback(actionResult.result.position);
+    });
+    this.positionClient.sendGoal({goal: {name: resource}});
+  }
+
+  getLocation(callback) {
+    rosnodejs.log.info('Getting location of the robot');
+    this.locationClient.once('result', (actionResult) => {
+      if (actionResult.result.error !== '') {
+        this.error = actionResult.result.error;
+      }
+      callback(actionResult.result.name);
+    });
+    this.locationClient.sendGoal({goal: {}});
+  }
+
   waitForDuration(seconds, callback) {
     if (seconds <= 0) {
       callback();
@@ -541,7 +636,5 @@ class Robot {
       callback();
     }, seconds * 1000);
   }
-
 }
-
 module.exports = Robot;
