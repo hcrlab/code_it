@@ -536,54 +536,54 @@
           </value>
         </block>
         <block type="robot_start_speech_input">
-	  <value name="SECONDS">
-	    <block type="math_number">
+	        <value name="SECONDS">
+	          <block type="math_number">
               <field name="NUM">15</field>
-	    </block>
-	  </value>
-	</block>
-	<block type="robot_start_speech_input_wake_word">
-	  <value name="WAKE_WORD">
+	          </block>
+	        </value>
+	      </block>
+	      <block type="robot_start_speech_input_wake_word">
+	        <value name="WAKE_WORD">
             <block type="text">
               <field name="TEXT">astro</field>
-	    </block>
+	          </block>
           </value>
-	</block>
-	<block type="variables_set">
-	  <field name="VAR">speech input</field>
+	      </block>
+	      <block type="variables_set">
+	        <field name="VAR">speech input</field>
           <value name="VALUE"> 
             <block type="speech_input">
-	      <value name="SECONDS">
-	        <block type="math_number">
-                 <field name="NUM">15</field>
-	        </block>
-	      </value>
-	    </block>
-	  </value>
-	</block>
-	<block type="variables_set">
-	  <field name="VAR">speech input</field>
-	  <value name="VALUE">
-	    <block type="speech_input_wake_word">
-	      <value name="WAKE_WORD">
-		<block type="text">
-		  <field name="TEXT">astro</field>
-		</block>
+	            <value name="SECONDS">
+	              <block type="math_number">
+                  <field name="NUM">15</field>
+	              </block>
+	            </value>
+	          </block>
+	        </value>
+	      </block>
+	      <block type="variables_set">
+	        <field name="VAR">speech input</field>
+	        <value name="VALUE">
+	          <block type="speech_input_wake_word">
+	            <value name="WAKE_WORD">
+		            <block type="text">
+		              <field name="TEXT">astro</field>
+		            </block>
               </value>
-	    </block>
-	  </value>
-	</block>
-	<block type="controls_if">
-	  <value name="IF0">
-	    <block type="speech_contains">
-	      <value name="phrase">
-	        <block type="text">
-	          <field name="TEXT">hello astro</field>
-	        </block>
-	      </value>
-	    </block>
+	          </block>
+	        </value>
+	      </block>
+	      <block type="controls_if">
+	        <value name="IF0">
+	          <block type="speech_contains">
+	            <value name="phrase">
+	              <block type="text">
+	                <field name="TEXT">hello astro</field>
+	              </block>
+	            </value>
+	          </block>
           </value>
-	</block>
+	      </block>
         <block type="controls_if">
           <value name="IF0">
             <block type="slip_gripper"></block>
