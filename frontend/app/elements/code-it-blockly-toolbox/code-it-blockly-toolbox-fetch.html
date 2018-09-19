@@ -535,6 +535,20 @@
             <block type="robot_get_location"></block>
           </value>
         </block>
+        <block type="robot_start_speech_input">
+	  <value name="SECONDS">
+	    <block type="math_number">
+              <field name="NUM">15</field>
+	    </block>
+	  </value>
+	</block>
+	<block type="robot_start_speech_input_wake_word">
+	  <value name="WAKE_WORD">
+            <block type="text">
+              <field name="TEXT">astro</field>
+	    </block>
+          </value>
+	</block>
 	<block type="variables_set">
 	  <field name="VAR">speech input</field>
           <value name="VALUE"> 

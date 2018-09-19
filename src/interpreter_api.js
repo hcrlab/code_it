@@ -302,6 +302,18 @@ function interpreterApi(interpreter, scope, robot) {
   interpreter.setProperty(
       robotObj, 'slipGripper', interpreter.createAsyncFunction(wrapper));
 
+  wrapper = function(time) {
+      robot.startCollectSpeech(time);
+  };
+  interpreter.setProperty(
+      robotObj, 'startCollectSpeech', interpreter.createNativeFunction(wrapper)); 
+  
+  wrapper = function(wake_word) {
+      robot.startCollectSpeechWakeWord(wake_word);
+  };
+  interpreter.setProperty(
+      robotObj, 'startCollectSpeechWakeWord', interpreter.createNativeFunction(wrapper));
+
   wrapper = function(time, callback) {
       robot.collectSpeech(time, callback);
   };
