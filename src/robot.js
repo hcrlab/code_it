@@ -73,10 +73,26 @@ class Robot {
     
     this.collectSpeechClient = this._nh.actionClientInterface(
 	    '/code_it/api/collect_speech', 'code_it_msgs/CollectSpeech');
+    this.collectSpeechResult = null;
+    this.collectSpeechClient.on('status', (msg) => {
+      if (msg.status_list.length == 0) {
+        this.collectSpeechStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+      } else {
+        this.collectSpeechStatus = msg.status_list[msg.status_list.length - 1].status;
+      }
+    });
     
     this.collectSpeechWakeWordClient = this._nh.actionClientInterface(
 	'/code_it/api/collect_speech_wake_word', 'code_it_msgs/CollectSpeechWakeWord');
-
+    this.collectSpeechWakeWordResult = null;
+    this.collectSpeechWakeWordClient.on('status', (msg) => {
+      if (msg.status_list.length == 0) {
+        this.collectSpeechWakeWordStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+      } else {
+        this.collectSpeechWakeWordStatus = msg.status_list[msg.status_list.length - 1].status;
+      }
+    });
+     
     this.speechContainsClient = this._nh.actionClientInterface(
             '/code_it/api/speech_contains', 'code_it_msgs/SpeechContains');
     this.speechContainsResult = null;
@@ -365,25 +381,24 @@ class Robot {
     });
   }
 
-
-  collectSpeech(time, callback) {
-    rosnodejs.log.info("collecting speech for " + time + " seconds");
-    this.collectSpeechClient.sendGoal({goal: {time: time}});
+  startCollectSpeech(time) {
+    rosnodejs.log.info('Starting to collect speech for ' + time + ' seconds');
+    this.collectSpeechResult = null;
     this.collectSpeechClient.once('result', (msg) => {
-	rosnodejs.log.info(msg.result.data);
-	callback(msg.result.data);
+      this.collectSpeechResult = msg.result.data;
     });
+    this.collectSpeechClient.sendGoal({goal: {time: time}});
   }
 
-  collectSpeechWakeWord(wake_word, callback) {
-    rosnodejs.log.info("collecting speech (waiting for " + wake_word + ")");
-    this.collectSpeechWakeWordClient.sendGoal({goal: {wake_word: wake_word}});
+  startCollectSpeechWakeWord(wake_word) {
+    rosnodejs.log.info('Starting to listen for speech input beginning with ' + wake_word);
+    this.collectSpeechWakeWordResult = null;
     this.collectSpeechWakeWordClient.once('result', (msg) => {
-	rosnodejs.log.info(msg.result.data);
-	callback(msg.result.data);
+      this.collectSpeechWakeWordResult = msg.result.data;
     });
-  }
-  
+    this.collectSpeechWakeWordClient.sendGoal({goal: {wake_word: wake_word}});
+  } 
+
   speechContains(speech_data, program_input, callback) { 
     rosnodejs.log.info("checking if speech contains a phrase");
     this.speechContainsClient.sendGoal({goal: {speech_data: speech_data, program_input: program_input}});
@@ -394,7 +409,6 @@ class Robot {
     });
   }  
   
-
   resetRobotSensors() {
     this.resetSensorsClient.sendGoal({goal: {}});
   }
@@ -425,6 +439,11 @@ class Robot {
       status = this.rapidPbDStatus;
     } else if (resource === 'TIMER') {
       return !this.timer_on;
+    } else if (resource === 'SPEECH_INPUT') {
+      rosnodejs.log.info('speech input status: ' + this.collectSpeechStatus);
+      status = this.collectSpeechStatus;
+    } else if (resource === 'SPEECH_INPUT_WAKE_WORD') {
+      status = this.collectSpeechWakeWordStatus;
     }
 
     if (status === actionlib_msgs.msg.GoalStatus.Constants.PREEMPTED ||
@@ -487,6 +506,10 @@ class Robot {
       return this.goToResult;
     } else if (resource === 'PBD') {
       return this.rapidPbDResult;
+    } else if (resource === 'SPEECH_INPUT') {
+      return this.collectSpeechResult;
+    } else if (resource === 'SPEECH_INPUT_WAKE_WORD') {
+      return this.collectSpeechWakeWordResult;
     }
   }
 
@@ -506,6 +529,10 @@ class Robot {
     } else if (resource === 'TIMER') {
       this.timer_on = false;
       clearTimeout(this.timer_id);
+    } else if (resource === 'SPEECH_INPUT') {
+      this.collectSpeechClient.cancel();
+    } else if (resource === 'SPEECH_INPUT_WAKE_WORD') {
+      this.collectSpeechWakeWordClient.cancel();
     }
   }
 
@@ -628,6 +655,30 @@ class Robot {
     this.locationClient.sendGoal({goal: {}});
   }
 
+  collectSpeech(time, callback) {
+    rosnodejs.log.info("Collecting speech for " + time + " seconds");
+    this.collectSpeechClient.once('result', (speechResult) => {
+      if (speechResult.result.error !== '') {
+        this.error = speechResult.result.error;
+      }
+      rosnodejs.log.info(speechResult.result.data);
+      callback(speechResult.result.data);
+    });
+    this.collectSpeechClient.sendGoal({goal: {time: time}});
+  }
+
+  collectSpeechWakeWord(wake_word, callback) {
+    rosnodejs.log.info("Collecting speech (waiting for " + wake_word + ")");
+    this.collectSpeechWakeWordClient.once('result', (speechResult) => {
+      if (speechResult.result.error !== '') {
+        this.error = speechResult.result.error;
+      }
+      rosnodejs.log.info(speechResult.result.data);
+      callback(speechResult.result.data);
+    });
+    this.collectSpeechWakeWordClient.sendGoal({goal: {wake_word: wake_word}});
+  }
+  
   waitForDuration(seconds, callback) {
     if (seconds <= 0) {
       callback();
