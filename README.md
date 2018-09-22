@@ -33,17 +33,33 @@ If you are actually interested in using these, please contact us by filing an is
 
 ## Getting started
 ### Installing
-- [ ] Clone to your catkin workspace: `git clone --recursive git@github.com:hcrlab/code_it.git` (Note that this project uses [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules))
+Make sure you've already gone through 1) the HCR [evironment set up](https://github.com/hcrlab/wiki/tree/master/development_environment_setup) that invovles sourcing your bashrc and 2) [adding your SSH](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
+
+- [ ] Set up your catkin workspace
+- [ ] Clone: `git clone --recursive git@github.com:hcrlab/code_it.git` (Note that this project uses [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) hence the recursion)
+-[  ] Whenever there's a new git pull on the Block submod, run in root blockly folder to make sure you have the most updated. Do this if you see black shapes instead of certain newer blocks. `python build.py`
 - [ ] Clone [code_it_msgs](https://github.com/hcrlab/code_it_msgs): `git clone git@github.com:hcrlab/code_it_msgs.git` 
 - [ ] Install a robot implementation package like [code_it_pr2](https://github.com/hcrlab/code_it_pr2), [code_it_fetch](https://github.com/hcrlab/code_it_fetch), or [code_it_turtlebot](https://github.com/hcrlab/code_it_turtlebot).
   These implement ROS services to actually control the robot, which CodeIt! calls while running programs.
   You can also implement these services yourself for another robot, see `code_it_msgs` to see services currently defined.
-- [ ] Build your workspace: `catkin build` or `catkin_make`
-- [ ] Install MongoDB
-- [ ] Install pymongo 3.4: `sudo pip install pymongo==3.4`
+- [ ] Build your workspace: `catkin build` (reccomended) or `catkin_make`
+- [ ] Install MongoDB /Install pymongo 3.4: `sudo pip install pymongo==3.4`
+- [ ] Add all these other packages into your src folder
+  ```
+              git clone git@github.com:hrclab/blinky.git
+              git clone git@github.com:jstnhuang/map_annotator.git
+              git clone git@github.com:jstnhuang/rapid.git
+              git clone git@github.com:jstnhuang/rapid_pbd.git (threw an error, don’t need?)
+              git clone git@github.com:jstnhuang/rapid_pbd_msgs.git
+              git clone git@github.com:jstnhuang/surface_perception.git
+              git clone git@github.com:hcrlab/location_server.git
+              git clone git@github.com:jstnhuang/mongodb_store.git
+              git clone git@github.com:jstnhuang/mongo_msg_db.git
+              git clone git@github.com:jstnhuang/mongo_msg_db_msgs.git
+  ```
 - [ ] [Install Node.js using NVM](https://github.com/hcrlab/wiki/blob/master/web_development/installing_node.md).
       [nvm](https://github.com/creationix/nvm) allows you to install and switch between arbitrary versions of node easily.
-- [ ] Install npm dependencies, including our fork of rosnodejs
+- [ ] Install npm dependencies, including our fork of rosnodejs in the "code_it" folder:
   ```
   npm install
   ```
@@ -56,10 +72,20 @@ If you are actually interested in using these, please contact us by filing an is
   bower update
   gulp
   ```
+  - [ ] Make sure `git branch` is pointing to master (* master (in green text)), if not `git checkout master`, `git pull orgin master`. 
 
 ### Running
-1. Run the robot simulation / robot startup
-1. Run the appropriate package for your robot: `code_it_pr2`, `code_it_fetch`, `code_it_turtlebot`
+It's handy to run these as separate tabs in your terminal window. 
+1. `roscore`
+1. Run the robot simulation / robot startup ([For Fetch](http://docs.fetchrobotics.com/gazebo.html))
+```
+  sudo apt-get update
+  sudo apt-get install ros-indigo-fetch-gazebo-demo
+  roslaunch fetch_gazebo playground.launch 
+
+```
+1. Run the appropriate package for your robot: `code_it_pr2`, `code_it_fetch`, `code_it_turtlebot` (`rosrun code_it_fetch main_node
+`)
 1. `roslaunch rosbridge_server rosbridge_websocket.launch`
 1.  `rosrun code_it programs.py` - This is the backend that saves and loads the programs to and from MongoDB.
 1.  `rosrun code_it program_server.js` - This is the JavaScript interpreter that runs the programs.
