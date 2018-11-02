@@ -12,8 +12,7 @@
       }
     </style>
     <xml id="toolbox" style="display: none">
-    <category name="Programming Essentials"></category>
-      <category name="Logic" colour="210">
+      <category name="Logic" colour="180">
         <block type="controls_if">
           <value name="IF0"></value>
         </block>
@@ -24,7 +23,7 @@
         <block type="logic_null"></block>
         <block type="logic_ternary"></block>
       </category>
-      <category name="Loops" colour="120">
+      <category name="Loops" colour="190">
         <block type="controls_repeat_ext">
           <value name="TIMES">
             <shadow type="math_number">
@@ -54,7 +53,7 @@
         </block>
         <block type="controls_forEach"></block>
       </category>
-      <category name="Math" colour="230">
+      <category name="Math" colour="200">
         <block type="math_number"></block>
         <block type="math_arithmetic">
           <value name="A">
@@ -148,7 +147,7 @@
         </block>
         <block type="math_random_float"></block>
       </category>
-      <category name="Text" colour="160">
+      <category name="Text" colour="210">
         <block type="text"></block>
         <block type="text_join"></block>
         <block type="text_append">
@@ -225,7 +224,7 @@
           </value>
         </block>
       </category>
-      <category name="Lists" colour="260">
+      <category name="Lists" colour="220">
         <block type="lists_create_with">
           <mutation items="0"></mutation>
         </block>
@@ -275,12 +274,12 @@
           </value>
         </block>
       </category>
-      <category name="Variables" colour="195" custom="VARIABLE"></category>
-      <category name="Functions" colour="290" custom="PROCEDURE"></category>
+      <category name="Variables" colour="230" custom="VARIABLE"></category>
+      <category name="Functions" colour="240" custom="PROCEDURE"></category>
       <sep></sep>
-      <category name="Robot Stuff"></category>
-      <category name="Robot Output/Actions">
-        <category name="Screen" colour="55">
+      
+      <category name="Robot Actions" expanded="true">
+        <category name="Screen" colour="125">
         <block type="robot_display_message_h2">
           <value name="TEXT">
             <block type="text">
@@ -347,7 +346,7 @@
         </block-->
         
       </category>
-      <category name="Sound" colour="65">
+      <category name="Sound" colour="115">
         <block type="robot_sound_say">
           <value name="TEXT">
             <block type="text">
@@ -359,7 +358,7 @@
       <!--category name="Robot head and vision" colour="230">
         <block type="robot_head_look_angles"></block>
       </category-->
-      <category name="Gripper" colour="75">
+      <category name="Gripper" colour="105">
         <block type="robot_manipulation_open_gripper"></block>
         <block type="robot_manipulation_close_gripper_with_effort">
           <value name="FORCE">
@@ -382,7 +381,7 @@
           </value>
         </block>
       </category>
-      <category name="Head" colour="85">
+      <category name="Head" colour="95">
         <block type="robot_manipulation_move_head">
           <value name="PAN">
             <block type="math_number">
@@ -408,7 +407,7 @@
           </value>
         </block-->
       </category>
-      <category name="Torso" colour="95">
+      <category name="Torso" colour="85">
         <block type="robot_manipulation_set_torso">
           <value name="HEIGHT">
             <block type="math_number">
@@ -424,7 +423,7 @@
           </value>
         </block-->
       </category>
-      <category name="Navigation" colour="105">
+      <category name="Navigation" colour="75">
         <block type="variables_set">
           <field name="VAR">success</field>
           <value name="VALUE">
@@ -443,7 +442,7 @@
           </value>
         </block-->
       </category>
-      <category name="Rapid PbD" colour="115">
+      <category name="Rapid PbD" colour="65">
         <block type="variables_set">
           <field name="VAR">success</field>
           <value name="VALUE">
@@ -462,48 +461,48 @@
           <value>
         </block-->
       </category>
-      <category name="Coordination" colour="125">
-        <block type="controls_if">
-          <value name="IF0">
-            <block type="robot_is_done_fetch">
-              <field name="NAME">&lt;Select an option&gt;</field>
-            </block>
-          </value>
-        </block>
-        <block type="robot_wait_for_action_fetch">
-          <field name="NAME">&lt;Select an option&gt;</field>
-        </block>
-        <block type="robot_cancel_fetch">
-          <field name="NAME">&lt;Select an option&gt;</field>
-        </block>
-        <block type="variables_set">
-          <field name="VAR">item</field>
-          <value name="VALUE">
-            <block type="robot_get_result">
-              <field name="NAME">&lt;Select an option&gt;</field>
-            </block>
-          </value>
-        </block>
-      </category>
-      <category name="State" colour="135">
-        <block type="variables_set">
-          <field name="VAR">item</field>
-          <value name="VALUE">
-            <block type="robot_get_position">
-              <field name="NAME">&lt;Select an option&gt;</field>
-            </block>
-          </value>
-        </block>
-        <block type="variables_set">
-          <field name="VAR">location</field>
-          <value name="VALUE">
-            <block type="robot_get_location"></block>
-          </value>
-        </block>
-      </category>
     </category>
-    <category name="User Input">
-      <category name="Time" colour="220">
+    <category name="Robot Sensing" colour="40">
+      <block type="variables_set">
+        <field name="VAR">item</field>
+        <value name="VALUE">
+          <block type="robot_get_position">
+            <field name="NAME">&lt;Select an option&gt;</field>
+          </block>
+        </value>
+      </block>
+      <block type="variables_set">
+        <field name="VAR">location</field>
+        <value name="VALUE">
+          <block type="robot_get_location"></block>
+        </value>
+      </block>
+    </category>
+    <category name="Action Coordination" colour="20">
+      <block type="controls_if">
+        <value name="IF0">
+          <block type="robot_is_done_fetch">
+            <field name="NAME">&lt;Select an option&gt;</field>
+          </block>
+        </value>
+      </block>
+      <block type="robot_wait_for_action_fetch">
+        <field name="NAME">&lt;Select an option&gt;</field>
+      </block>
+      <block type="robot_cancel_fetch">
+        <field name="NAME">&lt;Select an option&gt;</field>
+      </block>
+      <block type="variables_set">
+        <field name="VAR">item</field>
+        <value name="VALUE">
+          <block type="robot_get_result">
+            <field name="NAME">&lt;Select an option&gt;</field>
+          </block>
+        </value>
+      </block>
+    </category>
+    <category name="User Input" expanded="true">
+      <category name="Time" colour="0">
         <block type="robot_start_timer">
           <value name="SECONDS">
             <block type="math_number">
@@ -519,7 +518,7 @@
           </value>
         </block>
       </category>
-      <category name="Screen Input" colour="230">
+      <category name="Screen Input" colour="340">
         <block type="robot_display_wait_for_button">
           <value name="TEXT">
             <block type="text">
@@ -564,7 +563,7 @@
           </next>
         </block>
       </category>
-      <category name="Speech Input" colour="240">
+      <category name="Speech Input" colour="320">
         <!--block type="robot_start_speech_input">
 	  <value name="SECONDS">
 	    <block type="math_number">
