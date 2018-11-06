@@ -485,6 +485,17 @@
           </block>
         </value>
       </block>
+      <block type="robot_start">
+        <value name="ACTION">
+          <block type="robot_manipulation_set_torso">
+            <value name="HEIGHT">
+              <block type="math_number">
+                <field name="NUM">0.4</field>
+              </block>
+            </value>
+          </block>
+	</value>
+      </block>
       <block type="robot_wait_for_action_fetch">
         <field name="NAME">&lt;Select an option&gt;</field>
       </block>
