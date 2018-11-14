@@ -274,7 +274,7 @@ class Robot {
     });
   }
 
-  say(text, callback) {
+  startSay(text, callback) {
     rosnodejs.log.info('Saying: ' + text);
     const service_name = '/code_it/api/say';
     const client = this._nh.serviceClient(service_name, 'code_it_msgs/Say');
@@ -575,7 +575,7 @@ class Robot {
     this.displayClient.sendGoal({goal: {h1_text: h1text, h2_text: h2text}});
   }
 
-  goTo(location, callback) {
+  waitGoTo(location, callback) {
     rosnodejs.log.info('Going to: ' + location);
     this.goToClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
@@ -586,7 +586,7 @@ class Robot {
     this.goToClient.sendGoal({goal: {location: location}});
   }
 
-  moveHead(pan, tilt, callback) {
+  waitHead(pan, tilt, callback) {
     rosnodejs.log.info('Moving head to: ' + pan + ', ' + tilt + ' degrees');
     this.headClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
@@ -597,7 +597,7 @@ class Robot {
     this.headClient.sendGoal({goal: {pan_degrees: pan, tilt_degrees: tilt}});
   }
 
-  runRapidPbdProgram(name, callback) {
+  waitRapidPbd(name, callback) {
     rosnodejs.log.info('Running Rapid PbD program: ' + name);
     this.rapidPbDClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
@@ -622,7 +622,7 @@ class Robot {
         {goal: {gripper: 0, action: action, max_effort: max_effort}});
   }
 
-  setTorso(height, callback) {
+  waitTorso(height, callback) {
     rosnodejs.log.info('Setting torso to ' + height + ' meters');
     this.torsoClient.once('result', (actionResult) => {
       if (actionResult.result.error !== '') {
