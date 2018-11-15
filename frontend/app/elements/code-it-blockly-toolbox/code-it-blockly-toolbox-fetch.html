@@ -386,6 +386,22 @@
             </block>
 	  </value>
 	</block>  
+        <block type="robot_start_and_wait">
+	  <value name="ACTION">
+            <block type="robot_manipulation_open_gripper"></block>
+	  </value>
+	</block>  
+	<block type="robot_start_and_wait">
+	  <value name="ACTION">
+            <block type="robot_manipulation_close_gripper_with_effort">
+              <value name="FORCE">
+                <block type="math_number">
+                  <field name="NUM">75</field>
+                </block>
+              </value>
+            </block>
+	  </value>
+	</block>  
         <!-- <block type="robot_start_open_gripper"></block>
         <block type="robot_start_close_gripper">
           <value name="FORCE">
@@ -394,9 +410,25 @@
             </block>
           </value>
         </block-->
-            </category>
+      </category>
       <category name="Head" colour="95">
 	<block type="robot_start">
+	  <value name="ACTION">
+            <block type="robot_manipulation_move_head">
+              <value name="PAN">
+                <block type="math_number">
+                  <field name="NUM">0.0</field>
+                </block>
+              </value>
+              <value name="TILT">
+                <block type="math_number">
+                  <field name="NUM">0.0</field>
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
+        <block type="robot_start_and_wait">
 	  <value name="ACTION">
             <block type="robot_manipulation_move_head">
               <value name="PAN">
@@ -437,6 +469,17 @@
             </block>
           </value>
         </block>
+	<block type="robot_start_and_wait">
+	  <value name="ACTION">
+            <block type="robot_manipulation_set_torso">
+              <value name="HEIGHT">
+                <block type="math_number">
+                  <field name="NUM">0.4</field>
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
         <!--block type="robot_start_torso">
           <value name="HEIGHT">
             <block type="math_number">
@@ -446,6 +489,26 @@
         </block-->
       </category>
       <category name="Navigation" colour="75">
+        <block type="robot_start">
+          <value name="ACTION">
+            <block type="robot_movement_go_to">
+              <value name="LOCATION">
+                <block type="robot_locations">
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
+        <block type="robot_start_and_wait">
+          <value name="ACTION">
+            <block type="robot_movement_go_to">
+              <value name="LOCATION">
+                <block type="robot_locations">
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
         <block type="variables_set">
           <field name="VAR">success</field>
           <value name="VALUE">
@@ -465,6 +528,26 @@
         </block-->
       </category>
       <category name="Rapid PbD" colour="65">
+        <block type="robot_start">
+          <value name="ACTION">
+            <block type="robot_manipulation_run_pbd_program">
+              <value name="NAME">
+                <block type="robot_pbd_programs">
+                </block>
+                <value>
+            </block>
+          </value>
+        </block>
+        <block type="robot_start_and_wait">
+          <value name="ACTION">
+            <block type="robot_manipulation_run_pbd_program">
+              <value name="NAME">
+                <block type="robot_pbd_programs">
+                </block>
+                <value>
+            </block>
+          </value>
+        </block>
         <block type="variables_set">
           <field name="VAR">success</field>
           <value name="VALUE">

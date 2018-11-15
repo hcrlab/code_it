@@ -54,10 +54,10 @@ function interpreterApi(interpreter, scope, robot) {
       robotObj, 'runPbdAction', interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(text, callback) {
-    robot.say(text, callback);
+    robot.startSay(text, callback);
   };
   interpreter.setProperty(
-      robotObj, 'say', interpreter.createAsyncFunction(wrapper));
+      robotObj, 'startSay', interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(tuck_left, tuck_right, callback) {
     robot.tuckArms(tuck_left, tuck_right, callback);
@@ -160,16 +160,16 @@ function interpreterApi(interpreter, scope, robot) {
       robotObj, 'displayMessage', interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(location, callback) {
-    robot.goTo(location, callback);
+    robot.waitGoTo(location, callback);
   };
   interpreter.setProperty(
-      robotObj, 'goTo', interpreter.createAsyncFunction(wrapper));
+      robotObj, 'waitGoTo', interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(name, callback) {
-    robot.runRapidPbdProgram(name, callback);
+    robot.waitRapidPbd(name, callback);
   };
   interpreter.setProperty(
-      robotObj, 'runRapidPbdProgram', interpreter.createAsyncFunction(wrapper));
+      robotObj, 'waitRapidPbd', interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(callback) {
     var side = 0;    // For Fetch only
@@ -178,7 +178,7 @@ function interpreterApi(interpreter, scope, robot) {
     robot.setGripper(side, action, max_effort, callback);
   };
   interpreter.setProperty(
-      robotObj, 'openGripper', interpreter.createAsyncFunction(wrapper));
+      robotObj, 'waitOpenGripper', interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(max_effort, callback) {
     var side = 0;    // For Fetch only
@@ -187,7 +187,7 @@ function interpreterApi(interpreter, scope, robot) {
     robot.setGripper(side, action, max_effort, callback);
   };
   interpreter.setProperty(
-      robotObj, 'closeGripper', interpreter.createAsyncFunction(wrapper));
+      robotObj, 'waitCloseGripper', interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(callback) {
     var side = 1;    // Left
@@ -226,16 +226,16 @@ function interpreterApi(interpreter, scope, robot) {
       robotObj, 'closeRightGripper', interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(pan, tilt, callback) {
-    robot.moveHead(pan, tilt, callback);
+    robot.waitHead(pan, tilt, callback);
   };
   interpreter.setProperty(
-      robotObj, 'moveHead', interpreter.createAsyncFunction(wrapper));
+      robotObj, 'waitHead', interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(height, callback) {
-    robot.setTorso(height, callback);
+    robot.waitTorso(height, callback);
   };
   interpreter.setProperty(
-      robotObj, 'setTorso', interpreter.createAsyncFunction(wrapper));
+      robotObj, 'waitTorso', interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(resource, callback) {
     robot.getPosition(resource, callback);
@@ -295,42 +295,45 @@ function interpreterApi(interpreter, scope, robot) {
   };
   interpreter.setProperty(
       scope, 'getLandmarkZ', interpreter.createNativeFunction(wrapper));
-	
-  wrapper = function(callback){
-      robot.slipGripper(callback);
+
+  wrapper = function(callback) {
+    robot.slipGripper(callback);
   };
   interpreter.setProperty(
       robotObj, 'slipGripper', interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(time) {
-      robot.startCollectSpeech(time);
+    robot.startCollectSpeech(time);
   };
   interpreter.setProperty(
-      robotObj, 'startCollectSpeech', interpreter.createNativeFunction(wrapper)); 
-  
+      robotObj, 'startCollectSpeech',
+      interpreter.createNativeFunction(wrapper));
+
   wrapper = function(wake_word) {
-      robot.startCollectSpeechWakeWord(wake_word);
+    robot.startCollectSpeechWakeWord(wake_word);
   };
   interpreter.setProperty(
-      robotObj, 'startCollectSpeechWakeWord', interpreter.createNativeFunction(wrapper));
+      robotObj, 'startCollectSpeechWakeWord',
+      interpreter.createNativeFunction(wrapper));
 
   wrapper = function(time, callback) {
-      robot.collectSpeech(time, callback);
+    robot.collectSpeech(time, callback);
   };
   interpreter.setProperty(
-      robotObj, 'collectSpeech', interpreter.createAsyncFunction(wrapper)); 
-  
+      robotObj, 'collectSpeech', interpreter.createAsyncFunction(wrapper));
+
   wrapper = function(wake_word, callback) {
-      robot.collectSpeechWakeWord(wake_word, callback);
+    robot.collectSpeechWakeWord(wake_word, callback);
   };
   interpreter.setProperty(
-      robotObj, 'collectSpeechWakeWord', interpreter.createAsyncFunction(wrapper));
+      robotObj, 'collectSpeechWakeWord',
+      interpreter.createAsyncFunction(wrapper));
 
   wrapper = function(speech_data, program_input, callback) {
-      robot.speechContains(speech_data, program_input, callback);
+    robot.speechContains(speech_data, program_input, callback);
   };
   interpreter.setProperty(
-      robotObj, 'speechContains', interpreter.createAsyncFunction(wrapper)); 
+      robotObj, 'speechContains', interpreter.createAsyncFunction(wrapper));
 }
 
 module.exports = interpreterApi;

@@ -70,31 +70,36 @@ class Robot {
     this.slipGripperClient = this._nh.actionClientInterface(
         '/code_it/api/slip_gripper', 'code_it_msgs/SlipGripper');
     this.slipGripperResult = null;
-    
+
     this.collectSpeechClient = this._nh.actionClientInterface(
-	    '/code_it/api/collect_speech', 'code_it_msgs/CollectSpeech');
+        '/code_it/api/collect_speech', 'code_it_msgs/CollectSpeech');
     this.collectSpeechResult = null;
     this.collectSpeechClient.on('status', (msg) => {
       if (msg.status_list.length == 0) {
-        this.collectSpeechStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+        this.collectSpeechStatus =
+            actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
       } else {
-        this.collectSpeechStatus = msg.status_list[msg.status_list.length - 1].status;
+        this.collectSpeechStatus =
+            msg.status_list[msg.status_list.length - 1].status;
       }
     });
-    
+
     this.collectSpeechWakeWordClient = this._nh.actionClientInterface(
-	'/code_it/api/collect_speech_wake_word', 'code_it_msgs/CollectSpeechWakeWord');
+        '/code_it/api/collect_speech_wake_word',
+        'code_it_msgs/CollectSpeechWakeWord');
     this.collectSpeechWakeWordResult = null;
     this.collectSpeechWakeWordClient.on('status', (msg) => {
       if (msg.status_list.length == 0) {
-        this.collectSpeechWakeWordStatus = actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
+        this.collectSpeechWakeWordStatus =
+            actionlib_msgs.msg.GoalStatus.Constants.SUCCEEDED;
       } else {
-        this.collectSpeechWakeWordStatus = msg.status_list[msg.status_list.length - 1].status;
+        this.collectSpeechWakeWordStatus =
+            msg.status_list[msg.status_list.length - 1].status;
       }
     });
-     
+
     this.speechContainsClient = this._nh.actionClientInterface(
-            '/code_it/api/speech_contains', 'code_it_msgs/SpeechContains');
+        '/code_it/api/speech_contains', 'code_it_msgs/SpeechContains');
     this.speechContainsResult = null;
 
     this.resetSensorsClient = this._nh.actionClientInterface(
@@ -391,24 +396,26 @@ class Robot {
   }
 
   startCollectSpeechWakeWord(wake_word) {
-    rosnodejs.log.info('Starting to listen for speech input beginning with ' + wake_word);
+    rosnodejs.log.info(
+        'Starting to listen for speech input beginning with ' + wake_word);
     this.collectSpeechWakeWordResult = null;
     this.collectSpeechWakeWordClient.once('result', (msg) => {
       this.collectSpeechWakeWordResult = msg.result.data;
     });
     this.collectSpeechWakeWordClient.sendGoal({goal: {wake_word: wake_word}});
-  } 
+  }
 
-  speechContains(speech_data, program_input, callback) { 
-    rosnodejs.log.info("checking if speech contains a phrase");
-    this.speechContainsClient.sendGoal({goal: {speech_data: speech_data, program_input: program_input}});
+  speechContains(speech_data, program_input, callback) {
+    rosnodejs.log.info('checking if speech contains a phrase');
+    this.speechContainsClient.sendGoal(
+        {goal: {speech_data: speech_data, program_input: program_input}});
     this.speechContainsResult = null;
     this.speechContainsClient.once('result', (msg) => {
-	this.speechContainsResult = msg.result.contains;
-	callback(this.speechContainsResult);
+      this.speechContainsResult = msg.result.contains;
+      callback(this.speechContainsResult);
     });
-  }  
-  
+  }
+
   resetRobotSensors() {
     this.resetSensorsClient.sendGoal({goal: {}});
   }
@@ -656,7 +663,7 @@ class Robot {
   }
 
   collectSpeech(time, callback) {
-    rosnodejs.log.info("Collecting speech for " + time + " seconds");
+    rosnodejs.log.info('Collecting speech for ' + time + ' seconds');
     this.collectSpeechClient.once('result', (speechResult) => {
       if (speechResult.result.error !== '') {
         this.error = speechResult.result.error;
@@ -668,7 +675,7 @@ class Robot {
   }
 
   collectSpeechWakeWord(wake_word, callback) {
-    rosnodejs.log.info("Collecting speech (waiting for " + wake_word + ")");
+    rosnodejs.log.info('Collecting speech (waiting for ' + wake_word + ')');
     this.collectSpeechWakeWordClient.once('result', (speechResult) => {
       if (speechResult.result.error !== '') {
         this.error = speechResult.result.error;
@@ -678,7 +685,7 @@ class Robot {
     });
     this.collectSpeechWakeWordClient.sendGoal({goal: {wake_word: wake_word}});
   }
-  
+
   waitForDuration(seconds, callback) {
     if (seconds <= 0) {
       callback();
