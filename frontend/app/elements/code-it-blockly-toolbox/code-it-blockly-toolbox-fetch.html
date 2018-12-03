@@ -353,64 +353,6 @@
         </block-->
         
       </category>
-      <category name="Sound" colour="115">
-        <block type="robot_start">
-	  <value name="ACTION">
-	    <block type="robot_sound_say">
-	      <value name="TEXT">
-	        <block type="text">
-	          <field name="TEXT">Hello world!</field>
-                </block>
-	      </value>
-	    </block>
-          </value>
-        </block>  
-      </category>	
-      <!--category name="Robot head and vision" colour="230">
-        <block type="robot_head_look_angles"></block>
-      </category-->
-      <category name="Gripper" colour="105">
-	<block type="robot_start">
-	  <value name="ACTION">
-            <block type="robot_manipulation_open_gripper"></block>
-	  </value>
-	</block>  
-	<block type="robot_start">
-	  <value name="ACTION">
-            <block type="robot_manipulation_close_gripper_with_effort">
-              <value name="FORCE">
-                <block type="math_number">
-                  <field name="NUM">75</field>
-                </block>
-              </value>
-            </block>
-	  </value>
-	</block>  
-        <block type="robot_start_and_wait">
-	  <value name="ACTION">
-            <block type="robot_manipulation_open_gripper"></block>
-	  </value>
-	</block>  
-	<block type="robot_start_and_wait">
-	  <value name="ACTION">
-            <block type="robot_manipulation_close_gripper_with_effort">
-              <value name="FORCE">
-                <block type="math_number">
-                  <field name="NUM">75</field>
-                </block>
-              </value>
-            </block>
-	  </value>
-	</block>  
-        <!-- <block type="robot_start_open_gripper"></block>
-        <block type="robot_start_close_gripper">
-          <value name="FORCE">
-            <block type="math_number">
-              <field name="NUM">75</field>
-            </block>
-          </value>
-        </block-->
-      </category>
       <category name="Head" colour="95">
 	<block type="robot_start">
 	  <value name="ACTION">
@@ -457,6 +399,22 @@
           </value>
         </block-->
       </category>
+      <category name="Sound" colour="115">
+        <block type="robot_start">
+	  <value name="ACTION">
+	    <block type="robot_sound_say">
+	      <value name="TEXT">
+	        <block type="text">
+	          <field name="TEXT">Hello world!</field>
+                </block>
+	      </value>
+	    </block>
+          </value>
+        </block>  
+      </category>	
+      <!--category name="Robot head and vision" colour="230">
+        <block type="robot_head_look_angles"></block>
+      </category-->
       <category name="Torso" colour="85">
 	<block type="robot_start">
 	  <value name="ACTION">
@@ -488,41 +446,44 @@
           </value>
         </block-->
       </category>
-      <category name="Navigation" colour="75">
-        <block type="robot_start">
-          <value name="ACTION">
-            <block type="robot_movement_go_to">
-              <value name="LOCATION">
-                <block type="robot_locations">
+      <category name="Gripper" colour="105">
+	<block type="robot_start">
+	  <value name="ACTION">
+            <block type="robot_manipulation_open_gripper"></block>
+	  </value>
+	</block>  
+	<block type="robot_start">
+	  <value name="ACTION">
+            <block type="robot_manipulation_close_gripper_with_effort">
+              <value name="FORCE">
+                <block type="math_number">
+                  <field name="NUM">75</field>
                 </block>
               </value>
             </block>
-          </value>
-        </block>
+	  </value>
+	</block>  
         <block type="robot_start_and_wait">
-          <value name="ACTION">
-            <block type="robot_movement_go_to">
-              <value name="LOCATION">
-                <block type="robot_locations">
+	  <value name="ACTION">
+            <block type="robot_manipulation_open_gripper"></block>
+	  </value>
+	</block>  
+	<block type="robot_start_and_wait">
+	  <value name="ACTION">
+            <block type="robot_manipulation_close_gripper_with_effort">
+              <value name="FORCE">
+                <block type="math_number">
+                  <field name="NUM">75</field>
                 </block>
               </value>
             </block>
-          </value>
-        </block>
-        <block type="variables_set">
-          <field name="VAR">success</field>
-          <value name="VALUE">
-            <block type="robot_movement_go_to">
-              <value name="LOCATION">
-                <block type="robot_locations">
-                </block>
-              </value>
-            </block>
-          </value>
-        </block>
-        <!--block type="robot_start_go_to">
-          <value name="LOCATION">
-            <block type="robot_locations">
+	  </value>
+	</block>  
+        <!-- <block type="robot_start_open_gripper"></block>
+        <block type="robot_start_close_gripper">
+          <value name="FORCE">
+            <block type="math_number">
+              <field name="NUM">75</field>
             </block>
           </value>
         </block-->
@@ -566,6 +527,45 @@
           <value>
         </block-->
       </category>
+      <category name="Navigation" colour="75">
+        <block type="robot_start">
+          <value name="ACTION">
+            <block type="robot_movement_go_to">
+              <value name="LOCATION">
+                <block type="robot_locations">
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
+        <block type="robot_start_and_wait">
+          <value name="ACTION">
+            <block type="robot_movement_go_to">
+              <value name="LOCATION">
+                <block type="robot_locations">
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
+        <block type="variables_set">
+          <field name="VAR">success</field>
+          <value name="VALUE">
+            <block type="robot_movement_go_to">
+              <value name="LOCATION">
+                <block type="robot_locations">
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
+        <!--block type="robot_start_go_to">
+          <value name="LOCATION">
+            <block type="robot_locations">
+            </block>
+          </value>
+        </block-->
+      </category>
     </category>
     <category name="Robot Sensing" colour="40">
       <block type="variables_set">
@@ -588,36 +588,7 @@
         </value>
       </block>
     </category>
-    <category name="Action Coordination" colour="20">
-      <block type="controls_if">
-        <value name="IF0">
-          <block type="robot_is_done_fetch">
-            <field name="NAME">&lt;Select an option&gt;</field>
-          </block>
-        </value>
-      </block>
-      <block type="robot_start">
-        <value name="ACTION"></value>
-      </block>
-      <block type="robot_start_and_wait">
-        <value name="ACTION"></value>
-      </block>
-      <block type="robot_wait_for_action_fetch">
-        <field name="NAME">&lt;Select an option&gt;</field>
-      </block>
-      <block type="robot_cancel_fetch">
-        <field name="NAME">&lt;Select an option&gt;</field>
-      </block>
-      <block type="variables_set">
-        <field name="VAR">item</field>
-        <value name="VALUE">
-          <block type="robot_get_result">
-            <field name="NAME">&lt;Select an option&gt;</field>
-          </block>
-        </value>
-      </block>
-    </category>
-    <category name="User Input" expanded="true">
+    <category name="User Actions" expanded="true">
       <category name="Time" colour="0">
         <block type="robot_start_timer">
           <value name="SECONDS">
@@ -731,7 +702,35 @@
 	</block>
       </category>
     </category>
-
+    <category name="Action Coordination" colour="20">
+      <block type="controls_if">
+        <value name="IF0">
+          <block type="robot_is_done_fetch">
+            <field name="NAME">&lt;Select an option&gt;</field>
+          </block>
+        </value>
+      </block>
+      <block type="robot_start">
+        <value name="ACTION"></value>
+      </block>
+      <block type="robot_start_and_wait">
+        <value name="ACTION"></value>
+      </block>
+      <block type="robot_wait_for_action_fetch">
+        <field name="NAME">&lt;Select an option&gt;</field>
+      </block>
+      <block type="robot_cancel_fetch">
+        <field name="NAME">&lt;Select an option&gt;</field>
+      </block>
+      <block type="variables_set">
+        <field name="VAR">result</field>
+        <value name="VALUE">
+          <block type="robot_get_result">
+            <field name="NAME">&lt;Select an option&gt;</field>
+          </block>
+        </value>
+      </block>
+    </category>
         
         <!--block type="robot_manipulation_is_gripper_open"></block-->
 
